@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DermaScan: Kenne deine Haut. Jeden Tag. | Q Systems</title>
+<meta name="description" content="DermaScan: KI-Hautanalyse, Skin-Score und Spot-Tracking, privacy-first und lokal auf deinem iPhone." />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body class="theme-derma">
+<div id="prog"></div>
+
+<header class="gnav">
+  <div class="gnav-in">
+    <a href="index.html" class="gn-logo"><span class="dot"></span><b>Q&nbsp;Systems</b></a>
+    <a href="index.html">Übersicht</a>
+    <a href="dermascan.html" class="active">DermaScan</a>
+    <a href="plantcare.html">PlantCare</a>
+    <a href="diktatbuddy.html">DiktatBuddy</a>
+    <a href="index.html#privacy">Datenschutz</a>
+  </div>
+</header>
+
+<div class="subnav">
+  <div class="subnav-in">
+    <div class="pname">DermaScan</div>
+    <div class="subnav-r">
+      <a href="#funktionen">Funktionen</a>
+      <a href="#tracking">Spot-Tracking</a>
+      <a href="#datenschutz">Datenschutz</a>
+      <a href="#laden" class="buy">Laden</a>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <section class="promo" style="background:linear-gradient(180deg,#eef3ee,#fbfbfd 82%)" data-tilt-area>
+    <div class="promo-copy">
+      <span class="eyebrow rev">Hautgesundheit · KI-gestützt</span>
+      <h1 class="display rev d1" style="color:#3c4a3d">DermaScan</h1>
+      <p class="title rev d1" style="color:#4f6654;font-weight:500;margin-top:2px">Kenne deine Haut. Jeden Tag.</p>
+      <div class="section-cta rev d2" style="margin-top:20px"><a href="#laden" class="btn"><svg class="ic ic-fill" aria-hidden="true"><use href="#ic-apple"/></svg> Im App Store laden</a></div>
+    </div>
+    <div class="promo-art rev d2">
+      <div class="phone lg" data-tilt="6">
+        <div class="island"></div>
+        <div class="screen s-derma">
+          <div class="statusbar">9:41<span class="sb-r">●●●<span class="sbatt"></span></span></div>
+          <div class="scr-body">
+            <div class="dhead"><div class="hi">Hallo, Lena<small>Tägliches Check-in</small></div><div class="streak"><svg class="ic" aria-hidden="true"><use href="#ic-flame"/></svg> 12</div></div>
+            <div class="ring-card"><div class="ring" data-ring="82" data-ring-color="#6f8c74"><span class="rv2">82</span><span class="rl">Skin-Score</span></div><div class="delta"><b>▲ +4 diese Woche</b></div></div>
+            <div class="dbtn"><svg class="ic" aria-hidden="true"><use href="#ic-plus"/></svg> Haut scannen</div>
+            <div class="drow"><div class="dcard"><div class="dt">Routine</div><div class="dn">2 / 3</div><div class="db"><i style="width:66%"></i></div></div><div class="dcard"><div class="dt">Hydration</div><div class="dn">Gut</div><div class="db"><i style="width:80%"></i></div></div></div>
+          </div>
+          <div class="tabbar"><div class="tab on"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-home"/></svg></span>Home</div><div class="tab"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-camera"/></svg></span>Scan</div><div class="tab"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg></span>Spots</div><div class="tab"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-user"/></svg></span>Profil</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATEMENT -->
+  <section class="section tight">
+    <div class="container">
+      <h2 class="headline rev">Dein persönliches Haut-Tagebuch.<br><span class="grad-accent">Jeden Tag ein bisschen klüger.</span></h2>
+      <p class="sub rev d1 lead-copy" style="margin-top:16px">Foto machen, KI-Analyse erhalten, Veränderungen über Wochen verfolgen, verständlich erklärt, motivierend aufbereitet und vollständig auf deinem iPhone.</p>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE SCAN DEMO -->
+  <section class="section gray">
+    <div class="container wide">
+      <div class="frow">
+        <div class="frow-copy rev">
+          <span class="eyebrow">Probier's aus</span>
+          <h3 class="title">So fühlt sich ein Scan an.</h3>
+          <p>Tippe auf <b>Scannen</b> und sieh, wie DermaScan eine Hautstelle analysiert: visuelle Merkmale erkennen, eine Risiko-Einstufung berechnen und in Sekunden eine klare, verständliche Einschätzung liefern.</p>
+          <p style="font-size:15px">Eine stilisierte Demo. In der App passiert die Analyse mit deinem echten Foto.</p>
+        </div>
+        <div class="frow-art rev d1">
+          <div class="scan-demo" data-scan>
+            <div class="scan-target">
+              <span class="spot" style="left:28%;top:34%"></span>
+              <span class="spot" style="left:58%;top:26%;width:9%;height:9%"></span>
+              <span class="spot" style="left:50%;top:62%;width:11%;height:11%"></span>
+              <div class="scan-line"></div>
+              <div class="scan-result">
+                <div class="badge"><svg class="ic" aria-hidden="true"><use href="#ic-shield"/></svg></div>
+                <div class="rt">Niedriges Risiko</div>
+                <div class="rs">Konfidenz 94 % · zur Beobachtung</div>
+              </div>
+            </div>
+            <div style="text-align:center"><button class="btn scan-btn"> Scannen</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE EXPLORER (segmented tabs) -->
+  <section class="section" id="funktionen">
+    <div class="container">
+      <span class="eyebrow rev">Funktionen</span>
+      <h2 class="headline rev d1">Eine App. Deine ganze Routine.</h2>
+    </div>
+    <div class="container wide" style="margin-top:40px">
+      <div class="explorer rev d1" data-explorer>
+        <div class="seg" role="tablist" style="display:flex">
+          <button role="tab">Check-in</button>
+          <button role="tab">Skin-Score</button>
+          <button role="tab">Spot-Tracking</button>
+          <button role="tab">Wochen-Recap</button>
+        </div>
+        <div class="xp-panels">
+
+          <!-- Check-in -->
+          <div class="xp-panel on">
+            <div class="xp-art">
+              <div class="phone">
+                <div class="island"></div>
+                <div class="screen s-derma">
+                  <div class="statusbar">9:41<span class="sb-r">●●●<span class="sbatt"></span></span></div>
+                  <div class="scr-body" style="justify-content:flex-start">
+                    <div class="dhead"><div class="hi">Check-in<small>Wie geht's deiner Haut?</small></div></div>
+                    <div class="ring-card" style="text-align:left;padding:14px">
+                      <div style="font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#8a978b;margin-bottom:10px">Stimmung</div>
+                      <div style="display:flex;justify-content:space-between;font-size:24px"><svg class="ic ic-mood" aria-hidden="true"><use href="#ic-face-sad"/></svg> <span style="opacity:.3"><svg class="ic ic-mood" aria-hidden="true"><use href="#ic-face-neutral"/></svg></span> <span style="background:#eef3ee;border-radius:50%;padding:1px"><svg class="ic ic-mood" aria-hidden="true"><use href="#ic-face-smile"/></svg></span> <span style="opacity:.3"><svg class="ic ic-mood" aria-hidden="true"><use href="#ic-face-grin"/></svg></span></div>
+                    </div>
+                    <div class="ring-card" style="text-align:left;padding:14px">
+                      <div style="font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#8a978b;margin-bottom:8px">Heute erledigt</div>
+                      <div style="display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:600;color:#3c4a3d;padding:4px 0"><span style="width:16px;height:16px;border-radius:50%;background:#6f8c74;color:#fff;display:grid;place-items:center;font-size:10px">✓</span>Reinigung</div>
+                      <div style="display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:600;color:#3c4a3d;padding:4px 0;border-top:1px solid #f0f2ee"><span style="width:16px;height:16px;border-radius:50%;background:#6f8c74;color:#fff;display:grid;place-items:center;font-size:10px">✓</span>Feuchtigkeit</div>
+                      <div style="display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:600;color:#9aa28c;padding:4px 0;border-top:1px solid #f0f2ee"><span style="width:16px;height:16px;border-radius:50%;border:2px solid #cfd6c2"></span>SPF</div>
+                    </div>
+                    <div class="dbtn">Check-in speichern</div>
+                  </div>
+                  <div class="tabbar"><div class="tab on"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-home"/></svg></span>Home</div><div class="tab"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-camera"/></svg></span>Scan</div><div class="tab"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg></span>Spots</div><div class="tab"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-user"/></svg></span>Profil</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="xp-copy">
+              <span class="eyebrow">Tägliche Check-ins</span>
+              <h3>30 Sekunden, jeden Tag.</h3>
+              <p>Halte Stimmung, Routine und ein schnelles Foto fest. Aus diesen kleinen täglichen Momenten entsteht ein verlässliches Bild deiner Haut und dein Skin-Score.</p>
+            </div>
+          </div>
+
+          <!-- Skin-Score -->
+          <div class="xp-panel">
+            <div class="xp-art">
+              <div class="phone">
+                <div class="island"></div>
+                <div class="screen s-derma">
+                  <div class="statusbar">9:41<span class="sb-r">●●●<span class="sbatt"></span></span></div>
+                  <div class="scr-body">
+                    <div class="dhead"><div class="hi">Skin-Score<small>Dein Verlauf</small></div><div class="streak"><svg class="ic" aria-hidden="true"><use href="#ic-flame"/></svg> 12</div></div>
+                    <div class="ring-card"><div class="ring" data-ring="82" data-ring-color="#6f8c74"><span class="rv2">82</span><span class="rl">Skin-Score</span></div><div class="delta"><b>▲ +4 diese Woche</b></div></div>
+                    <div class="ring-card" style="padding:14px;text-align:left">
+                      <div style="font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#8a978b;margin-bottom:10px">7-Tage-Trend</div>
+                      <div style="display:flex;align-items:flex-end;gap:6px;height:48px">
+                        <i style="flex:1;background:#cfe0cf;border-radius:3px 3px 0 0;height:55%"></i><i style="flex:1;background:#cfe0cf;border-radius:3px 3px 0 0;height:62%"></i><i style="flex:1;background:#bcd6bc;border-radius:3px 3px 0 0;height:58%"></i><i style="flex:1;background:#bcd6bc;border-radius:3px 3px 0 0;height:70%"></i><i style="flex:1;background:#9cc29c;border-radius:3px 3px 0 0;height:74%"></i><i style="flex:1;background:#9cc29c;border-radius:3px 3px 0 0;height:80%"></i><i style="flex:1;background:#6f8c74;border-radius:3px 3px 0 0;height:92%"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tabbar"><div class="tab on"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-home"/></svg></span>Home</div><div class="tab"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-camera"/></svg></span>Scan</div><div class="tab"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg></span>Spots</div><div class="tab"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-user"/></svg></span>Profil</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="xp-copy">
+              <span class="eyebrow">Skin-Score 0–100</span>
+              <h3>Ein Wert, der dich dranbleiben lässt.</h3>
+              <p>Der Skin-Score fasst deine Check-ins zu einer Zahl zusammen und zeigt Trends auf einen Blick. Streaks und Erinnerungen machen aus Vorsätzen eine echte Gewohnheit.</p>
+            </div>
+          </div>
+
+          <!-- Spots -->
+          <div class="xp-panel">
+            <div class="xp-art">
+              <div class="phone">
+                <div class="island"></div>
+                <div class="screen s-derma">
+                  <div class="statusbar">9:41<span class="sb-r">●●●<span class="sbatt"></span></span></div>
+                  <div class="scr-body" style="justify-content:flex-start">
+                    <div class="dhead"><div class="hi">Spots<small>3 beobachtet</small></div></div>
+                    <div class="ring-card" style="padding:11px;display:flex;align-items:center;gap:10px"><span style="width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#e8c4af,#d9ad94)"></span><div style="text-align:left"><div style="font-size:12px;font-weight:700;color:#3c4a3d">Wange links</div><div style="font-size:9.5px;color:#7d8a7e;font-weight:600">12 Aufnahmen · stabil</div></div><span style="margin-left:auto;font-size:11px;font-weight:700;color:#5aa05a">●</span></div>
+                    <div class="ring-card" style="padding:11px;display:flex;align-items:center;gap:10px"><span style="width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#e0b39a,#cf9c80)"></span><div style="text-align:left"><div style="font-size:12px;font-weight:700;color:#3c4a3d">Unterarm</div><div style="font-size:9.5px;color:#7d8a7e;font-weight:600">8 Aufnahmen · heller</div></div><span style="margin-left:auto;font-size:11px;font-weight:700;color:#5aa05a">▼</span></div>
+                    <div class="ring-card" style="padding:11px;display:flex;align-items:center;gap:10px"><span style="width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#dba98e,#c89070)"></span><div style="text-align:left"><div style="font-size:12px;font-weight:700;color:#3c4a3d">Schulter</div><div style="font-size:9.5px;color:#7d8a7e;font-weight:600">5 Aufnahmen · beobachten</div></div><span style="margin-left:auto;font-size:11px;font-weight:700;color:#d98c18">▲</span></div>
+                  </div>
+                  <div class="tabbar"><div class="tab"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-home"/></svg></span>Home</div><div class="tab"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-camera"/></svg></span>Scan</div><div class="tab on"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg></span>Spots</div><div class="tab"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-user"/></svg></span>Profil</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="xp-copy">
+              <span class="eyebrow">Spot-Tracking</span>
+              <h3>Behalte einzelne Stellen im Blick.</h3>
+              <p>Lege für jede Stelle eine eigene Zeitleiste an. DermaScan erkennt Veränderungen in Größe und Farbe und markiert, was du beobachten solltest.</p>
+            </div>
+          </div>
+
+          <!-- Recap -->
+          <div class="xp-panel">
+            <div class="xp-art">
+              <div class="phone">
+                <div class="island"></div>
+                <div class="screen s-derma">
+                  <div class="statusbar">9:41<span class="sb-r">●●●<span class="sbatt"></span></span></div>
+                  <div class="scr-body" style="justify-content:flex-start">
+                    <div class="dhead"><div class="hi">Wochen-Recap<small>KW 26</small></div></div>
+                    <div class="ring-card" style="text-align:left;padding:15px">
+                      <div style="font-size:13px;font-weight:800;color:#3c4a3d;margin-bottom:8px">Deine Woche <svg class="ic" aria-hidden="true"><use href="#ic-sparkles"/></svg></div>
+                      <div style="font-size:11px;color:#5b6a5c;line-height:1.5">Dein Score stieg um <b>+4</b>. Die abendliche Feuchtigkeitspflege zeigt Wirkung: Die Trockenheit an der Wange ist zurückgegangen.</div>
+                    </div>
+                    <div class="drow"><div class="dcard"><div class="dt">Check-ins</div><div class="dn">7 / 7</div></div><div class="dcard"><div class="dt">Ø Score</div><div class="dn">80</div></div></div>
+                    <div class="ring-card" style="text-align:left;padding:12px"><div style="font-size:11px;font-weight:700;color:#3c4a3d"><svg class="ic" aria-hidden="true"><use href="#ic-bulb"/></svg> Tipp der Woche</div><div style="font-size:10.5px;color:#5b6a5c;margin-top:4px">Denk auch morgens an SPF, das hat letzte Woche oft gefehlt.</div></div>
+                  </div>
+                  <div class="tabbar"><div class="tab on"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-home"/></svg></span>Home</div><div class="tab"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-camera"/></svg></span>Scan</div><div class="tab"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg></span>Spots</div><div class="tab"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-user"/></svg></span>Profil</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="xp-copy">
+              <span class="eyebrow">Wochen-Recap</span>
+              <h3>Jeden Sonntag etwas klüger.</h3>
+              <p>Eine KI-Zusammenfassung deiner Woche: Trends, Fortschritte und ein konkreter Tipp für die nächste Woche, damit du verstehst, was wirklich wirkt.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEFORE / AFTER -->
+  <section class="section gray" id="tracking">
+    <div class="container">
+      <span class="eyebrow rev">Vorher / Nachher</span>
+      <h2 class="headline rev d1">Fortschritt, den du sehen kannst.</h2>
+      <p class="sub rev d2 lead-copy" style="margin-top:14px">Zieh am Griff und vergleiche beide Zeitpunkte. Genau dieser Vergleich begrüßt dich auch beim ersten Start der App.</p>
+    </div>
+    <div style="margin-top:42px" class="rev d2">
+      <div class="ba" data-ba>
+        <div class="ba-layer"><div class="ba-skin before"></div></div>
+        <div class="ba-after ba-layer"><div class="ba-skin after"></div></div>
+        <div class="ba-tag l"><svg class="ic" aria-hidden="true"><use href="#ic-search"/></svg> Vorher</div>
+        <div class="ba-tag r"><svg class="ic" aria-hidden="true"><use href="#ic-sparkles"/></svg> Nachher</div>
+        <div class="ba-handle"><div class="ba-knob"><svg class="ic" aria-hidden="true"><use href="#ic-arrows-h"/></svg></div></div>
+        <input class="ba-range" type="range" min="0" max="100" value="52" aria-label="Vorher/Nachher vergleichen" />
+      </div>
+    </div>
+  </section>
+
+  <!-- BENTO -->
+  <section class="section">
+    <div class="container"><h2 class="headline rev">Noch mehr für deine Haut.</h2></div>
+    <div class="container wide" style="margin-top:42px">
+      <div class="bento">
+        <div class="cell span2 rev"><div class="bemoji"><svg class="ic" aria-hidden="true"><use href="#ic-bottle"/></svg></div><h3>Routine-Tracker</h3><p>Logge Produkte und Schritte morgens wie abends. DermaScan merkt sich, was wirkt, und erinnert dich an das, was fehlt. Ganz ohne Druck.</p></div>
+        <div class="cell rev d1"><div class="bemoji"><svg class="ic" aria-hidden="true"><use href="#ic-map"/></svg></div><h3>Body-Map</h3><p>Verorte Stellen am Körper: links/rechts, Gesicht, Rumpf, Gliedmaßen.</p></div>
+        <div class="cell rev d1"><div class="bemoji"><svg class="ic" aria-hidden="true"><use href="#ic-route"/></svg></div><h3>Journeys</h3><p>Foto-Verläufe für ein konkretes Anliegen, z. B. „Akne-Fortschritt".</p></div>
+        <div class="cell rev"><div class="bemoji"><svg class="ic" aria-hidden="true"><use href="#ic-bell"/></svg></div><h3>Smarte Erinnerungen</h3><p>Sanfte Morgen- &amp; Abend-Nudges, wann immer es dir passt.</p></div>
+        <div class="cell span2 rev d1"><div class="bemoji"><svg class="ic" aria-hidden="true"><use href="#ic-grid"/></svg></div><h3>Home-Screen-Widgets</h3><p>Skin-Score, Streak und Routine direkt auf dem Home-Bildschirm. Ein Blick genügt.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVACY -->
+  <section class="section gray" id="datenschutz">
+    <div class="container">
+      <span class="eyebrow rev">Datenschutz</span>
+      <h2 class="headline rev d1">Deine Haut. Deine Daten.</h2>
+      <p class="sub rev d2 lead-copy" style="margin-top:14px">Hautdaten sind sensibel. Genau deshalb bleibt fast alles auf deinem iPhone.</p>
+    </div>
+    <div class="container wide rev d2" style="margin-top:54px">
+      <div class="privc">
+        <div class="card">
+          <div class="ic-badge"><svg class="ic" aria-hidden="true"><use href="#ic-lock"/></svg></div>
+          <h3>Lokal &amp; verschlüsselt</h3>
+          <p>Scans, Verläufe, Profil und Notizen bleiben auf deinem iPhone, gesichert mit SwiftData und iOS&nbsp;File-Protection.</p>
+        </div>
+        <div class="card">
+          <div class="ic-badge"><svg class="ic" aria-hidden="true"><use href="#ic-shield"/></svg></div>
+          <h3>Fotos nur zur Analyse</h3>
+          <p>Bilder werden komprimiert für die KI-Analyse gesendet und auf <b>keinem Server</b> gespeichert.</p>
+        </div>
+        <div class="card">
+          <div class="ic-badge"><svg class="ic" aria-hidden="true"><use href="#ic-user"/></svg></div>
+          <h3>Kein Konto, kein Tracking</h3>
+          <p>Keine Registrierung. Werbung und Tracking nur nach deiner ausdrücklichen Zustimmung (ATT).</p>
+        </div>
+      </div>
+      <div class="section-cta rev d2" style="margin-top:40px"><a href="rechtliches.html" class="link" style="font-size:19px">Vollständige Datenschutzerklärung</a></div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="section" id="stimmen">
+    <div class="container">
+      <span class="eyebrow rev">Was Nutzer:innen sagen</span>
+      <h2 class="headline rev d1"><span class="count" data-count="4.9" data-dec="1">0,0</span> von 5 Sternen.</h2>
+    </div>
+    <div class="rev-rail rev d1" style="max-width:1100px;margin:38px auto 0">
+      <div class="review"><div class="stars">★★★★★</div><p>„Endlich eine Haut-App, bei der ich nicht das Gefühl habe, dass meine Fotos irgendwo landen. Der Skin-Score motiviert mich, jeden Abend dranzubleiben."</p><div class="who"><span class="av">LM</span><div><div class="rn">Lena M.</div><div class="rm">Wien</div></div></div></div>
+      <div class="review"><div class="stars">★★★★☆</div><p>„Das Spot-Tracking mit dem Vorher/Nachher-Schieber ist unglaublich praktisch, um Veränderungen über Monate zu sehen."</p><div class="who"><span class="av">JF</span><div><div class="rn">Julia F.</div><div class="rm">Innsbruck</div></div></div></div>
+      <div class="review"><div class="stars">★★★★★</div><p>„Die tägliche Routine-Erinnerung und die Streaks haben tatsächlich meine Hautpflege verändert. 14 Tage am Stück. <svg class="ic" aria-hidden="true"><use href="#ic-flame"/></svg>"</p><div class="who"><span class="av">CN</span><div><div class="rn">Carina N.</div><div class="rm">Wien</div></div></div></div>
+      <div class="review"><div class="stars">★★★★★</div><p>„Schön gestaltet, schnell und ehrlich beim Thema Daten. Man merkt, dass hier mit Liebe entwickelt wurde."</p><div class="who"><span class="av">DR</span><div><div class="rn">Daniel R.</div><div class="rm">Bregenz</div></div></div></div>
+      <div class="review"><div class="stars">★★★★★</div><p>„Die Wochen-Recaps sind richtig hilfreich. Ich verstehe meine Haut zum ersten Mal wirklich."</p><div class="who"><span class="av">EM</span><div><div class="rn">Elif M.</div><div class="rm">Wien</div></div></div></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section gray">
+    <div class="container"><h2 class="headline rev" style="text-align:center">Häufige Fragen</h2></div>
+    <div class="faq-wrap rev d1" style="margin-top:36px">
+      <details class="faq" open><summary>Ist DermaScan ein medizinisches Diagnosewerkzeug? <span class="pm">+</span></summary><div class="ans">Nein. DermaScan unterstützt die Selbstbeobachtung deiner Haut und ersetzt keine ärztliche Untersuchung. Bei Beschwerden oder auffälligen Veränderungen wende dich bitte an eine Dermatologin oder einen Dermatologen.</div></details>
+      <details class="faq"><summary>Werden meine Fotos gespeichert? <span class="pm">+</span></summary><div class="ans">Deine Fotos und Verläufe bleiben lokal auf dem Gerät. Für die Analyse wird ein Bild komprimiert übertragen und danach nicht auf einem Server gespeichert.</div></details>
+      <details class="faq"><summary>Brauche ich ein Konto? <span class="pm">+</span></summary><div class="ans">Nein. Es gibt keine Registrierung und kein Login, du kannst sofort starten.</div></details>
+      <details class="faq"><summary>Was kostet die App? <span class="pm">+</span></summary><div class="ans">Du kannst kostenlos starten. Premium schaltet unbegrenzte Scans, Daten-Export und ein werbefreies Erlebnis frei.</div></details>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" id="laden" style="background:linear-gradient(180deg,#fbfbfd,#eef3ee)">
+    <div class="container">
+      <h2 class="headline rev" style="color:#3c4a3d">Starte dein Haut-Tagebuch.</h2>
+      <p class="sub rev d1 lead-copy" style="margin-top:14px">Kostenlos starten, ohne Konto. Für iPhone &amp; iPad.</p>
+      <div class="section-cta rev d2"><a href="#" class="btn btn-lg"><svg class="ic ic-fill" aria-hidden="true"><use href="#ic-apple"/></svg> Im App Store laden</a></div>
+      <p class="cap rev d2" style="max-width:640px;margin:22px auto 0">DermaScan ist kein medizinisches Diagnosewerkzeug und ersetzt keine ärztliche Untersuchung.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot-in">
+    <div class="foot-top"><p>Q&nbsp;Systems baut iOS-Apps, die nützlich sind, ohne dich zum Produkt zu machen. Lokal-first, transparent, mit Respekt vor deinen Daten.</p></div>
+    <div class="foot-cols">
+      <div><h4>Apps</h4><a href="dermascan.html">DermaScan</a><a href="plantcare.html">PlantCare</a><a href="diktatbuddy.html">DiktatBuddy</a></div>
+      <div><h4>Datenschutz</h4><a href="index.html#privacy">Datenschutz-Übersicht</a><a href="rechtliches.html">Datenschutzerklärung</a></div>
+      <div><h4>Support</h4><a href="mailto:hello@q-systems.app">Kontakt</a><a href="#">Hilfe</a></div>
+      <div><h4>Q&nbsp;Systems</h4><a href="index.html">Übersicht</a><a href="#">Über uns</a><a href="rechtliches.html#impressum">Impressum</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Q&nbsp;Systems · Mit Sorgfalt in Österreich gebaut <svg class="ic-flag" width="20" height="13" viewBox="0 0 20 13" aria-hidden="true" style="display:inline-block;vertical-align:-2px;border-radius:2px"><rect width="20" height="13" fill="#ED2939"/><rect y="4.34" width="20" height="4.33" fill="#fff"/></svg></span>
+      <span>Bewertungen &amp; Kennzahlen sind Platzhalter für diese Demo-Seite.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
