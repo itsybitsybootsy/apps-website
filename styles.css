@@ -650,3 +650,12 @@ body:not(.ink) .strip p{ color:var(--text-2); }
   .plan{ padding:24px 20px; }
   .strip{ padding:22px; }
 }
+
+/* ============================================================
+   REAL DEVICE SCREENSHOTS inside the CSS phone frame.
+   Captured on the iPhone 17 simulator, so the shot already
+   contains the status bar and the Dynamic Island — these frames
+   therefore omit the .island element the mock screens draw.
+   ============================================================ */
+.phone.shot .screen{ background:#000; display:block; }
+.phone.shot .screen img{ width:100%; height:100%; object-fit:cover; object-position:top center; }

@@ -22,6 +22,32 @@ kein Consent-Banner.
 | `styles.css` | Gemeinsames Designsystem + `theme-instead` |
 | `app.js` | SVG-Icon-Sprite und Interaktionen (Reveal, Count-up, Explorer, Before/After) |
 
+## Screenshots
+
+`img/shots/` enthält **echte Aufnahmen vom iPhone-17-Simulator**, keine Renderings.
+Sie stecken in demselben CSS-Telefonrahmen wie die gezeichneten Mockups, tragen aber die
+Klasse `.phone.shot` – dort entfällt das `.island`-Element, weil die Aufnahme die Dynamic
+Island bereits enthält.
+
+So entstehen sie neu:
+
+```sh
+xcrun simctl status_bar booted override --time "9:41" \
+  --cellularBars 4 --wifiBars 3 --batteryState charged --batteryLevel 100
+
+# Instead bringt eine eigene Screenshot-Harness mit:
+xcrun simctl launch booted com.llammer.Instead \
+  -InsteadPreviewData YES -InsteadPro YES -InsteadOnboarding NO -InsteadScreen mirror
+# gültige Screens: mirror | you | reclaim | rewind | settings | paywall
+
+xcrun simctl io booted screenshot roh.png
+sips -Z 640 roh.png            # Fotolastiges zusätzlich nach JPEG (Qualität ~82)
+```
+
+**DermaScan fehlt hier noch**: Die App lässt sich derzeit nicht bauen, im Paywall-Refactor
+hat `PlaceholderPlan` die Felder `name`, `price`, `period`, `monthlyEquivalent`, `badge` und
+`isRecommended` verloren. Solange nutzt `dermascan.html` die gezeichneten Mockups.
+
 ## Rechtstexte ändern
 
 `datenschutz.html`, `agb.html` und `impressum.html` sind **generierte Dateien – nicht direkt
