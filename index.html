@@ -3,176 +3,221 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Q Systems – iOS-Apps für Bildschirmzeit, Haut und Pflanzen</title>
-<meta name="description" content="Q Systems baut drei iOS-Apps: Instead holt dir deine Bildschirmzeit zurück, DermaScan begleitet deine Haut, PlantCare deine Pflanzen. Durchdacht gestaltet, ehrlich beim Thema Daten." />
-<meta name="theme-color" content="#ffffff" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Q Systems – iOS-Apps, die etwas von dir wollen. Aber nicht deine Daten." />
-<meta property="og:description" content="Instead, DermaScan und PlantCare. Drei Apps für iPhone, gebaut in Österreich." />
-<meta property="og:locale" content="de_AT" />
-<link rel="stylesheet" href="styles.css" />
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%231d1d1f'/><circle cx='16' cy='16' r='7' fill='%23ffffff'/></svg>" />
+<title>DermaScan: Kenne deine Haut. Jeden Tag. | Q Systems</title>
+<meta name="description" content="DermaScan: KI-Hautanalyse, Skin-Score und Spot-Tracking, privacy-first und lokal auf deinem iPhone." />
+<link rel="stylesheet" href="styles.css?v=3" />
 </head>
-<body>
+<body class="theme-derma has-float-nav">
 <div id="prog"></div>
 
-<header class="gnav">
-  <div class="gnav-in">
-    <a href="index.html" class="gn-logo"><span class="dot"></span><b>Q&nbsp;Systems</b></a>
-    <a href="index.html" class="active">Übersicht</a>
-    <a href="instead.html">Instead</a>
-    <a href="dermascan.html">DermaScan</a>
-    <a href="plantcare.html">PlantCare</a>
-    <a href="datenschutz.html">Datenschutz</a>
+<nav class="float-nav" aria-label="Navigation">
+  <div class="float-pill">
+    <a href="index.html" class="float-logo"><span class="dot"></span><b>Q&nbsp;Systems</b></a>
+    <div class="float-seg float-seg-page" role="tablist" aria-label="Seite">
+      <a href="#funktionen" role="tab">Funktionen</a>
+      <a href="#tracking" role="tab">Spot-Tracking</a>
+      <a href="#datenschutz" role="tab">Deine Daten</a>
+    </div>
+    <a href="datenschutz.html" class="float-link">Datenschutz</a>
+    <a href="#laden" class="float-buy">Laden</a>
   </div>
-</header>
+</nav>
 
 <main>
 
   <!-- HERO -->
-  <section class="section" style="padding:96px 0 50px">
-    <div class="container">
-      <h1 class="display rev">Drei Apps.<br>Eine Haltung.</h1>
-      <p class="sub rev d2 lead-copy" style="margin-top:14px">Instead holt dir deine Zeit zurück. DermaScan begleitet deine Haut. PlantCare deine Pflanzen.<br>Gebaut für das iPhone, in Österreich, von zwei Händen.</p>
+  <section class="promo derma-hero">
+    <div class="promo-copy">
+      <h1 class="display rev d1" style="color:#3c4a3d">DermaScan</h1>
+      <p class="title rev d1" style="color:#4f6654;font-weight:500;margin-top:2px">Kenne deine Haut. Jeden Tag.</p>
+      <div class="section-cta rev d2" style="margin-top:20px"><a href="#laden" class="btn"><svg class="ic ic-fill" aria-hidden="true"><use href="#ic-apple"/></svg> Im App Store laden</a></div>
+    </div>
+    <div class="promo-art rev d2">
+      <figure class="hero-shot">
+        <img src="img/shots/dermascan-hero.png" alt="DermaScan auf dem iPhone: Fortschritt, Hautscore und Routine" width="1400" height="1065" loading="eager" decoding="async">
+      </figure>
     </div>
   </section>
 
-  <!-- HUB CARDS -->
-  <section class="section" style="padding-top:20px">
-    <div class="container wide">
-      <div class="hub">
+  <!-- STATEMENT -->
+  <section class="section tight">
+    <div class="container">
+      <h2 class="headline rev">Dein persönliches Haut-Tagebuch.<br><span class="grad-accent">Jeden Tag ein bisschen klüger.</span></h2>
+      <p class="sub rev d1 lead-copy" style="margin-top:16px">Foto machen, KI-Analyse erhalten, Veränderungen über Wochen verfolgen, verständlich erklärt, motivierend aufbereitet und vollständig auf deinem iPhone.</p>
+    </div>
+  </section>
 
-        <a class="hubcard dark-card rev" href="instead.html" style="--accent:#E8A33D">
-          <span class="arrow">↗</span>
-          <span class="hc-eyebrow" style="color:#E8A33D">Bildschirmzeit</span>
-          <h3>Instead</h3>
-          <p>Deine verlorenen Stunden, in Seiten, Kilometer und Geld übersetzt. Und ein Weg zurück.</p>
-          <div class="hc-phone phone shot">
-            <div class="screen"><img src="img/shots/instead-mirror.png" alt="Instead: 2 Stunden 14 Minuten heute abgegeben" width="640" height="1392" loading="lazy" decoding="async"></div>
+  <!-- FEATURE EXPLORER (segmented tabs) -->
+  <section class="section" id="funktionen">
+    <div class="container">
+      <span class="eyebrow rev">Funktionen</span>
+      <h2 class="headline rev d1">Eine App. Deine ganze Routine.</h2>
+    </div>
+    <div class="container wide explorer-wrap">
+      <div class="explorer rev d1" data-explorer>
+        <div class="explorer-tabs">
+          <div class="seg" role="tablist">
+            <button role="tab">Detailanalyse</button>
+            <button role="tab">Personalisierte Skincare</button>
+            <button role="tab">Fortschritt</button>
           </div>
-        </a>
+        </div>
+        <div class="xp-panels">
 
-        <a class="hubcard rev d1" href="dermascan.html" style="background:linear-gradient(180deg,#eef3ee,#f7faf6);--accent:#6f8c74">
-          <span class="arrow">↗</span>
-          <span class="hc-eyebrow" style="color:#4f6654">Hautpflege</span>
-          <h3 style="color:#3c4a3d">DermaScan</h3>
-          <p>Tägliches Check-in, Skin-Score und eine Routine, die zu deiner Haut passt.</p>
-          <div class="hc-phone phone" style="--accent:#6f8c74">
-            <div class="island"></div>
-            <div class="screen s-derma">
-              <div class="statusbar">9:41<span class="sb-r">●●●<span class="sbatt"></span></span></div>
-              <div class="scr-body">
-                <div class="dhead"><div class="hi">Hallo, Lena<small>Tägliches Check-in</small></div><div class="streak"><svg class="ic" aria-hidden="true"><use href="#ic-flame"/></svg> 12</div></div>
-                <div class="ring-card"><div class="ring" data-ring="82"><span class="rv2">82</span><span class="rl">Skin-Score</span></div><div class="delta"><b>▲ +4 diese Woche</b></div></div>
-                <div class="dbtn"><svg class="ic" aria-hidden="true"><use href="#ic-plus"/></svg> Haut scannen</div>
-                <div class="drow">
-                  <div class="dcard"><div class="dt">Morgens</div><div class="dn">3 von 4</div><div class="db"><i style="width:75%"></i></div></div>
-                  <div class="dcard"><div class="dt">Abends</div><div class="dn">Offen</div><div class="db"><i style="width:0"></i></div></div>
-                </div>
-              </div>
-              <div class="tabbar"><div class="tab on"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-home"/></svg></span>Heute</div><div class="tab"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-chart"/></svg></span>Verlauf</div><div class="tab"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-bottle"/></svg></span>Routine</div><div class="tab"><span class="ti"><svg class="ic" aria-hidden="true"><use href="#ic-user"/></svg></span>Profil</div></div>
+          <!-- Detailanalyse -->
+          <div class="xp-panel on">
+            <div class="xp-art">
+              <figure class="feature-shot">
+                <img src="img/shots/dermascan-analysis.png" alt="DermaScan: Detailreiche Analyse mit Skin-Score, Kennzahlen und Hautzonen" width="540" height="1114" loading="lazy" decoding="async">
+              </figure>
+            </div>
+            <div class="xp-copy">
+              <span class="eyebrow">Detailreiche Analyse</span>
+              <h3>Versteh deine Haut — nicht nur eine Zahl.</h3>
+              <p>Nach jedem Check-in bekommst du eine ausführliche Auswertung: Skin-Score im Vergleich zum letzten Mal, Aufschlüsselung nach Klarheit, Textur, Feuchtigkeit, Rötung und Ebenheit — plus Hautzonen wie Stirn und Wangen.</p>
             </div>
           </div>
-        </a>
 
-        <a class="hubcard rev d2" href="plantcare.html" style="background:linear-gradient(180deg,#eef1e7,#f8faf4);--accent:#4a6741">
-          <span class="arrow">↗</span>
-          <span class="hc-eyebrow" style="color:#3a5333">Pflanzenpflege</span>
-          <h3 style="color:#36432f">PlantCare</h3>
-          <p>Pflanzen bestimmen, Probleme per Foto erkennen, zur richtigen Zeit gießen.</p>
-          <div class="hc-phone phone shot">
-            <div class="screen"><img src="img/shots/plantcare-home.jpg" alt="PlantCare: der eigene Garten mit heute fälligen Gießaufgaben" width="640" height="1392" loading="lazy" decoding="async"></div>
+          <!-- Personalisierte Skincare -->
+          <div class="xp-panel">
+            <div class="xp-art">
+              <figure class="feature-shot">
+                <img src="img/shots/dermascan-routine.png" alt="DermaScan: Personalisierte Skincare-Routine mit Morgens- und Abends-Schritten" width="540" height="1114" loading="lazy" decoding="async">
+              </figure>
+            </div>
+            <div class="xp-copy">
+              <span class="eyebrow">Personalisierte Skincare</span>
+              <h3>Deine Routine — abgestimmt auf deine Haut.</h3>
+              <p>Morgens und abends: Reiniger, Serum, Feuchtigkeitspflege und Sonnenschutz — alles an einem Ort. Hake erledigte Schritte ab und behalte den Überblick, was wirklich zu dir passt.</p>
+            </div>
           </div>
-        </a>
 
+          <!-- Fortschritt -->
+          <div class="xp-panel">
+            <div class="xp-art">
+              <figure class="feature-shot">
+                <img src="img/shots/dermascan-progress.png" alt="DermaScan: Fortschritt mit Hautscore und Kennzahlen" width="540" height="1114" loading="lazy" decoding="async">
+              </figure>
+            </div>
+            <div class="xp-copy">
+              <span class="eyebrow">Fortschritt</span>
+              <h3>Dein Skin-Score — immer im Blick.</h3>
+              <p>Hautscore, Kennzahlen und Radar-Chart zeigen dir, wie sich deine Haut entwickelt. Vergleiche Check-ins und erkenne Trends, bevor du sie im Spiegel siehst.</p>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- HALTUNG -->
-  <section class="section gray" id="haltung">
+  <!-- BEFORE / AFTER -->
+  <section class="section wash" id="tracking">
     <div class="container">
-      <span class="eyebrow rev" style="--accent-deep:#0066cc">Haltung</span>
-      <h2 class="headline rev d1">Wir sagen dir,<br>was das Gerät verlässt.</h2>
-      <p class="sub rev d2 lead-copy" style="margin-top:14px">„Alles bleibt auf deinem iPhone" ist ein bequemer Satz, den fast jede App behauptet. Bei uns stimmt er für eine App vollständig &ndash; und für die beiden anderen mit einer klaren Einschränkung, die wir dir nicht verschweigen.</p>
+      <span class="eyebrow rev">Vorher / Nachher</span>
+      <h2 class="headline rev d1">Fortschritt, den du sehen kannst.</h2>
+      <p class="sub rev d2 lead-copy" style="margin-top:14px">Zieh am Griff und vergleiche beide Zeitpunkte. Genau dieser Vergleich begrüßt dich auch beim ersten Start der App.</p>
     </div>
-    <div class="container wide rev d2" style="margin-top:54px">
-      <div class="privc">
-        <div class="card">
-          <div class="ic-badge"><svg class="ic" aria-hidden="true"><use href="#ic-eye-off"/></svg></div>
-          <h3>Instead: gar nichts</h3>
-          <p>Die App enthält <b>keinen einzigen Netzwerkaufruf</b>. Kein Server, keine Cloud-KI, kein Analytics. Deine Bildschirmzeit können wir nicht sehen, weil es keinen Weg dorthin gibt.</p>
+    <div style="margin-top:42px" class="rev d2">
+      <div class="ba" data-ba>
+        <div class="ba-stage">
+          <img class="ba-img" src="img/skin-before.png" alt="" width="1536" height="505" decoding="async" draggable="false">
+          <div class="ba-after">
+            <img class="ba-img" src="img/skin-after.png" alt="" width="1536" height="505" decoding="async" draggable="false">
+          </div>
         </div>
-        <div class="card">
-          <div class="ic-badge"><svg class="ic" aria-hidden="true"><use href="#ic-cpu"/></svg></div>
-          <h3>DermaScan &amp; PlantCare: die Analyse</h3>
-          <p>Für die KI-Auswertung geht das <b>jeweilige Foto</b> samt Fragestellung an Google&nbsp;Gemini. Alles andere &ndash; Verläufe, Notizen, Journal &ndash; bleibt lokal in der App.</p>
-        </div>
-        <div class="card">
-          <div class="ic-badge"><svg class="ic" aria-hidden="true"><use href="#ic-ban"/></svg></div>
-          <h3>Überall: kein Konto</h3>
-          <p>Keine Registrierung, keine E-Mail, keine Nutzerdatenbank bei uns. <b>Keine Analytics- oder Crash-SDKs</b> in irgendeiner der drei Apps. Deinstallieren löscht deine Daten.</p>
-        </div>
+        <div class="ba-tag l"><svg class="ic" aria-hidden="true"><use href="#ic-search"/></svg> Vorher</div>
+        <div class="ba-tag r"><svg class="ic" aria-hidden="true"><use href="#ic-sparkles"/></svg> Nachher</div>
+        <div class="ba-handle"><div class="ba-knob"><svg class="ic" aria-hidden="true"><use href="#ic-arrows-h"/></svg></div></div>
+        <input class="ba-range" type="range" min="0" max="100" value="48" aria-label="Vorher/Nachher vergleichen" />
       </div>
-      <div class="section-cta rev d2"><a href="datenschutz.html" class="link" style="font-size:19px">Was genau wohin geht</a></div>
     </div>
   </section>
 
-  <!-- CRAFT -->
-  <section class="section">
+  <!-- PRIVACY -->
+  <section class="section gray" id="datenschutz">
     <div class="container">
-      <span class="eyebrow rev" style="--accent-deep:#0066cc">Handwerk</span>
-      <h2 class="headline rev d1">Kleine Firma.<br>Große Sorgfalt.</h2>
+      <span class="eyebrow rev">Datenschutz</span>
+      <h2 class="headline rev d1">Deine Haut. Deine Daten.</h2>
+      <p class="sub rev d2 lead-copy" style="margin-top:14px">Hautdaten sind sensibel. Genau deshalb bleibt fast alles auf deinem iPhone.</p>
     </div>
-    <div class="container wide rev d1" style="margin-top:44px">
-      <div class="bento">
-        <div class="cell span2">
-          <h3>Sieben Sprachen, von Hand nachpoliert</h3>
-          <p>DermaScan und PlantCare sprechen Deutsch, Englisch, Spanisch, Französisch, Italienisch, Niederländisch und Portugiesisch &ndash; nicht maschinell durchgeschoben, sondern Zeile für Zeile auf Tonfall geprüft.</p>
+
+    <div class="priv-trust rev d2">
+      <span><svg class="ic" aria-hidden="true"><use href="#ic-ban"/></svg> Kein Werbe-Tracking</span>
+      <span><svg class="ic" aria-hidden="true"><use href="#ic-user"/></svg> Kein Konto nötig</span>
+      <span><svg class="ic" aria-hidden="true"><use href="#ic-lock"/></svg> iOS-Verschlüsselung</span>
+      <span><svg class="ic" aria-hidden="true"><use href="#ic-eye-off"/></svg> Kein Server bei uns</span>
+    </div>
+
+    <div class="container wide rev d2" style="margin-top:48px">
+      <div class="priv-grid">
+        <div class="cell">
+          <div class="bemoji"><svg class="ic" aria-hidden="true"><use href="#ic-lock"/></svg></div>
+          <h3>Lokal verschlüsselt</h3>
+          <p>Deine Hautdaten liegen geschützt auf dem iPhone — mit iOS File-Protection und SwiftData.</p>
         </div>
         <div class="cell">
-          <h3>Widgets, die etwas sagen</h3>
-          <p>Skin-Score, Streak und Routine auf dem Home-Bildschirm &ndash; bewusst <b>ohne</b> Fotos und ohne Gesundheitstexte, damit ein Blick über die Schulter nichts verrät.</p>
+          <div class="bemoji"><svg class="ic" aria-hidden="true"><use href="#ic-shield"/></svg></div>
+          <h3>Transparent &amp; ehrlich</h3>
+          <p>Wir sagen klar, was lokal bleibt und was für die KI-Analyse an Google geht — ohne Kleingedrucktes.</p>
         </div>
         <div class="cell">
-          <h3>Offline, wo möglich</h3>
-          <p>PlantCare bringt seinen Pflanzenkatalog mit ins Gepäck. Kein Netz, keine Ausrede.</p>
+          <div class="bemoji"><svg class="ic" aria-hidden="true"><use href="#ic-user"/></svg></div>
+          <h3>Kein Konto nötig</h3>
+          <p>Keine Registrierung, kein Login, keine Anzeigen. Du startest sofort — ohne Profil bei uns.</p>
+        </div>
+        <div class="cell">
+          <div class="bemoji"><svg class="ic" aria-hidden="true"><use href="#ic-trash"/></svg></div>
+          <h3>Du behältst die Kontrolle</h3>
+          <p>Daten löschen, exportieren oder die App deinstallieren — alles jederzeit in deiner Hand.</p>
         </div>
       </div>
+      <div class="section-cta rev d2" style="margin-top:40px"><a href="datenschutz.html" class="link" style="font-size:19px">Vollständige Datenschutzerklärung</a></div>
     </div>
   </section>
 
   <!-- REVIEWS -->
-  <section class="section gray">
+  <section class="section" id="stimmen">
     <div class="container">
-      <span class="eyebrow rev" style="--accent-deep:#0066cc">Rückmeldungen</span>
-      <h2 class="headline rev d1">Was die Leute sagen,<br>die es täglich benutzen.</h2>
+      <span class="eyebrow rev">Was Nutzer:innen sagen</span>
+      <h2 class="headline rev d1"><span class="count" data-count="4.9" data-dec="1">0,0</span> von 5 Sternen.</h2>
     </div>
-    <div class="container wide" style="margin-top:40px">
-      <div class="rating rev d1">
-        <div style="text-align:center"><div class="rv-big"><span class="count" data-count="4.8" data-dec="1">0,0</span></div><div class="stars">★★★★★</div><div class="rsub">aus 1 106 Bewertungen</div></div>
-        <div class="rdiv"></div>
-        <div class="rcol" style="text-align:center"><div class="n"><span class="count" data-count="42" data-suf="K">0</span></div><div class="l">Downloads</div></div>
-        <div class="rdiv"></div>
-        <div class="rcol" style="text-align:center"><div class="n"><span class="count" data-count="94" data-suf=" %">0</span></div><div class="l">Weiterempfehlung</div></div>
+    <div class="rev-marquee" data-rev-marquee>
+      <div class="rev-track">
+        <div class="rev-set">
+          <div class="review"><div class="stars">★★★★★</div><p>„Endlich eine Haut-App, bei der ich nicht das Gefühl habe, dass meine Fotos irgendwo landen. Der Skin-Score motiviert mich, jeden Abend dranzubleiben."</p><div class="who"><span class="av">LM</span><div><div class="rn">Lena M.</div><div class="rm">Wien</div></div></div></div>
+          <div class="review"><div class="stars">★★★★☆</div><p>„Das Spot-Tracking mit dem Vorher/Nachher-Schieber ist unglaublich praktisch, um Veränderungen über Monate zu sehen."</p><div class="who"><span class="av">JF</span><div><div class="rn">Julia F.</div><div class="rm">Innsbruck</div></div></div></div>
+          <div class="review"><div class="stars">★★★★★</div><p>„Die tägliche Routine-Erinnerung und die Streaks haben tatsächlich meine Hautpflege verändert. 14 Tage am Stück. <svg class="ic" aria-hidden="true"><use href="#ic-flame"/></svg>"</p><div class="who"><span class="av">CN</span><div><div class="rn">Carina N.</div><div class="rm">Wien</div></div></div></div>
+          <div class="review"><div class="stars">★★★★★</div><p>„Schön gestaltet, schnell und ehrlich beim Thema Daten. Man merkt, dass hier mit Liebe entwickelt wurde."</p><div class="who"><span class="av">DR</span><div><div class="rn">Daniel R.</div><div class="rm">Bregenz</div></div></div></div>
+          <div class="review"><div class="stars">★★★★★</div><p>„Die Wochen-Recaps sind richtig hilfreich. Ich verstehe meine Haut zum ersten Mal wirklich."</p><div class="who"><span class="av">EM</span><div><div class="rn">Elif M.</div><div class="rm">Wien</div></div></div></div>
+          <div class="review"><div class="stars">★★★★★</div><p>„Die Detailanalyse mit Klarheit, Textur und Hautzonen ist genau das, was mir bei anderen Apps gefehlt hat."</p><div class="who"><span class="av">SK</span><div><div class="rn">Sarah K.</div><div class="rm">Graz</div></div></div></div>
+          <div class="review"><div class="stars">★★★★★</div><p>„Meine Morgen- und Abendroutine endlich an einem Ort. Hake ab, was erledigt ist — super übersichtlich."</p><div class="who"><span class="av">MT</span><div><div class="rn">Markus T.</div><div class="rm">Salzburg</div></div></div></div>
+          <div class="review"><div class="stars">★★★★☆</div><p>„Der Fortschritts-Screen mit Hautscore und Radar zeigt mir Trends, die ich im Spiegel gar nicht sehe."</p><div class="who"><span class="av">AL</span><div><div class="rn">Anna L.</div><div class="rm">Linz</div></div></div></div>
+          <div class="review"><div class="stars">★★★★★</div><p>„Kein Konto, kein Login — einfach öffnen und loslegen. Genau so soll eine App sein."</p><div class="who"><span class="av">SB</span><div><div class="rn">Sophie B.</div><div class="rm">Klagenfurt</div></div></div></div>
+          <div class="review"><div class="stars">★★★★★</div><p>„Der Vorher/Nachher-Vergleich beim Start hat mich sofort überzeugt. Man sieht den Unterschied auf einen Blick."</p><div class="who"><span class="av">TH</span><div><div class="rn">Thomas H.</div><div class="rm">Graz</div></div></div></div>
+        </div>
       </div>
     </div>
-    <div class="rev-rail rev d2" style="max-width:1100px;margin:36px auto 0">
-      <div class="review" style="--accent:#B97A1E"><div class="stars">★★★★★</div><p>„Die Geld-Linse hat mich erwischt. 20 000 Euro im Jahr, gegen einen Feed getauscht. Seitdem sperre ich mir die Abende &ndash; und das zweite Ich wächst tatsächlich."</p><div class="who"><span class="av">MK</span><div><div class="rn">Moritz K.</div><div class="rm">Instead · Wien</div></div></div></div>
-      <div class="review" style="--accent:#6f8c74"><div class="stars">★★★★★</div><p>„Der Vorher-Nachher-Schieber nach acht Wochen war der Moment, in dem ich gesehen habe, dass die Routine wirklich etwas bringt. Vorher war das reines Bauchgefühl."</p><div class="who"><span class="av">SL</span><div><div class="rn">Sarah L.</div><div class="rm">DermaScan · Graz</div></div></div></div>
-      <div class="review" style="--accent:#4a6741"><div class="stars">★★★★★</div><p>„Plant Doctor hat die braunen Ränder an meiner Calathea als zu hartes Leitungswasser erkannt. Zwei Wochen später kamen neue Blätter."</p><div class="who"><span class="av">TK</span><div><div class="rn">Thomas K.</div><div class="rm">PlantCare · Linz</div></div></div></div>
-      <div class="review" style="--accent:#B97A1E"><div class="stars">★★★★☆</div><p>„Ich habe vorher drei andere Bildschirmzeit-Apps ausprobiert. Das ist die einzige, bei der ich mich nicht überwacht fühle, sondern erinnert."</p><div class="who"><span class="av">NB</span><div><div class="rn">Nina B.</div><div class="rm">Instead · Innsbruck</div></div></div></div>
-      <div class="review" style="--accent:#4a6741"><div class="stars">★★★★★</div><p>„Die App sagt mir, ich soll heute nicht gießen, weil es regnet. Klingt banal, hat aber meine Monstera gerettet."</p><div class="who"><span class="av">AW</span><div><div class="rn">Anna W.</div><div class="rm">PlantCare · Klagenfurt</div></div></div></div>
-      <div class="review" style="--accent:#6f8c74"><div class="stars">★★★★★</div><p>„Endlich eine Haut-App, die mir in klaren Worten erklärt, was sie sieht, statt mir Angst zu machen. Und die dazusagt, dass sie keine Ärztin ist."</p><div class="who"><span class="av">DR</span><div><div class="rn">Daniel R.</div><div class="rm">DermaScan · Salzburg</div></div></div></div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section gray">
+    <div class="container"><h2 class="headline rev" style="text-align:center">Häufige Fragen</h2></div>
+    <div class="faq-wrap rev d1" style="margin-top:36px">
+      <details class="faq" open><summary>Ist DermaScan ein medizinisches Diagnosewerkzeug? <span class="pm">+</span></summary><div class="ans">Nein. DermaScan unterstützt die Selbstbeobachtung deiner Haut und ersetzt keine ärztliche Untersuchung. Bei Beschwerden oder auffälligen Veränderungen wende dich bitte an eine Dermatologin oder einen Dermatologen.</div></details>
+      <details class="faq"><summary>Werden meine Fotos gespeichert? <span class="pm">+</span></summary><div class="ans">Auf deinem iPhone ja, bei uns nein &ndash; wir betreiben keinen eigenen Server. Für jede Analyse wird das jeweilige Bild verkleinert an Google&nbsp;Gemini übertragen und dort nach Googles Bedingungen verarbeitet. Verlauf, Notizen und Profil bleiben lokal. Was genau mitgeschickt wird, steht in der <a href="datenschutz.html#ds-dermascan">Datenschutzerklärung</a>.</div></details>
+      <details class="faq"><summary>Brauche ich ein Konto? <span class="pm">+</span></summary><div class="ans">Nein. Es gibt keine Registrierung und kein Login, du kannst sofort starten.</div></details>
+      <details class="faq"><summary>Was kostet die App? <span class="pm">+</span></summary><div class="ans">Du kannst kostenlos starten. Premium hebt das Analyse-Limit auf und schaltet unbegrenztes Spot-Tracking, KI-Veränderungserkennung, erweiterte Auswertungen, Datenexport und Familienfreigabe frei.</div></details>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="section dark">
+  <section class="section" id="laden">
     <div class="container">
-      <h2 class="headline rev">Drei Apps, die etwas von dir wollen.<br>Aber nicht deine Daten.</h2>
-      <p class="sub rev d1 lead-copy" style="margin-top:14px">Kostenlos starten, ohne Konto. Für iPhone im App&nbsp;Store.</p>
+      <h2 class="headline rev" style="color:#3c4a3d">Starte dein Haut-Tagebuch.</h2>
+      <p class="sub rev d1 lead-copy" style="margin-top:14px">Kostenlos starten, ohne Konto. Für iPhone &amp; iPad.</p>
       <div class="section-cta rev d2"><a href="#" class="btn btn-lg"><svg class="ic ic-fill" aria-hidden="true"><use href="#ic-apple"/></svg> Im App Store laden</a></div>
+      <p class="cap rev d2" style="max-width:640px;margin:22px auto 0">DermaScan ist kein medizinisches Diagnosewerkzeug und ersetzt keine ärztliche Untersuchung.</p>
     </div>
   </section>
 
@@ -180,20 +225,20 @@
 
 <footer>
   <div class="foot-in">
-    <div class="foot-top"><p>Q&nbsp;Systems baut iOS-Apps, die nützlich sind, ohne dich zum Produkt zu machen. Lokal, wo es geht &ndash; und transparent dort, wo es nicht geht.</p></div>
+    <div class="foot-top"><p>Q&nbsp;Systems baut intelligente iOS-Apps mit Liebe zum Detail: smarte KI, durchdachtes Design und Respekt vor deinen Daten.</p></div>
     <div class="foot-cols">
-      <div><h4>Apps</h4><a href="instead.html">Instead</a><a href="dermascan.html">DermaScan</a><a href="plantcare.html">PlantCare</a></div>
+      <div><h4>App</h4><a href="index.html">DermaScan</a></div>
       <div><h4>Rechtliches</h4><a href="datenschutz.html">Datenschutzerklärung</a><a href="agb.html">Nutzungsbedingungen</a><a href="impressum.html">Impressum &amp; Offenlegung</a></div>
       <div><h4>Support</h4><a href="mailto:hello@q-systems.app">Kontakt</a><a href="mailto:privacy@q-systems.app">Datenschutzanfragen</a></div>
-      <div><h4>Q&nbsp;Systems</h4><a href="index.html">Übersicht</a><a href="index.html#haltung">Haltung</a></div>
+      <div><h4>Q&nbsp;Systems</h4><a href="index.html">Übersicht</a><a href="index.html#datenschutz">Datenschutz</a></div>
     </div>
     <div class="foot-bottom">
-      <span>© 2026 Q&nbsp;Systems &middot; Mit Sorgfalt in Österreich gebaut <svg class="ic-flag" width="20" height="13" viewBox="0 0 20 13" aria-hidden="true" style="display:inline-block;vertical-align:-2px;border-radius:2px"><rect width="20" height="13" fill="#ED2939"/><rect y="4.34" width="20" height="4.33" fill="#fff"/></svg></span>
-      <span>Bewertungen und Kennzahlen sind Platzhalter, bis die Apps im App&nbsp;Store sind.</span>
+      <span>© 2026 Q&nbsp;Systems · Mit Sorgfalt in Österreich gebaut <svg class="ic-flag" width="20" height="13" viewBox="0 0 20 13" aria-hidden="true" style="display:inline-block;vertical-align:-2px;border-radius:2px"><rect width="20" height="13" fill="#ED2939"/><rect y="4.34" width="20" height="4.33" fill="#fff"/></svg></span>
+      <span>Bewertungen &amp; Kennzahlen sind Platzhalter für diese Demo-Seite.</span>
     </div>
   </div>
 </footer>
 
-<script src="app.js"></script>
+<script src="app.js?v=4"></script>
 </body>
 </html>

@@ -38,6 +38,7 @@
     + s('route','<circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h6a3 3 0 0 0 0-6H10a3 3 0 0 1 0-6h.5"/>')
     + s('bell','<path d="M6.5 16.5V11a5.5 5.5 0 0 1 11 0v5.5l1.5 1.5h-14z"/><path d="M10 19.5a2 2 0 0 0 4 0"/>')
     + s('flame','<path d="M12 3c2.5 3 4.5 5.5 4.5 9a4.5 4.5 0 0 1-9 0c0-1.4.5-2.5 1.3-3.4C9 9.5 9.5 10.5 10 11 10 7.5 11 5 12 3z"/>')
+    + s('chevron-left','<path d="M14.5 7 9 12l5.5 5"/><path d="M9 12h11"/>')
     + s('arrows-h','<path d="M8.5 8l-3.5 4 3.5 4M15.5 8l3.5 4-3.5 4M5 12h14"/>')
     + s('plus','<path d="M12 5.5v13M5.5 12h13"/>')
     + s('face-sad','<circle cx="12" cy="12" r="8.3"/><path d="M8.5 15.5c.9-1.1 2.1-1.7 3.5-1.7s2.6.6 3.5 1.7"/><path d="M9.3 10h0M14.7 10h0"/>')
@@ -148,7 +149,7 @@
       ba.style.setProperty('--p', p + '%');
       if (range) range.value = p;
     }
-    set(range ? parseFloat(range.value) || 50 : 50);
+    set(range ? parseFloat(range.value) || 48 : 48);
     if (range){ range.addEventListener('input', function(){ set(parseFloat(range.value)); }); }
     function fromEvent(clientX){
       var r = ba.getBoundingClientRect();
@@ -160,6 +161,70 @@
     ba.addEventListener('pointerup', function(){ dragging=false; ba.classList.remove('dragging'); });
     ba.addEventListener('pointercancel', function(){ dragging=false; ba.classList.remove('dragging'); });
   });
+
+  /* ---- reviews marquee (seamless infinite loop, rAF — no hover jump) ---- */
+  if (!reduce){
+    document.querySelectorAll('[data-rev-marquee]').forEach(function (wrap){
+      var track = wrap.querySelector('.rev-track');
+      var set = wrap.querySelector('.rev-set');
+      if (!track || !set) return;
+
+      var shift = 0;
+      var offset = 0;
+      var speed = 72;
+      var paused = false;
+      var lastTs = 0;
+      var resizeTimer;
+
+      function apply(){
+        track.style.transform = 'translate3d(' + (-offset) + 'px,0,0)';
+      }
+
+      function tick(ts){
+        if (!lastTs) lastTs = ts;
+        var dt = (ts - lastTs) / 1000;
+        lastTs = ts;
+        if (!paused && shift > 0){
+          offset += speed * dt;
+          if (offset >= shift) offset -= shift;
+          apply();
+        }
+        requestAnimationFrame(tick);
+      }
+
+      function setup(){
+        var saved = shift > 0 ? offset % shift : 0;
+        track.querySelectorAll('.rev-set[aria-hidden="true"]').forEach(function (c){ c.remove(); });
+
+        var clone = set.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        track.appendChild(clone);
+
+        shift = set.getBoundingClientRect().width;
+        var minWidth = wrap.offsetWidth * 2 + shift;
+        while (track.scrollWidth < minWidth){
+          var extra = set.cloneNode(true);
+          extra.setAttribute('aria-hidden', 'true');
+          track.appendChild(extra);
+        }
+
+        offset = saved;
+        apply();
+      }
+
+      setup();
+      requestAnimationFrame(function (){ requestAnimationFrame(setup); });
+      requestAnimationFrame(tick);
+
+      wrap.addEventListener('mouseenter', function(){ paused = true; });
+      wrap.addEventListener('mouseleave', function(){ paused = false; lastTs = 0; });
+
+      window.addEventListener('resize', function (){
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(setup, 180);
+      });
+    });
+  }
 
   /* ---- 3D tilt ---- */
   if (!reduce && window.matchMedia('(pointer:fine)').matches){
@@ -177,35 +242,16 @@
     });
   }
 
-  /* ---- scan demo ---- */
-  document.querySelectorAll('[data-scan]').forEach(function (wrap){
-    var target = wrap.querySelector('.scan-target');
-    var btn = wrap.querySelector('.scan-btn');
-    if (!btn) return;
-    btn.addEventListener('click', function(){
-      target.classList.remove('done');
-      target.classList.add('scanning');
-      btn.textContent = 'Analysiere …';
-      btn.disabled = true;
-      setTimeout(function(){
-        target.classList.remove('scanning');
-        target.classList.add('done');
-        btn.textContent = 'Nochmal scannen';
-        btn.disabled = false;
-      }, 2200);
-    });
-  });
-
   /* ---- scrollspy for product subnav ---- */
-  var spy = document.querySelectorAll('.subnav-r a[href^="#"]');
+  var spy = document.querySelectorAll('.float-seg-page a[href^="#"]');
   if (spy.length){
     var map = {};
     spy.forEach(function (a){ var id=a.getAttribute('href').slice(1); var s=document.getElementById(id); if(s) map[id]=a; });
     var sio = new IntersectionObserver(function (entries){
       entries.forEach(function (e){
         if (e.isIntersecting){
-          spy.forEach(function(a){ a.style.color=''; });
-          if (map[e.target.id]) map[e.target.id].style.color = 'var(--text)';
+          spy.forEach(function(a){ a.classList.remove('active'); a.style.color=''; });
+          if (map[e.target.id]){ map[e.target.id].classList.add('active'); map[e.target.id].style.color=''; }
         }
       });
     }, { rootMargin:'-30% 0px -60% 0px' });
