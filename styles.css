@@ -448,8 +448,8 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
 @media (max-width:560px){ .rev-marquee::before, .rev-marquee::after{ width:36px; } }
 @keyframes rev-scroll{ from{ transform:translate3d(0,0,0); } to{ transform:translate3d(-50%,0,0); } }
 
-/* mobile review carousel — hidden on desktop */
-.rev-mobile-scroll{ display:none; }
+/* mobile review stack — hidden on desktop */
+.rev-mobile-stack{ display:none; }
 
 /* stat band */
 .statband{ display:grid; grid-template-columns:repeat(4,1fr); gap:30px; max-width:1024px; margin:0 auto; }
@@ -531,19 +531,31 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
    DERMASCAN — MOBILE (≤640px)
    ============================================================ */
 @media (max-width:640px){
-  /* 1 — no floating nav on phones */
-  .float-nav{ display:none !important; }
-  .has-float-nav main{ padding-top:0; }
+  /* 1 — compact nav, hero clears fixed bar */
+  .float-nav{
+    padding-top:max(10px, env(safe-area-inset-top, 0px));
+    width:min(calc(100% - 24px), 960px);
+  }
+  .float-pill{ gap:8px; padding:8px 8px 8px 14px; }
+  .float-logo{ font-size:14px; padding-right:4px; }
+  .float-logo .dot{ width:15px; height:15px; }
+  .float-link{ display:none; }
+  .float-seg a{ padding:8px 10px; font-size:11px; }
+  .float-buy{ padding:9px 16px; font-size:12px; }
 
-  /* 2 — hero: only DermaScan + App Store button */
+  /* 2 — hero: DermaScan + button + screenshot */
   .derma-hero{
-    padding-top:max(48px, env(safe-area-inset-top, 0px));
-    padding-bottom:32px;
+    padding-top:calc(72px + max(10px, env(safe-area-inset-top, 0px)));
+    padding-bottom:0;
   }
   .derma-hero .display{ font-size:clamp(44px,12vw,64px); margin-bottom:0; }
   .derma-hero .hero-subtitle{ display:none; }
-  .derma-hero .promo-art{ display:none; }
-  .derma-hero .section-cta{ margin-top:28px; }
+  .derma-hero .promo-art{
+    display:block;
+    margin-top:20px;
+    padding:0 18px 28px;
+  }
+  .derma-hero .section-cta{ margin-top:20px; }
 
   /* statement block after hero — hidden entirely */
   .mobile-hide-statement{ display:none; }
@@ -551,25 +563,41 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
   /* 3 — privacy trust badges */
   .priv-trust{ display:none; }
 
-  /* 4 — reviews: swipe carousel instead of marquee */
+  /* 4 — reviews: vertical stack + expand */
   .rev-marquee{ display:none; }
-  .rev-mobile-scroll{
+  .rev-mobile-stack{
     display:flex;
-    overflow-x:auto;
-    scroll-snap-type:x mandatory;
+    flex-direction:column;
     gap:14px;
     margin-top:28px;
-    padding:6px 18px 22px;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
+    padding:0 18px 22px;
   }
-  .rev-mobile-scroll::-webkit-scrollbar{ display:none; }
-  .rev-mobile-scroll .review{
-    flex:0 0 min(88vw,340px);
-    scroll-snap-align:start;
+  .rev-mobile-stack .review{
     margin:0;
     min-height:auto;
+    width:100%;
   }
+  .rev-mobile-stack .review.rev-more{ display:none; }
+  .rev-mobile-stack.is-expanded .review.rev-more{ display:flex; }
+  .rev-expand-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    align-self:center;
+    margin-top:6px;
+    padding:12px 24px;
+    border:1px solid var(--hair);
+    border-radius:980px;
+    background:#fff;
+    color:var(--link);
+    font:inherit;
+    font-size:16px;
+    font-weight:500;
+    cursor:pointer;
+    transition:background .2s var(--ease);
+  }
+  .rev-expand-btn:hover{ background:var(--bg-2); }
+  .rev-mobile-stack.is-expanded .rev-expand-btn{ display:none; }
 }
 
 /* ============================================================

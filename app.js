@@ -162,6 +162,20 @@
     ba.addEventListener('pointercancel', function(){ dragging=false; ba.classList.remove('dragging'); });
   });
 
+  /* ---- mobile reviews expand ---- */
+  document.querySelectorAll('[data-rev-expand]').forEach(function (wrap) {
+    var btn = wrap.querySelector('.rev-expand-btn');
+    var more = wrap.querySelectorAll('.review.rev-more');
+    if (!btn || !more.length) {
+      if (btn) btn.hidden = true;
+      return;
+    }
+    btn.addEventListener('click', function () {
+      wrap.classList.add('is-expanded');
+      btn.setAttribute('aria-expanded', 'true');
+    });
+  });
+
   /* ---- reviews marquee (both card sets are static in the HTML; JS only tunes speed) ---- */
   document.querySelectorAll('[data-rev-marquee]').forEach(function (wrap){
     var track = wrap.querySelector('.rev-track');
