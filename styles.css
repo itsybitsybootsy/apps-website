@@ -342,19 +342,9 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
   .float-seg a{ padding:9px 14px; font-size:12px; }
 }
 @media (max-width:640px){
-  /* not enough room for the section tabs + the separate "Datenschutz" link on phones —
-     drop both and keep just the logo + primary CTA, which always fits. */
-  .float-seg-page, .float-link{ display:none; }
-  .float-nav{ width:min(calc(100% - 24px),960px); padding-top:12px; }
-  .float-pill{ padding:9px 8px 9px 16px; gap:10px; justify-content:space-between; }
-  .float-logo{ font-size:14px; }
-  .float-buy{ padding:10px 18px; font-size:12px; }
-  .derma-hero{ padding-top:calc(72px + 40px); }
-  .has-float-nav main{ padding-top:0; }
   .container{ padding:0 18px; }
   .faq-wrap{ padding:0 18px; }
   .faq summary{ font-size:18px; padding:22px 4px; }
-  .priv-trust{ padding:0 18px; gap:8px; }
   .foot-bottom{ flex-direction:column; align-items:flex-start; }
 }
 @media (max-width:560px){
@@ -455,8 +445,11 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
 .rev-marquee:hover .rev-track{ animation-play-state:paused; }
 .rev-set{ display:flex; flex:0 0 auto; gap:18px; padding-right:18px; }
 .rev-marquee .review{ flex:0 0 320px; margin:0; min-height:168px; }
-@media (max-width:560px){ .rev-marquee .review{ flex:0 0 280px; min-height:160px; } .rev-marquee::before, .rev-marquee::after{ width:36px; } }
+@media (max-width:560px){ .rev-marquee::before, .rev-marquee::after{ width:36px; } }
 @keyframes rev-scroll{ from{ transform:translate3d(0,0,0); } to{ transform:translate3d(-50%,0,0); } }
+
+/* mobile review carousel — hidden on desktop */
+.rev-mobile-scroll{ display:none; }
 
 /* stat band */
 .statband{ display:grid; grid-template-columns:repeat(4,1fr); gap:30px; max-width:1024px; margin:0 auto; }
@@ -532,6 +525,51 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
   .lenscard{ padding:20px 18px; }
   .plan{ padding:24px 20px; }
   .strip{ padding:22px; }
+}
+
+/* ============================================================
+   DERMASCAN — MOBILE (≤640px)
+   ============================================================ */
+@media (max-width:640px){
+  /* 1 — no floating nav on phones */
+  .float-nav{ display:none !important; }
+  .has-float-nav main{ padding-top:0; }
+
+  /* 2 — hero: only DermaScan + App Store button */
+  .derma-hero{
+    padding-top:max(48px, env(safe-area-inset-top, 0px));
+    padding-bottom:32px;
+  }
+  .derma-hero .display{ font-size:clamp(44px,12vw,64px); margin-bottom:0; }
+  .derma-hero .hero-subtitle{ display:none; }
+  .derma-hero .promo-art{ display:none; }
+  .derma-hero .section-cta{ margin-top:28px; }
+
+  /* statement block after hero — hidden entirely */
+  .mobile-hide-statement{ display:none; }
+
+  /* 3 — privacy trust badges */
+  .priv-trust{ display:none; }
+
+  /* 4 — reviews: swipe carousel instead of marquee */
+  .rev-marquee{ display:none; }
+  .rev-mobile-scroll{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    gap:14px;
+    margin-top:28px;
+    padding:6px 18px 22px;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .rev-mobile-scroll::-webkit-scrollbar{ display:none; }
+  .rev-mobile-scroll .review{
+    flex:0 0 min(88vw,340px);
+    scroll-snap-align:start;
+    margin:0;
+    min-height:auto;
+  }
 }
 
 /* ============================================================
