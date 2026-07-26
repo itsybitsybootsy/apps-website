@@ -555,25 +555,27 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
   body.theme-derma .promo.derma-hero,
   body.has-float-nav main{ background:#eef3ee; }
 
-  /* ── mobile nav (v0) ── */
+  /* ── mobile nav — floating pill, offset from hero ── */
   .mobile-nav{
     display:flex;
     position:fixed;
-    top:0; left:0; right:0;
+    top:max(12px, env(safe-area-inset-top, 0px));
+    left:16px;
+    right:16px;
+    width:auto;
     z-index:9000;
-    height:calc(48px + env(safe-area-inset-top, 0px));
-    padding:env(safe-area-inset-top, 0px) 22px 0;
+    height:48px;
+    padding:0 16px;
     align-items:center;
     justify-content:space-between;
-    background:rgba(238,243,238,.88);
+    border-radius:980px;
+    border:1px solid rgba(255,255,255,.5);
+    background:rgba(238,243,238,.92);
     backdrop-filter:saturate(180%) blur(20px);
     -webkit-backdrop-filter:saturate(180%) blur(20px);
+    box-shadow:0 8px 28px rgba(79,102,84,.14),0 1px 3px rgba(60,74,61,.06);
   }
-  .mobile-nav::after{
-    content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
-    background:#e3e3e5; opacity:0; transition:opacity .3s cubic-bezier(.4,0,.2,1);
-  }
-  .mobile-nav.stuck::after{ opacity:1; }
+  .mobile-nav::after{ display:none; }
   .mobile-nav-name{ font-size:16px; font-weight:600; letter-spacing:-.02em; color:var(--accent-deep); }
   .mobile-nav-link{
     font-size:13px;
@@ -585,7 +587,7 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
   }
 
   body.has-float-nav main{
-    padding-top:calc(48px + env(safe-area-inset-top, 0px));
+    padding-top:calc(76px + env(safe-area-inset-top, 0px));
   }
 
   /* section backgrounds — alternate like desktop */
@@ -598,7 +600,7 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
 
   /* ── hero: one headline, button, then phones ── */
   .derma-hero{
-    padding:24px 22px 0;
+    padding:20px 22px 0;
     min-height:auto;
     text-align:center;
   }
@@ -653,12 +655,19 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
   }
   #datenschutz .priv-grid .cell .bemoji{ color:var(--accent-deep); }
 
-  /* ── feature explorer (v0) ── */
-  .explorer-wrap{ margin-top:0; padding:0; }
-  .explorer-tabs{ margin:36px auto 0; max-width:340px; padding:0; }
+  /* ── feature explorer — tabs, title, phone, compact detail ── */
+  .explorer-wrap{ margin-top:0; padding:0; overflow:visible; }
+  .explorer{ overflow:visible; }
+  .explorer-tabs{
+    margin:28px auto 0;
+    max-width:340px;
+    padding:0;
+    position:relative;
+    z-index:2;
+  }
   .seg{
     border-radius:9px;
-    background:rgba(120,120,128,.12);
+    background:rgba(111,140,116,.12);
     padding:2px;
     gap:2px;
   }
@@ -674,51 +683,83 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
     box-shadow:0 3px 8px rgba(60,74,61,.12),0 1px 1px rgba(60,74,61,.06);
     color:var(--accent-deep);
   }
-  .xp-panels{ min-height:0; }
-  .xp-panel.on{ gap:0; }
+  .xp-panels{
+    min-height:0;
+    overflow:visible;
+    padding-top:8px;
+  }
+  .xp-panel.on{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:0;
+    overflow:visible;
+  }
+  .xp-copy{ display:contents; }
+  .xp-copy .eyebrow{
+    display:block;
+    order:1;
+    margin:14px 0 6px;
+    font-size:13px;
+    text-align:center;
+  }
+  .xp-panel.on h3{
+    order:2;
+    margin:0 0 18px;
+    font-size:18px;
+    letter-spacing:-.02em;
+    line-height:1.25;
+    max-width:26ch;
+    text-align:center;
+  }
+  .xp-panel.on p{ display:none; }
+  .xp-art{
+    order:3;
+    margin:0;
+    width:100%;
+    overflow:visible;
+    flex:0 0 auto;
+  }
   .feature-shot{
-    height:clamp(360px,72vw,460px);
-    filter:none;
+    height:clamp(340px,78vw,440px);
+    width:100%;
+    overflow:visible;
+    margin:0 auto;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
   }
-  .feature-shot img{ filter:none; box-shadow:none; }
-  .xp-copy{
-    margin-top:44px;
-    padding:0;
-    max-width:32ch;
-    text-align:center;
-  }
-  .xp-copy .eyebrow{ display:none; }
-  .xp-panel h3{
-    font-size:21px;
-    letter-spacing:-.022em;
-    margin-bottom:12px;
-  }
-  .xp-panel p{
-    font-size:16px;
-    line-height:1.55;
-    text-align:center;
+  .feature-shot img{
+    height:100%;
+    width:auto;
+    max-width:min(100%,280px);
+    object-fit:contain;
+    object-position:top center;
+    filter:drop-shadow(0 20px 40px rgba(60,74,61,.18));
   }
   .mobile-xp-detail{
-    margin-top:26px;
-    border-top:1px solid #e3e3e5;
+    order:4;
+    width:100%;
+    margin-top:18px;
+    border-top:1px solid rgba(111,140,116,.18);
     text-align:left;
   }
   .mobile-xp-detail div{
-    padding:14px 0;
-    border-bottom:1px solid #e3e3e5;
+    padding:10px 0;
+    border-bottom:1px solid rgba(111,140,116,.12);
     display:flex;
-    gap:14px;
+    gap:12px;
   }
   .mobile-xp-detail dt{
-    flex:0 0 84px;
-    font-size:14px;
-    color:#86868b;
+    flex:0 0 72px;
+    font-size:13px;
+    color:var(--accent-deep);
     padding-top:1px;
   }
   .mobile-xp-detail dd{
     flex:1 1 auto;
-    font-size:15px;
-    line-height:1.45;
+    font-size:14px;
+    line-height:1.4;
     color:var(--text-2);
   }
 
