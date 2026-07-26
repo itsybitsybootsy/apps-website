@@ -2,15 +2,16 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
 <title>DermaScan: Kenne deine Haut. Jeden Tag. | Q Systems</title>
 <meta name="description" content="DermaScan: KI-Hautanalyse, Skin-Score und Spot-Tracking, privacy-first und lokal auf deinem iPhone." />
-<link rel="stylesheet" href="styles.css?v=15" />
+<link rel="stylesheet" href="styles.css?v=16" />
 </head>
 <body class="theme-derma has-float-nav">
 <div id="prog"></div>
 
-<nav class="float-nav" aria-label="Navigation">
+<nav class="float-nav desktop-nav" aria-label="Navigation">
   <div class="float-pill">
     <a href="index.html" class="float-logo"><span class="dot"></span><b>Q&nbsp;Systems</b></a>
     <div class="float-seg float-seg-page" role="tablist" aria-label="Seite">
@@ -23,14 +24,31 @@
   </div>
 </nav>
 
-<main>
+<nav class="mobile-nav mobile-only" id="mobile-nav" aria-label="Navigation">
+  <a href="#top" class="mobile-nav-name">DermaScan</a>
+  <a href="#laden" class="mobile-nav-link">Laden</a>
+</nav>
+
+<main id="top">
 
   <!-- HERO -->
   <section class="promo derma-hero">
     <div class="promo-copy">
-      <h1 class="display rev d1" style="color:#3c4a3d">DermaScan</h1>
-      <p class="title hero-subtitle rev d1" style="color:#4f6654;font-weight:500;margin-top:2px">Kenne deine Haut. Jeden Tag.</p>
-      <div class="section-cta rev d2" style="margin-top:20px"><a href="#laden" class="btn"><svg class="ic ic-fill" aria-hidden="true"><use href="#ic-apple"/></svg> Im App Store laden</a></div>
+      <div class="hero-desktop">
+        <h1 class="display rev d1" style="color:#3c4a3d">DermaScan</h1>
+        <p class="title hero-subtitle rev d1" style="color:#4f6654;font-weight:500;margin-top:2px">Kenne deine Haut. Jeden Tag.</p>
+        <div class="section-cta rev d2" style="margin-top:20px"><a href="#laden" class="btn"><svg class="ic ic-fill" aria-hidden="true"><use href="#ic-apple"/></svg> Im App Store laden</a></div>
+      </div>
+      <div class="mobile-hero-copy mobile-only">
+        <p class="m-hero-stars" aria-hidden="true">★★★★★</p>
+        <p class="m-hero-rating">4,9 im App&nbsp;Store</p>
+        <h1 class="m-hero-headline">Kenne deine Haut.<br>Jeden Tag.</h1>
+        <p class="m-hero-lead">Analyse, Routine und Fortschritt — in einer App.</p>
+        <div class="m-hero-actions">
+          <a href="#laden" class="btn btn-ink"><svg class="ic ic-fill" aria-hidden="true"><use href="#ic-apple"/></svg> Im App Store laden</a>
+          <p class="m-hero-fine">Kostenlos · Kein Konto · iPhone &amp; iPad</p>
+        </div>
+      </div>
     </div>
     <div class="promo-art rev d2">
       <figure class="hero-shot">
@@ -38,6 +56,14 @@
       </figure>
     </div>
   </section>
+
+  <div class="mobile-facts mobile-only">
+    <dl>
+      <div><dt>Deine Daten</dt><dd>Lokal verschlüsselt</dd></div>
+      <div><dt>Anmeldung</dt><dd>Kein Konto nötig</dd></div>
+      <div><dt>Analyse</dt><dd>In Sekunden</dd></div>
+    </dl>
+  </div>
 
   <!-- STATEMENT (hidden on mobile) -->
   <section class="section tight mobile-hide-statement">
@@ -57,8 +83,8 @@
       <div class="explorer rev d1" data-explorer>
         <div class="explorer-tabs">
           <div class="seg" role="tablist">
-            <button role="tab">Detailanalyse</button>
-            <button role="tab">Personalisierte Skincare</button>
+            <button role="tab"><span class="seg-long">Detailanalyse</span><span class="seg-short">Analyse</span></button>
+            <button role="tab"><span class="seg-long">Personalisierte Skincare</span><span class="seg-short">Routine</span></button>
             <button role="tab">Fortschritt</button>
           </div>
         </div>
@@ -75,6 +101,10 @@
               <span class="eyebrow">Detailreiche Analyse</span>
               <h3>Versteh deine Haut — nicht nur eine Zahl.</h3>
               <p>Nach jedem Check-in bekommst du eine ausführliche Auswertung: Skin-Score im Vergleich zum letzten Mal, Aufschlüsselung nach Klarheit, Textur, Feuchtigkeit, Rötung und Ebenheit — plus Hautzonen wie Stirn und Wangen.</p>
+              <dl class="mobile-xp-detail mobile-only">
+                <div><dt>Werte</dt><dd>Klarheit, Textur, Feuchtigkeit, Rötung, Ebenheit</dd></div>
+                <div><dt>Zonen</dt><dd>Stirn, Wangen, Nase, Kinn</dd></div>
+              </dl>
             </div>
           </div>
 
@@ -89,6 +119,10 @@
               <span class="eyebrow">Personalisierte Skincare</span>
               <h3>Deine Routine — abgestimmt auf deine Haut.</h3>
               <p>Morgens und abends: Reiniger, Serum, Feuchtigkeitspflege und Sonnenschutz — alles an einem Ort. Hake erledigte Schritte ab und behalte den Überblick, was wirklich zu dir passt.</p>
+              <dl class="mobile-xp-detail mobile-only">
+                <div><dt>Schritte</dt><dd>Reiniger, Serum, Feuchtigkeitspflege, Sonnenschutz</dd></div>
+                <div><dt>Tagesablauf</dt><dd>Morgens und abends, mit Erinnerung</dd></div>
+              </dl>
             </div>
           </div>
 
@@ -103,6 +137,10 @@
               <span class="eyebrow">Fortschritt</span>
               <h3>Dein Skin-Score — immer im Blick.</h3>
               <p>Hautscore, Kennzahlen und Radar-Chart zeigen dir, wie sich deine Haut entwickelt. Vergleiche Check-ins und erkenne Trends, bevor du sie im Spiegel siehst.</p>
+              <dl class="mobile-xp-detail mobile-only">
+                <div><dt>Ansichten</dt><dd>Hautscore, Kennzahlen, Radar-Chart, Verlauf</dd></div>
+                <div><dt>Rückblick</dt><dd>Wochen-Recap mit den wichtigsten Veränderungen</dd></div>
+              </dl>
             </div>
           </div>
 
@@ -131,6 +169,7 @@
         <div class="ba-handle"><div class="ba-knob"><svg class="ic" aria-hidden="true"><use href="#ic-arrows-h"/></svg></div></div>
         <input class="ba-range" type="range" min="0" max="100" value="48" aria-label="Vorher/Nachher vergleichen" />
       </div>
+      <p class="ba-cap mobile-only">Zum Vergleichen wischen</p>
     </div>
   </section>
 
@@ -178,9 +217,14 @@
 
   <!-- REVIEWS -->
   <section class="section" id="stimmen">
-    <div class="container">
+    <div class="container desktop-rev-head">
       <span class="eyebrow rev">Was Nutzer:innen sagen</span>
       <h2 class="headline rev d1"><span class="count" data-count="4.9" data-dec="1">0,0</span> von 5 Sternen.</h2>
+    </div>
+    <div class="mobile-rev-head mobile-only">
+      <p class="m-rev-stars" aria-hidden="true">★★★★★</p>
+      <p class="m-rev-big">4,9</p>
+      <p class="m-rev-sub">Aus Bewertungen im App&nbsp;Store</p>
     </div>
     <div class="rev-marquee" data-rev-marquee>
       <div class="rev-track">
@@ -227,7 +271,7 @@
       <div class="review rev-more"><div class="rev-top"><div class="who"><span class="av">DP</span><div class="rev-meta"><div class="rn">David P.</div><div class="rd">20. Jul. 2026</div></div></div><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div></div><p>„Der Vorher/Nachher-Vergleich beim ersten Start hat mich sofort überzeugt, die App zu behalten."</p></div>
       <div class="review rev-more"><div class="rev-top"><div class="who"><span class="av">AK</span><div class="rev-meta"><div class="rn">Anna-Lena K.</div><div class="rd">vor 1 Woche</div></div></div><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div></div><p>„Radar-Chart und Skin-Score zeigen mir Trends, die ich im Spiegel nie bemerkt hätte."</p></div>
       <div class="review rev-more"><div class="rev-top"><div class="who"><span class="av">TW</span><div class="rev-meta"><div class="rn">Tobias W.</div><div class="rd">15. Jul. 2026</div></div></div><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div></div><p>„Kein Server, keine Registrierung — als Datenschutz-Fan bin ich hier genau richtig."</p></div>
-      <button type="button" class="rev-expand-btn" aria-expanded="false">Weitere Bewertungen</button>
+      <button type="button" class="rev-expand-btn" aria-expanded="false">Alle Bewertungen anzeigen</button>
     </div>
   </section>
 
@@ -243,7 +287,7 @@
   </section>
 
   <!-- CTA -->
-  <section class="section" id="laden">
+  <section class="section cta-close" id="laden">
     <div class="container">
       <h2 class="headline rev" style="color:#3c4a3d">Starte dein Haut-Tagebuch.</h2>
       <p class="sub rev d1 lead-copy" style="margin-top:14px">Kostenlos starten, ohne Konto. Für iPhone &amp; iPad.</p>
@@ -263,6 +307,13 @@
       <div><h4>Support</h4><a href="mailto:hello@q-systems.app">Kontakt</a><a href="mailto:privacy@q-systems.app">Datenschutzanfragen</a></div>
       <div><h4>Q&nbsp;Systems</h4><a href="index.html">Übersicht</a><a href="index.html#datenschutz">Datenschutz</a></div>
     </div>
+    <nav class="mobile-foot-nav mobile-only" aria-label="Fußzeile">
+      <a href="#funktionen">Funktionen</a>
+      <a href="#tracking">Spot-Tracking</a>
+      <a href="#datenschutz">Deine Daten</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="impressum.html">Impressum</a>
+    </nav>
     <div class="foot-bottom">
       <span>© 2026 Q&nbsp;Systems · Mit Sorgfalt in Österreich gebaut <svg class="ic-flag" width="20" height="13" viewBox="0 0 20 13" aria-hidden="true" style="display:inline-block;vertical-align:-2px;border-radius:2px"><rect width="20" height="13" fill="#ED2939"/><rect y="4.34" width="20" height="4.33" fill="#fff"/></svg></span>
       <span>Bewertungen &amp; Kennzahlen sind Platzhalter für diese Demo-Seite.</span>
@@ -270,6 +321,6 @@
   </div>
 </footer>
 
-<script src="app.js?v=15"></script>
+<script src="app.js?v=16"></script>
 </body>
 </html>

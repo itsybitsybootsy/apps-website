@@ -240,4 +240,14 @@
       prog.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
     }, { passive:true });
   }
+
+  /* ---- mobile nav border on scroll ---- */
+  var mobileNav = document.getElementById('mobile-nav');
+  if (mobileNav){
+    function mobileNavScroll(){
+      mobileNav.classList.toggle('stuck', document.documentElement.scrollTop > 10);
+    }
+    window.addEventListener('scroll', mobileNavScroll, { passive:true });
+    mobileNavScroll();
+  }
 })();

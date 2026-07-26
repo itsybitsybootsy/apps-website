@@ -1,403 +1,413 @@
-<!-- Mobile-Ansicht für v0 — kopieren und redesignen. Desktop: index.html -->
+<!-- DermaScan — Mobile-Ansicht. Desktop: index.html -->
 <!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>DermaScan Mobile · v0 Export</title>
+<meta name="theme-color" content="#ffffff" />
+<title>DermaScan — Kenne deine Haut. Jeden Tag.</title>
+<meta name="description" content="DermaScan analysiert deine Haut, erstellt deine Routine und zeigt deinen Fortschritt. Ohne Konto, lokal verschlüsselt. Für iPhone & iPad." />
 <style>
 :root{
-  --text:#1d1d1f; --text-2:#6e6e73; --bg:#fff; --bg-2:#f5f5f7; --hair:#d2d2d7;
-  --link:#0066cc; --blue:#0071e3; --blue-hover:#0077ed;
-  --accent:#6f8c74; --accent-deep:#4f6654; --accent-soft:#eef3ee; --wash:#eef3ee;
-  --maxw:980px; --sans:"SF Pro Display","SF Pro Text",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;
-  --ease:cubic-bezier(.28,.11,.32,1);
+  --ink:#1d1d1f;
+  --ink-2:#6e6e73;
+  --ink-3:#86868b;
+  --bg:#ffffff;
+  --bg-2:#f5f5f7;
+  --hair:#e3e3e5;
+  --accent:#3f5843;
+  --star:#1d1d1f;
+  --sans:"SF Pro Display","SF Pro Text",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --ease:cubic-bezier(.4,0,.2,1);
+  --sat:env(safe-area-inset-top,0px);
+  --sab:env(safe-area-inset-bottom,0px);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:#eef3ee}
+html{-webkit-text-size-adjust:100%;background:var(--bg);scroll-behavior:smooth}
 body{
-  font-family:var(--sans);color:var(--text);background:#eef3ee;
-  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
-  line-height:1.47;letter-spacing:-.01em;
-  display:flex;justify-content:center;min-height:100vh;
+  font-family:var(--sans);background:var(--bg);color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  font-size:17px;line-height:1.5;letter-spacing:-.012em;
+  display:flex;justify-content:center;min-height:100dvh;
 }
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
-.mobile-shell{width:100%;max-width:430px;background:#eef3ee;position:relative;overflow-x:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.06)}
+button{font:inherit;color:inherit;background:none;border:0}
+:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:6px}
 
-/* progress */
-#prog{position:fixed;top:0;left:50%;transform:translateX(-50%);height:2px;width:0;max-width:430px;background:var(--accent);z-index:9999;transition:width .1s linear}
+.shell{width:100%;max-width:430px;background:var(--bg);position:relative;overflow-x:clip}
 
-/* compact float nav */
-.float-nav{
-  position:fixed;top:0;left:50%;transform:translateX(-50%);z-index:9000;
-  width:min(calc(100% - 24px),406px);pointer-events:none;
-  padding-top:max(10px,env(safe-area-inset-top,0px));
+/* ── Navigationsleiste ──────────────────────────── */
+.nav{
+  position:fixed;top:0;left:50%;transform:translateX(-50%);z-index:100;
+  width:100%;max-width:430px;height:calc(48px + var(--sat));padding:var(--sat) 22px 0;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(255,255,255,.8);backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
 }
-.float-pill{
-  pointer-events:auto;display:flex;align-items:center;gap:8px;
-  padding:8px 8px 8px 14px;border-radius:980px;
-  background:linear-gradient(135deg,rgba(238,243,238,.42),rgba(228,236,228,.28));
-  backdrop-filter:blur(52px) saturate(160%);-webkit-backdrop-filter:blur(52px) saturate(160%);
-  border:1px solid rgba(255,255,255,.45);
-  box-shadow:0 8px 32px rgba(79,102,84,.1),0 1px 4px rgba(60,74,61,.05),inset 0 1px 0 rgba(255,255,255,.35);
-}
-.float-logo{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:600;letter-spacing:-.02em;color:var(--accent-deep);white-space:nowrap;flex-shrink:0;padding-right:4px}
-.float-logo .dot{width:15px;height:15px;border-radius:5px;background:linear-gradient(150deg,#4f6654,#6f8c74);flex-shrink:0}
-.float-logo b{font-weight:600;color:var(--accent-deep)}
-.float-seg{display:inline-flex;align-items:center;gap:3px;flex:1 1 auto;min-width:0;
-  background:rgba(111,140,116,.1);padding:4px;border-radius:980px}
-.float-seg a{flex:1 1 0;min-width:0;text-align:center;font-size:11px;font-weight:500;color:rgba(79,102,84,.82);
-  padding:8px 10px;border-radius:980px;white-space:nowrap;transition:color .2s var(--ease),background .2s var(--ease)}
-.float-seg a.active{background:rgba(255,255,255,.55);color:var(--accent-deep);box-shadow:0 1px 2px rgba(60,74,61,.08),inset 0 0 0 .5px rgba(255,255,255,.45)}
-.float-buy{background:rgba(111,140,116,.82);color:#fff;padding:9px 16px;border-radius:980px;
-  font-size:12px;font-weight:500;white-space:nowrap;flex-shrink:0;border:1px solid rgba(255,255,255,.25);
-  box-shadow:0 2px 10px rgba(111,140,116,.22)}
+.nav::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--hair);
+  opacity:0;transition:opacity .3s var(--ease)}
+.nav.stuck::after{opacity:1}
+.nav .name{font-size:16px;font-weight:600;letter-spacing:-.02em}
+.nav a.link{font-size:14px;color:var(--accent);font-weight:400}
 
-main{padding-top:0;background:#eef3ee}
+/* ── Grundraster ────────────────────────────────── */
+main{padding-top:calc(48px + var(--sat))}
+section{padding:76px 22px}
+section.grey{background:var(--bg-2)}
+h1,h2,h3{font-weight:600;letter-spacing:-.028em;line-height:1.07;text-wrap:balance}
+h1{font-size:clamp(40px,11vw,48px);letter-spacing:-.038em}
+h2{font-size:clamp(30px,8.4vw,36px)}
+h3{font-size:21px;letter-spacing:-.022em}
+.sub{margin-top:14px;font-size:19px;line-height:1.42;color:var(--ink-2);letter-spacing:-.018em;text-wrap:pretty}
+.body{margin-top:12px;font-size:16px;line-height:1.55;color:var(--ink-2);text-wrap:pretty}
+.center{text-align:center}
+.head{max-width:26ch;margin:0 auto}
 
-/* typography */
-.eyebrow{font-size:18px;font-weight:600;color:var(--accent-deep)}
-h1,h2,h3{font-weight:600;letter-spacing:-.015em;line-height:1.06}
-.display{font-size:clamp(44px,12vw,64px);font-weight:600;line-height:1.04;letter-spacing:-.02em}
-.headline{font-size:clamp(23px,6.3vw,34px);font-weight:600;line-height:1.07;letter-spacing:-.018em}
-.sub{font-size:clamp(16px,4.4vw,20px);font-weight:400;color:var(--text-2);line-height:1.32}
-.count{font-variant-numeric:tabular-nums}
+/* ── Aktionen ───────────────────────────────────── */
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--ink);color:#fff;font-size:17px;font-weight:500;letter-spacing:-.01em;
+  padding:14px 28px;border-radius:980px;cursor:pointer}
+.cta.light{background:#fff;color:var(--ink)}
+.cta .ic{width:17px;height:17px}
+.link{display:inline-flex;align-items:center;gap:5px;color:var(--accent);font-size:16px}
+.link .ic{width:13px;height:13px;stroke-width:2.2}
+.link:hover{text-decoration:underline}
 
-/* buttons & links */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--blue);color:#fff;font-size:17px;font-weight:400;padding:12px 23px;border-radius:980px;border:0;cursor:pointer}
-.btn-lg{font-size:19px;padding:14px 28px}
-.link{color:var(--link);font-size:19px;display:inline-flex;align-items:center}
-.link::after{content:"\00a0›"}
+/* ── Hero ───────────────────────────────────────── */
+.hero{padding:60px 22px 0;text-align:center}
+.hero .stars{font-size:12px;letter-spacing:2px;color:var(--ink-3)}
+.hero .rating{margin-top:6px;font-size:13px;color:var(--ink-3);letter-spacing:0}
+.hero h1{margin-top:26px}
+.hero .sub{max-width:24ch;margin-left:auto;margin-right:auto}
+.hero .actions{margin-top:28px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.hero .fine{font-size:13px;color:var(--ink-3);letter-spacing:0}
+.hero figure{margin-top:52px}
 
-/* sections */
-.section{padding:64px 0;text-align:center;position:relative}
-.section.gray{background:var(--bg-2)}
-.section.wash{background:var(--accent-soft)}
-.section:not(.gray):not(.wash){background:var(--bg)}
-.container{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 18px}
-.wide{max-width:1024px}
-.section .container>.eyebrow{display:block;margin-bottom:8px}
-.section .lead-copy{max-width:720px;margin:0 auto}
-.section-cta{margin-top:34px}
+/* ── Kennzahlen ─────────────────────────────────── */
+.facts{border-top:1px solid var(--hair);margin:0 22px}
+.facts dl{display:flex;flex-direction:column}
+.facts div{display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  padding:20px 0;border-bottom:1px solid var(--hair)}
+.facts dt{font-size:16px;color:var(--ink-2)}
+.facts dd{font-size:17px;font-weight:500;text-align:right;letter-spacing:-.015em}
 
-/* hero */
-.promo{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;padding:52px 18px 0;overflow:hidden;position:relative;background:#eef3ee}
-.promo .promo-copy{position:relative;z-index:3}
-.derma-hero{padding-top:calc(72px + max(10px,env(safe-area-inset-top,0px)));padding-bottom:0;min-height:auto}
-.derma-hero .hero-subtitle{display:none}
-.derma-hero .section-cta{margin-top:20px}
-.derma-hero .promo-art{display:block;margin-top:20px;width:100%;max-width:1100px;padding:0 18px 28px;position:relative;z-index:2}
-.hero-shot{margin:0;width:100%}
-.hero-shot img{width:100%;height:auto;margin:0 auto;filter:drop-shadow(0 28px 48px rgba(60,74,61,.14))}
+/* ── Funktionen ─────────────────────────────────── */
+.seg{display:flex;gap:2px;background:rgba(120,120,128,.12);padding:2px;border-radius:9px;
+  margin:36px auto 40px;max-width:340px}
+.seg button{flex:1 1 0;min-width:0;cursor:pointer;font-size:13px;font-weight:500;color:var(--ink);
+  padding:7px 4px;border-radius:7px;letter-spacing:-.01em;transition:background .2s var(--ease)}
+.seg button[aria-selected="true"]{background:#fff;box-shadow:0 3px 8px rgba(0,0,0,.08),0 1px 1px rgba(0,0,0,.04)}
+.panel{display:none}
+.panel.on{display:block;animation:fade .4s var(--ease)}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.shot{display:flex;justify-content:center;height:clamp(360px,72vw,460px)}
+.shot img{height:100%;width:auto;object-fit:contain}
+.panel .txt{margin-top:44px;text-align:center;max-width:32ch;margin-left:auto;margin-right:auto}
+.detail{margin-top:26px;border-top:1px solid var(--hair);text-align:left}
+.detail div{padding:14px 0;border-bottom:1px solid var(--hair);display:flex;gap:14px}
+.detail dt{flex:0 0 84px;font-size:14px;color:var(--ink-3);letter-spacing:0;padding-top:1px}
+.detail dd{flex:1 1 auto;font-size:15px;line-height:1.45}
 
-/* feature explorer — mobile stacked */
-.explorer-wrap{margin-top:32px}
-.explorer{max-width:1160px;margin:0 auto}
-.explorer-tabs{display:flex;width:100%;margin:0 auto 20px;padding:0 2px}
-.seg{display:flex;gap:1px;width:100%;background:rgba(120,120,128,.1);padding:1px;border-radius:980px;flex-wrap:nowrap}
-.seg button{flex:1 1 0;min-width:0;border:0;background:transparent;cursor:pointer;font:inherit;
-  font-size:10px;font-weight:500;color:var(--text-2);padding:4px 3px;border-radius:980px;
-  white-space:normal;line-height:1.15;display:flex;align-items:center;justify-content:center;text-align:center;
-  transition:color .2s var(--ease),background .2s var(--ease),box-shadow .2s var(--ease)}
-.seg button[aria-selected="true"]{background:#fff;color:var(--text);box-shadow:0 1px 2px rgba(0,0,0,.08),0 0 0 .5px rgba(0,0,0,.04)}
-.xp-panels{position:relative;min-height:0}
-.xp-panel{display:none}
-.xp-panel.on{display:flex;flex-direction:column;text-align:center;gap:24px;width:100%;animation:xpfade .55s var(--ease)}
-@keyframes xpfade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.xp-art{order:-1;display:flex;flex:0 0 auto;align-items:center;justify-content:center}
-.feature-shot{margin:0;height:clamp(480px,78vw,620px);width:auto;display:flex;justify-content:center;align-items:center}
-.feature-shot img{height:100%;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 28px 52px rgba(60,74,61,.2))}
-.xp-copy{flex:0 1 auto;max-width:none;margin:0 auto;padding:0 18px}
-.xp-copy .eyebrow{margin-bottom:10px;display:block;text-align:center}
-.xp-panel h3{font-size:clamp(24px,5.5vw,30px);font-weight:600;margin-bottom:14px;text-align:center}
-.xp-panel p{font-size:17px;color:var(--text-2);line-height:1.5;text-align:center}
+/* ── Bild-Platzhalter (Dateien liegen in img/…) ── */
+.ph{width:100%;height:100%;min-height:160px;background:var(--bg-2);
+  display:grid;place-items:center;color:var(--ink-3);font-size:13px;text-align:center;padding:18px}
+.shot .ph{width:min(100%,240px);border-radius:24px}
+section.grey .ph{background:#ebebee}
 
-/* before / after */
-.ba{position:relative;width:min(100%,377px);aspect-ratio:377/286;margin:0 auto;border-radius:22px;overflow:hidden;cursor:ew-resize;user-select:none;touch-action:none;box-shadow:0 18px 36px -16px rgba(79,102,84,.34)}
-.ba::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:6;box-shadow:inset 0 0 0 1px rgba(255,255,255,.5),inset 0 0 0 2px rgba(111,140,116,.18)}
-.ba-stage{position:absolute;inset:0}
-.ba-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;pointer-events:none;user-select:none;-webkit-user-drag:none}
-.ba-after{position:absolute;inset:0;clip-path:inset(0 0 0 var(--p,48%))}
-.ba-tag{position:absolute;bottom:14px;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:980px;font-size:12.5px;font-weight:700;color:#4f6654;background:rgba(255,255,255,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.72);box-shadow:0 6px 16px rgba(0,0,0,.08);z-index:3}
-.ba-tag .ic{width:14px;height:14px}
-.ba-tag.l{left:14px}.ba-tag.r{right:14px}
-.ba-handle{position:absolute;top:-4px;bottom:-4px;left:var(--p,48%);width:1.5px;transform:translateX(-50%);z-index:4;background:rgba(255,255,255,.55);border-radius:2px;box-shadow:0 0 2px rgba(0,0,0,.18)}
-.ba-knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.6);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.55);box-shadow:0 8px 22px rgba(0,0,0,.22);display:grid;place-items:center;color:#4f6654}
-.ba.dragging .ba-knob{transform:translate(-50%,-50%) scale(.92);opacity:.4}
-.ba-knob .ic{width:20px;height:20px;stroke-width:2.2}
+/* ── Vorher / Nachher ───────────────────────────── */
+.ba{position:relative;width:100%;aspect-ratio:4/3;border-radius:14px;overflow:hidden;margin-top:40px;
+  background:var(--bg-2);cursor:ew-resize;user-select:none;touch-action:none}
+.ba-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
+.ba-after{position:absolute;inset:0;clip-path:inset(0 0 0 var(--p,50%))}
+.ba-label{position:absolute;top:14px;font-size:12px;font-weight:500;letter-spacing:.02em;
+  color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.45);z-index:3}
+.ba-label.l{left:14px}.ba-label.r{right:14px}
+.ba-handle{position:absolute;top:0;bottom:0;left:var(--p,50%);width:1px;transform:translateX(-50%);z-index:4;
+  background:rgba(255,255,255,.9)}
+.ba-knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:34px;height:34px;
+  border-radius:50%;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.28);
+  display:grid;place-items:center;color:var(--ink)}
+.ba-knob .ic{width:16px;height:16px;stroke-width:2}
+.ba.dragging .ba-knob{transform:translate(-50%,-50%) scale(.92)}
 .ba-range{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;z-index:5;margin:0}
+.cap{margin-top:14px;font-size:13px;color:var(--ink-3);text-align:center;letter-spacing:0}
 
-/* privacy */
-.priv-grid{display:grid;grid-template-columns:1fr;gap:16px;max-width:1024px;margin:0 auto;text-align:left;padding:0 18px}
-.priv-grid .cell{background:#fff;border-radius:24px;padding:28px 24px;display:flex;flex-direction:column;border:1px solid rgba(0,0,0,.04);box-shadow:0 1px 3px rgba(0,0,0,.04)}
-.priv-grid .cell .bemoji{color:var(--accent-deep);margin-bottom:16px}
-.priv-grid .cell h3{font-size:21px;font-weight:600;margin-bottom:8px}
-.priv-grid .cell p{font-size:16px;color:var(--text-2);line-height:1.45}
+/* ── Listen (Datenschutz) ───────────────────────── */
+.rows{margin-top:44px;border-top:1px solid var(--hair)}
+.rows article{padding:24px 0;border-bottom:1px solid var(--hair)}
+.rows h3{font-size:18px;letter-spacing:-.018em}
+.rows p{margin-top:6px;font-size:15px;line-height:1.5;color:var(--ink-2)}
 
-/* Google-style review cards */
-.review{background:#fff;border-radius:12px;padding:18px 20px;border:1px solid rgba(0,0,0,.08);box-shadow:0 1px 2px rgba(60,74,61,.06);display:flex;flex-direction:column;width:100%}
-.review .rev-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
-.review .who{display:flex;align-items:center;gap:10px;min-width:0;flex:1 1 auto}
-.review .rev-meta{min-width:0;text-align:left}
-.review .stars{color:#fbbc04;font-size:13px;letter-spacing:.5px;margin:0;flex:none;line-height:1;white-space:nowrap;padding-top:2px}
-.review p{font-size:15px;line-height:1.45;color:var(--text);margin:0;text-align:left}
-.review .av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:600;font-size:15px;flex:none;background:var(--accent)}
-.review .rn{font-size:14px;font-weight:600;line-height:1.25;color:var(--text)}
-.review .rd{font-size:12px;color:var(--text-2);margin-top:2px;line-height:1.3}
-.rev-mobile-stack{display:flex;flex-direction:column;gap:14px;margin-top:28px;padding:0 18px 22px}
-.rev-mobile-stack .review{margin:0;min-height:auto}
-.rev-mobile-stack .review.rev-more{display:none}
-.rev-mobile-stack.is-expanded .review.rev-more{display:flex}
-.rev-expand-btn{display:inline-flex;align-items:center;justify-content:center;align-self:center;margin-top:6px;padding:12px 24px;border:1px solid var(--hair);border-radius:980px;background:#fff;color:var(--link);font:inherit;font-size:16px;font-weight:500;cursor:pointer}
-.rev-mobile-stack.is-expanded .rev-expand-btn{display:none}
+/* ── Bewertungen ────────────────────────────────── */
+.big{font-size:76px;font-weight:600;letter-spacing:-.045em;line-height:1;margin-top:6px}
+.revs{margin-top:44px;border-top:1px solid var(--hair)}
+.rev{padding:24px 0;border-bottom:1px solid var(--hair);text-align:left}
+.rev .st{font-size:11px;letter-spacing:2px;color:var(--ink)}
+.rev blockquote{margin-top:10px;font-size:16px;line-height:1.5}
+.rev .by{margin-top:10px;font-size:13px;color:var(--ink-3);letter-spacing:0}
+.rev.more{display:none}
+.revs.open .rev.more{display:block}
+.morewrap{margin-top:26px;text-align:center}
+.revs.open+.morewrap{display:none}
 
-/* FAQ */
-.faq-wrap{max-width:820px;margin:0 auto;text-align:left;padding:0 18px}
-.faq{border-top:1px solid var(--hair)}
-.faq:last-child{border-bottom:1px solid var(--hair)}
-.faq summary{list-style:none;cursor:pointer;padding:22px 4px;display:flex;align-items:center;justify-content:space-between;gap:18px;font-size:18px;font-weight:600}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary .pm{font-size:28px;font-weight:300;color:var(--text-2);transition:transform .3s var(--ease);flex:none}
-.faq[open] summary .pm{transform:rotate(45deg)}
-.faq .ans{padding:0 4px 28px;font-size:17px;color:var(--text-2);line-height:1.5;max-width:64ch}
-.faq .ans a{color:var(--link);text-decoration:underline}
+/* ── FAQ ────────────────────────────────────────── */
+.faqs{margin-top:40px;border-top:1px solid var(--hair)}
+details{border-bottom:1px solid var(--hair)}
+summary{list-style:none;cursor:pointer;padding:22px 0;display:flex;align-items:flex-start;
+  justify-content:space-between;gap:18px;font-size:17px;font-weight:500;letter-spacing:-.018em;line-height:1.35}
+summary::-webkit-details-marker{display:none}
+summary .pm{flex:none;width:15px;height:15px;position:relative;margin-top:5px;color:var(--ink-3)}
+summary .pm::before,summary .pm::after{content:"";position:absolute;background:currentColor;
+  left:50%;top:50%;transition:transform .28s var(--ease)}
+summary .pm::before{width:15px;height:1.5px;transform:translate(-50%,-50%)}
+summary .pm::after{width:1.5px;height:15px;transform:translate(-50%,-50%)}
+details[open] summary .pm::after{transform:translate(-50%,-50%) rotate(90deg)}
+details .ans{padding:0 0 24px;font-size:15px;line-height:1.6;color:var(--ink-2);max-width:40ch}
+details .ans a{color:var(--accent);text-decoration:underline}
 
-/* CTA */
-.cap{font-size:13px;color:var(--text-2);margin-top:14px}
+/* ── Abschluss + Fußzeile ───────────────────────── */
+.close{background:var(--ink);color:#fff;text-align:center;padding:84px 22px}
+.close h2{color:#fff}
+.close .sub{color:rgba(255,255,255,.66)}
+.close .cta{margin-top:30px}
+.close .fine{margin-top:22px;font-size:12px;line-height:1.55;color:rgba(255,255,255,.45);
+  letter-spacing:0;max-width:34ch;margin-left:auto;margin-right:auto}
+footer{background:var(--bg-2);padding:34px 22px calc(34px + var(--sab));font-size:13px;color:var(--ink-3);letter-spacing:0}
+footer nav{display:flex;flex-direction:column;gap:2px;border-bottom:1px solid var(--hair);padding-bottom:20px}
+footer nav a{padding:8px 0;color:var(--ink-2)}
+footer .cr{margin-top:20px;line-height:1.5}
 
-/* icons */
-.ic{display:inline-block;width:1em;height:1em;vertical-align:-.14em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+/* ── Icons / Motion ─────────────────────────────── */
+.ic{display:inline-block;width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round;flex:none}
 .ic-fill{fill:currentColor;stroke:none}
-.btn .ic{width:1.05em;height:1.05em;vertical-align:-.18em;margin-right:.12em}
-.bemoji .ic{width:34px;height:34px;stroke-width:1.6}
-
-/* reveal */
-.rev{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.up{opacity:0;transform:translateY(14px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.up.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}
+  .up{opacity:1;transform:none}}
 </style>
 </head>
-<body class="theme-derma">
+<body>
 
-<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
-<defs>
-<symbol id="ic-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.3"/><path d="M19.5 19.5 15.5 15.5"/></symbol>
-<symbol id="ic-sparkles" viewBox="0 0 24 24"><path d="M12 4l1.7 4.6L18.5 10l-4.8 1.4L12 16l-1.7-4.6L5.5 10l4.8-1.4z"/><path d="M18 14.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></symbol>
-<symbol id="ic-arrows-h" viewBox="0 0 24 24"><path d="M8.5 8l-3.5 4 3.5 4M15.5 8l3.5 4-3.5 4M5 12h14"/></symbol>
-<symbol id="ic-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9.5" rx="2.2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/><path d="M12 14v2.5"/></symbol>
-<symbol id="ic-shield" viewBox="0 0 24 24"><path d="M12 3.5l7 2.8V11c0 4.4-3 8-7 9.5-4-1.5-7-5.1-7-9.5V6.3z"/><path d="M9 12l2 2 4-4"/></symbol>
-<symbol id="ic-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 19.5c.6-3.3 3.2-5 6.5-5s5.9 1.7 6.5 5"/></symbol>
-<symbol id="ic-trash" viewBox="0 0 24 24"><path d="M4.5 7h15"/><path d="M9 7V4.8h6V7"/><path d="M6.5 7l1 12.5h9L17.5 7"/><path d="M10.5 10.5v6M13.5 10.5v6"/></symbol>
-<symbol id="ic-flame" viewBox="0 0 24 24"><path d="M12 3c2.5 3 4.5 5.5 4.5 9a4.5 4.5 0 0 1-9 0c0-1.4.5-2.5 1.3-3.4C9 9.5 9.5 10.5 10 11 10 7.5 11 5 12 3z"/></symbol>
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0" aria-hidden="true"><defs>
 <symbol id="ic-apple" viewBox="0 0 24 24"><path d="M15.8 12.6c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.6.8-3.3.8s-1.7-.8-2.8-.8c-1.4 0-2.7.8-3.5 2.1-1.5 2.6-.4 6.5 1.1 8.6.7 1 1.5 2.2 2.6 2.1 1 0 1.4-.7 2.7-.7s1.6.7 2.7.7 1.8-1 2.5-2c.8-1.1 1.1-2.3 1.1-2.3s-2.1-.8-2.1-3.5z" fill="currentColor" stroke="none"/><path d="M13.7 6.1c.6-.7.9-1.7.8-2.7-.8 0-1.8.5-2.4 1.2-.5.6-1 1.6-.9 2.6.9.1 1.9-.4 2.5-1.1z" fill="currentColor" stroke="none"/></symbol>
-</defs>
-</svg>
+<symbol id="ic-arrows" viewBox="0 0 24 24"><path d="M9 8.5 5.5 12 9 15.5M15 8.5 18.5 12 15 15.5"/></symbol>
+<symbol id="ic-chev" viewBox="0 0 24 24"><path d="M9.5 5.5 16 12l-6.5 6.5"/></symbol>
+</defs></svg>
 
-<div class="mobile-shell">
-<div id="prog"></div>
+<div class="shell">
 
-<nav class="float-nav" aria-label="Navigation">
-  <div class="float-pill">
-    <a href="#" class="float-logo"><span class="dot"></span><b>Q&nbsp;Systems</b></a>
-    <div class="float-seg float-seg-page" role="tablist" aria-label="Seite">
-      <a href="#funktionen" role="tab">Funktionen</a>
-      <a href="#tracking" role="tab">Spot-Tracking</a>
-      <a href="#datenschutz" role="tab">Deine Daten</a>
+<header class="nav" id="nav">
+  <a href="#top" class="name">DermaScan</a>
+  <a href="#laden" class="link">Laden</a>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="hero">
+    <p class="stars" aria-hidden="true">★★★★★</p>
+    <p class="rating">4,9 im App&nbsp;Store</p>
+    <h1>Kenne deine Haut.<br>Jeden Tag.</h1>
+    <p class="sub">Analyse, Routine und Fortschritt — in einer App.</p>
+    <div class="actions">
+      <a href="#laden" class="cta"><svg class="ic ic-fill" aria-hidden="true"><use href="#ic-apple"/></svg> Im App Store laden</a>
+      <p class="fine">Kostenlos · Kein Konto · iPhone &amp; iPad</p>
     </div>
-    <a href="#laden" class="float-buy">Laden</a>
+    <figure>
+      <img src="img/shots/dermascan-hero.png" alt="DermaScan auf dem iPhone mit Hautscore, Fortschritt und Routine" width="1400" height="1065" loading="eager" decoding="async" data-fallback="Hero">
+    </figure>
+  </section>
+
+  <!-- Kennzahlen -->
+  <div class="facts up">
+    <dl>
+      <div><dt>Deine Daten</dt><dd>Lokal verschlüsselt</dd></div>
+      <div><dt>Anmeldung</dt><dd>Kein Konto nötig</dd></div>
+      <div><dt>Analyse</dt><dd>In Sekunden</dd></div>
+    </dl>
   </div>
-</nav>
 
-<main>
+  <!-- Funktionen -->
+  <section id="funktionen">
+    <div class="center up">
+      <h2 class="head">Eine App. Deine ganze Routine.</h2>
+    </div>
 
-  <!-- HERO -->
-  <section class="promo derma-hero">
-    <div class="promo-copy">
-      <h1 class="display" style="color:#3c4a3d">DermaScan</h1>
-      <p class="title hero-subtitle" style="color:#4f6654;font-weight:500;margin-top:2px">Kenne deine Haut. Jeden Tag.</p>
-      <div class="section-cta" style="margin-top:20px"><a href="#laden" class="btn"><svg class="ic ic-fill" aria-hidden="true"><use href="#ic-apple"/></svg> Im App Store laden</a></div>
-    </div>
-    <div class="promo-art">
-      <figure class="hero-shot">
-        <img src="img/shots/dermascan-hero.png" alt="DermaScan auf dem iPhone: Fortschritt, Hautscore und Routine" width="1400" height="1065" loading="eager" decoding="async">
-      </figure>
-    </div>
-  </section>
+    <div data-explorer>
+      <div class="seg" role="tablist" aria-label="Funktionen">
+        <button type="button" role="tab" id="tab-0" aria-controls="p-0">Analyse</button>
+        <button type="button" role="tab" id="tab-1" aria-controls="p-1">Routine</button>
+        <button type="button" role="tab" id="tab-2" aria-controls="p-2">Fortschritt</button>
+      </div>
 
-  <!-- FEATURE EXPLORER -->
-  <section class="section" id="funktionen">
-    <div class="container">
-      <span class="eyebrow">Funktionen</span>
-      <h2 class="headline">Eine App. Deine ganze Routine.</h2>
-    </div>
-    <div class="container wide explorer-wrap">
-      <div class="explorer" data-explorer>
-        <div class="explorer-tabs">
-          <div class="seg" role="tablist">
-            <button role="tab">Detailanalyse</button>
-            <button role="tab">Personalisierte Skincare</button>
-            <button role="tab">Fortschritt</button>
-          </div>
+      <div class="panel on" id="p-0" role="tabpanel" aria-labelledby="tab-0">
+        <figure class="shot">
+          <img src="img/shots/dermascan-analysis.png" alt="Detailanalyse mit Skin-Score, Kennzahlen und Hautzonen" width="540" height="1114" loading="lazy" decoding="async" data-fallback="Analyse">
+        </figure>
+        <div class="txt">
+          <h3>Nicht nur eine Zahl.</h3>
+          <p class="body">Nach jedem Check-in siehst du deinen Skin-Score im Vergleich zum letzten Mal — aufgeschlüsselt nach Werten und Hautzonen.</p>
+          <dl class="detail">
+            <div><dt>Werte</dt><dd>Klarheit, Textur, Feuchtigkeit, Rötung, Ebenheit</dd></div>
+            <div><dt>Zonen</dt><dd>Stirn, Wangen, Nase, Kinn</dd></div>
+          </dl>
         </div>
-        <div class="xp-panels">
+      </div>
 
-          <div class="xp-panel on">
-            <div class="xp-art">
-              <figure class="feature-shot">
-                <img src="img/shots/dermascan-analysis.png" alt="DermaScan: Detailreiche Analyse mit Skin-Score, Kennzahlen und Hautzonen" width="540" height="1114" loading="lazy" decoding="async">
-              </figure>
-            </div>
-            <div class="xp-copy">
-              <span class="eyebrow">Detailreiche Analyse</span>
-              <h3>Versteh deine Haut — nicht nur eine Zahl.</h3>
-              <p>Nach jedem Check-in bekommst du eine ausführliche Auswertung: Skin-Score im Vergleich zum letzten Mal, Aufschlüsselung nach Klarheit, Textur, Feuchtigkeit, Rötung und Ebenheit — plus Hautzonen wie Stirn und Wangen.</p>
-            </div>
-          </div>
+      <div class="panel" id="p-1" role="tabpanel" aria-labelledby="tab-1">
+        <figure class="shot">
+          <img src="img/shots/dermascan-routine.png" alt="Personalisierte Routine mit Morgens- und Abends-Schritten" width="540" height="1114" loading="lazy" decoding="async" data-fallback="Routine">
+        </figure>
+        <div class="txt">
+          <h3>Abgestimmt auf deine Haut.</h3>
+          <p class="body">Morgens und abends alles an einem Ort. Schritte abhaken und sehen, was wirklich zu dir passt.</p>
+          <dl class="detail">
+            <div><dt>Schritte</dt><dd>Reiniger, Serum, Feuchtigkeitspflege, Sonnenschutz</dd></div>
+            <div><dt>Tagesablauf</dt><dd>Morgens und abends, mit Erinnerung</dd></div>
+          </dl>
+        </div>
+      </div>
 
-          <div class="xp-panel">
-            <div class="xp-art">
-              <figure class="feature-shot">
-                <img src="img/shots/dermascan-routine.png" alt="DermaScan: Personalisierte Skincare-Routine mit Morgens- und Abends-Schritten" width="540" height="1114" loading="lazy" decoding="async">
-              </figure>
-            </div>
-            <div class="xp-copy">
-              <span class="eyebrow">Personalisierte Skincare</span>
-              <h3>Deine Routine — abgestimmt auf deine Haut.</h3>
-              <p>Morgens und abends: Reiniger, Serum, Feuchtigkeitspflege und Sonnenschutz — alles an einem Ort. Hake erledigte Schritte ab und behalte den Überblick, was wirklich zu dir passt.</p>
-            </div>
-          </div>
-
-          <div class="xp-panel">
-            <div class="xp-art">
-              <figure class="feature-shot">
-                <img src="img/shots/dermascan-progress.png" alt="DermaScan: Fortschritt mit Hautscore und Kennzahlen" width="540" height="1114" loading="lazy" decoding="async">
-              </figure>
-            </div>
-            <div class="xp-copy">
-              <span class="eyebrow">Fortschritt</span>
-              <h3>Dein Skin-Score — immer im Blick.</h3>
-              <p>Hautscore, Kennzahlen und Radar-Chart zeigen dir, wie sich deine Haut entwickelt. Vergleiche Check-ins und erkenne Trends, bevor du sie im Spiegel siehst.</p>
-            </div>
-          </div>
-
+      <div class="panel" id="p-2" role="tabpanel" aria-labelledby="tab-2">
+        <figure class="shot">
+          <img src="img/shots/dermascan-progress.png" alt="Fortschritt mit Hautscore, Kennzahlen und Radar-Chart" width="540" height="1114" loading="lazy" decoding="async" data-fallback="Fortschritt">
+        </figure>
+        <div class="txt">
+          <h3>Trends, bevor du sie im Spiegel siehst.</h3>
+          <p class="body">Check-ins vergleichen und den Verlauf über Wochen verfolgen.</p>
+          <dl class="detail">
+            <div><dt>Ansichten</dt><dd>Hautscore, Kennzahlen, Radar-Chart, Verlauf</dd></div>
+            <div><dt>Rückblick</dt><dd>Wochen-Recap mit den wichtigsten Veränderungen</dd></div>
+          </dl>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- BEFORE / AFTER -->
-  <section class="section wash" id="tracking">
-    <div class="container">
-      <span class="eyebrow">Vorher / Nachher</span>
-      <h2 class="headline">Fortschritt, den du sehen kannst.</h2>
-      <p class="sub lead-copy" style="margin-top:14px">Zieh am Griff und vergleiche beide Zeitpunkte. Genau dieser Vergleich begrüßt dich auch beim ersten Start der App.</p>
+  <!-- Vorher / Nachher -->
+  <section class="grey" id="tracking">
+    <div class="center up">
+      <h2 class="head">Fortschritt, den du sehen kannst.</h2>
+      <p class="sub">Spot-Tracking vergleicht zwei Zeitpunkte — zieh am Griff.</p>
     </div>
-    <div style="margin-top:42px">
-      <div class="ba" data-ba>
-        <div class="ba-stage">
-          <img class="ba-img" src="img/skin-before.png" alt="" width="1536" height="505" decoding="async" draggable="false">
-          <div class="ba-after">
-            <img class="ba-img" src="img/skin-after.png" alt="" width="1536" height="505" decoding="async" draggable="false">
-          </div>
-        </div>
-        <div class="ba-tag l"><svg class="ic" aria-hidden="true"><use href="#ic-search"/></svg> Vorher</div>
-        <div class="ba-tag r"><svg class="ic" aria-hidden="true"><use href="#ic-sparkles"/></svg> Nachher</div>
-        <div class="ba-handle"><div class="ba-knob"><svg class="ic" aria-hidden="true"><use href="#ic-arrows-h"/></svg></div></div>
-        <input class="ba-range" type="range" min="0" max="100" value="48" aria-label="Vorher/Nachher vergleichen" />
-      </div>
+    <div class="ba" data-ba>
+      <img class="ba-img" src="img/skin-before.png" alt="" width="1536" height="505" decoding="async" draggable="false" data-fallback="Vorher">
+      <div class="ba-after"><img class="ba-img" src="img/skin-after.png" alt="" width="1536" height="505" decoding="async" draggable="false" data-fallback="Nachher"></div>
+      <span class="ba-label l">Vorher</span>
+      <span class="ba-label r">Nachher</span>
+      <div class="ba-handle"><div class="ba-knob"><svg class="ic" aria-hidden="true"><use href="#ic-arrows"/></svg></div></div>
+      <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Vorher und Nachher vergleichen">
     </div>
+    <p class="cap">Zum Vergleichen wischen</p>
   </section>
 
-  <!-- PRIVACY (ohne priv-trust Badges) -->
-  <section class="section gray" id="datenschutz">
-    <div class="container">
-      <span class="eyebrow">Datenschutz</span>
-      <h2 class="headline">Deine Haut. Deine Daten.</h2>
-      <p class="sub lead-copy" style="margin-top:14px">Hautdaten sind sensibel. Genau deshalb bleibt fast alles auf deinem iPhone.</p>
+  <!-- Datenschutz -->
+  <section id="datenschutz">
+    <div class="center up">
+      <h2 class="head">Deine Haut. Deine Daten.</h2>
+      <p class="sub">Hautdaten sind sensibel. Deshalb bleibt fast alles auf deinem iPhone.</p>
     </div>
-
-    <div class="container wide" style="margin-top:48px">
-      <div class="priv-grid">
-        <div class="cell">
-          <div class="bemoji"><svg class="ic" aria-hidden="true"><use href="#ic-lock"/></svg></div>
-          <h3>Lokal verschlüsselt</h3>
-          <p>Deine Hautdaten liegen geschützt auf dem iPhone — mit iOS File-Protection und SwiftData.</p>
-        </div>
-        <div class="cell">
-          <div class="bemoji"><svg class="ic" aria-hidden="true"><use href="#ic-shield"/></svg></div>
-          <h3>Transparent &amp; ehrlich</h3>
-          <p>Wir sagen klar, was lokal bleibt und was für die KI-Analyse an Google geht — ohne Kleingedrucktes.</p>
-        </div>
-        <div class="cell">
-          <div class="bemoji"><svg class="ic" aria-hidden="true"><use href="#ic-user"/></svg></div>
-          <h3>Kein Konto nötig</h3>
-          <p>Keine Registrierung, kein Login, keine Anzeigen. Du startest sofort — ohne Profil bei uns.</p>
-        </div>
-        <div class="cell">
-          <div class="bemoji"><svg class="ic" aria-hidden="true"><use href="#ic-trash"/></svg></div>
-          <h3>Du behältst die Kontrolle</h3>
-          <p>Daten löschen, exportieren oder die App deinstallieren — alles jederzeit in deiner Hand.</p>
-        </div>
-      </div>
-      <div class="section-cta" style="margin-top:40px"><a href="datenschutz.html" class="link">Vollständige Datenschutzerklärung</a></div>
+    <div class="rows">
+      <article class="up"><h3>Lokal verschlüsselt</h3><p>Geschützt auf dem Gerät — mit iOS File-Protection und SwiftData.</p></article>
+      <article class="up"><h3>Transparent</h3><p>Klar gesagt, was lokal bleibt und was für die KI-Analyse an Google geht.</p></article>
+      <article class="up"><h3>Kein Konto</h3><p>Keine Registrierung, kein Login, keine Anzeigen. Sofort starten.</p></article>
+      <article class="up"><h3>Du behältst die Kontrolle</h3><p>Daten jederzeit löschen, exportieren oder die App entfernen.</p></article>
     </div>
+    <p class="center" style="margin-top:28px">
+      <a href="datenschutz.html" class="link">Datenschutzerklärung <svg class="ic" aria-hidden="true"><use href="#ic-chev"/></svg></a>
+    </p>
   </section>
 
-  <!-- REVIEWS — vertikaler Stack -->
-  <section class="section" id="stimmen">
-    <div class="container">
-      <span class="eyebrow">Was Nutzer:innen sagen</span>
-      <h2 class="headline"><span class="count" data-count="4.9" data-dec="1">4,9</span> von 5 Sternen.</h2>
+  <!-- Bewertungen -->
+  <section class="grey" id="stimmen">
+    <div class="center up">
+      <p class="stars" aria-hidden="true" style="letter-spacing:2px;font-size:12px;color:var(--ink-3)">★★★★★</p>
+      <p class="big">4,9</p>
+      <p class="sub" style="font-size:16px">Aus Bewertungen im App&nbsp;Store</p>
     </div>
-    <div class="rev-mobile-stack" data-rev-expand aria-label="Nutzerbewertungen">
-      <div class="review"><div class="rev-top"><div class="who"><span class="av">NW</span><div class="rev-meta"><div class="rn">Nina W.</div><div class="rd">vor 2 Wochen</div></div></div><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div></div><p>„Ich checke meine Haut jetzt jeden Abend — der Skin-Score ist wie ein kleines Spiel, das mich motiviert dranzubleiben."</p></div>
-      <div class="review"><div class="rev-top"><div class="who"><span class="av">PK</span><div class="rev-meta"><div class="rn">Paul K.</div><div class="rd">12. Jul. 2026</div></div></div><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div></div><p>„Das Spot-Tracking hat mir gezeigt, dass mein Pickelmal wirklich langsam verblasst. Ohne die App hätte ich das nie so genau gesehen."</p></div>
-      <div class="review"><div class="rev-top"><div class="who"><span class="av">MS</span><div class="rev-meta"><div class="rn">Michaela S.</div><div class="rd">vor 1 Monat</div></div></div><div class="stars" aria-label="4 von 5 Sternen">★★★★☆</div></div><p>„Sehr durchdacht gemacht. Nur die Analyse dauert manchmal ein paar Sekunden länger, als ich erwartet hätte."</p></div>
-      <div class="review rev-more"><div class="rev-top"><div class="who"><span class="av">FB</span><div class="rev-meta"><div class="rn">Felix B.</div><div class="rd">5. Jul. 2026</div></div></div><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div></div><p>„Endlich eine App, die ehrlich sagt, was mit meinen Fotos passiert. Kein Konto, keine Werbung — genau mein Ding."</p></div>
-      <div class="review rev-more"><div class="rev-top"><div class="who"><span class="av">VR</span><div class="rev-meta"><div class="rn">Vanessa R.</div><div class="rd">vor 3 Wochen</div></div></div><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div></div><p>„Die Wochen-Recaps fühlen sich an wie ein persönliches Hauttagebuch. Ich verstehe endlich, warum meine Haut an manchen Tagen anders aussieht."</p></div>
-      <div class="review rev-more"><div class="rev-top"><div class="who"><span class="av">JH</span><div class="rev-meta"><div class="rn">Jonas H.</div><div class="rd">18. Jul. 2026</div></div></div><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div></div><p>„14 Tage Streak und ich merke wirklich einen Unterschied. Die Erinnerung kommt genau zur richtigen Zeit. <svg class="ic" aria-hidden="true"><use href="#ic-flame"/></svg>"</p></div>
-      <div class="review rev-more"><div class="rev-top"><div class="who"><span class="av">KF</span><div class="rev-meta"><div class="rn">Katharina F.</div><div class="rd">vor 5 Tagen</div></div></div><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div></div><p>„Die Routine mit Morgens- und Abends-Schritten ist super übersichtlich. Endlich vergesse ich keinen Schritt mehr."</p></div>
-      <div class="review rev-more"><div class="rev-top"><div class="who"><span class="av">ST</span><div class="rev-meta"><div class="rn">Simon T.</div><div class="rd">1. Jul. 2026</div></div></div><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div></div><p>„Die Detailanalyse mit Klarheit, Textur und Rötung ist unglaublich präzise. Fühlt sich an wie ein kleines Hautlabor am Handy."</p></div>
-      <div class="review rev-more"><div class="rev-top"><div class="who"><span class="av">LM</span><div class="rev-meta"><div class="rn">Laura M.</div><div class="rd">vor 2 Monaten</div></div></div><div class="stars" aria-label="4 von 5 Sternen">★★★★☆</div></div><p>„Tolles Design und schnell. Ich wünsche mir nur noch mehr Export-Optionen für Premium."</p></div>
-      <div class="review rev-more"><div class="rev-top"><div class="who"><span class="av">DP</span><div class="rev-meta"><div class="rn">David P.</div><div class="rd">20. Jul. 2026</div></div></div><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div></div><p>„Der Vorher/Nachher-Vergleich beim ersten Start hat mich sofort überzeugt, die App zu behalten."</p></div>
-      <div class="review rev-more"><div class="rev-top"><div class="who"><span class="av">AK</span><div class="rev-meta"><div class="rn">Anna-Lena K.</div><div class="rd">vor 1 Woche</div></div></div><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div></div><p>„Radar-Chart und Skin-Score zeigen mir Trends, die ich im Spiegel nie bemerkt hätte."</p></div>
-      <div class="review rev-more"><div class="rev-top"><div class="who"><span class="av">TW</span><div class="rev-meta"><div class="rn">Tobias W.</div><div class="rd">15. Jul. 2026</div></div></div><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div></div><p>„Kein Server, keine Registrierung — als Datenschutz-Fan bin ich hier genau richtig."</p></div>
-      <button type="button" class="rev-expand-btn" aria-expanded="false">Weitere Bewertungen</button>
+
+    <div class="revs" id="revstack">
+      <div class="rev"><p class="st" aria-label="5 von 5 Sternen">★★★★★</p><blockquote>„Ich checke meine Haut jetzt jeden Abend — der Skin-Score motiviert mich, dranzubleiben."</blockquote><p class="by">Nina W. · vor 2 Wochen</p></div>
+      <div class="rev"><p class="st" aria-label="5 von 5 Sternen">★★★★★</p><blockquote>„Das Spot-Tracking hat mir gezeigt, dass mein Pickelmal wirklich langsam verblasst."</blockquote><p class="by">Paul K. · 12. Juli 2026</p></div>
+      <div class="rev"><p class="st" aria-label="4 von 5 Sternen">★★★★☆</p><blockquote>„Sehr durchdacht gemacht. Nur die Analyse dauert manchmal ein paar Sekunden länger als erwartet."</blockquote><p class="by">Michaela S. · vor 1 Monat</p></div>
+      <div class="rev more"><p class="st" aria-label="5 von 5 Sternen">★★★★★</p><blockquote>„Endlich eine App, die ehrlich sagt, was mit meinen Fotos passiert. Kein Konto, keine Werbung."</blockquote><p class="by">Felix B. · 5. Juli 2026</p></div>
+      <div class="rev more"><p class="st" aria-label="5 von 5 Sternen">★★★★★</p><blockquote>„Die Wochen-Recaps fühlen sich an wie ein persönliches Hauttagebuch."</blockquote><p class="by">Vanessa R. · vor 3 Wochen</p></div>
+      <div class="rev more"><p class="st" aria-label="5 von 5 Sternen">★★★★★</p><blockquote>„14 Tage Streak und ich merke wirklich einen Unterschied. Die Erinnerung kommt genau zur richtigen Zeit."</blockquote><p class="by">Jonas H. · 18. Juli 2026</p></div>
+      <div class="rev more"><p class="st" aria-label="5 von 5 Sternen">★★★★★</p><blockquote>„Die Routine mit Morgens- und Abends-Schritten ist super übersichtlich. Ich vergesse keinen Schritt mehr."</blockquote><p class="by">Katharina F. · vor 5 Tagen</p></div>
+      <div class="rev more"><p class="st" aria-label="5 von 5 Sternen">★★★★★</p><blockquote>„Die Detailanalyse mit Klarheit, Textur und Rötung fühlt sich an wie ein kleines Hautlabor am Handy."</blockquote><p class="by">Simon T. · 1. Juli 2026</p></div>
+      <div class="rev more"><p class="st" aria-label="4 von 5 Sternen">★★★★☆</p><blockquote>„Tolles Design und schnell. Ich wünsche mir nur noch mehr Export-Optionen für Premium."</blockquote><p class="by">Laura M. · vor 2 Monaten</p></div>
+      <div class="rev more"><p class="st" aria-label="5 von 5 Sternen">★★★★★</p><blockquote>„Der Vorher/Nachher-Vergleich beim ersten Start hat mich sofort überzeugt."</blockquote><p class="by">David P. · 20. Juli 2026</p></div>
+      <div class="rev more"><p class="st" aria-label="5 von 5 Sternen">★★★★★</p><blockquote>„Radar-Chart und Skin-Score zeigen mir Trends, die ich im Spiegel nie bemerkt hätte."</blockquote><p class="by">Anna-Lena K. · vor 1 Woche</p></div>
+      <div class="rev more"><p class="st" aria-label="5 von 5 Sternen">★★★★★</p><blockquote>„Kein Server, keine Registrierung — als Datenschutz-Fan bin ich hier genau richtig."</blockquote><p class="by">Tobias W. · 15. Juli 2026</p></div>
     </div>
+    <div class="morewrap"><button type="button" class="link" id="revmore" aria-expanded="false" aria-controls="revstack">Alle Bewertungen anzeigen <svg class="ic" aria-hidden="true"><use href="#ic-chev"/></svg></button></div>
   </section>
 
   <!-- FAQ -->
-  <section class="section gray">
-    <div class="container"><h2 class="headline" style="text-align:center">Häufige Fragen</h2></div>
-    <div class="faq-wrap" style="margin-top:36px">
-      <details class="faq" open><summary>Ist DermaScan ein medizinisches Diagnosewerkzeug? <span class="pm">+</span></summary><div class="ans">Nein. DermaScan unterstützt die Selbstbeobachtung deiner Haut und ersetzt keine ärztliche Untersuchung. Bei Beschwerden oder auffälligen Veränderungen wende dich bitte an eine Dermatologin oder einen Dermatologen.</div></details>
-      <details class="faq"><summary>Werden meine Fotos gespeichert? <span class="pm">+</span></summary><div class="ans">Auf deinem iPhone ja, bei uns nein &ndash; wir betreiben keinen eigenen Server. Für jede Analyse wird das jeweilige Bild verkleinert an Google&nbsp;Gemini übertragen und dort nach Googles Bedingungen verarbeitet. Verlauf, Notizen und Profil bleiben lokal. Was genau mitgeschickt wird, steht in der <a href="datenschutz.html#ds-dermascan">Datenschutzerklärung</a>.</div></details>
-      <details class="faq"><summary>Brauche ich ein Konto? <span class="pm">+</span></summary><div class="ans">Nein. Es gibt keine Registrierung und kein Login, du kannst sofort starten.</div></details>
-      <details class="faq"><summary>Was kostet die App? <span class="pm">+</span></summary><div class="ans">Du kannst kostenlos starten. Premium hebt das Analyse-Limit auf und schaltet unbegrenztes Spot-Tracking, KI-Veränderungserkennung, erweiterte Auswertungen, Datenexport und Familienfreigabe frei.</div></details>
+  <section id="fragen">
+    <div class="center up"><h2 class="head">Häufige Fragen</h2></div>
+    <div class="faqs">
+      <details open>
+        <summary>Ist DermaScan ein medizinisches Diagnosewerkzeug?<span class="pm" aria-hidden="true"></span></summary>
+        <div class="ans">Nein. DermaScan unterstützt die Selbstbeobachtung deiner Haut und ersetzt keine ärztliche Untersuchung. Bei Beschwerden oder auffälligen Veränderungen wende dich bitte an eine Dermatologin oder einen Dermatologen.</div>
+      </details>
+      <details>
+        <summary>Werden meine Fotos gespeichert?<span class="pm" aria-hidden="true"></span></summary>
+        <div class="ans">Auf deinem iPhone ja, bei uns nein — wir betreiben keinen eigenen Server. Für jede Analyse wird das Bild verkleinert an Google&nbsp;Gemini übertragen und dort nach Googles Bedingungen verarbeitet. Verlauf, Notizen und Profil bleiben lokal. Details in der <a href="datenschutz.html#ds-dermascan">Datenschutzerklärung</a>.</div>
+      </details>
+      <details>
+        <summary>Brauche ich ein Konto?<span class="pm" aria-hidden="true"></span></summary>
+        <div class="ans">Nein. Es gibt keine Registrierung und kein Login — du kannst sofort starten.</div>
+      </details>
+      <details>
+        <summary>Was kostet die App?<span class="pm" aria-hidden="true"></span></summary>
+        <div class="ans">Du kannst kostenlos starten. Premium hebt das Analyse-Limit auf und schaltet unbegrenztes Spot-Tracking, KI-Veränderungserkennung, erweiterte Auswertungen, Datenexport und Familienfreigabe frei.</div>
+      </details>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="section" id="laden">
-    <div class="container">
-      <h2 class="headline" style="color:#3c4a3d">Starte dein Haut-Tagebuch.</h2>
-      <p class="sub lead-copy" style="margin-top:14px">Kostenlos starten, ohne Konto. Für iPhone &amp; iPad.</p>
-      <div class="section-cta"><a href="#" class="btn btn-lg"><svg class="ic ic-fill" aria-hidden="true"><use href="#ic-apple"/></svg> Im App Store laden</a></div>
-      <p class="cap" style="max-width:640px;margin:22px auto 0">DermaScan ist kein medizinisches Diagnosewerkzeug und ersetzt keine ärztliche Untersuchung.</p>
-    </div>
+  <!-- Abschluss -->
+  <section class="close" id="laden">
+    <h2>Starte dein Haut&shy;tagebuch.</h2>
+    <p class="sub">Kostenlos, ohne Konto. Für iPhone und iPad.</p>
+    <a href="#" class="cta light"><svg class="ic ic-fill" aria-hidden="true"><use href="#ic-apple"/></svg> Im App Store laden</a>
+    <p class="fine">DermaScan ist kein medizinisches Diagnosewerkzeug und ersetzt keine ärztliche Untersuchung.</p>
   </section>
+
+  <footer>
+    <nav aria-label="Fußzeile">
+      <a href="#funktionen">Funktionen</a>
+      <a href="#tracking">Spot-Tracking</a>
+      <a href="#datenschutz">Deine Daten</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="impressum.html">Impressum</a>
+    </nav>
+    <p class="cr">© 2026 Q&nbsp;Systems · DermaScan</p>
+  </footer>
 
 </main>
-</div><!-- /.mobile-shell -->
+</div><!-- /.shell -->
 
 <script>
 (function(){
   'use strict';
 
-  /* feature explorer tabs */
+  /* Bild-Fallback: Pfade bleiben (img/…), Platzhalter falls Datei fehlt */
+  document.querySelectorAll('img[data-fallback]').forEach(function(img){
+    img.addEventListener('error',function(){
+      var ph=document.createElement('div');
+      ph.className='ph';
+      ph.textContent=img.getAttribute('data-fallback');
+      if(img.parentNode) img.parentNode.replaceChild(ph,img);
+    });
+  });
+
+  /* Segmented Control */
   document.querySelectorAll('[data-explorer]').forEach(function(xp){
     var btns=[].slice.call(xp.querySelectorAll('.seg button'));
-    var panels=[].slice.call(xp.querySelectorAll('.xp-panel'));
+    var panels=[].slice.call(xp.querySelectorAll('.panel'));
     function select(i){
       btns.forEach(function(b,bi){b.setAttribute('aria-selected',bi===i?'true':'false');});
       panels.forEach(function(p,pi){p.classList.toggle('on',pi===i);});
@@ -406,37 +416,47 @@ h1,h2,h3{font-weight:600;letter-spacing:-.015em;line-height:1.06}
     select(0);
   });
 
-  /* before / after slider */
+  /* Vorher / Nachher */
   document.querySelectorAll('[data-ba]').forEach(function(ba){
-    var range=ba.querySelector('.ba-range');
+    var range=ba.querySelector('.ba-range'),dragging=false;
     function set(p){p=Math.max(0,Math.min(100,p));ba.style.setProperty('--p',p+'%');if(range)range.value=p;}
-    set(range?parseFloat(range.value)||48:48);
-    if(range){range.addEventListener('input',function(){set(parseFloat(range.value));});}
-    function fromEvent(x){var r=ba.getBoundingClientRect();set(((x-r.left)/r.width)*100);}
-    var dragging=false;
-    ba.addEventListener('pointerdown',function(e){dragging=true;ba.classList.add('dragging');fromEvent(e.clientX);ba.setPointerCapture(e.pointerId);});
-    ba.addEventListener('pointermove',function(e){if(dragging)fromEvent(e.clientX);});
-    ba.addEventListener('pointerup',function(){dragging=false;ba.classList.remove('dragging');});
-    ba.addEventListener('pointercancel',function(){dragging=false;ba.classList.remove('dragging');});
-  });
-
-  /* reviews expand */
-  document.querySelectorAll('[data-rev-expand]').forEach(function(wrap){
-    var btn=wrap.querySelector('.rev-expand-btn');
-    if(!btn)return;
-    btn.addEventListener('click',function(){
-      wrap.classList.add('is-expanded');
-      btn.setAttribute('aria-expanded','true');
+    set(range?parseFloat(range.value)||50:50);
+    if(range)range.addEventListener('input',function(){set(parseFloat(range.value));});
+    function fromX(x){var r=ba.getBoundingClientRect();set(((x-r.left)/r.width)*100);}
+    ba.addEventListener('pointerdown',function(e){dragging=true;ba.classList.add('dragging');fromX(e.clientX);
+      try{ba.setPointerCapture(e.pointerId);}catch(err){}});
+    ba.addEventListener('pointermove',function(e){if(dragging)fromX(e.clientX);});
+    ['pointerup','pointercancel'].forEach(function(ev){
+      ba.addEventListener(ev,function(){dragging=false;ba.classList.remove('dragging');});
     });
   });
 
-  /* scroll progress (scoped to mobile shell) */
-  var prog=document.getElementById('prog');
-  if(prog){
-    window.addEventListener('scroll',function(){
-      var h=document.documentElement;
-      prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
-    },{passive:true});
+  /* Bewertungen ausklappen */
+  var stack=document.getElementById('revstack'),moreBtn=document.getElementById('revmore');
+  if(stack&&moreBtn){
+    moreBtn.addEventListener('click',function(){
+      stack.classList.add('open');
+      moreBtn.setAttribute('aria-expanded','true');
+      var wrap=moreBtn.parentNode; if(wrap) wrap.style.display='none';
+    });
+  }
+
+  /* Navigationsleiste */
+  var nav=document.getElementById('nav');
+  function onScroll(){
+    if(nav) nav.classList.toggle('stuck',document.documentElement.scrollTop>10);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+
+  /* Einblenden beim Scrollen */
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+    },{rootMargin:'0px 0px -6% 0px',threshold:.1});
+    document.querySelectorAll('.up').forEach(function(el){io.observe(el);});
+  }else{
+    document.querySelectorAll('.up').forEach(function(el){el.classList.add('in');});
   }
 })();
 </script>
