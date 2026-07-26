@@ -721,7 +721,7 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
     flex:0 0 auto;
   }
   .feature-shot{
-    height:clamp(340px,78vw,440px);
+    height:clamp(440px,96vw,620px);
     width:100%;
     overflow:visible;
     margin:0 auto;
@@ -732,35 +732,10 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
   .feature-shot img{
     height:100%;
     width:auto;
-    max-width:min(100%,280px);
+    max-width:min(100%,360px);
     object-fit:contain;
     object-position:top center;
     filter:drop-shadow(0 20px 40px rgba(60,74,61,.18));
-  }
-  .mobile-xp-detail{
-    order:4;
-    width:100%;
-    margin-top:18px;
-    border-top:1px solid rgba(111,140,116,.18);
-    text-align:left;
-  }
-  .mobile-xp-detail div{
-    padding:10px 0;
-    border-bottom:1px solid rgba(111,140,116,.12);
-    display:flex;
-    gap:12px;
-  }
-  .mobile-xp-detail dt{
-    flex:0 0 72px;
-    font-size:13px;
-    color:var(--accent-deep);
-    padding-top:1px;
-  }
-  .mobile-xp-detail dd{
-    flex:1 1 auto;
-    font-size:14px;
-    line-height:1.4;
-    color:var(--text-2);
   }
 
   /* ── before / after (v0) ── */
