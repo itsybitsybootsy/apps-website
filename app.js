@@ -162,69 +162,29 @@
     ba.addEventListener('pointercancel', function(){ dragging=false; ba.classList.remove('dragging'); });
   });
 
-  /* ---- reviews marquee (seamless infinite loop, rAF — no hover jump) ---- */
-  if (!reduce){
-    document.querySelectorAll('[data-rev-marquee]').forEach(function (wrap){
-      var track = wrap.querySelector('.rev-track');
-      var set = wrap.querySelector('.rev-set');
-      if (!track || !set) return;
+  /* ---- reviews marquee (both card sets are static in the HTML; JS only tunes speed) ---- */
+  document.querySelectorAll('[data-rev-marquee]').forEach(function (wrap){
+    var track = wrap.querySelector('.rev-track');
+    var set = wrap.querySelector('.rev-set');
+    if (!track || !set) return;
 
-      var shift = 0;
-      var offset = 0;
-      var speed = 72;
-      var paused = false;
-      var lastTs = 0;
-      var resizeTimer;
+    var speed = 72; // px per second
+    var resizeTimer;
 
-      function apply(){
-        track.style.transform = 'translate3d(' + (-offset) + 'px,0,0)';
-      }
+    function setup(){
+      var setWidth = set.offsetWidth;
+      var duration = setWidth ? setWidth / speed : 30;
+      track.style.setProperty('--rev-dur', duration + 's');
+    }
 
-      function tick(ts){
-        if (!lastTs) lastTs = ts;
-        var dt = (ts - lastTs) / 1000;
-        lastTs = ts;
-        if (!paused && shift > 0){
-          offset += speed * dt;
-          if (offset >= shift) offset -= shift;
-          apply();
-        }
-        requestAnimationFrame(tick);
-      }
-
-      function setup(){
-        var saved = shift > 0 ? offset % shift : 0;
-        track.querySelectorAll('.rev-set[aria-hidden="true"]').forEach(function (c){ c.remove(); });
-
-        var clone = set.cloneNode(true);
-        clone.setAttribute('aria-hidden', 'true');
-        track.appendChild(clone);
-
-        shift = set.getBoundingClientRect().width;
-        var minWidth = wrap.offsetWidth * 2 + shift;
-        while (track.scrollWidth < minWidth){
-          var extra = set.cloneNode(true);
-          extra.setAttribute('aria-hidden', 'true');
-          track.appendChild(extra);
-        }
-
-        offset = saved;
-        apply();
-      }
-
-      setup();
-      requestAnimationFrame(function (){ requestAnimationFrame(setup); });
-      requestAnimationFrame(tick);
-
-      wrap.addEventListener('mouseenter', function(){ paused = true; });
-      wrap.addEventListener('mouseleave', function(){ paused = false; lastTs = 0; });
-
-      window.addEventListener('resize', function (){
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(setup, 180);
-      });
+    setup();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(setup);
+    window.addEventListener('load', setup);
+    window.addEventListener('resize', function (){
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(setup, 180);
     });
-  }
+  });
 
   /* ---- 3D tilt ---- */
   if (!reduce && window.matchMedia('(pointer:fine)').matches){

@@ -432,15 +432,23 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
 .ba-knob .ic{ width:20px; height:20px; stroke-width:2.2; }
 .ba-range{ position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:ew-resize; z-index:5; margin:0; }
 
-/* reviews marquee */
-.rev-marquee{ overflow:hidden; margin-top:38px; padding:6px 0 22px; opacity:1; transform:none;
-  -webkit-mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent);
-  mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent); }
-.rev-track{ display:flex; width:max-content; will-change:transform; }
-.rev-set{ display:flex; gap:18px; flex:none; padding-right:18px; }
+/* reviews marquee — endless CSS keyframe loop, duplicated set, no scroll-position math.
+   Edge fade uses overlay pseudo-elements instead of mask-image: masking an animated
+   transform layer is a known Safari/WebKit bug source (the mask briefly fails to
+   composite, showing a blank "hole" where cards should be). */
+.rev-marquee{ position:relative; overflow:hidden; margin-top:38px; padding:6px 0 22px; }
+.rev-marquee::before, .rev-marquee::after{ content:""; position:absolute; top:0; bottom:0; width:64px; z-index:2; pointer-events:none; }
+.rev-marquee::before{ left:0; background:linear-gradient(to right, var(--bg), transparent); }
+.rev-marquee::after{ right:0; background:linear-gradient(to left, var(--bg), transparent); }
+.section.gray .rev-marquee::before{ background:linear-gradient(to right, var(--bg-2), transparent); }
+.section.gray .rev-marquee::after{ background:linear-gradient(to left, var(--bg-2), transparent); }
+.rev-track{ display:flex; width:max-content; transform:translate3d(0,0,0);
+  animation:rev-scroll var(--rev-dur, 40s) linear infinite; }
+.rev-marquee:hover .rev-track{ animation-play-state:paused; }
+.rev-set{ display:flex; flex:0 0 auto; gap:18px; padding-right:18px; }
 .rev-marquee .review{ flex:0 0 320px; margin:0; }
-@media (max-width:560px){ .rev-marquee .review{ flex:0 0 280px; } }
-@media (prefers-reduced-motion:reduce){ .rev-track{ animation:none; overflow-x:auto; width:100%; } .rev-marquee{ overflow-x:auto; -webkit-mask-image:none; mask-image:none; } }
+@media (max-width:560px){ .rev-marquee .review{ flex:0 0 280px; } .rev-marquee::before, .rev-marquee::after{ width:36px; } }
+@keyframes rev-scroll{ from{ transform:translate3d(0,0,0); } to{ transform:translate3d(-50%,0,0); } }
 
 /* stat band */
 .statband{ display:grid; grid-template-columns:repeat(4,1fr); gap:30px; max-width:1024px; margin:0 auto; }
