@@ -538,23 +538,22 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
   .mobile-only{ display:block; }
   .mobile-only-flex{ display:flex; }
 
-  /* white canvas, no green wash */
-  html:has(body.theme-derma){ background:#fff; }
-  body.theme-derma,
-  body.theme-derma::before,
-  body.theme-derma main,
-  body.theme-derma .derma-hero,
-  body.theme-derma .promo.derma-hero,
-  body.has-float-nav main{ background:#fff; }
-
-  /* hide desktop chrome */
+  /* hide desktop chrome on mobile */
   .desktop-nav,
-  .hero-desktop,
   .desktop-rev-head,
   .mobile-hide-statement,
   .priv-trust,
   .rev-marquee,
   #prog{ display:none !important; }
+
+  /* green hero wash (pre-v0) */
+  html:has(body.theme-derma){ background:#eef3ee; }
+  body.theme-derma,
+  body.theme-derma::before,
+  body.theme-derma main,
+  body.theme-derma .derma-hero,
+  body.theme-derma .promo.derma-hero,
+  body.has-float-nav main{ background:#eef3ee; }
 
   /* ── mobile nav (v0) ── */
   .mobile-nav{
@@ -590,82 +589,35 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
   .container.wide{ max-width:none; }
   .eyebrow{ font-size:14px; }
 
-  /* ── hero (v0) ── */
+  /* ── hero: one headline, button, then phones ── */
   .derma-hero{
-    padding:60px 22px 0;
+    padding:24px 22px 0;
     min-height:auto;
     text-align:center;
   }
-  .mobile-hero-copy{ text-align:center; }
-  .m-hero-stars{ font-size:12px; letter-spacing:2px; color:#86868b; }
-  .m-hero-rating{ margin-top:6px; font-size:13px; color:#86868b; }
-  .m-hero-headline{
-    margin-top:26px;
-    font-size:clamp(40px,11vw,48px);
-    font-weight:600;
-    letter-spacing:-.038em;
-    line-height:1.07;
-    color:var(--text);
-    text-wrap:balance;
+  .derma-hero .display{
+    font-size:clamp(44px,12vw,64px);
+    margin-bottom:0;
+    color:#3c4a3d;
   }
-  .m-hero-lead{
-    margin-top:14px;
-    font-size:19px;
-    line-height:1.42;
-    color:var(--text-2);
-    letter-spacing:-.018em;
-    max-width:24ch;
-    margin-left:auto;
-    margin-right:auto;
-    text-wrap:pretty;
-  }
-  .m-hero-actions{
-    margin-top:28px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:16px;
-  }
-  .btn-ink{
-    background:var(--text);
-    color:#fff;
-    font-weight:500;
-    padding:14px 28px;
-  }
-  .btn-ink:hover{ background:#333; color:#fff; }
-  .m-hero-fine{ font-size:13px; color:#86868b; }
+  .derma-hero .hero-subtitle{ display:none; }
+  .derma-hero .section-cta{ margin-top:20px; }
   .derma-hero .promo-art{
     display:block;
-    margin-top:52px;
-    padding:0 0 0;
+    margin-top:20px;
+    padding:0 18px 28px;
     max-width:none;
   }
   .derma-hero .hero-shot img{
-    filter:none;
+    filter:drop-shadow(0 28px 52px rgba(60,74,61,.2));
     box-shadow:none;
   }
 
-  /* ── facts band ── */
-  .mobile-facts{
-    border-top:1px solid #e3e3e5;
-    margin:0 22px;
-    padding:0;
-  }
-  .mobile-facts dl{ display:flex; flex-direction:column; }
-  .mobile-facts div{
-    display:flex; align-items:baseline; justify-content:space-between; gap:16px;
-    padding:20px 0; border-bottom:1px solid #e3e3e5;
-  }
-  .mobile-facts dt{ font-size:16px; color:var(--text-2); }
-  .mobile-facts dd{ font-size:17px; font-weight:500; text-align:right; letter-spacing:-.015em; color:var(--text); }
-
-  /* section headings — v0 centered, no eyebrow */
+  /* section headings — v0 centered, no eyebrow (except datenschutz) */
   #funktionen > .container > .eyebrow,
-  #tracking > .container > .eyebrow,
-  #datenschutz > .container > .eyebrow{ display:none; }
+  #tracking > .container > .eyebrow{ display:none; }
   #funktionen > .container > .headline,
-  #tracking > .container > .headline,
-  #datenschutz > .container > .headline{
+  #tracking > .container > .headline{
     font-size:clamp(30px,8.4vw,36px);
     max-width:26ch;
     margin:0 auto;
@@ -676,11 +628,9 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
     font-size:19px;
     max-width:32ch;
   }
-  #datenschutz > .container > .lead-copy{
-    margin-top:14px;
-    font-size:19px;
-    max-width:32ch;
-  }
+
+  /* datenschutz — pre-v0 card grid (820px rules apply) */
+  #datenschutz > .container.wide{ margin-top:32px; padding:0 22px; }
 
   /* ── feature explorer (v0) ── */
   .explorer-wrap{ margin-top:0; padding:0; }
@@ -796,32 +746,6 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
     color:#86868b;
     text-align:center;
   }
-
-  /* ── privacy (v0 rows) ── */
-  .priv-grid{
-    display:block;
-    gap:0;
-    margin-top:44px;
-    border-top:1px solid #e3e3e5;
-  }
-  .priv-grid .cell{
-    background:transparent;
-    border:0;
-    border-radius:0;
-    box-shadow:none;
-    padding:24px 0;
-    border-bottom:1px solid #e3e3e5;
-    min-height:auto;
-    text-align:left;
-  }
-  .priv-grid .cell .bemoji{ display:none; }
-  .priv-grid .cell h3{ font-size:18px; letter-spacing:-.018em; margin-bottom:6px; }
-  .priv-grid .cell p{ font-size:15px; line-height:1.5; }
-  .section#datenschutz .section-cta .link{
-    font-size:16px;
-    color:#3f5843;
-  }
-  .section#datenschutz .section-cta .link::after{ content:none; }
 
   /* ── reviews (v0 vertical) ── */
   .mobile-rev-head{ text-align:center; padding:0 22px; }
