@@ -162,6 +162,101 @@
     ba.addEventListener('pointercancel', function(){ dragging=false; ba.classList.remove('dragging'); });
   });
 
+  /* ---- FAQ accordion slide ---- */
+  document.querySelectorAll('.faq').forEach(function (faq) {
+    var head = faq.querySelector('.faq-head');
+    var ans = faq.querySelector('.ans');
+    var inner = faq.querySelector('.ans-inner');
+    if (!head || !ans || !inner) return;
+
+    var animating = false;
+    var openDuration = reduce ? 0 : 650;
+    var closeDuration = reduce ? 0 : 680;
+    var openEasing = 'cubic-bezier(.62,0,.2,1)';
+    var closeEasing = 'cubic-bezier(.62,0,.2,1)';
+
+    function isOpen(){ return faq.classList.contains('faq-open'); }
+
+    function setExpanded(open){
+      head.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    function targetH(){ return inner.offsetHeight; }
+
+    function applyHeight(px, animate, ms, ease){
+      var dur = ms || openDuration;
+      var curve = ease || openEasing;
+      if (!animate || reduce || !dur){
+        ans.style.transition = 'none';
+        ans.style.height = px + 'px';
+        void ans.offsetHeight;
+        ans.style.transition = '';
+        return;
+      }
+      ans.style.transition = 'height ' + dur + 'ms ' + curve;
+      ans.style.height = px + 'px';
+    }
+
+    function watchHeight(done, ms){
+      var dur = ms || openDuration;
+      if (reduce || !dur){ done(); return; }
+      var finished = false;
+      function complete(){
+        if (finished) return;
+        finished = true;
+        ans.removeEventListener('transitionend', onEnd);
+        clearTimeout(fallback);
+        done();
+      }
+      function onEnd(e){
+        if (e.target !== ans) return;
+        if (e.propertyName && e.propertyName !== 'height') return;
+        complete();
+      }
+      var fallback = setTimeout(complete, dur + 60);
+      ans.addEventListener('transitionend', onEnd);
+    }
+
+    function openPanel(){
+      if (animating || isOpen()) return;
+      animating = true;
+      applyHeight(0, false);
+      faq.classList.add('faq-open');
+      setExpanded(true);
+      void ans.offsetHeight;
+      applyHeight(targetH(), true, openDuration, openEasing);
+      watchHeight(function () { animating = false; }, openDuration);
+    }
+
+    function closePanel(){
+      if (animating || !isOpen()) return;
+      animating = true;
+      setExpanded(false);
+      var current = targetH();
+      applyHeight(current, false);
+      faq.classList.remove('faq-open');
+      applyHeight(0, true, closeDuration, closeEasing);
+      watchHeight(function () { animating = false; }, closeDuration);
+    }
+
+    if (isOpen()){
+      setExpanded(true);
+      ans.style.height = targetH() + 'px';
+    } else {
+      setExpanded(false);
+      ans.style.height = '0px';
+    }
+
+    head.addEventListener('click', function () {
+      if (isOpen()) closePanel();
+      else openPanel();
+    });
+
+    window.addEventListener('resize', function () {
+      if (isOpen() && !animating) ans.style.height = targetH() + 'px';
+    });
+  });
+
   /* ---- mobile reviews expand ---- */
   document.querySelectorAll('[data-rev-expand]').forEach(function (wrap) {
     var btn = wrap.querySelector('.rev-expand-btn');
