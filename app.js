@@ -126,16 +126,53 @@
     var btns = Array.prototype.slice.call(xp.querySelectorAll('.seg button'));
     var panels = Array.prototype.slice.call(xp.querySelectorAll('.xp-panel'));
     function select(i){
-      btns.forEach(function (b,bi){ b.setAttribute('aria-selected', bi===i ? 'true':'false'); });
-      panels.forEach(function (p,pi){ p.classList.toggle('on', pi===i); });
+      btns.forEach(function (b,bi){
+        b.setAttribute('aria-selected', bi===i ? 'true':'false');
+        b.setAttribute('tabindex', bi===i ? '0' : '-1');
+      });
+      panels.forEach(function (p,pi){
+        p.classList.toggle('on', pi===i);
+        p.hidden = pi !== i;
+      });
     }
-    btns.forEach(function (b,i){ b.addEventListener('click', function(){ select(i); }); });
+    btns.forEach(function (b,i){
+      b.setAttribute('role', 'tab');
+      b.setAttribute('tabindex', i===0 ? '0' : '-1');
+      b.addEventListener('click', function(){ select(i); auto=false; stopAuto(); });
+      b.addEventListener('keydown', function (e) {
+        var next = i;
+        if (e.key === 'ArrowRight') next = (i + 1) % btns.length;
+        else if (e.key === 'ArrowLeft') next = (i - 1 + btns.length) % btns.length;
+        else return;
+        e.preventDefault();
+        select(next);
+        btns[next].focus();
+        auto = false;
+        stopAuto();
+      });
+    });
+    panels.forEach(function (p, pi){ if (pi > 0) p.hidden = true; });
     select(0);
-    // auto-advance until user interacts
-    var auto = true, idx = 0;
-    btns.forEach(function (b){ b.addEventListener('click', function(){ auto=false; }); });
+    var auto = true, idx = 0, timer = null;
+    function stopAuto(){
+      if (timer){ clearInterval(timer); timer = null; }
+    }
+    function startAuto(){
+      if (reduce || !auto || timer) return;
+      timer = setInterval(function(){
+        if (!auto) return;
+        idx = (idx + 1) % btns.length;
+        select(idx);
+      }, 4200);
+    }
     if (!reduce){
-      setInterval(function(){ if(!auto) return; idx=(idx+1)%btns.length; select(idx); }, 4200);
+      var xio = new IntersectionObserver(function (entries){
+        entries.forEach(function (e){
+          if (e.isIntersecting) startAuto();
+          else stopAuto();
+        });
+      }, { threshold:0.2 });
+      xio.observe(xp);
     }
   });
 
