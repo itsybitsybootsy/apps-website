@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="theme-color" content="#eef3ee" />
+<meta name="theme-color" content="#ffffff" />
 <title>DermaScan: Kenne deine Haut. Jeden Tag. | Q Systems</title>
 <meta name="description" content="DermaScan: KI-Hautanalyse, Skin-Score und Spot-Tracking, privacy-first und lokal auf deinem iPhone." />
-<link rel="stylesheet" href="styles.css?v=37" />
+<link rel="stylesheet" href="styles.css?v=33" />
 </head>
 <body class="theme-derma has-float-nav">
 <div id="prog"></div>
@@ -16,9 +16,8 @@
     <a href="index.html" class="float-logo"><span class="dot"></span><b>Q&nbsp;Systems</b></a>
     <div class="float-seg float-seg-page" role="tablist" aria-label="Seite">
       <a href="#funktionen" role="tab">Funktionen</a>
-      <a href="#tracking" role="tab">Vorher/Nachher</a>
+      <a href="#tracking" role="tab">Spot-Tracking</a>
       <a href="#datenschutz" role="tab">Deine Daten</a>
-      <a href="#faq" role="tab">FAQ</a>
     </div>
     <a href="datenschutz.html" class="float-link">Datenschutz</a>
     <a href="#laden" class="float-buy">Laden</a>
@@ -34,19 +33,11 @@
 
   <!-- HERO -->
   <section class="promo derma-hero">
-    <div class="hero-glow" aria-hidden="true"></div>
     <div class="promo-copy">
       <div class="hero-desktop">
-        <p class="hero-badge rev d1"><span class="hero-badge-dot"></span> Neu · iOS 17+</p>
-        <h1 class="display rev d1 hero-title">DermaScan</h1>
-        <p class="title hero-subtitle rev d1">Kenne deine Haut. Jeden Tag.</p>
-        <p class="hero-mobile-lead mobile-only rev d1">Jeden Tag ein bisschen klüger.</p>
-        <div class="hero-meta rev d2">
-          <span class="hero-meta-item"><span class="hero-stars" aria-hidden="true">★★★★★</span> 4,9 im App Store</span>
-          <span class="hero-meta-div" aria-hidden="true"></span>
-          <span class="hero-meta-item">Kein Konto nötig</span>
-        </div>
-        <div class="section-cta rev d2 hero-cta"><a href="#laden" class="btn"><svg class="ic ic-fill" aria-hidden="true"><use href="#ic-apple"/></svg> Im App Store laden</a></div>
+        <h1 class="display rev d1" style="color:#3c4a3d">DermaScan</h1>
+        <p class="title hero-subtitle rev d1" style="color:#4f6654;font-weight:500;margin-top:2px">Kenne deine Haut. Jeden Tag.</p>
+        <div class="section-cta rev d2" style="margin-top:20px"><a href="#laden" class="btn"><svg class="ic ic-fill" aria-hidden="true"><use href="#ic-apple"/></svg> Im App Store laden</a></div>
       </div>
     </div>
     <div class="promo-art rev d2">
@@ -56,68 +47,11 @@
     </div>
   </section>
 
-  <!-- STATEMENT + value pills -->
-  <section class="section wash tight statement-band mobile-hide-statement">
+  <!-- STATEMENT (hidden on mobile) -->
+  <section class="section tight mobile-hide-statement">
     <div class="container">
       <h2 class="headline rev">Dein persönliches Haut-Tagebuch.<br><span class="grad-accent">Jeden Tag ein bisschen klüger.</span></h2>
-      <p class="sub rev d1 lead-copy statement-lead">Foto machen, KI-Analyse erhalten, Veränderungen über Wochen verfolgen — verständlich erklärt und vollständig auf deinem iPhone.</p>
-      <ul class="value-pills rev d2" aria-label="Kernfunktionen">
-        <li><svg class="ic" aria-hidden="true"><use href="#ic-camera"/></svg> Haut-Check-in</li>
-        <li><svg class="ic" aria-hidden="true"><use href="#ic-sparkles"/></svg> KI-Analyse</li>
-        <li><svg class="ic" aria-hidden="true"><use href="#ic-chart"/></svg> Skin-Score</li>
-        <li><svg class="ic" aria-hidden="true"><use href="#ic-lock"/></svg> Lokal &amp; privat</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section class="section steps-section mobile-hide-statement" id="ablauf">
-    <div class="container">
-      <span class="eyebrow rev">So funktioniert's</span>
-      <h2 class="headline rev d1">Drei Schritte. Jeden Tag.</h2>
-      <div class="steps-grid rev d2">
-        <article class="step-card">
-          <span class="step-num">1</span>
-          <h3>Foto machen</h3>
-          <p>Frontkamera, gleiches Licht — ein Check-in dauert unter einer Minute.</p>
-        </article>
-        <article class="step-card">
-          <span class="step-num">2</span>
-          <h3>KI analysiert</h3>
-          <p>Skin-Score, Kennzahlen und Hautzonen — verständlich aufbereitet, nicht nur eine Zahl.</p>
-        </article>
-        <article class="step-card">
-          <span class="step-num">3</span>
-          <h3>Fortschritt sehen</h3>
-          <p>Vergleiche Wochen, erkenne Trends und behalte deine Routine im Blick.</p>
-        </article>
-      </div>
-      <p class="section-cta rev d3"><a href="#funktionen" class="link link-lg">Funktionen entdecken</a></p>
-    </div>
-  </section>
-
-  <ul class="value-pills mobile-only rev d2 hero-value-pills" aria-label="Kernfunktionen">
-    <li><svg class="ic" aria-hidden="true"><use href="#ic-camera"/></svg> Check-in</li>
-    <li><svg class="ic" aria-hidden="true"><use href="#ic-sparkles"/></svg> KI-Analyse</li>
-    <li><svg class="ic" aria-hidden="true"><use href="#ic-chart"/></svg> Skin-Score</li>
-  </ul>
-
-  <!-- MOBILE STEPS -->
-  <section class="mobile-steps mobile-only" aria-label="So funktioniert's">
-    <div class="mobile-steps-scroll">
-      <article class="m-step"><span class="m-step-n">1</span><h3>Foto</h3><p>Unter einer Minute</p></article>
-      <article class="m-step"><span class="m-step-n">2</span><h3>KI-Analyse</h3><p>Skin-Score &amp; Zonen</p></article>
-      <article class="m-step"><span class="m-step-n">3</span><h3>Fortschritt</h3><p>Trends über Wochen</p></article>
-    </div>
-  </section>
-
-  <!-- STATS -->
-  <section class="stats-strip mobile-hide-statement" aria-label="Kennzahlen">
-    <div class="stats-inner rev">
-      <div class="stat"><span class="stat-n" data-count="82" data-suf="%">0%</span><span class="stat-l">Ø Skin-Score</span></div>
-      <div class="stat"><span class="stat-n">&lt;60s</span><span class="stat-l">pro Check-in</span></div>
-      <div class="stat"><span class="stat-n">100%</span><span class="stat-l">lokal gespeichert</span></div>
-      <div class="stat"><span class="stat-n">0</span><span class="stat-l">Werbung &amp; Tracking</span></div>
+      <p class="sub rev d1 lead-copy" style="margin-top:16px">Foto machen, KI-Analyse erhalten, Veränderungen über Wochen verfolgen, verständlich erklärt, motivierend aufbereitet und vollständig auf deinem iPhone.</p>
     </div>
   </section>
 
@@ -128,8 +62,7 @@
       <h2 class="headline rev d1">Eine App. Deine ganze Routine.</h2>
     </div>
     <div class="container wide explorer-wrap">
-      <div class="explorer-shell rev d1">
-      <div class="explorer" data-explorer>
+      <div class="explorer rev d1" data-explorer>
         <div class="explorer-tabs">
           <div class="seg" role="tablist">
             <button role="tab"><span class="seg-long">Detailanalyse</span><span class="seg-short">Analyse</span></button>
@@ -183,45 +116,17 @@
 
         </div>
       </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PREMIUM STRIP -->
-  <section class="compare-strip mobile-hide-statement" aria-label="Free vs Premium">
-    <div class="compare-inner rev">
-      <div class="compare-col compare-free">
-        <span class="compare-tag">Kostenlos</span>
-        <ul>
-          <li><svg class="ic" aria-hidden="true"><use href="#ic-check"/></svg> Täglicher Check-in</li>
-          <li><svg class="ic" aria-hidden="true"><use href="#ic-check"/></svg> Skin-Score &amp; Analyse</li>
-          <li><svg class="ic" aria-hidden="true"><use href="#ic-check"/></svg> Skincare-Routine</li>
-        </ul>
-      </div>
-      <div class="compare-col compare-pro">
-        <span class="compare-tag">Premium</span>
-        <ul>
-          <li><svg class="ic" aria-hidden="true"><use href="#ic-sparkles"/></svg> Unbegrenzte Analysen</li>
-          <li><svg class="ic" aria-hidden="true"><use href="#ic-sparkles"/></svg> Spot-Tracking &amp; KI-Diff</li>
-          <li><svg class="ic" aria-hidden="true"><use href="#ic-sparkles"/></svg> Export &amp; Familienfreigabe</li>
-        </ul>
-      </div>
     </div>
   </section>
 
   <!-- BEFORE / AFTER -->
-  <section class="section wash tracking-section" id="tracking">
+  <section class="section wash" id="tracking">
     <div class="container">
       <span class="eyebrow rev">Vorher / Nachher</span>
       <h2 class="headline rev d1">Fortschritt, den du sehen kannst.</h2>
-      <p class="sub rev d2 section-lead">Zieh am Griff und vergleiche beide Zeitpunkte. Genau dieser Vergleich begrüßt dich auch beim ersten Start der App.</p>
-      <ul class="tracking-pills rev d2 mobile-hide-statement" aria-label="Tracking-Features">
-        <li><svg class="ic" aria-hidden="true"><use href="#ic-search"/></svg> Spot-Vergleich</li>
-        <li><svg class="ic" aria-hidden="true"><use href="#ic-chart"/></svg> Wochen-Trends</li>
-        <li><svg class="ic" aria-hidden="true"><use href="#ic-sparkles"/></svg> KI-Veränderung</li>
-      </ul>
+      <p class="sub rev d2 lead-copy" style="margin-top:14px">Zieh am Griff und vergleiche beide Zeitpunkte. Genau dieser Vergleich begrüßt dich auch beim ersten Start der App.</p>
     </div>
-    <div class="ba-wrap rev d2">
+    <div style="margin-top:42px" class="rev d2">
       <div class="ba" data-ba>
         <div class="ba-stage">
           <img class="ba-img" src="img/skin-before.png" alt="" width="1536" height="505" decoding="async" draggable="false">
@@ -243,12 +148,7 @@
     <div class="container">
       <span class="eyebrow rev">Datenschutz</span>
       <h2 class="headline rev d1">Deine Haut. Deine Daten.</h2>
-      <p class="sub rev d2 section-lead">Hautdaten sind sensibel. Genau deshalb bleibt fast alles auf deinem iPhone.</p>
-    </div>
-
-    <div class="priv-callout rev d1">
-      <div class="priv-callout-icon"><svg class="ic" aria-hidden="true"><use href="#ic-shield"/></svg></div>
-      <p><strong>Privacy by Design:</strong> Verlauf, Fotos und Profil bleiben auf deinem iPhone. Nur für die KI-Analyse wird ein verkleinertes Bild an Google Gemini übertragen.</p>
+      <p class="sub rev d2 lead-copy" style="margin-top:14px">Hautdaten sind sensibel. Genau deshalb bleibt fast alles auf deinem iPhone.</p>
     </div>
 
     <div class="priv-trust rev d2">
@@ -258,7 +158,7 @@
       <span><svg class="ic" aria-hidden="true"><use href="#ic-eye-off"/></svg> Kein Server bei uns</span>
     </div>
 
-    <div class="container wide rev d2 section-spaced">
+    <div class="container wide rev d2" style="margin-top:48px">
       <div class="priv-grid">
         <div class="cell">
           <div class="bemoji"><svg class="ic" aria-hidden="true"><use href="#ic-lock"/></svg></div>
@@ -281,19 +181,15 @@
           <p>Daten löschen, exportieren oder die App deinstallieren — alles jederzeit in deiner Hand.</p>
         </div>
       </div>
-      <div class="section-cta rev d2"><a href="datenschutz.html" class="link link-lg">Vollständige Datenschutzerklärung</a></div>
+      <div class="section-cta rev d2" style="margin-top:40px"><a href="datenschutz.html" class="link" style="font-size:19px">Vollständige Datenschutzerklärung</a></div>
     </div>
   </section>
 
   <!-- REVIEWS -->
-  <section class="section gray" id="stimmen">
+  <section class="section" id="stimmen">
     <div class="container desktop-rev-head">
       <span class="eyebrow rev">Was Nutzer:innen sagen</span>
       <h2 class="headline rev d1"><span class="count" data-count="4.9" data-dec="1">0,0</span> von 5 Sternen.</h2>
-      <div class="rev-summary rev d2">
-        <div class="rev-summary-score"><span class="rev-summary-big">4,9</span><span class="rev-summary-stars" aria-hidden="true">★★★★★</span></div>
-        <p class="rev-summary-text">Basierend auf App-Store-Bewertungen · Demo-Kennzahlen für diese Seite</p>
-      </div>
     </div>
     <div class="mobile-rev-head mobile-only">
       <p class="m-rev-stars" aria-hidden="true">★★★★★</p>
@@ -350,9 +246,9 @@
   </section>
 
   <!-- FAQ -->
-  <section class="section faq-section" id="faq">
-    <div class="container section-intro-center"><span class="eyebrow rev">Support</span><h2 class="headline rev d1">Häufige Fragen</h2></div>
-    <div class="faq-wrap rev d2">
+  <section class="section gray">
+    <div class="container"><h2 class="headline rev" style="text-align:center">Häufige Fragen</h2></div>
+    <div class="faq-wrap rev d1" style="margin-top:36px">
       <div class="faq">
         <button type="button" class="faq-head" aria-expanded="false">Ist DermaScan ein medizinisches Diagnosewerkzeug? <span class="pm">+</span></button>
         <div class="ans"><div class="ans-inner">Nein. DermaScan unterstützt die Selbstbeobachtung deiner Haut und ersetzt keine ärztliche Untersuchung. Bei Beschwerden oder auffälligen Veränderungen wende dich bitte an eine Dermatologin oder einen Dermatologen.</div></div>
@@ -369,25 +265,16 @@
         <button type="button" class="faq-head" aria-expanded="false">Was kostet die App? <span class="pm">+</span></button>
         <div class="ans"><div class="ans-inner">Du kannst kostenlos starten. Premium hebt das Analyse-Limit auf und schaltet unbegrenztes Spot-Tracking, KI-Veränderungserkennung, erweiterte Auswertungen, Datenexport und Familienfreigabe frei.</div></div>
       </div>
-      <div class="faq">
-        <button type="button" class="faq-head" aria-expanded="false">Funktioniert DermaScan auch offline? <span class="pm">+</span></button>
-        <div class="ans"><div class="ans-inner">Dein Verlauf, Fotos und Routinen sind jederzeit offline verfügbar. Für die KI-Analyse brauchst du kurz eine Internetverbindung — danach siehst du alles wieder lokal.</div></div>
-      </div>
-      <div class="faq">
-        <button type="button" class="faq-head" aria-expanded="false">Kann ich meine Daten exportieren? <span class="pm">+</span></button>
-        <div class="ans"><div class="ans-inner">Ja — mit Premium kannst du deine Hautdaten exportieren. Du behältst jederzeit die volle Kontrolle: löschen, exportieren oder die App deinstallieren.</div></div>
-      </div>
     </div>
   </section>
 
   <!-- CTA -->
   <section class="section cta-close" id="laden">
-    <div class="container cta-card rev">
-      <h2 class="headline cta-title">Starte dein Haut-Tagebuch.</h2>
-      <p class="sub section-lead">Kostenlos starten, ohne Konto. Für iPhone &amp; iPad.</p>
-      <div class="section-cta"><a href="#laden" class="btn btn-lg"><svg class="ic ic-fill" aria-hidden="true"><use href="#ic-apple"/></svg> Im App Store laden</a></div>
-      <p class="cta-secondary"><a href="datenschutz.html" class="link">Datenschutz lesen</a></p>
-      <p class="cap cta-disclaimer">DermaScan ist kein medizinisches Diagnosewerkzeug und ersetzt keine ärztliche Untersuchung.</p>
+    <div class="container">
+      <h2 class="headline rev" style="color:#3c4a3d">Starte dein Haut-Tagebuch.</h2>
+      <p class="sub rev d1 lead-copy" style="margin-top:14px">Kostenlos starten, ohne Konto. Für iPhone &amp; iPad.</p>
+      <div class="section-cta rev d2"><a href="#" class="btn btn-lg"><svg class="ic ic-fill" aria-hidden="true"><use href="#ic-apple"/></svg> Im App Store laden</a></div>
+      <p class="cap rev d2" style="max-width:640px;margin:22px auto 0">DermaScan ist kein medizinisches Diagnosewerkzeug und ersetzt keine ärztliche Untersuchung.</p>
     </div>
   </section>
 
@@ -404,9 +291,8 @@
     </div>
     <nav class="mobile-foot-nav mobile-only" aria-label="Fußzeile">
       <a href="#funktionen">Funktionen</a>
-      <a href="#tracking">Vorher/Nachher</a>
+      <a href="#tracking">Spot-Tracking</a>
       <a href="#datenschutz">Deine Daten</a>
-      <a href="#faq">FAQ</a>
       <a href="datenschutz.html">Datenschutz</a>
       <a href="impressum.html">Impressum</a>
     </nav>
@@ -417,6 +303,6 @@
   </div>
 </footer>
 
-<script src="app.js?v=33"></script>
+<script src="app.js?v=30"></script>
 </body>
 </html>
