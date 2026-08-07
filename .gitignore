@@ -1,9 +1,8 @@
-# Quellen und Arbeitsdateien der Rechtstexte.
-# Bewusst NICHT im öffentlichen Repo: die Fragmente und *-quellen.txt enthalten
-# interne Risikoeinschätzungen ("Handlungsbedarf vor Release", Blocker-Listen)
-# und Hinweise darauf, wo in den App-Repos Schlüssel liegen.
-# Lokal unter legal/ vorhanden; für die Versionierung gehören sie in ein
-# privates Repo, nicht hierher. Gebaut wird mit: python3 legal/build_legal.py all
-legal/
+# Rechtstext-Quellen und Build-Skripte (privat, nicht öffentlich).
+# Die veröffentlichten Seiten liegen unter legal/*.html und gehören ins Repo.
+legal/build_legal.py
+legal/fragments/
+legal/**/*-quellen.txt
 
 .DS_Store
+.cursor/
