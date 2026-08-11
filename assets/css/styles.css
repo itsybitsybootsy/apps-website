@@ -51,7 +51,7 @@ body.theme-derma{
 body.theme-derma::before{
   content:""; position:fixed; inset:0; background:#eef3ee; z-index:-1; pointer-events:none;
 }
-body.theme-derma .section:not(.gray):not(.wash):not(.dark){ background:var(--bg); }
+body.theme-derma .section:not(.gray):not(.wash):not(.dark):not(.statement-band){ background:var(--bg); }
 body.theme-derma main,
 body.theme-derma .derma-hero,
 body.theme-derma .promo.derma-hero{ background:#eef3ee; }
@@ -206,6 +206,76 @@ body.theme-derma.has-float-back.legal-doc main .section.legal-hero{
   max-width:100%;
   margin:0 auto;
   filter:drop-shadow(0 28px 48px rgba(60,74,61,.14));
+}
+
+/* statement band — two-part headline side by side, lead below same width */
+body.theme-derma .statement-band{
+  padding:80px 0 96px;
+  background:var(--accent-soft);
+  text-align:center;
+}
+.statement-inner{
+  max-width:min(100%,820px);
+  margin:0 auto;
+}
+.statement-headline{
+  margin:0;
+  color:#3c4a3d;
+  font-size:clamp(30px,4.6vw,52px);
+  line-height:1.12;
+  letter-spacing:-.018em;
+  text-align:center;
+}
+.statement-headline-in{
+  display:inline;
+  text-wrap:balance;
+}
+.statement-headline .type-line1,
+.statement-headline .type-line2{
+  display:inline;
+  white-space:normal;
+}
+.statement-headline .type-line1{
+  color:#3c4a3d;
+}
+.statement-headline .type-line2{
+  letter-spacing:-.022em;
+}
+.statement-headline:not(.typing-line2) .statement-break,
+.statement-headline:not(.typing-line2) .type-line2{
+  display:none;
+}
+.statement-headline .type-cursor{
+  display:inline-block;
+  width:2px;
+  height:.92em;
+  margin-left:2px;
+  vertical-align:text-bottom;
+  background:var(--accent-deep);
+  opacity:.85;
+  animation:type-cursor 1s step-end infinite;
+}
+.statement-headline.is-done .type-cursor{ display:none; }
+.statement-band .statement-lead{
+  width:100%;
+  max-width:100%;
+  margin:20px auto 0;
+  color:#5a6e5e;
+  font-size:clamp(17px,2.1vw,21px);
+  line-height:1.5;
+  text-wrap:pretty;
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity .55s var(--ease), transform .55s var(--ease);
+}
+.statement-band .statement-lead.is-visible{
+  opacity:1;
+  transform:none;
+}
+@keyframes type-cursor{ 50%{ opacity:0; } }
+@media (prefers-reduced-motion:reduce){
+  .statement-headline .type-cursor{ display:none; }
+  .statement-band .statement-lead{ opacity:1; transform:none; }
 }
 
 /* feature row (text + mockup, alternating) */

@@ -80,6 +80,64 @@
   }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
   document.querySelectorAll('.rev').forEach(function (el) { io.observe(el); });
 
+  /* ---- statement headline typewriter ---- */
+  document.querySelectorAll('[data-type-headline]').forEach(function (headline) {
+    var line1 = headline.getAttribute('data-line1') || '';
+    var line2 = headline.getAttribute('data-line2') || '';
+    var out1 = headline.querySelector('.type-line1');
+    var out2 = headline.querySelector('.type-line2');
+    var cursor = headline.querySelector('.type-cursor');
+    var lead = headline.closest('.statement-band');
+    lead = lead ? lead.querySelector('.statement-lead') : null;
+    if (!out1 || !line1) return;
+
+    function parkCursor(afterEl) {
+      if (cursor && afterEl) afterEl.insertAdjacentElement('afterend', cursor);
+    }
+
+    function finish() {
+      headline.classList.add('is-done');
+      if (lead) lead.classList.add('is-visible');
+    }
+
+    if (reduce) {
+      headline.classList.add('typing-line2');
+      out1.textContent = line1;
+      if (out2 && line2) out2.textContent = line2;
+      finish();
+      return;
+    }
+
+    function typeInto(el, text, cb) {
+      var i = 0;
+      function tick() {
+        el.textContent = text.slice(0, i);
+        parkCursor(el);
+        i += 1;
+        if (i <= text.length) setTimeout(tick, 58);
+        else cb();
+      }
+      parkCursor(el);
+      tick();
+    }
+
+    parkCursor(out1);
+
+    var tio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        tio.unobserve(headline);
+        typeInto(out1, line1, function () {
+          if (out2 && line2) {
+            headline.classList.add('typing-line2');
+            typeInto(out2, line2, finish);
+          } else finish();
+        });
+      });
+    }, { threshold: 0.35 });
+    tio.observe(headline);
+  });
+
   /* ---- count up ---- */
   function easeOut(t){ return 1 - Math.pow(1 - t, 3); }
   function runCount(el){
