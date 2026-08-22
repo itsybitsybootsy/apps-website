@@ -185,7 +185,11 @@
     var panels = Array.prototype.slice.call(xp.querySelectorAll('.xp-panel'));
     function select(i){
       btns.forEach(function (b,bi){ b.setAttribute('aria-selected', bi===i ? 'true':'false'); });
-      panels.forEach(function (p,pi){ p.classList.toggle('on', pi===i); });
+      panels.forEach(function (p,pi){
+        var on = pi===i;
+        p.classList.toggle('on', on);
+        p.setAttribute('aria-hidden', on ? 'false' : 'true');
+      });
     }
     btns.forEach(function (b,i){ b.addEventListener('click', function(){ select(i); }); });
     select(0);
@@ -395,20 +399,86 @@
     });
   });
 
-  /* ---- 3D tilt ---- */
-  if (!reduce && window.matchMedia('(pointer:fine)').matches){
+  /* ---- pointer feel: spring tilt, magnetic buttons, card shine, hero glow ---- */
+  var finePointer = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (!reduce && finePointer){
+    var pointerRaf = 0;
+    var tilts = [];
     document.querySelectorAll('[data-tilt]').forEach(function (el){
       var max = parseFloat(el.getAttribute('data-tilt')) || 7;
-      el.style.transition = 'transform .12s ease-out';
       var parent = el.closest('[data-tilt-area]') || el;
-      parent.addEventListener('mousemove', function(e){
+      var state = { el: el, parent: parent, tx: 0, ty: 0, x: 0, y: 0, vx: 0, vy: 0, max: max };
+      parent.addEventListener('pointermove', function (e){
         var r = parent.getBoundingClientRect();
-        var px = (e.clientX - r.left) / r.width - .5;
-        var py = (e.clientY - r.top) / r.height - .5;
-        el.style.transform = 'perspective(1000px) rotateY(' + (px*max) + 'deg) rotateX(' + (-py*max) + 'deg)';
+        state.tx = ((e.clientX - r.left) / r.width - .5) * max;
+        state.ty = ((e.clientY - r.top) / r.height - .5) * -max;
       });
-      parent.addEventListener('mouseleave', function(){ el.style.transform = 'perspective(1000px) rotateY(0) rotateX(0)'; });
+      parent.addEventListener('pointerleave', function (){ state.tx = 0; state.ty = 0; });
+      tilts.push(state);
     });
+
+    var magnets = [];
+    document.querySelectorAll('[data-magnetic]').forEach(function (el){
+      var state = { el: el, tx: 0, ty: 0, x: 0, y: 0, hot: false };
+      el.addEventListener('pointerenter', function (){ state.hot = true; });
+      el.addEventListener('pointermove', function (e){
+        var r = el.getBoundingClientRect();
+        state.tx = Math.max(-16, Math.min(16, (e.clientX - (r.left + r.width / 2)) * .42));
+        state.ty = Math.max(-12, Math.min(12, (e.clientY - (r.top + r.height / 2)) * .42));
+      });
+      el.addEventListener('pointerleave', function (){ state.hot = false; state.tx = 0; state.ty = 0; });
+      magnets.push(state);
+    });
+
+    document.querySelectorAll('[data-shine]').forEach(function (el){
+      el.addEventListener('pointermove', function (e){
+        var r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+        el.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+      });
+    });
+
+    var stages = [];
+    document.querySelectorAll('[data-pointer-stage]').forEach(function (el){
+      var glow = el.querySelector('.hero-glow');
+      var state = { el: el, glow: glow, tx: 50, ty: 38, x: 50, y: 38 };
+      el.addEventListener('pointerenter', function (){ el.classList.add('is-lit'); });
+      el.addEventListener('pointerleave', function (){ el.classList.remove('is-lit'); });
+      el.addEventListener('pointermove', function (e){
+        var r = el.getBoundingClientRect();
+        state.tx = ((e.clientX - r.left) / r.width) * 100;
+        state.ty = ((e.clientY - r.top) / r.height) * 100;
+      });
+      stages.push(state);
+    });
+
+    function tickPointer(){
+      tilts.forEach(function (s){
+        s.vx += (s.tx - s.x) * .18;
+        s.vy += (s.ty - s.y) * .18;
+        s.vx *= .72;
+        s.vy *= .72;
+        s.x += s.vx;
+        s.y += s.vy;
+        s.el.style.transform = 'perspective(1100px) rotateY(' + s.x.toFixed(2) + 'deg) rotateX(' + s.y.toFixed(2) + 'deg)';
+      });
+      magnets.forEach(function (s){
+        s.x += (s.tx - s.x) * .34;
+        s.y += (s.ty - s.y) * .34;
+        var scale = s.el.matches(':active') ? .94 : (s.hot ? 1.05 : 1);
+        s.el.style.transform = 'translate(' + s.x.toFixed(2) + 'px,' + s.y.toFixed(2) + 'px) scale(' + scale + ')';
+      });
+      stages.forEach(function (s){
+        s.x += (s.tx - s.x) * .12;
+        s.y += (s.ty - s.y) * .12;
+        if (s.glow){
+          s.glow.style.setProperty('--hx', s.x.toFixed(2) + '%');
+          s.glow.style.setProperty('--hy', s.y.toFixed(2) + '%');
+        }
+      });
+      pointerRaf = requestAnimationFrame(tickPointer);
+    }
+    pointerRaf = requestAnimationFrame(tickPointer);
   }
 
   /* ---- scrollspy for product subnav ---- */

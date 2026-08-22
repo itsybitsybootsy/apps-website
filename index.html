@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#ffffff" />
 <title>Skinmetrics: Kenne deine Haut. Jeden Tag. | Q Systems</title>
 <meta name="description" content="Skinmetrics: KI-Hautanalyse, Skin-Score und Spot-Tracking, privacy-first und lokal auf deinem iPhone." />
-<link rel="stylesheet" href="assets/css/styles.css?v=58" />
+<link rel="stylesheet" href="assets/css/styles.css?v=60" />
 </head>
 <body class="theme-derma has-float-nav">
 <div id="prog"></div>
@@ -20,28 +20,29 @@
       <a href="#datenschutz" role="tab">Deine Daten</a>
     </div>
     <a href="legal/datenschutz.html?v=48" class="float-link">Datenschutz</a>
-    <a href="#laden" class="float-buy">Laden</a>
+    <a href="#laden" class="float-buy" data-magnetic>Laden</a>
   </div>
 </nav>
 
 <nav class="mobile-nav mobile-only" id="mobile-nav" aria-label="Navigation">
   <a href="#top" class="mobile-nav-name">Skinmetrics</a>
-  <a href="#laden" class="mobile-nav-link">Laden</a>
+  <a href="#laden" class="mobile-nav-link" data-magnetic>Laden</a>
 </nav>
 
 <main id="top">
 
   <!-- HERO -->
-  <section class="promo derma-hero">
+  <section class="promo derma-hero" data-pointer-stage>
+    <div class="hero-glow" aria-hidden="true"></div>
     <div class="promo-copy">
       <div class="hero-desktop">
         <h1 class="display rev d1" style="color:#3c4a3d">Skinmetrics</h1>
         <p class="title hero-subtitle rev d1" style="color:#4f6654;font-weight:500;margin-top:2px">Kenne deine Haut. Jeden Tag.</p>
-        <div class="section-cta rev d2" style="margin-top:20px"><a href="#laden" class="btn"><svg class="ic ic-fill" aria-hidden="true"><use href="#ic-apple"/></svg> Im App Store laden</a></div>
+        <div class="section-cta rev d2" style="margin-top:20px"><a href="#laden" class="btn" data-magnetic><svg class="ic ic-fill" aria-hidden="true"><use href="#ic-apple"/></svg> Im App Store laden</a></div>
       </div>
     </div>
-    <div class="promo-art rev d2">
-      <figure class="hero-shot">
+    <div class="promo-art rev d2" data-tilt-area>
+      <figure class="hero-shot" data-tilt="5">
         <img src="assets/img/product/hero.png" alt="Skinmetrics auf dem iPhone: Fortschritt, Hautscore und Routine" width="1400" height="1065" loading="eager" decoding="async">
       </figure>
     </div>
@@ -77,7 +78,7 @@
           <!-- Detailanalyse -->
           <div class="xp-panel on">
             <div class="xp-art">
-              <figure class="feature-shot">
+              <figure class="feature-shot" data-tilt="4">
                 <img src="assets/img/product/analysis.png" alt="Skinmetrics: Detailreiche Analyse mit Skin-Score, Kennzahlen und Hautzonen" width="540" height="1114" loading="lazy" decoding="async">
               </figure>
             </div>
@@ -91,7 +92,7 @@
           <!-- Personalisierte Skincare -->
           <div class="xp-panel">
             <div class="xp-art">
-              <figure class="feature-shot">
+              <figure class="feature-shot" data-tilt="4">
                 <img src="assets/img/product/routine.png" alt="Skinmetrics: Personalisierte Skincare-Routine mit Morgens- und Abends-Schritten" width="540" height="1114" loading="lazy" decoding="async">
               </figure>
             </div>
@@ -105,7 +106,7 @@
           <!-- Fortschritt -->
           <div class="xp-panel">
             <div class="xp-art">
-              <figure class="feature-shot">
+              <figure class="feature-shot" data-tilt="4">
                 <img src="assets/img/product/progress.png" alt="Skinmetrics: Fortschritt mit Hautscore und Kennzahlen" width="540" height="1114" loading="lazy" decoding="async">
               </figure>
             </div>
@@ -163,22 +164,22 @@
 
     <div class="container wide rev d2" style="margin-top:48px">
       <div class="priv-grid">
-        <div class="cell">
+        <div class="cell" data-shine>
           <div class="bemoji"><svg class="ic" aria-hidden="true"><use href="#ic-lock"/></svg></div>
           <h3>Lokal verschlüsselt</h3>
           <p>Deine Hautdaten liegen geschützt auf dem iPhone — mit iOS File-Protection und SwiftData.</p>
         </div>
-        <div class="cell">
+        <div class="cell" data-shine>
           <div class="bemoji"><svg class="ic" aria-hidden="true"><use href="#ic-shield"/></svg></div>
           <h3>Transparent &amp; ehrlich</h3>
           <p>Wir sagen klar, was lokal bleibt und was für die KI-Analyse an Google geht — ohne Kleingedrucktes.</p>
         </div>
-        <div class="cell">
+        <div class="cell" data-shine>
           <div class="bemoji"><svg class="ic" aria-hidden="true"><use href="#ic-user"/></svg></div>
           <h3>Kein Konto nötig</h3>
           <p>Keine Registrierung, kein Login, keine Anzeigen. Du startest sofort — ohne Profil bei uns.</p>
         </div>
-        <div class="cell">
+        <div class="cell" data-shine>
           <div class="bemoji"><svg class="ic" aria-hidden="true"><use href="#ic-trash"/></svg></div>
           <h3>Du behältst die Kontrolle</h3>
           <p>Daten löschen, exportieren oder die App deinstallieren — alles jederzeit in deiner Hand.</p>
@@ -276,7 +277,7 @@
     <div class="container">
       <h2 class="headline rev" style="color:#3c4a3d">Starte deine <span class="grad-accent">Skin Journey.</span></h2>
       <p class="sub rev d1 lead-copy" style="margin-top:14px">Kostenlos starten, ohne Konto. Für iPhone &amp; iPad.</p>
-      <div class="section-cta rev d2"><a href="#" class="btn btn-lg"><svg class="ic ic-fill" aria-hidden="true"><use href="#ic-apple"/></svg> Im App Store laden</a></div>
+      <div class="section-cta rev d2"><a href="#" class="btn btn-lg" data-magnetic><svg class="ic ic-fill" aria-hidden="true"><use href="#ic-apple"/></svg> Im App Store laden</a></div>
       <p class="cap rev d2" style="max-width:640px;margin:22px auto 0">Skinmetrics ist kein medizinisches Diagnosewerkzeug und ersetzt keine ärztliche Untersuchung.</p>
     </div>
   </section>
@@ -306,6 +307,6 @@
   </div>
 </footer>
 
-<script src="assets/js/app.js?v=39"></script>
+<script src="assets/js/app.js?v=41"></script>
 </body>
 </html>
