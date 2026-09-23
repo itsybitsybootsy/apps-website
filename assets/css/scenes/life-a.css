@@ -1,0 +1,114 @@
+/* verlauf + score scenes ("life" stage), laid out in iOS points (see app.css).
+   Prefixes: vl- (Verlauf tab) and ss- (Profil / Skin Score detail). */
+
+.ss-scr {
+  --ss-needsCare: #C76F66; --ss-needsCare-ink: #C76F66; --ss-needsCare-fill: rgba(199, 111, 102, .16);
+  --ss-fair: #C76F66; --ss-fair-ink: #C76F66; --ss-fair-fill: rgba(199, 111, 102, .12);
+  --ss-good: #4F6152; --ss-good-ink: #4F6152; --ss-good-fill: rgba(79, 97, 82, .14);
+  --ss-great: #38503C; --ss-great-ink: #38503C; --ss-great-fill: rgba(56, 80, 60, .16);
+}
+
+/* ---------------------------------------------------------------- shared header (title / segmented control) */
+.vl-title, .ss-title { font-size: 34px; font-weight: 800; letter-spacing: -.03em; line-height: 1.05; margin: 0 2px 18px; }
+
+.vl-seg, .ss-seg {
+  position: relative; display: flex; padding: 4px;
+  background: var(--card-2); border-radius: 15px; margin-bottom: 12px;
+}
+.vl-seg-i, .ss-seg-i {
+  position: relative; z-index: 1; flex: 1; text-align: center;
+  padding: 11px 0; border-radius: 11px;
+  font-size: 15px; font-weight: 600; color: var(--ink-2);
+}
+.vl-seg-i.on, .ss-seg-i.on { color: #fff; }
+.vl-seg-hl, .ss-seg-hl {
+  position: absolute; z-index: 0; top: 4px; bottom: 4px; left: 4px;
+  width: calc(50% - 4px); background: var(--sage); border-radius: 11px;
+}
+.vl-seg-hl.on-verlauf { transform: translateX(100%); }
+
+/* ---------------------------------------------------------------- range pill (Verlauf) */
+.vl-range {
+  position: relative; display: flex; padding: 3px;
+  background: var(--card-2); border: 1px solid var(--line); border-radius: 999px;
+  margin-bottom: 16px;
+}
+.vl-range-i {
+  position: relative; z-index: 1; flex: 1; text-align: center;
+  padding: 9px 0; font-size: 13px; font-weight: 600; color: var(--ink-2);
+}
+.vl-range-hl {
+  position: absolute; z-index: 0; top: 3px; bottom: 3px; left: 0;
+  background: var(--sage); border-radius: 999px;
+}
+
+/* ---------------------------------------------------------------- card chrome shared by both scenes */
+.vl-card-title, .ss-card-title { font-size: 19px; font-weight: 700; letter-spacing: -.02em; }
+.vl-card-sub, .ss-card-sub { margin-top: 3px; font-size: 12.5px; line-height: 1.4; color: var(--ink-3); }
+
+/* ---------------------------------------------------------------- Trend chart */
+.vl-chart-wrap { position: relative; margin: 16px 0 4px 22px; }
+.vl-ylabel { position: absolute; left: -22px; transform: translateY(-50%); font-size: 11px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.vl-svg { display: block; overflow: visible; }
+.vl-band { fill: var(--sage); opacity: 0; }
+.vl-line { fill: none; stroke: var(--sage); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.vl-dots circle { fill: var(--ink-3); opacity: 0; transform-box: fill-box; transform-origin: center; transition: none; }
+.vl-xaxis { display: flex; justify-content: space-between; margin: 8px 0 0 22px; font-size: 11px; color: var(--ink-3); }
+
+/* ---------------------------------------------------------------- Kennzahl-Trends lanes */
+.vl-metrics .vl-card-title { margin-top: 2px; }
+.vl-lane { display: flex; align-items: center; gap: 8px; padding: 7px 0; opacity: 0; will-change: opacity, transform; }
+.vl-lane-name { width: 56px; font-size: 12.5px; font-weight: 600; color: inherit; flex: none; }
+.vl-lane-chart { flex: none; overflow: visible; }
+.vl-lane-chart path { fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.vl-lane-val { width: 20px; text-align: right; font-family: var(--rounded); font-weight: 700; font-size: 13px; color: var(--ink-2); flex: none; }
+.vl-lane-c0 { color: var(--ink); } .vl-lane-c0 .vl-lane-chart path { stroke: var(--ink); }
+.vl-lane-c1 { color: #3B5BA5; } .vl-lane-c1 .vl-lane-chart path { stroke: #3B5BA5; }
+.vl-lane-c2 { color: var(--sage); } .vl-lane-c2 .vl-lane-chart path { stroke: var(--sage); }
+.vl-lane-c3 { color: var(--sage-2); } .vl-lane-c3 .vl-lane-chart path { stroke: var(--sage-2); }
+.vl-lane-c4 { color: var(--clay); } .vl-lane-c4 .vl-lane-chart path { stroke: var(--clay); }
+
+/* fades scrolled card content out before it reaches the (transparent) status bar */
+.ss-topmask { position: absolute; z-index: 12; left: 0; right: 0; top: 0; height: 76px; background: linear-gradient(var(--bg) 58%, rgba(248, 247, 245, 0)); pointer-events: none; }
+
+/* ---------------------------------------------------------------- Skin Score dial */
+.ss-dial { display: flex; flex-direction: column; align-items: center; padding-top: 22px; padding-bottom: 20px; }
+.ss-dial-svg { display: block; margin: 0 auto -16px; }
+.ss-ruler-a { stroke: var(--clay); fill: none; stroke-width: 5; stroke-linecap: round; }
+.ss-ruler-b { stroke: var(--sage); fill: none; stroke-width: 5; stroke-linecap: round; }
+.ss-track { stroke: var(--card-2); fill: none; stroke-width: 16; stroke-linecap: round; }
+.ss-value { stroke: var(--sage); fill: none; stroke-width: 16; stroke-linecap: round; }
+.ss-knob { fill: var(--card); stroke: var(--sage); stroke-width: 3; opacity: 0; }
+.ss-tick-label { font-size: 9px; font-weight: 600; fill: var(--ink-3); }
+.ss-center { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 2px; }
+.ss-num { display: flex; align-items: baseline; gap: 3px; font-family: var(--rounded); }
+.ss-num b { font-size: 52px; font-weight: 800; letter-spacing: -.02em; line-height: 1; font-variant-numeric: tabular-nums; }
+.ss-num small { font-size: 13px; font-weight: 600; color: var(--ink-3); }
+.ss-band { padding: 4px 11px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; min-height: 20px; }
+
+/* ---------------------------------------------------------------- Kennzahlen */
+.ss-rows { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.ss-row { padding: 12px 14px; border-radius: 14px; background: var(--bg); }
+.ss-row-top { display: flex; align-items: baseline; gap: 8px; margin-bottom: 9px; }
+.ss-row-name { flex: 1; font-size: 14px; font-weight: 600; color: var(--ink); }
+.ss-row-delta { display: inline-flex; align-items: center; gap: 2px; padding: 3px 6px; border-radius: 999px; background: var(--card-2); color: var(--ink-3); font-size: 10px; font-weight: 700; }
+.ss-row-delta svg { width: 8px; height: 8px; }
+.ss-row-delta.down { background: rgba(199, 111, 102, .13); color: var(--clay); }
+.ss-row-delta.empty { padding: 0; background: none; width: 0; }
+.ss-row-val { font-family: var(--rounded); font-weight: 700; font-size: 16px; }
+.ss-row-val small { margin-left: 2px; font-size: 11px; font-weight: 600; color: var(--ink-3); }
+.ss-ticks { display: flex; gap: 3px; }
+.ss-tick { flex: 1; height: 5px; border-radius: 3px; background: color-mix(in srgb, var(--sage) calc(var(--f, 0) * 100%), var(--card-2)); }
+
+/* ---------------------------------------------------------------- Radar */
+.ss-radar-svg { display: block; overflow: visible; margin-top: 6px; }
+.ss-radar-grid-ring { fill: none; stroke: var(--line); stroke-width: .6; }
+.ss-radar-grid-ring.edge { stroke-width: 1.25; stroke: var(--card-2); }
+.ss-radar-spoke { stroke: var(--line); stroke-width: .6; }
+.ss-radar-ghost { fill: none; stroke: var(--ink-3); stroke-width: 1.25; stroke-dasharray: 4 4; opacity: .5; }
+.ss-radar-fill { fill: var(--sage); opacity: 0; }
+.ss-radar-line { fill: none; stroke: var(--sage); stroke-width: 2; }
+.ss-radar-dots circle { fill: var(--card); stroke: var(--sage); stroke-width: 2; }
+.ss-radar-label { font-size: 11px; font-weight: 600; fill: var(--ink-2); }
+
+.ss-disclaimer { margin-top: 14px; padding: 0 4px; font-size: 11px; line-height: 1.4; color: var(--ink-3); text-align: center; }

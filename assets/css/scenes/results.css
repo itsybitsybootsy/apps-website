@@ -1,0 +1,141 @@
+/* results scene: check-in results sheet, laid out in iOS points (see app.css).
+   Prefix rs- everywhere to stay isolated from other scenes. */
+
+.rs-scr { will-change: transform, opacity; }
+
+/* opaque backdrop behind status bar + nav bar: the shared status bar has a
+   transparent background by design, but our scrollable body passes earlier
+   cards through that row while dragging up, so it needs real cover here
+   (same job a real UINavigationBar's scrollEdgeAppearance does). */
+.rs-topmask { position: absolute; z-index: 13; left: 0; right: 0; top: 0; height: 98px; background: var(--bg); }
+
+/* nav bar: SwiftUI inline navigationTitle, pinned above the scrolling body */
+.rs-navbar {
+  position: absolute; z-index: 14; left: 0; right: 0; top: 54px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg);
+  font-size: 17px; font-weight: 600; letter-spacing: -.01em; color: var(--ink);
+}
+.rs-navbar-sep { position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--line); opacity: 0; }
+
+.rs-scr .scr-body { top: 0; padding: 98px 16px 150px; }
+.rs-body .card + .rs-closeups,
+.rs-body .rs-closeups + .card,
+.rs-body .card + .card { margin-top: 20px; }
+
+.rs-h { display: block; }
+.rs-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+
+/* ---------------------------------------------------------------- hero */
+.rs-hero { padding: 0; overflow: hidden; border-radius: 24px; }
+.rs-hero-photo {
+  position: relative; height: 300px; overflow: hidden;
+  background: radial-gradient(120% 90% at 50% 8%, #3c4f3e 0%, #263323 46%, #131c14 82%, #0d130e 100%);
+}
+.rs-mesh { position: absolute; left: 50%; top: 42%; width: 74%; height: 92%; transform: translate(-50%, -50%); color: var(--sage-l); opacity: .5; overflow: visible; }
+.rs-hero-grad {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg,
+    rgba(0, 0, 0, .30) 0%, rgba(0, 0, 0, .30) 4%,
+    rgba(0, 0, 0, 0) 35%,
+    rgba(0, 0, 0, .12) 52%,
+    rgba(0, 0, 0, .86) 100%);
+}
+.rs-pill {
+  position: absolute; left: 16px; top: 16px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 12px; border-radius: 999px;
+  background: rgba(0, 0, 0, .48); color: #fff;
+  font-size: 12px; font-weight: 600;
+  transform-origin: left center;
+}
+.rs-expand {
+  position: absolute; right: 16px; top: 16px; z-index: 2;
+  width: 38px; height: 38px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(0, 0, 0, .48); color: #fff;
+}
+.rs-score { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 24px; color: #fff; }
+.rs-score-cap { display: block; font-size: 12px; font-weight: 700; letter-spacing: .16em; margin-bottom: 8px; }
+.rs-score-row { display: flex; align-items: flex-end; gap: 6px; }
+.rs-score-num { font-family: var(--rounded); font-weight: 500; }
+.rs-score-num b { font-size: 58px; line-height: 1; letter-spacing: -.02em; }
+.rs-score-num small { margin-left: 4px; font-size: 18px; font-weight: 500; opacity: .75; }
+.rs-score-side { margin-left: auto; text-align: right; display: flex; flex-direction: column; gap: 4px; }
+.rs-score-side b { font-size: 11px; font-weight: 700; letter-spacing: .08em; }
+.rs-score-side span { font-size: 12px; opacity: .8; }
+
+.rs-hero-info { display: flex; align-items: flex-start; gap: 12px; padding: 16px; }
+.rs-hero-ic { color: var(--sage); flex: none; margin-top: 1px; }
+.rs-hero-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.rs-hero-text b { font-size: 14px; font-weight: 600; }
+.rs-hero-text span { font-size: 12px; color: var(--ink-2); }
+/* "Check-in" is a single term in the app's own strings: never break the line
+   at its internal hyphen, only at the word spaces around it. */
+.rs-nowrap { white-space: nowrap; }
+.rs-spark { margin-left: auto; flex: none; overflow: visible; align-self: center; }
+.rs-spark path { fill: none; stroke: var(--sage); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------------------------------------------------------------- profile */
+.rs-profile { border-radius: 24px; }
+.rs-bars { display: flex; justify-content: space-between; gap: 6px; margin-top: 16px; }
+.rs-bar-col { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1; min-width: 0; }
+.rs-bar-num { font-size: 17px; font-weight: 600; }
+.rs-bar-track { position: relative; width: 26px; height: 72px; border-radius: 7px; background: rgba(79, 97, 82, .09); overflow: visible; }
+.rs-bar-fill {
+  position: absolute; left: 0; right: 0; bottom: 0; top: 0; border-radius: 7px;
+  background: linear-gradient(180deg, var(--sage-2), var(--sage));
+  transform-origin: bottom; transform: scaleY(var(--v, 0));
+}
+.rs-bar-tick { position: absolute; left: 0; right: 0; height: 1px; background: rgba(239, 237, 232, .55); }
+.rs-bar-prev {
+  position: absolute; left: -2px; right: -2px; bottom: 0; height: 4px; border-radius: 2px;
+  background: var(--card); border: 1px solid var(--ink-2);
+  opacity: 0; will-change: transform, opacity;
+}
+.rs-bar-label { font-size: 10.5px; font-weight: 500; color: var(--ink-2); text-align: center; }
+
+.rs-legend { display: flex; flex-direction: column; gap: 4px; margin-top: 16px; }
+.rs-legend-prev { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--ink-2); }
+.rs-legend-prev i { width: 12px; height: 5px; border-radius: 1px; border: 1px solid var(--ink-2); }
+.rs-legend-note { font-size: 11px; color: var(--ink-2); }
+
+/* ---------------------------------------------------------------- close ups */
+.rs-closeups { padding: 0 4px; }
+.rs-closeup-row { display: flex; gap: 12px; margin-top: 12px; }
+.rs-closeup { flex: 1; min-width: 0; padding: 0; overflow: hidden; will-change: transform, opacity; }
+.rs-closeup-photo {
+  position: relative; height: 150px; overflow: hidden;
+  background: radial-gradient(130% 100% at 50% 30%, #3c4f3e 0%, #263323 50%, #131c14 90%);
+}
+.rs-mesh-close { color: var(--sage-l); opacity: .55; width: 130%; height: 130%; }
+.rs-closeup-expand {
+  position: absolute; right: 8px; bottom: 8px; z-index: 2;
+  width: 28px; height: 28px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(0, 0, 0, .5); color: #fff;
+}
+.rs-closeup-body { padding: 14px; }
+.rs-closeup-body .rs-row { align-items: baseline; }
+.rs-closeup-body b { font-size: 14px; font-weight: 600; }
+.rs-active { font-size: 11px; font-weight: 600; color: var(--ink-2); white-space: nowrap; }
+.rs-closeup-body p { margin: 8px 0 0; font-size: 12.5px; line-height: 1.4; color: var(--ink-2); }
+
+/* ---------------------------------------------------------------- zones */
+.rs-zones { border-radius: 24px; }
+.rs-zone-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 16px; margin-top: 16px; }
+.rs-zone-tile { display: flex; flex-direction: column; gap: 8px; }
+.rs-zone-tile .rs-row span { font-size: 13.5px; }
+.rs-zone-tile .rs-row b { font-size: 16px; }
+.rs-zone-prev { font-size: 11px; color: var(--ink-2); }
+
+/* ---------------------------------------------------------------- cta */
+.rs-cta {
+  position: absolute; z-index: 12; left: 0; right: 0; bottom: 0;
+  padding: 10px 16px 18px;
+  background: rgba(248, 247, 245, .86);
+  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+}
+.rs-btn { width: 100%; gap: 8px; will-change: transform, filter; }
+.rs-btn svg { flex: none; will-change: transform; }
+.rs-btn span { line-height: 1; }

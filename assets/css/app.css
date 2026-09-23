@@ -1,0 +1,165 @@
+/* The live iPhone and the recreated Skinmetrics UI.
+   Everything inside .ui is laid out in iOS points on a 393 × 852 canvas and
+   scaled as a whole, so sizes here match the SwiftUI code one to one.
+   App design system ("Instrument"): near monochrome, flat, sage accent. */
+
+/* ---------------------------------------------------------------- frame */
+.iphone {
+  position: relative;
+  /* content-box so the screen itself is exactly 393:852, like the UI canvas */
+  box-sizing: content-box;
+  aspect-ratio: 393 / 852;
+  height: calc(100% - 22px);
+  padding: 11px;
+  border-radius: 62px;
+  background: linear-gradient(150deg, #43464a 0%, #16171a 18%, #0b0b0c 55%, #2a2c2f 100%);
+  box-shadow:
+    0 0 0 1.5px #b5b8bb,
+    0 0 0 3px #6c7075,
+    inset 0 0 0 1.5px rgba(255, 255, 255, .14),
+    0 60px 100px -40px rgba(14, 24, 16, .45),
+    0 28px 48px -28px rgba(0, 0, 0, .4);
+  isolation: isolate;
+}
+/* side buttons */
+.iphone::before, .iphone::after {
+  content: ""; position: absolute; width: 3px; border-radius: 2px;
+  background: linear-gradient(90deg, #7c8084, #c4c7ca);
+}
+.iphone::before { right: -4px; top: 24%; height: 11%; }
+.iphone::after { left: -4px; top: 19%; height: 7%; box-shadow: 0 60px 0 #9a9ea2, 0 110px 0 #9a9ea2; }
+.iphone-screen {
+  position: relative; height: 100%;
+  border-radius: 52px;
+  overflow: hidden;
+  background: #F8F7F5;
+  transform: translateZ(0);
+}
+/* Dynamic Island sits above the UI */
+.iphone-screen::after {
+  content: ""; position: absolute; z-index: 20;
+  top: 2.2%; left: 50%; transform: translateX(-50%);
+  width: 31%; aspect-ratio: 3.3; border-radius: 999px; background: #000;
+}
+
+/* ---------------------------------------------------------------- canvas */
+.ui {
+  --bg: #F8F7F5;
+  --card: #EFEDE8;
+  --card-2: #E5E3DD;
+  --line: #E2E1DC;
+  --ink: #1B1C1A;
+  --ink-2: #6B6E6A;
+  --ink-3: #9C9E99;
+  --sage: #4F6152;
+  --sage-l: #A9C0AC;
+  --sage-2: #8AA28D;
+  --sage-3: #A6BCA9;
+  --better: #246B3D;
+  --worse: #9E2633;
+  --clay: #C76F66;
+  --rounded: ui-rounded, "SF Pro Rounded", -apple-system, system-ui, sans-serif;
+  --serif: ui-serif, "New York", "Iowan Old Style", Georgia, serif;
+
+  position: absolute; left: 0; top: 0;
+  width: 393px; height: 852px;
+  transform: scale(var(--s, 1)); transform-origin: 0 0;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+  font-size: 15px; line-height: 1.3; letter-spacing: -.01em;
+  -webkit-font-smoothing: antialiased;
+  user-select: none; -webkit-user-select: none;
+  pointer-events: none;
+  contain: strict;
+}
+.ui * { box-sizing: border-box; }
+.ui svg { display: block; flex: none; }
+
+/* a full screen inside the phone; scenes stack these and fade between them */
+.scr { position: absolute; inset: 0; background: var(--bg); overflow: hidden; will-change: transform, opacity; }
+.scr-body { position: absolute; left: 0; right: 0; top: 0; padding: 62px 16px 120px; will-change: transform; }
+
+/* ---------------------------------------------------------------- status bar */
+.sb {
+  position: absolute; z-index: 15; left: 0; right: 0; top: 0; height: 54px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 6px 34px 0 50px;
+  font-weight: 600; font-size: 17px; letter-spacing: -.02em;
+}
+.sb-dark { color: #000; }
+.sb-light { color: #fff; }
+.sb-icons { display: flex; align-items: center; gap: 6px; }
+.sb-icons svg { fill: currentColor; }
+
+/* ---------------------------------------------------------------- type */
+.t-title { font-size: 28px; font-weight: 700; letter-spacing: -.025em; line-height: 1.15; }
+.t-serif { font-family: var(--serif); font-weight: 600; letter-spacing: -.01em; }
+.t-sub { font-size: 14px; color: var(--ink-2); }
+.t-cap { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.t-num { font-family: var(--rounded); font-weight: 700; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.t-small { font-size: 12px; color: var(--ink-3); }
+
+/* ---------------------------------------------------------------- building blocks */
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 16px; }
+.card + .card, .card + .row2, .row2 + .card { margin-top: 12px; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 9px; border-radius: 999px;
+  font-size: 12px; font-weight: 600;
+  background: var(--card-2); color: var(--ink-2);
+}
+.pill.up { background: rgba(36, 107, 61, .12); color: var(--better); }
+.pill.down { background: rgba(158, 38, 51, .1); color: var(--worse); }
+.btn-app {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  height: 52px; border-radius: 16px;
+  background: var(--sage); color: #fff; font-size: 17px; font-weight: 600;
+}
+.bar { height: 6px; border-radius: 6px; background: var(--card-2); overflow: hidden; }
+.bar > i { display: block; height: 100%; border-radius: inherit; background: var(--sage); transform-origin: left; transform: scaleX(var(--v, 0)); }
+.check {
+  width: 26px; height: 26px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--sage); color: #fff;
+}
+.check svg { width: 14px; height: 14px; }
+.check.off { background: transparent; border: 1.5px solid var(--line); color: transparent; }
+
+/* ---------------------------------------------------------------- tab bar */
+.tabbar {
+  position: absolute; z-index: 10; left: 0; right: 0; bottom: 0; height: 88px;
+  display: grid; grid-template-columns: repeat(5, 1fr); align-items: start;
+  padding: 10px 8px 0;
+  background: rgba(246, 244, 242, .94);
+  -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+  border-top: 1px solid var(--line);
+}
+.tab { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--ink-3); }
+.tab b { font-size: 10px; font-weight: 500; }
+.tab.on { color: var(--ink); }
+.tab-scan {
+  justify-self: center; margin-top: -22px;
+  width: 58px; height: 58px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--sage); color: #fff;
+  box-shadow: 0 8px 20px -6px rgba(79, 97, 82, .6), 0 0 0 5px var(--bg);
+}
+
+/* ---------------------------------------------------------------- finger (touch indicator) */
+.finger {
+  position: absolute; z-index: 30; left: -24px; top: -24px;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, .55) 0%, rgba(210, 212, 208, .5) 60%, rgba(170, 172, 168, .45) 100%);
+  border: 1.5px solid rgba(255, 255, 255, .85);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .22), inset 0 0 0 1px rgba(0, 0, 0, .06);
+  opacity: 0; will-change: transform, opacity;
+}
+.finger::after {
+  content: ""; position: absolute; inset: -12px; border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, .7);
+  opacity: calc(var(--press, 0) * .9);
+  transform: scale(calc(.7 + var(--press, 0) * .5));
+}
