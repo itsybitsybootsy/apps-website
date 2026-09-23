@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
 <meta name="color-scheme" content="light">
-<title>Skinmetrics | Sieh, was der Spiegel nicht zeigt</title>
+<title>Skinmetrics | Deine Haut, jeden Tag gemessen</title>
 <meta name="description" content="Ein Scan am Tag. Skinmetrics bewertet deine Haut von 0 bis 100 und zeigt dir über Wochen, wie sie sich verändert. Für iPhone im App Store.">
 <link rel="canonical" href="https://skinmetrics.app/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="de_AT">
 <meta property="og:site_name" content="Skinmetrics">
-<meta property="og:title" content="Skinmetrics | Sieh, was der Spiegel nicht zeigt">
+<meta property="og:title" content="Skinmetrics | Deine Haut, jeden Tag gemessen">
 <meta property="og:description" content="Ein Scan am Tag, ein Hautscore von 0 bis 100 und ein Verlauf, der zeigt, wie sich deine Haut über Wochen entwickelt.">
 <meta property="og:url" content="https://skinmetrics.app/">
 <meta property="og:image" content="https://skinmetrics.app/assets/img/og.jpg">
@@ -24,6 +24,11 @@
 <link rel="stylesheet" href="assets/css/scenes/results.css?v=1">
 <link rel="stylesheet" href="assets/css/scenes/life-a.css?v=1">
 <link rel="stylesheet" href="assets/css/scenes/life.css?v=1">
+<script>
+  /* animated start states right away; fall back to the plain layout if the module never runs */
+  document.documentElement.classList.add('anim');
+  setTimeout(function () { if (!window.smReady) document.documentElement.classList.remove('anim'); }, 4000);
+</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"MobileApplication","name":"Skinmetrics","operatingSystem":"iOS 26.2","applicationCategory":"HealthApplication","inLanguage":["de","en","es","fr","it","nl","pt"],"publisher":{"@type":"Organization","name":"Q Systems","email":"hello@q-systems.app"}}
 </script>
@@ -78,10 +83,10 @@
           <div class="cap"><h2 class="h-stage">Erst von vorne.</h2><p>Die Kamera führt dich ins Oval und löst selbst aus, sobald Haltung und Schärfe passen.</p></div>
           <div class="cap"><h2 class="h-stage">Dann nach links.</h2><p>Ein Pfeil am Rand zeigt dir, wohin. Der Ring leuchtet auf, sobald der Winkel stimmt.</p></div>
           <div class="cap"><h2 class="h-stage">Und nach rechts.</h2><p>Drei Fotos, etwa fünf Sekunden. Von der Seite sieht die Analyse auch deine Wangen gut.</p></div>
-          <div class="cap"><h2 class="h-stage">Zone für Zone.</h2><p>Eine KI wertet Stirn, Wangen, Nase und Kinn einzeln aus und zählt die Unreinheiten in jedem Bereich.</p></div>
+          <div class="cap"><h2 class="h-stage">Zone für Zone.</h2><p>Eine KI bewertet Stirn, Wangen, Nase und Kinn einzeln, jeweils mit einem Wert von 0 bis 100.</p></div>
           <div class="cap"><h2 class="h-stage">Dein Hautscore.</h2><p>Ein Wert von 0 bis 100. Dahinter stehen fünf Einzelwerte von 1 bis 10, jeweils im Vergleich zum letzten Scan.</p></div>
           <div class="cap"><h2 class="h-stage">Ein schlechter Tag ist noch kein Trend.</h2><p>Bei jedem Scan zählt die App die entzündeten Unreinheiten. Der schattierte Bereich zeigt deine typische Spanne.</p></div>
-          <div class="cap"><h2 class="h-stage">Eine Zahl, die du nachvollziehen kannst.</h2><p>Klarheit, Textur, Feuchte, Rötung und Ebenheit, jeder Wert mit eigener Kurve. Bei jedem gilt: höher ist besser.</p></div>
+          <div class="cap"><h2 class="h-stage">Fünf Werte, jeder mit eigener Kurve.</h2><p>Klarheit, Textur, Feuchte, Rötung und Ebenheit, jeweils von 1 bis 10. Bei jedem gilt: höher ist besser.</p></div>
           <div class="cap"><h2 class="h-stage">Abhaken, was du benutzt hast.</h2><p>Morgens und abends deine Produkte. Die KI prüft die Routine und sagt dir, wenn sich Wirkstoffe nicht vertragen.</p></div>
           <div class="cap"><h2 class="h-stage">Dranbleiben ohne Druck.</h2><p>Jeder Tag mit Scan zählt für deine Serie. Verpasst du einen, springt ein Gnadentag ein.</p></div>
         </div>
@@ -158,7 +163,6 @@
 <!-- =========================================================== CTA -->
 <section class="cta-sec" id="start">
   <div class="cta-panel">
-    <div class="cta-face" aria-hidden="true"><img src="assets/face/front.webp" alt="" loading="lazy" decoding="async"></div>
     <div class="cta-copy">
       <h2 class="display-2">Morgen früh, <span class="dim">erster Scan.</span></h2>
       <div class="cta-row">
@@ -202,6 +206,6 @@
   </div>
 </footer>
 
-<script type="module" src="assets/js/main.js?v=1"></script>
+<script type="module" src="assets/js/main.js?v=2" onerror="document.documentElement.classList.remove('anim')"></script>
 </body>
 </html>

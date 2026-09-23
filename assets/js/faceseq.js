@@ -66,7 +66,8 @@ export function createFaceSeq(canvas, opts = {}) {
     canvas.height = Math.round(size.h * size.dpr);
   };
   measure();
-  if (set === 'auto') set = size.h * size.dpr > 700 ? 1000 : 640;
+  // the face is drawn at well under canvas height, so 640 frames hold up to ~1000 css px
+  if (set === 'auto') set = size.h > 1000 ? 1000 : 640;
 
   const ro = new ResizeObserver(() => { measure(); draw(); });
   ro.observe(canvas);

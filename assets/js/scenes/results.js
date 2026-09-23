@@ -7,7 +7,7 @@
    No screenshots: everything is live HTML; the only image is the scan's
    front frame, cropped like the app crops the check-in photo. */
 
-import { seg, ease, css, text, attr, once, lerp } from '../engine.js';
+import { seg, ease, css, text, attr, once, resetOnce, lerp } from '../engine.js';
 import { fingerPath } from '../phone.js';
 import { statusBar, h } from '../ui-kit.js';
 import { score, metrics, zones, closeUps, sparkline } from './data.js';
@@ -179,6 +179,7 @@ export default function results({ phone }) {
       const enter = ease.out(seg(t, 0, .08));
       css(el, 'transform', `translateY(${((1 - enter) * 46).toFixed(1)}px)`);
       if (hidden) {
+        resetOnce('rs-');
         return;
       }
 

@@ -95,6 +95,12 @@ button { font: inherit; color: inherit; }
 .nav-toggle svg { width: 20px; height: 20px; }
 .nav-cta { justify-self: end; height: 52px; padding: 0 28px; }
 .nav.on-dark .nav-cta { background: #fff; color: var(--ink); }
+/* over the black stage the nav turns into dark glass so the headline leads */
+.nav-logo, .nav-pill, .nav-links a { transition: background-color .3s, border-color .3s, color .3s; }
+.nav.on-dark .nav-pill, .nav.on-dark .nav-logo { background: rgba(255, 255, 255, .08); border-color: rgba(255, 255, 255, .14); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); }
+.nav.on-dark .nav-links a, .nav.on-dark .nav-toggle { color: rgba(255, 255, 255, .72); }
+.nav.on-dark .nav-links a:hover, .nav.on-dark .nav-links a[aria-current] { color: #fff; background: rgba(255, 255, 255, .12); }
+@media (max-width: 860px) { .nav.on-dark .nav-links a { color: var(--ink); } }
 @media (max-width: 860px) {
   :root { --nav-h: 72px; }
   .nav-logo, .nav-pill, .nav-cta { height: 46px; }
@@ -134,9 +140,9 @@ button { font: inherit; color: inherit; }
   position: absolute; z-index: 4; left: var(--gutter); top: 50%;
   width: min(30vw, 460px); transform: translateY(-50%);
   display: grid;
-  transition: left .9s var(--ease);
+  transition: transform .9s var(--ease);
 }
-.caps.right { left: calc(100vw - var(--gutter) - min(30vw, 460px)); }
+.caps.right { transform: translate(calc(100vw - 2 * var(--gutter) - min(30vw, 460px)), -50%); }
 .cap p { margin-top: 20px; color: rgba(255, 255, 255, .62); }
 .anim .cap { grid-area: 1 / 1; transition: opacity .5s var(--ease), transform .7s var(--ease); }
 .anim .cap:not(.on) { opacity: 0; transform: translateY(14px); pointer-events: none; }
@@ -154,7 +160,7 @@ button { font: inherit; color: inherit; }
 }
 .stage-phone .iphone { height: calc(82svh - 22px - var(--nav-h) * .6); }
 .stage-callouts { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
-.stage-note { position: absolute; z-index: 5; right: var(--gutter); bottom: 22px; font-size: 13px; color: rgba(255, 255, 255, .34); opacity: 0; transition: opacity .4s; }
+.stage-note { position: absolute; z-index: 5; left: var(--gutter); bottom: 22px; font-size: 13px; color: rgba(255, 255, 255, .34); opacity: 0; transition: opacity .4s; }
 .stage-note.on { opacity: 1; }
 
 @media (max-width: 860px) {
@@ -182,6 +188,7 @@ html:not(.anim) .caps { margin-top: 80px; gap: 48px; }
 .sec-head { max-width: 780px; }
 .sec-head .lead { margin-top: 24px; }
 
+.privacy-sec { position: relative; z-index: 3; margin-top: -40px; border-radius: 40px 40px 0 0; background: #fff; }
 .statement { font-size: clamp(40px, 5.4vw, 88px); letter-spacing: -.045em; line-height: 1.02; max-width: 14ch; }
 .privacy-copy { margin-top: 40px; max-width: 34em; margin-left: auto; }
 .privacy-copy p { color: var(--ink-2); }
@@ -222,16 +229,15 @@ html:not(.anim) .caps { margin-top: 80px; gap: 48px; }
 
 /* ---------------------------------------------------------------- closing */
 .cta-sec { background: #000; color: #fff; }
-.cta-panel { position: relative; min-height: 100svh; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; overflow: hidden; }
-.cta-face { position: relative; height: 100%; min-height: 60svh; }
-.cta-face img { position: absolute; inset: 8% 0 0; width: 100%; height: 92%; object-fit: contain; object-position: center bottom; -webkit-mask-image: linear-gradient(#000 70%, transparent); mask-image: linear-gradient(#000 70%, transparent); }
-.cta-copy { padding: 0 var(--gutter) 0 0; }
+.cta-panel { position: relative; min-height: 80svh; display: grid; place-items: center; text-align: center; padding: 120px var(--gutter); overflow: hidden; }
+.cta-copy .cta-row { justify-content: center; }
+.cta-copy .small { margin-inline: auto; }
+.cta-copy { max-width: 900px; }
 .cta-copy .dim { color: rgba(255, 255, 255, .45); }
 .cta-copy .avail { color: rgba(255, 255, 255, .5); }
 .cta-copy .small { margin-top: 44px; color: rgba(255, 255, 255, .4); max-width: 30em; }
 @media (max-width: 860px) {
   .cta-panel { grid-template-columns: 1fr; padding: 120px 20px 60px; }
-  .cta-face { min-height: 44svh; order: 2; }
   .cta-copy { padding: 0; }
 }
 

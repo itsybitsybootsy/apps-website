@@ -16,8 +16,9 @@
 import { createStage, captions, seg, css, ease, lerp, reduceMotion, toggle } from './engine.js';
 import { mountPhone } from './phone.js';
 
-/* Animated start states only apply once this module actually runs, so the
-   page still reads fine without JS or if a module fails to load. */
+/* index.html sets .anim early and drops it again unless this module reports in,
+   so the page still reads fine without JS or if a module fails to load. */
+window.smReady = true;
 document.documentElement.classList.add('anim');
 
 const $ = (s, c = document) => c.querySelector(s);
@@ -40,14 +41,14 @@ const CAPTIONS = [.05, .15, .25, .34, .475, .58, .685, .79, .895];
 /* Phone placement per beat: x in vw from centre, y in svh, scale, opacity.
    Between keys it eases; at each key the phone rests. */
 const PLACE_WIDE = [
-  { p: .478, x: 18, y: 0, s: 1, o: 0 },     // the camera lands in the screen first,
-  { p: .488, x: 18, y: 0, s: 1, o: 1 },     // then the frame appears around it
-  { p: .69, x: 18, y: 0, s: 1, o: 1 },
-  { p: .71, x: 16, y: 24, s: 1.45, o: 1 },   // push in on the score dial
-  { p: .77, x: 16, y: 24, s: 1.45, o: 1 },
-  { p: .8, x: -18, y: 0, s: 1, o: 1 },       // phone moves left for the routine
+  { p: .478, x: 10, y: 0, s: 1, o: 0 },     // the camera lands in the screen first,
+  { p: .488, x: 10, y: 0, s: 1, o: 1 },     // then the frame appears around it (same 60vw axis as the oval)
+  { p: .69, x: 10, y: 0, s: 1, o: 1 },
+  { p: .71, x: 10, y: 24, s: 1.45, o: 1 },   // push in on the score dial
+  { p: .77, x: 10, y: 24, s: 1.45, o: 1 },
+  { p: .8, x: -18, y: 0, s: 1, o: 1 },       // the one sideways move: phone left for the routine
   { p: .885, x: -18, y: 0, s: 1, o: 1 },
-  { p: .91, x: 0, y: 0, s: 1, o: 1 },
+  { p: .91, x: 10, y: 0, s: 1, o: 1 },
 ];
 const PLACE_NARROW = [
   { p: .478, x: 0, y: 0, s: 1, o: 0 },

@@ -71,6 +71,11 @@ export function once(key, on, ms = 600) {
   return k;
 }
 
+/* Re-arms every one-shot whose key starts with prefix. */
+export function resetOnce(prefix) {
+  for (const k of shots.keys()) if (k.startsWith(prefix)) shots.delete(k);
+}
+
 /* Formats a number the German way: 1,5 instead of 1.5 */
 export const de = (n, d = 0) => n.toFixed(d).replace('.', ',');
 

@@ -43,12 +43,12 @@ async function makeFace(canvas) {
   const base = new URL('../../face/seq-640/', import.meta.url);
   return {
     set: v => {
-      // calibrated from landmarks.json: forehead to chin spans .59 of a frame and
-      // the face centre sits .055 below the frame centre, so lift it to the oval centre
-      // the frame fits the tighter side of the canvas (portrait frames are width bound on phones)
+      // framed like the app: eyes at about 42% of the oval, chin just inside the rim
+      // (calibrated from landmarks.json). The frame fits the tighter side of the
+      // canvas; portrait frames are width bound on phones.
       const H = canvas.clientHeight, base = Math.min(H, canvas.clientWidth / .82);
-      const scale = (v.ovalH / base) * 1.32 * (v.scale || 1);
-      f.set({ yaw: v.yaw || 0, x: v.nx || 0, y: (v.ny || 0) - .11 * scale * base / H, scale, dim: v.dim || 0 }, { draw: false });
+      const scale = (v.ovalH / base) * 1.21 * (v.scale || 1);
+      f.set({ yaw: v.yaw || 0, x: v.nx || 0, y: (v.ny || 0) - .01 * scale * base / H, scale, dim: v.dim || 0 }, { draw: false });
     },
     draw: () => f.draw(),
     project: n => f.project(n),
@@ -59,7 +59,7 @@ async function makeFace(canvas) {
 }
 
 export default function camera({ phone, cam }) {
-  let mask, root, view, canvas, ring, ringGlow, pill, hint, arrowL, arrowR, flash, badge, done, status, statusText, thumbs, dots, zoneLayer, labels, inPhone;
+  let lines, head, thumbsRow, asleep = false, mask, root, view, canvas, ring, ringGlow, pill, hint, arrowL, arrowR, flash, badge, done, status, statusText, thumbs, dots, zoneLayer, labels, inPhone;
   let face = null;
   let W = 0, H = 0;
 
@@ -87,6 +87,7 @@ export default function camera({ phone, cam }) {
           <div class="cm-pill"><b>Zentriere dein Gesicht im Oval</b><small>Halt dein Handy auf Augenhöhe bei gleichmäßigem Licht.</small></div>
           <span class="cm-done"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>
           <div class="cm-status"><i class="cm-spin"></i><span></span></div>
+          <svg class="cm-lines">${ZONE_LABELS.map(() => '<g><line/><circle r="3"/></g>').join('')}</svg>
           <div class="cm-labels">${ZONE_LABELS.map(z => `<span class="cm-label" data-z="${z.key}"><b>${z.name}</b><em>0</em></span>`).join('')}</div>
           <div class="cm-thumbs">${[0, 1, 2].map(i => `<span class="cm-thumb" data-i="${i}"><i></i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span>`).join('')}</div>
         </div>
@@ -96,6 +97,8 @@ export default function camera({ phone, cam }) {
       canvas = root.querySelector('.cm-face');
       ring = root.querySelector('.cm-ring');
       mask = root.querySelector('.cm-mask');
+      head = root.querySelector('.cm-head');
+      thumbsRow = root.querySelector('.cm-thumbs');
       ringGlow = root.querySelector('.cm-ring-glow');
       pill = root.querySelector('.cm-pill');
       hint = pill.querySelector('small');
@@ -110,6 +113,7 @@ export default function camera({ phone, cam }) {
       dots = root.querySelector('.cm-dots');
       zoneLayer = root.querySelector('.cm-zones');
       labels = [...root.querySelectorAll('.cm-label')];
+      lines = [...root.querySelectorAll('.cm-lines g')];
 
       // the same moment, inside the phone: shown while the camera lands in it
       inPhone = phone.addScreen(h(`<div class="scr cm-inphone"><div class="cm-inphone-oval"></div><span class="cm-done on"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span><p>Analyse fertig!</p></div>`));
@@ -130,24 +134,29 @@ export default function camera({ phone, cam }) {
     },
 
     update(t, ctx) {
-      const p = ctx.p;
+      // once the camera has landed in the phone it rests until scrolled back to
+      if (t >= 1 && asleep) return;
+      asleep = t >= 1;
+      // all layout reads first, before this frame writes anything
+      const target = phone.screen.getBoundingClientRect();
+      const box = cam.getBoundingClientRect();
       const o0 = oval();
-      const heroX = narrow() ? 0 : W * .17;          // hero: oval right of the headline
+      const axis = narrow() ? 0 : W * .1;            // desktop: oval and phone share one axis at 60vw
+      const heroX = axis;
       const heroY = narrow() ? H * .24 : 0;          // mobile hero: oval below the headline
       const g = ease.inOut(seg(t, ...B.glide));
       // on phones the hero oval sits smaller under the headline, then grows into place
       const os = narrow() ? lerp(.72, 1, g) : 1;
       const o = { w: o0.w * os, h: o0.h * os };
-      const cx = W / 2 + lerp(heroX, 0, g);
+      const cx = W / 2 + lerp(heroX, axis, g);
       const cy = H / 2 + lerp(heroY, 0, g) + (narrow() ? H * .04 : 0);
 
       /* ---- ring, positioned in stage px */
       css(ring, 'width', `${o.w.toFixed(1)}px`);
       css(ring, 'height', `${o.h.toFixed(1)}px`);
       css(ring, 'transform', `translate(${(cx - o.w / 2).toFixed(1)}px, ${(cy - o.h / 2).toFixed(1)}px)`);
-      css(mask, 'width', `${o.w.toFixed(1)}px`);
-      css(mask, 'height', `${o.h.toFixed(1)}px`);
-      css(mask, 'transform', `translate(${(cx - o.w / 2).toFixed(1)}px, ${(cy - o.h / 2).toFixed(1)}px)`);
+      // the mask is a fixed size hole, placed and scaled with a transform only
+      css(mask, 'transform', `translate(${cx.toFixed(1)}px, ${cy.toFixed(1)}px) scale(${(o.w / 300).toFixed(4)}, ${(o.h / 405).toFixed(4)})`);
       const chrome = seg(t, .02, .1) * (1 - seg(t, .64, .7));
       const lock1 = seg(t, .16, .185), lock2 = seg(t, .375, .395), lock3 = seg(t, .585, .605);
       const bright = Math.max(ease.out(seg(t, ...B.align)) * (1 - seg(t, .2, .24)), lock2, lock3, lock1);
@@ -179,7 +188,6 @@ export default function camera({ phone, cam }) {
       }
 
       /* ---- chrome: title with badge above the oval, pill below, arrows on the rim */
-      const head = root.querySelector('.cm-head');
       css(head, 'transform', `translate(${cx.toFixed(1)}px, ${(cy - o.h / 2 - 54).toFixed(1)}px) translateX(-50%)`);
       css(head, 'opacity', chrome.toFixed(3));
       text(badge, t < B.shot1 + .01 ? '1/3' : t < B.shot2 + .01 ? '2/3' : '3/3');
@@ -197,7 +205,9 @@ export default function camera({ phone, cam }) {
       let fl = 0;
       shots.forEach((at, i) => {
         const k = once(`cm-shot-${i}`, t >= at, 700);
-        fl = Math.max(fl, k > 0 && k < 1 ? Math.pow(1 - k, 3) : 0);
+        // a short shutter blink in the first ~120 ms, the thumbnail keeps flying
+        const blink = seg(k, 0, .17);
+        fl = Math.max(fl, k > 0 && blink < 1 ? Math.pow(1 - blink, 2) : 0);
         const th = thumbs[i];
         const fly = ease.outQuint(k);
         // from the oval centre to its slot in the row under the pill
@@ -205,8 +215,7 @@ export default function camera({ phone, cam }) {
         css(th, 'opacity', ((k > 0 ? 1 : 0) * (1 - seg(t, .66, .7))).toFixed(3));
         toggle(th, 'ok', k >= 1);
       });
-      css(flash, 'opacity', (fl * .8).toFixed(3));
-      const thumbsRow = root.querySelector('.cm-thumbs');
+      css(flash, 'opacity', (fl * .5).toFixed(3));
       css(thumbsRow, 'transform', `translate(${cx.toFixed(1)}px, ${(cy + o.h / 2 + 96).toFixed(1)}px) translateX(-50%)`);
       // thumbnails start at the oval centre, which is this far above their row
       css(thumbsRow, '--dy', `${(-(o.h / 2 + 96 + 40)).toFixed(1)}px`);
@@ -221,23 +230,32 @@ export default function camera({ phone, cam }) {
         for (let i = 0; i < dotEls.length; i++) {
           const pt = face.project(i);
           const show = seg(dk, i / dotEls.length * .7, i / dotEls.length * .7 + .3) * (1 - zk);
-          if (!pt) continue;
+          css(dotEls[i], 'opacity', show > 0 && pt ? (show * clamp(pt.facing * 3)).toFixed(3) : '0');
+          if (!pt || show <= 0) continue;
           css(dotEls[i], 'transform', `translate(${pt.x.toFixed(1)}px, ${pt.y.toFixed(1)}px)`);
-          css(dotEls[i], 'opacity', (show * clamp(pt.facing * 3)).toFixed(3));
         }
       }
       if (face && zk > 0) {
         const polys = face.zones();
         if (polys) {
-          if (!zoneLayer.childElementCount) zoneLayer.innerHTML = Object.keys(polys).map(k => `<polygon data-z="${k}"/>`).join('');
-          [...zoneLayer.children].forEach((pg, i) => {
+          if (!zoneLayer.querySelector('polygon')) {
+            zoneLayer.innerHTML = '<defs><filter id="cm-soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="9"/></filter></defs>'
+              + Object.keys(polys).map(k => `<polygon data-z="${k}" filter="url(#cm-soft)"/>`).join('');
+          }
+          // each zone lights up together with its chip
+          const order = { stirn: 0, wangeL: 1, wangeR: 1, nase: 2, kinn: 3 };
+          zoneLayer.querySelectorAll('polygon').forEach(pg => {
             const pts = polys[pg.dataset.z];
+            const at = .15 + order[pg.dataset.z] * .18;
             if (pts) attr(pg, 'points', pts.map(q => `${q.x.toFixed(1)},${q.y.toFixed(1)}`).join(' '));
-            css(pg, 'opacity', (seg(zk, i * .12, i * .12 + .4) * (1 - seg(t, .86, .9)) * .9).toFixed(3));
+            css(pg, 'opacity', (seg(zk, at - .1, at + .08) * (1 - seg(t, .86, .9))).toFixed(3));
           });
         }
       }
       css(zoneLayer, 'opacity', zk > 0 ? '1' : '0');
+      // chips on the right are stacked at their zones' heights, pushed apart if they collide
+      const chipY = ZONE_LABELS.map(z => { const q = face && face.project(z.key); return q ? q.y : 0; });
+      for (let i = 1; i < chipY.length; i++) chipY[i] = Math.max(chipY[i], chipY[i - 1] + 46);
       labels.forEach((lab, i) => {
         const z = ZONE_LABELS[i];
         const pt = face && face.project(z.key);
@@ -250,13 +268,20 @@ export default function camera({ phone, cam }) {
         } else if (pt) {
           toggle(lab, 'flat', false);
           // labels sit outside the face, on the side of their zone
-          const side = z.key === 'nase' ? 1 : pt.x < cx ? -1 : 1;
-          const lx = z.key === 'stirn' || z.key === 'kinn' ? cx + o.w * .62 : cx + side * o.w * .72;
-          css(lab, 'transform', `translate(${lx.toFixed(1)}px, ${pt.y.toFixed(1)}px) translate(${side < 0 ? '-100%' : '0'}, -50%)`);
-          css(lab, '--ax', `${(pt.x - lx).toFixed(1)}px`);
+          // all chips sit right of the oval, each at its zone's height
+          const side = 1;
+          const lx = cx + o.w * .64;
+          css(lab, 'transform', `translate(${lx.toFixed(1)}px, ${chipY[i].toFixed(1)}px) translate(${side < 0 ? '-100%' : '0'}, -50%)`);
+          // hairline from the chip to its point on the face
+          const [ln, dot] = lines[i].children;
+          attr(ln, 'x1', lx.toFixed(1)); attr(ln, 'y1', chipY[i].toFixed(1));
+          attr(ln, 'x2', pt.x.toFixed(1)); attr(ln, 'y2', pt.y.toFixed(1));
+          attr(dot, 'cx', pt.x.toFixed(1)); attr(dot, 'cy', pt.y.toFixed(1));
           toggle(lab, 'left', side < 0);
         }
-        css(lab, 'opacity', (ease.out(k) * (1 - seg(t, .86, .9))).toFixed(3));
+        const labK = (ease.out(k) * (1 - seg(t, .86, .9))).toFixed(3);
+        css(lab, 'opacity', labK);
+        css(lines[i], 'opacity', narrow() ? '0' : labK);
         text(lab.querySelector('em'), Math.round(z.value * ease.outQuint(k)));
       });
 
@@ -268,8 +293,6 @@ export default function camera({ phone, cam }) {
 
       /* ---- the camera lands in the phone screen */
       const s = ease.inOut(seg(t, ...B.shrink));
-      const target = phone.screen.getBoundingClientRect();
-      const box = cam.getBoundingClientRect();
       const rx = target.left - box.left, ry = target.top - box.top;
       const L = lerp(0, rx, s), Tp = lerp(0, ry, s);
       const R = lerp(W, rx + target.width, s), Bt = lerp(H, ry + target.height, s);
