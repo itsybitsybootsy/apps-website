@@ -1,9 +1,9 @@
 # Q Systems · Skinmetrics
 
-Marketing- und Rechtstexte-Website für die iOS-App **Skinmetrics**.
+Marketing- und Rechtstexte-Website für die iOS-App **Skinmetrics** (skinmetrics.app).
 
 Statische Seite (HTML/CSS/JS, kein Build-Schritt), ausgeliefert über GitHub Pages.
-Keine Cookies, keine externen Ressourcen, keine Schriften von Dritten — alles ist selbst enthalten
+Keine Cookies, keine externen Ressourcen, keine Schriften von Dritten. Alles ist selbst enthalten
 oder System-Font.
 
 ## Projektstruktur
@@ -12,27 +12,27 @@ oder System-Font.
 apps-website/
 ├── index.html                 # Produktseite Skinmetrics
 ├── assets/
-│   ├── css/styles.css         # Designsystem
-│   ├── js/app.js              # SVG-Icons & Interaktionen
+│   ├── css/site.css           # Designsystem der Produktseite
+│   ├── css/legal.css          # Layout der Rechtstexte (gleiche Tokens)
+│   ├── js/site.js             # Scroll-Effekte, Demos, Vorher/Nachher-Regler, FAQ
 │   └── img/
-│       ├── product/           # App-Screenshots
-│       ├── marketing/           # Vorher/Nachher-Bilder
-│       └── labels/            # KI-Kennzeichnung (EU-Label)
+│       ├── screens/           # App-Screenshots (WebP), scan-face = KI-Bild für den Scan-Mock
+│       ├── marketing/         # Vorher/Nachher-Illustration (KI-generiert, so gekennzeichnet)
+│       ├── og.jpg             # Vorschaubild für Links (1200×630)
+│       ├── favicon.svg
+│       └── apple-touch-icon.png
 ├── legal/
 │   ├── index.html             # Übersicht Rechtstexte
 │   ├── datenschutz.html
 │   ├── agb.html
 │   └── impressum.html
-├── datenschutz.html           # Weiterleitung → legal/
-├── agb.html                   # Weiterleitung → legal/
-├── impressum.html             # Weiterleitung → legal/
-├── rechtliches.html           # Weiterleitung → legal/
+├── datenschutz.html, agb.html, impressum.html, rechtliches.html,
+│   privacy.html, terms.html   # Weiterleitungen → legal/
 ├── skinmetrics.html           # Weiterleitung → index.html
-├── dermascan.html             # Legacy-Weiterleitung
-└── skinfolio.html             # Legacy-Weiterleitung
+└── dermascan.html, skinfolio.html  # Legacy-Weiterleitungen
 ```
 
-Die Weiterleitungen im Root-Verzeichnis halten bestehende URLs (App Store, Bookmarks) gültig.
+Die Weiterleitungen im Root-Verzeichnis halten bestehende URLs (App Store, Onboarding-Links, Bookmarks) gültig.
 
 ## Lokal starten
 
@@ -42,7 +42,12 @@ python3 -m http.server 8080
 
 Dann im Browser: http://localhost:8080/
 
-## Hinweise
+## Hinweise zu den Texten
 
+- Sichtbare Texte auf der Produktseite enthalten bewusst keine Binde- oder Gedankenstriche.
+- Jede Aussage über die App muss dem aktuellen App-Code entsprechen. Demos und Werte sind als
+  „Beispieldaten“ gekennzeichnet, Gesichter als KI-generiert.
+- Solange die App nicht im App Store ist, führen die Buttons zu einer Mail an hello@q-systems.app.
+  Nach dem Launch: Buttons „Zum Start benachrichtigen“ durch den App-Store-Link ersetzen und die
+  Hinweise „Bald im App Store“ entfernen.
 - Rechtstext-Quellen und Build-Skripte liegen bewusst **nicht** in diesem Repo (siehe `.gitignore`).
-- Bilder unter `assets/img/product/` sind App-Screenshots; `assets/img/marketing/` enthält KI-generierte Vorher/Nachher-Grafiken.
