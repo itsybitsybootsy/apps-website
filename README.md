@@ -47,7 +47,7 @@ Dann im Browser: http://localhost:8080/
 - Sichtbare Texte auf der Produktseite enthalten bewusst keine Binde- oder Gedankenstriche.
 - Jede Aussage über die App muss dem aktuellen App-Code entsprechen. Demos und Werte sind als
   „Beispieldaten“ gekennzeichnet, Gesichter als KI-generiert.
-- Solange die App nicht im App Store ist, führen die Buttons zu einer Mail an hello@q-systems.app.
-  Nach dem Launch: Buttons „Zum Start benachrichtigen“ durch den App-Store-Link ersetzen und die
-  Hinweise „Bald im App Store“ entfernen.
+- Alle „Laden“-Links und die App-Store-Badges zeigen auf den Platzhalter
+  `https://apps.apple.com/app/id0000000000`. Nach dem Launch in `index.html` durch die echte
+  App-Store-URL ersetzen (4 Stellen). Die Badge stammt von Apple (`assets/img/app-store-badge-de.svg`).
 - Rechtstext-Quellen und Build-Skripte liegen bewusst **nicht** in diesem Repo (siehe `.gitignore`).
