@@ -1,0 +1,106 @@
+/* life scene: routine + streak, see assets/js/scenes/routine.js, streak.js */
+
+/* ---------------------------------------------------------------- routine (rt-) */
+.rt-scr { opacity: 0; }
+.rt-body { padding-top: 66px; }
+.rt-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.rt-navbtn { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--card); border: 1px solid var(--line); color: var(--ink); flex: none; }
+.rt-title { font-size: 20px; font-weight: 700; letter-spacing: -.02em; margin: 0; }
+
+.rt-seg { display: flex; gap: 4px; padding: 5px; border-radius: 999px; background: var(--card-2); margin-bottom: 22px; }
+.rt-seg-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px; height: 38px; border-radius: 999px; color: var(--ink-2); font-size: 14px; font-weight: 600; }
+.rt-seg-btn svg { flex: none; }
+.rt-seg-btn.on { background: var(--sage); color: #fff; }
+.rt-seg-count { font-variant-numeric: tabular-nums; font-weight: 600; font-size: 12px; opacity: .82; }
+
+.rt-progress { display: flex; align-items: center; justify-content: space-between; margin: 0 2px 10px; }
+.rt-progress-text { font-size: 14px; color: var(--ink-2); font-weight: 500; }
+.rt-done-check { width: 22px; height: 22px; border-radius: 50%; background: var(--sage); color: #fff; display: grid; place-items: center; opacity: 0; }
+.rt-bar { margin-bottom: 18px; }
+
+.rt-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+.rt-card { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 12px 14px; }
+.rt-card-ic { width: 46px; height: 56px; border-radius: 14px; background: var(--bg); color: var(--sage-2); display: grid; place-items: center; flex: none; }
+.rt-card-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.rt-card-step { font-size: 11px; font-weight: 600; color: var(--ink-3); letter-spacing: .01em; }
+.rt-card-name { font-size: 14px; font-weight: 700; color: var(--ink); line-height: 1.25; }
+.rt-card > svg { flex: none; color: var(--ink-3); }
+.rt-check { flex: none; width: 30px; height: 30px; }
+.rt-check svg { width: 15px; height: 15px; }
+
+.rt-audit { opacity: 0; }
+.rt-audit-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; color: var(--sage); }
+.rt-audit-head b { font-size: 14px; font-weight: 700; color: var(--ink); }
+.rt-audit p { margin: 0; font-size: 13px; line-height: 1.45; color: var(--ink-2); }
+
+/* ---------------------------------------------------------------- streak (st-) */
+.st-sheet-scr { background: rgba(20, 21, 18, calc(var(--scrim, 0) * .5)); }
+.st-sheet {
+  position: absolute; left: 0; right: 0; top: 54px; bottom: 0;
+  background: var(--bg); border-radius: 32px 32px 0 0; overflow: hidden;
+  display: flex; flex-direction: column;
+  box-shadow: 0 -24px 60px -20px rgba(0, 0, 0, .3);
+  will-change: transform;
+}
+.st-grabber { width: 36px; height: 5px; border-radius: 3px; background: var(--line); margin: 9px auto 2px; flex: none; }
+.st-sheet-nav { display: flex; align-items: center; padding: 8px 16px 14px; flex: none; }
+.st-close { flex: 1; font-size: 15px; color: var(--ink); background: var(--card-2); padding: 7px 14px; border-radius: 999px; white-space: nowrap; align-self: center; width: fit-content; }
+.st-sheet-title { flex: 1; text-align: center; font-size: 19px; font-weight: 700; letter-spacing: -.02em; }
+.st-sheet-spacer { flex: 1; }
+
+.st-sheet-body { flex: 1; overflow: hidden; padding: 2px 18px 48px; display: flex; flex-direction: column; gap: 18px; will-change: transform; }
+
+.st-head-card { display: flex; flex-direction: column; gap: 10px; }
+.st-head-num { display: flex; align-items: baseline; gap: 7px; }
+.st-head-num b { font-family: ui-rounded, "SF Pro Rounded", -apple-system, system-ui, sans-serif; font-size: 40px; font-weight: 700; letter-spacing: -.02em; line-height: 1; color: var(--ink); }
+.st-head-num span { font-size: 14px; font-weight: 600; color: var(--ink-2); }
+.st-head-tier { display: flex; align-items: center; gap: 10px; opacity: 0; }
+.st-head-tier > div { display: flex; flex-direction: column; gap: 1px; }
+.st-head-tier b { font-size: 14px; font-weight: 700; color: var(--ink); }
+.st-head-tier span { font-size: 12px; color: var(--ink-2); }
+.st-head-run { margin: 0; font-size: 12px; color: var(--ink-3); opacity: 0; }
+.st-tier-crest { width: 38px; height: 38px; border-radius: 50%; background: rgba(79, 97, 82, .14); border: 1px solid rgba(79, 97, 82, .4); display: grid; place-items: center; color: var(--sage); flex: none; }
+
+.st-label { display: block; font-size: 19px; font-weight: 700; letter-spacing: -.015em; color: var(--ink); margin: 0 2px; opacity: 0; }
+
+/* 84 cells animate their own transform every frame while filling; none of
+   them carry will-change (that would mean 84 compositing layers), and cells
+   render as empty (not invisible) from the start, so the card never reads
+   as a blank loading failure before the fill animation reaches it. */
+.st-mosaic-card, .st-mile-card { background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 16px; }
+.st-mosaic { display: grid; grid-template-rows: repeat(7, 1fr); grid-auto-flow: column; grid-template-columns: repeat(12, 1fr); gap: 3px; margin-bottom: 12px; }
+.st-cell { height: 13px; border-radius: 3.5px; background: rgba(156, 158, 153, .16); }
+.st-cell.on { background: var(--sage); }
+.st-cell.miss { background: rgba(156, 158, 153, .3); }
+.st-cell.grace { background: var(--clay); box-shadow: 0 0 0 2px rgba(199, 111, 102, .3); }
+.st-mosaic-note { margin: 0 0 4px; font-size: 12px; line-height: 1.4; color: var(--ink-2); }
+.st-mosaic-count { margin-bottom: 10px; font-variant-numeric: tabular-nums; }
+.st-grace-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: rgba(199, 111, 102, .12); color: var(--clay); font-size: 12px; font-weight: 600; opacity: 0; }
+
+/* rows are always visible (name readable, crest neutral) so the card never
+   reads as blank; each crest lights up and its "Erreicht" badge appears in
+   turn, like a checklist filling in rather than the card fading up whole. */
+.st-mile-row { display: flex; align-items: center; gap: 12px; padding: 9px 0; }
+.st-mile-row + .st-mile-row { border-top: 1px solid var(--line); }
+.st-crest { width: 32px; height: 32px; border-radius: 50%; background: var(--card-2); border: 1px solid var(--line); display: grid; place-items: center; color: var(--ink-3); flex: none; }
+.st-crest.on { background: rgba(79, 97, 82, .14); border-color: rgba(79, 97, 82, .4); color: var(--sage); }
+.st-mile-row b { flex: 1; font-size: 14px; font-weight: 600; color: var(--ink); }
+.st-mile-reached { display: flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: var(--ink-3); opacity: 0; }
+.st-mile-reached svg { width: 11px; height: 11px; }
+
+/* Restrained, static acknowledgement (Fitness.app award style): a crest, a
+   name, a sentence, the count, no confetti or particles. */
+.st-celeb-scr {
+  background: var(--bg); opacity: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.st-celeb-body { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; padding: 0 30px; }
+.st-medal { width: 76px; height: 76px; border-radius: 50%; background: rgba(79, 97, 82, .12); border: 2px solid var(--sage); display: grid; place-items: center; color: var(--sage); opacity: 0; }
+.st-celeb-title { margin: 6px 0 0; font-size: 23px; font-weight: 700; letter-spacing: -.02em; color: var(--ink); opacity: 0; }
+.st-celeb-text { margin: 0; font-size: 15px; line-height: 1.45; color: var(--ink-2); max-width: 280px; opacity: 0; }
+.st-celeb-count { margin-top: 2px; font-family: ui-rounded, "SF Pro Rounded", -apple-system, system-ui, sans-serif; font-size: 16px; font-weight: 700; color: var(--ink-2); opacity: 0; }
+.st-celeb-btn {
+  position: absolute; left: 20px; right: 20px; bottom: 36px; height: 52px; border: none; border-radius: 16px;
+  background: var(--sage); color: #fff; font-size: 16px; font-weight: 600;
+  opacity: 0;
+}
