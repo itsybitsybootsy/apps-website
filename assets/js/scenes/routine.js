@@ -1,12 +1,12 @@
 /* Scene: the "Routine" tab (RoutineTabView / RoutineShelfVisual). The score
    scene ends with the finger tapping the Routine tab, so this screen switches
    in instantly (real iOS tab switches are a hard cut, not a crossfade) with
-   the tab already highlighted. Then the finger checks off the four morning
-   products one by one (spring pop, progress bar and "x von y erledigt" count
-   updating live), and finally the AI audit card ("Routinekontrolle") settles
-   in once everything is done. */
+   the tab already highlighted. Scroll decides WHEN the finger reaches each
+   product; the check pop, the progress bar/count and the AI audit card
+   ("Routinekontrolle") play on the clock (engine once()) once reached, so
+   they read the same at any scroll speed. */
 
-import { seg, ease, css, text, toggle, lerp } from '../engine.js';
+import { seg, ease, css, text, toggle, lerp, once } from '../engine.js';
 import { fingerPath } from '../phone.js';
 import { statusBar, tabBar, icon, h } from '../ui-kit.js';
 import { routine } from './data.js';
@@ -20,11 +20,11 @@ const filterIcon = (w = 18) => `<svg viewBox="0 0 24 24" width="${w}" height="${
 
 const stepIcon = { 'Reiniger': icon.bottle, 'Serum': icon.drop, 'Feuchtigkeitspflege': icon.jar, 'Sonnenschutz': icon.shield };
 
-/* Finger taps a check at these local t's, in order. */
-const TAP = [.14, .30, .46, .62];
-const AUDIT = [.72, .84];
+/* Scroll reaches a check at these local t's, in order (retimed for the
+   shorter [.79, .895] range: ≈.07-.12 apart, never a bare stretch). */
+const TAP = [.15, .34, .53, .72];
 
-export default function routineScene({ phone, rail }) {
+export default function routineScene({ phone }) {
   let el, segCount, progressText, progressCheck, barFill, checks, auditCard;
   const morgens = routine.morgens;
 
@@ -83,44 +83,37 @@ export default function routineScene({ phone, rail }) {
       const total = TAP.length;
       text(segCount, `${done}/${total}`);
       text(progressText, `${done} von ${total} erledigt`);
-      css(progressCheck, 'opacity', done === total ? ease.outQuint(seg(t, TAP[total - 1], TAP[total - 1] + .08)).toFixed(3) : '0');
 
-      const frac = TAP.reduce((sum, tc) => sum + ease.outQuint(seg(t, tc, tc + .08)), 0) / total;
-      css(barFill, '--v', frac.toFixed(3));
-
+      // each check pops and adds its share of the bar on its own clock, not
+      // tied to further scrolling, so a fast scroll never skips the pop
+      let frac = 0;
       checks.forEach((c, i) => {
         const on = t >= TAP[i];
         toggle(c, 'off', !on);
-        const k = ease.outBack(seg(t, TAP[i], TAP[i] + .16));
-        css(c, 'transform', `scale(${(on ? lerp(.55, 1, k) : 1).toFixed(3)})`);
+        const k = once(`rt-check-${i}`, on, 380);
+        frac += k / total;
+        const sc = ease.outBack(k);
+        css(c, 'transform', `scale(${(on ? lerp(.55, 1, sc) : 1).toFixed(3)})`);
       });
+      css(barFill, '--v', frac.toFixed(3));
 
-      const ae = ease.outQuint(seg(t, AUDIT[0], AUDIT[1]));
+      const ae = ease.outQuint(once('rt-audit', done === total, 480));
+      css(progressCheck, 'opacity', ae.toFixed(3));
       css(auditCard, 'opacity', ae.toFixed(3));
       css(auditCard, 'transform', `translateY(${lerp(16, 0, ae).toFixed(1)}px) scale(${lerp(.97, 1, ae).toFixed(3)})`);
 
       if (ctx.active === this) {
-        // the rail names whichever product was just checked, then hands
-        // off to the audit finding once it has settled in
-        const justChecked = morgens[Math.max(done - 1, 0)].name;
-        const showAudit = ae > .5;
-        rail.set({
-          num: showAudit ? '0' : `${done}/${total}`,
-          label: showAudit ? 'Wirkstoffkonflikte' : justChecked,
-          k: seg(t, .03, .10) * (1 - seg(t, .94, 1)),
-        });
-
         phone.finger(fingerPath(phone, t, [
           { t: 0, at: [200, 940], show: 0 },
-          { t: .04, at: checks[0], show: 1 },
+          { t: .08, at: checks[0], show: 1 },
           { t: TAP[0], at: checks[0], show: 1, tap: true },
-          { t: .20, at: checks[1], show: 1 },
+          { t: .27, at: checks[1], show: 1 },
           { t: TAP[1], at: checks[1], show: 1, tap: true },
-          { t: .36, at: checks[2], show: 1 },
+          { t: .46, at: checks[2], show: 1 },
           { t: TAP[2], at: checks[2], show: 1, tap: true },
-          { t: .52, at: checks[3], show: 1 },
+          { t: .65, at: checks[3], show: 1 },
           { t: TAP[3], at: checks[3], show: 1, tap: true },
-          { t: .68, at: checks[3], show: 0 },
+          { t: .82, at: checks[3], show: 0 },
           { t: 1, at: checks[3], show: 0 },
         ]));
       }

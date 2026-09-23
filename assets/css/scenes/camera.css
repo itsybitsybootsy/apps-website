@@ -1,0 +1,83 @@
+/* camera scene: the app's face scan at page scale (assets/js/scenes/camera.js) */
+.cm { position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 45%, #121212 0%, #000 62%); overflow: hidden; }
+.cm-view { position: absolute; inset: 0; transform-origin: 50% 50%; will-change: transform; }
+.cm-face { position: absolute; inset: 0; width: 100%; height: 100%; filter: contrast(1.08) saturate(1.06); }
+.cm > *, .cm-view > * { pointer-events: none; }
+
+/* absolutely placed pieces; JS sets translate() in stage px */
+.cm-ring, .cm-head, .cm-pill, .cm-arrow, .cm-done, .cm-status, .cm-thumbs, .cm-label { position: absolute; left: 0; top: 0; will-change: transform, opacity; }
+
+.cm-ring { --b: .4; }
+.cm-ring svg { width: 100%; height: 100%; overflow: visible; }
+.cm-ring ellipse { fill: none; stroke: rgba(255, 255, 255, var(--b)); stroke-width: 2.5px; vector-effect: non-scaling-stroke; transition: stroke .25s; }
+.cm-ring.lock ellipse { stroke: #3F9B62; stroke-width: 3.5px; }
+.cm-ring-glow { position: absolute; inset: -6px; border-radius: 50%; box-shadow: 0 0 36px 6px rgba(63, 155, 98, .45), inset 0 0 30px 2px rgba(63, 155, 98, .25); opacity: 0; }
+
+.cm-head { display: flex; align-items: center; gap: 12px; color: #fff; font-size: 19px; font-weight: 600; letter-spacing: -.01em; white-space: nowrap; }
+.cm-badge { padding: 4px 10px; border-radius: 999px; background: rgba(255, 255, 255, .14); font-size: 14px; font-variant-numeric: tabular-nums; }
+
+.cm-pill { display: grid; justify-items: center; gap: 10px; text-align: center; }
+.cm-pill b { padding: 11px 20px; border-radius: 999px; background: rgba(40, 40, 40, .82); color: #fff; font-size: 16px; font-weight: 600; white-space: nowrap; }
+.cm-pill small { max-width: 30ch; font-size: 14px; color: rgba(255, 255, 255, .6); }
+
+.cm-arrow { width: 24px; height: 24px; color: #fff; }
+.cm-arrow svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+
+.cm-flash { position: absolute; inset: 0; background: #fff; opacity: 0; }
+
+.cm-thumbs { display: flex; gap: 14px; }
+.cm-thumb {
+  --fly: 1; --dx: 0px;
+  position: relative; width: 64px; height: 80px; border-radius: 14px; overflow: hidden;
+  background: #1a1a1a; box-shadow: 0 0 0 1.5px rgba(255, 255, 255, .22);
+  transform: translate(calc(var(--fly) * var(--dx)), calc(var(--fly) * var(--dy, -300px))) scale(calc(1 + var(--fly) * 1.4));
+  opacity: 0;
+}
+.cm-thumb:nth-child(1) { --dx: 78px; }
+.cm-thumb:nth-child(3) { --dx: -78px; }
+.cm-thumb i { position: absolute; inset: 0; background: #222 center 30% / cover no-repeat; }
+.cm-thumb svg { position: absolute; right: 5px; bottom: 5px; width: 20px; height: 20px; padding: 3px; border-radius: 50%; background: #3F9B62; fill: none; stroke: #fff; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transform: scale(.5); transition: opacity .25s, transform .35s cubic-bezier(.3, 1.6, .5, 1); }
+.cm-thumb.ok svg { opacity: 1; transform: none; }
+
+.cm-done { width: 84px; height: 84px; border-radius: 50%; background: var(--sage, #4F6152); display: grid; place-items: center; opacity: 0; }
+.cm-done svg { width: 44px; height: 44px; fill: none; stroke: #fff; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+
+.cm-status { display: flex; align-items: center; gap: 12px; color: rgba(255, 255, 255, .8); font-size: 16px; white-space: nowrap; }
+.cm-spin { width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, .2); border-top-color: #fff; animation: cm-spin .8s linear infinite; }
+.cm-status.fin .cm-spin { animation: none; border-color: #3F9B62; background: #3F9B62; }
+@keyframes cm-spin { to { transform: rotate(360deg); } }
+
+.cm-dots { position: absolute; inset: 0; }
+.cm-dots i { position: absolute; left: -2.5px; top: -2.5px; width: 5px; height: 5px; border-radius: 50%; background: #fff; box-shadow: 0 0 8px rgba(255, 255, 255, .7); opacity: 0; }
+.cm-zones { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.cm-zones polygon { fill: rgba(169, 192, 172, .22); stroke: rgba(169, 192, 172, .75); stroke-width: 1.2; stroke-linejoin: round; opacity: 0; }
+.cm-zones polygon[data-z="kinn"] { fill: rgba(199, 111, 102, .2); stroke: rgba(199, 111, 102, .7); }
+
+.cm-label { --ax: 0px; display: flex; align-items: baseline; gap: 10px; padding: 8px 14px; border-radius: 999px; background: rgba(255, 255, 255, .95); color: #000; font-size: 15px; white-space: nowrap; opacity: 0; }
+.cm-label b { font-weight: 600; }
+.cm-label em { font-style: normal; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--sage, #4F6152); min-width: 2ch; }
+/* hairline from the label to its point on the face */
+.cm-label::before { content: ""; position: absolute; top: 50%; height: 1px; background: rgba(255, 255, 255, .55); }
+.cm-label:not(.left)::before { right: 100%; width: calc(-1 * var(--ax)); }
+.cm-label.left::before { left: 100%; width: var(--ax); }
+
+/* inside the phone: the camera's last frame, the analysis is done */
+.cm-inphone { background: #000; display: grid; place-items: center; align-content: center; gap: 22px; visibility: hidden; }
+.cm-inphone-oval { position: absolute; left: 50%; top: 45%; width: 72%; aspect-ratio: .74; transform: translate(-50%, -50%); border-radius: 50%; border: 2px solid rgba(255, 255, 255, .35); }
+.cm-inphone .cm-done { position: relative; opacity: 1; }
+.cm-inphone p { position: relative; margin-top: 270px; color: #fff; font-size: 17px; font-weight: 600; }
+
+@media (max-width: 860px) {
+  .cm-head { font-size: 16px; }
+  .cm-pill b { font-size: 14px; padding: 9px 16px; }
+  .cm-pill small { display: none; }
+  .cm-thumb { width: 48px; height: 60px; border-radius: 11px; }
+  .cm-thumb:nth-child(1) { --dx: 60px; }
+  .cm-thumb:nth-child(3) { --dx: -60px; }
+  .cm-label { font-size: 13px; padding: 6px 11px; }
+  .cm-status { font-size: 14px; }
+}
+
+/* everything outside the oval is dimmed, as in the app's camera */
+.cm-mask { position: absolute; left: 0; top: 0; border-radius: 50%; box-shadow: 0 0 0 200vmax rgba(0, 0, 0, .86); will-change: transform; }
+.cm-label.flat::before { display: none; }

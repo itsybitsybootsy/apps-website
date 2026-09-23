@@ -32,7 +32,7 @@
   position: relative; height: 300px; overflow: hidden;
   background: radial-gradient(120% 90% at 50% 8%, #3c4f3e 0%, #263323 46%, #131c14 82%, #0d130e 100%);
 }
-.rs-mesh { position: absolute; left: 50%; top: 42%; width: 74%; height: 92%; transform: translate(-50%, -50%); color: var(--sage-l); opacity: .5; overflow: visible; }
+.rs-photo { position: absolute; inset: 0; background-repeat: no-repeat; }
 .rs-hero-grad {
   position: absolute; inset: 0;
   background: linear-gradient(180deg,
@@ -108,7 +108,7 @@
   position: relative; height: 150px; overflow: hidden;
   background: radial-gradient(130% 100% at 50% 30%, #3c4f3e 0%, #263323 50%, #131c14 90%);
 }
-.rs-mesh-close { color: var(--sage-l); opacity: .55; width: 130%; height: 130%; }
+
 .rs-closeup-expand {
   position: absolute; right: 8px; bottom: 8px; z-index: 2;
   width: 28px; height: 28px; border-radius: 50%;

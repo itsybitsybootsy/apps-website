@@ -1,14 +1,13 @@
 /* Scene: check-in results (CheckInVisualResultsView). The sheet pushes in
    over the analysis screen, the score counts up inside a stylized hero
-   (never a real photo), the profile bars grow, then a drag scrolls the
+   (the photo from the scan), the profile bars grow, then a drag scrolls the
    sheet to reveal the close-up cards and the per-zone grid before the
    finger taps "Check-in abschließen".
 
-   No screenshots: the hero and the close-up crops reuse the app's own
-   face-points point cloud (assets/models/face-points.svg), tinted and
-   cropped, never a picture of a person. */
+   No screenshots: everything is live HTML; the only image is the scan's
+   front frame, cropped like the app crops the check-in photo. */
 
-import { seg, ease, css, text, attr, pulse, lerp } from '../engine.js';
+import { seg, ease, css, text, attr, once, lerp } from '../engine.js';
 import { fingerPath } from '../phone.js';
 import { statusBar, h } from '../ui-kit.js';
 import { score, metrics, zones, closeUps, sparkline } from './data.js';
@@ -23,28 +22,16 @@ const checkCircle = (w = 20) =>
 const trendIcon = (w = 18) =>
   `<svg viewBox="0 0 24 24" width="${w}" height="${w}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 19.5h17"/><path d="M5 15.5l4.5-4.5 3.5 3 6-6.5"/><path d="M15.5 7.5H19V11"/></svg>`;
 
-/* ---------------------------------------------------------------- face point cloud (shared, loaded once) */
-const MESH_ID = 'rs-facepoints-path';
-const MESH_VB = '-8.04 -8.56 16.09 18.27';
-let meshPromise = null;
-function loadMesh(root) {
-  if (!meshPromise) {
-    meshPromise = fetch(new URL('../../models/face-points.svg', import.meta.url))
-      .then(r => r.text())
-      .then(txt => new DOMParser().parseFromString(txt, 'image/svg+xml').querySelector('path'))
-      .catch(() => null);
-  }
-  meshPromise.then(path => {
-    if (!path || document.getElementById(MESH_ID)) return;
-    const host = h('<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs></defs></svg>');
-    const clone = path.cloneNode(false);
-    clone.id = MESH_ID;
-    host.querySelector('defs').appendChild(clone);
-    root.appendChild(host);
-  });
-}
-const mesh = (cls, vb = MESH_VB) =>
-  `<svg class="rs-mesh ${cls}" viewBox="${vb}" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#${MESH_ID}"/></svg>`;
+/* ---------------------------------------------------------------- the check-in photo
+   Like the app, the hero and the close ups show the photo from the scan: the
+   front frame of the rendered head (Lee Perry-Smith scan, CC BY 3.0). */
+const PHOTO = new URL('../../face/front.webp', import.meta.url).href;
+const CROPS = {
+  hero: 'background-size: 150%; background-position: 50% 44%;',
+  kinn: 'background-size: 330%; background-position: 48% 86%;',
+  wangeL: 'background-size: 330%; background-position: 22% 60%;',
+};
+const photo = (cls, crop) => `<span class="rs-photo ${cls}" style="background-image: url('${PHOTO}'); ${CROPS[crop]}" aria-hidden="true"></span>`;
 
 /* fixed 0..100 scale sparkline, same rule as the app: small changes must look small */
 const sparkPath = () => {
@@ -59,7 +46,7 @@ const deltaNum = `${deltaSign}${delta}`;
    its own nowrap span, the rest of the line still wraps normally. */
 const deltaHtml = `${deltaNum} Punkte seit dem letzten <span class="rs-nowrap">Check-in</span>`;
 
-export default function results({ phone, rail }) {
+export default function results({ phone }) {
   let el, body, num, sideLabel, pill, expandBtn, infoRow, spark, sparkLen;
   let barNums, barFills, barPrevs, legend;
   let closeupCards;
@@ -77,7 +64,7 @@ export default function results({ phone, rail }) {
         <div class="scr-body rs-body">
           <section class="card rs-hero">
             <div class="rs-hero-photo">
-              ${mesh('rs-mesh-hero')}
+              ${photo('rs-photo-hero', 'hero')}
               <div class="rs-hero-grad"></div>
               <span class="rs-pill">${checkGlyph(11)} Check-in gespeichert</span>
               <span class="rs-expand">${expandIcon(16)}</span>
@@ -126,7 +113,7 @@ export default function results({ phone, rail }) {
             <div class="rs-closeup-row">
               ${closeUps.map((cUp, i) => `<div class="card rs-closeup">
                 <div class="rs-closeup-photo">
-                  ${mesh('rs-mesh-close', i === 0 ? '-3.2 3.4 6.4 6' : '1.4 -1.2 6.6 7')}
+                  ${photo('rs-photo-close', i === 0 ? 'kinn' : 'wangeL')}
                   <span class="rs-closeup-expand">${expandIcon(13)}</span>
                 </div>
                 <div class="rs-closeup-body">
@@ -153,7 +140,6 @@ export default function results({ phone, rail }) {
         </div>
       </div>`));
 
-      loadMesh(el);
 
       body = el.querySelector('.rs-body');
       num = el.querySelector('.rs-score-num b');
@@ -189,106 +175,105 @@ export default function results({ phone, rail }) {
 
     update(t, ctx) {
       const hidden = t <= 0;
-      css(el, 'opacity', ease.out(seg(t, 0, .04)).toFixed(3));
-      const enter = ease.out(seg(t, 0, .06));
+      css(el, 'opacity', ease.out(seg(t, 0, .05)).toFixed(3));
+      const enter = ease.out(seg(t, 0, .08));
       css(el, 'transform', `translateY(${((1 - enter) * 46).toFixed(1)}px)`);
       if (hidden) {
         return;
       }
 
-      // hero: pill, expand button, score count. Front loaded so the sheet
-      // is never mostly empty while it's still arriving (t .70-.76 on the
-      // page): the count starts immediately and the profile card follows
-      // right behind the hero instead of waiting for it to finish.
-      const successK = pulse(t, .93, .985);
-      const pillK = ease.outBack(seg(t, .02, .10));
-      css(pill, 'opacity', seg(t, .02, .08).toFixed(3));
-      css(pill, 'transform', `scale(${(lerp(.7, 1, pillK) * (1 + successK * .06)).toFixed(3)})`);
-      css(expandBtn, 'opacity', seg(t, .04, .10).toFixed(3));
-
-      const count = ease.outQuint(seg(t, .02, .26));
+      // The whole scene now plays inside ~63svh of scroll, far too little to
+      // let every readout animate at scroll speed: a fast flick would snap
+      // numbers instead of counting them, a slow one would leave the sheet
+      // looking stuck. Spatial motion (the sheet sliding in, the body being
+      // dragged up, the finger) still follows scroll directly; content
+      // beats (counts, bars, badges, the tap) fire once their moment on the
+      // scrollbar is reached and then play out on their own clock via
+      // once(), so they always read at the same, comfortable pace.
+      const countK = once('rs-count', t >= .03, 900);
+      const count = ease.outQuint(countK);
       text(num, Math.round(score.after * count));
-      css(sideLabel, 'opacity', seg(t, .06, .14).toFixed(3));
-      css(sideLabel, 'transform', `translateY(${(6 * (1 - seg(t, .06, .16))).toFixed(1)}px)`);
+
+      const pillK = once('rs-pill', t >= .05, 550);
+      css(pill, 'opacity', Math.min(1, pillK * 1.6).toFixed(3));
+      css(pill, 'transform', `scale(${lerp(.7, 1, ease.outBack(pillK)).toFixed(3)})`);
+      css(expandBtn, 'opacity', once('rs-expand', t >= .07, 400).toFixed(3));
+
+      const sideK = once('rs-side', t >= .08, 450);
+      css(sideLabel, 'opacity', sideK.toFixed(3));
+      css(sideLabel, 'transform', `translateY(${(6 * (1 - ease.out(sideK))).toFixed(1)}px)`);
 
       // delta row + sparkline
-      const infoK = seg(t, .08, .16);
+      const infoK = ease.out(once('rs-delta', t >= .09, 550));
       css(infoRow, 'opacity', infoK.toFixed(3));
-      css(infoRow, 'transform', `translateY(${(10 * (1 - ease.out(infoK))).toFixed(1)}px)`);
-      attr(spark, 'stroke-dashoffset', (sparkLen * (1 - ease.inOut(seg(t, .10, .26)))).toFixed(1));
+      css(infoRow, 'transform', `translateY(${(10 * (1 - infoK)).toFixed(1)}px)`);
+      attr(spark, 'stroke-dashoffset', (sparkLen * (1 - ease.inOut(once('rs-spark', t >= .11, 700)))).toFixed(1));
 
       // profile card, staggered in right behind the hero instead of after it
-      const profK = seg(t, .07, .14);
+      const profK = ease.out(once('rs-profile', t >= .13, 500));
       css(profileCard, 'opacity', profK.toFixed(3));
-      css(profileCard, 'transform', `translateY(${(14 * (1 - ease.out(profK))).toFixed(1)}px)`);
+      css(profileCard, 'transform', `translateY(${(14 * (1 - profK)).toFixed(1)}px)`);
 
+      const barsK = once('rs-bars', t >= .17, 950);
       metrics.forEach((m, i) => {
-        const a = .10 + i * .022, b = a + .10;
-        const k = ease.outQuint(seg(t, a, b));
+        const a = i * .12, b = a + .45;
+        const k = ease.outQuint(seg(barsK, a, b));
         text(barNums[i], Math.round(m.value * k));
         css(barFills[i], '--v', (m.value / 10 * k).toFixed(3));
-        const pk = seg(t, b, b + .05);
+        const pk = seg(barsK, b, b + .15);
         css(barPrevs[i], 'opacity', pk.toFixed(3));
         css(barPrevs[i], 'transform', `translateY(${(-68 * (m.prev / 10) * pk).toFixed(1)}px)`);
       });
-      css(legend, 'opacity', seg(t, .30, .36).toFixed(3));
+      css(legend, 'opacity', once('rs-legend', t >= .34, 450).toFixed(3));
 
-      // drag the sheet up to reveal close-ups and the zone grid
-      const scrollP = ease.inOut(seg(t, .44, .78));
+      // drag the sheet up to reveal close-ups and the zone grid: this one
+      // stays tied to scroll itself, it's the reader's own drag gesture
+      const scrollP = ease.inOut(seg(t, .40, .78));
       css(body, 'transform', `translateY(${(-maxScroll * scrollP).toFixed(1)}px)`);
       css(navSep, 'opacity', Math.min(1, scrollP * 6).toFixed(3));
 
-      const closeK = seg(scrollP, .12, .55);
-      closeupCards.forEach((card, i) => {
-        const k = seg(closeK, i * .12, i * .12 + .6);
-        css(card, 'opacity', k.toFixed(3));
-        css(card, 'transform', `translateY(${(16 * (1 - ease.out(k))).toFixed(1)}px)`);
+      const close0 = ease.out(once('rs-close0', t >= .46, 550));
+      const close1 = ease.out(once('rs-close1', t >= .54, 550));
+      [close0, close1].forEach((k, i) => {
+        css(closeupCards[i], 'opacity', k.toFixed(3));
+        css(closeupCards[i], 'transform', `translateY(${(16 * (1 - k)).toFixed(1)}px)`);
       });
 
-      const zoneK = seg(scrollP, .55, .95);
-      css(zonesCard, 'opacity', seg(zoneK, 0, .3).toFixed(3));
+      css(zonesCard, 'opacity', once('rs-zonescard', t >= .60, 450).toFixed(3));
+      const zoneBarsK = once('rs-zonebars', t >= .65, 900);
       zones.forEach((z, i) => {
-        const a = i * .12, b = a + .5;
-        const k = ease.outQuint(seg(zoneK, a, b));
+        const a = i * .15, b = a + .5;
+        const k = ease.outQuint(seg(zoneBarsK, a, b));
         text(zoneNums[i], Math.round(z.value * k));
         css(zoneFills[i], '--v', (z.value / 100 * k).toFixed(3));
       });
 
-      // finish: finger drags, taps at .93. The tap has a real payoff instead
-      // of trailing off into dead scroll: the button settles into a saved
-      // state (its own label swaps to the app's real "Check-in gespeichert"
-      // string, matching the pill above) and the rail hands off to the
-      // final score so it's never empty on the way to t = 1.
-      const pressK = pulse(t, .885, .93);
-      const saved = t >= .945;
-      css(btn, 'transform', `scale(${(1 - pressK * .06).toFixed(3)})`);
-      css(btn, 'filter', `brightness(${(1 + successK * .12).toFixed(3)})`);
-      css(btnIcon, 'transform', `scale(${(1 + successK * .22).toFixed(3)})`);
+      // finish: finger drags, taps at .85, well clear of t = 1 so the
+      // saved state (button label swap + a checkmark pop) has room to
+      // fully play out on its own clock and rest on a readable plateau,
+      // instead of trailing off into a dead final stretch.
+      const tapK = once('rs-tap', t >= .85, 650);
+      const tapShape = Math.sin(tapK * Math.PI); // press then release, once() already returns 0..1
+      const saved = tapK >= .55;
+      css(btn, 'transform', `scale(${(1 - tapShape * .06).toFixed(3)})`);
+      css(btn, 'filter', `brightness(${(1 + tapShape * .14).toFixed(3)})`);
+      css(btnIcon, 'transform', `scale(${(1 + tapShape * .24).toFixed(3)})`);
+      css(pill, 'transform', `scale(${(lerp(.7, 1, ease.outBack(pillK)) * (1 + tapShape * .05)).toFixed(3)})`);
       text(btnLabel, saved ? 'Check-in gespeichert' : 'Check-in abschließen');
 
       if (ctx.active === this) {
         phone.finger(fingerPath(phone, t, [
-          { t: .40, at: [196, 760], show: 0 },
-          { t: .47, at: [196, 760], show: 1 },
-          { t: .60, at: [196, 300], show: 1 },
-          { t: .74, at: [196, 300], show: 1 },
-          { t: .79, at: [196, 700], show: 0 },
-          { t: .84, at: btn, show: 0 },
-          { t: .885, at: btn, show: 1 },
-          { t: .93, at: btn, show: 1, tap: true },
-          { t: .97, at: btn, show: 0 },
+          { t: .38, at: [196, 760], show: 0 },
+          { t: .44, at: [196, 760], show: 1 },
+          { t: .55, at: [196, 300], show: 1 },
+          { t: .68, at: [196, 300], show: 1 },
+          { t: .73, at: [196, 700], show: 0 },
+          { t: .78, at: btn, show: 0 },
+          { t: .81, at: btn, show: 1 },
+          { t: .85, at: btn, show: 1, tap: true },
+          { t: .90, at: btn, show: 0 },
           { t: 1, at: btn, show: 0 },
         ]));
-
-        // shared stat rail beside the phone: live score while it counts,
-        // then the delta, then the saved score again as the final payoff
-        // of the tap, held all the way to t = 1 so the rail is never empty.
-        const k1 = seg(t, 0, .05) * (1 - seg(t, .26, .34));
-        const k2 = seg(t, .36, .42) * (1 - seg(t, .60, .68));
-        const k3 = ease.out(seg(t, .90, 1));
-        if (k3 > 0) rail.set({ num: String(score.after), unit: '/100', label: 'Gespeichert, bis morgen', k: k3 });
-        else if (k1 >= k2) rail.set({ num: Math.round(score.after * count), unit: '/100', label: 'Hautscore heute', k: k1 });
-        else rail.set({ num: deltaNum, label: 'seit dem letzten Scan', k: k2 });
       }
     },
   };

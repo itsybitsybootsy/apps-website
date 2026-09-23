@@ -33,11 +33,13 @@ export function mountPhone(frame) {
 
   /* Center of an element in UI points, transforms included. */
   phone.at = (el, dx = 0, dy = 0) => {
+    // the rendered scale includes any zoom applied to the phone from outside
     const u = ui.getBoundingClientRect();
     const r = el.getBoundingClientRect();
+    const k = u.width / UI_W || phone.scale;
     return [
-      (r.left + r.width / 2 - u.left) / phone.scale + dx,
-      (r.top + r.height / 2 - u.top) / phone.scale + dy,
+      (r.left + r.width / 2 - u.left) / k + dx,
+      (r.top + r.height / 2 - u.top) / k + dy,
     ];
   };
 
