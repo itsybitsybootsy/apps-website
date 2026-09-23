@@ -144,6 +144,10 @@ h1,h2,h3,h4,p{margin:0}
 .hero .display{margin-top:0}
 .hero .lead{margin-top:24px;max-width:31em}
 .cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px;margin-top:34px}
+.store-badge{display:inline-flex;border-radius:12px;transition:transform .2s var(--ease),opacity .2s}
+.store-badge:hover{transform:translateY(-1px);opacity:.92}
+.store-badge img{height:54px;width:auto}
+.avail{margin-top:24px;font-size:.9375rem;color:var(--ink3)}
 .facts{display:flex;flex-wrap:wrap;gap:8px 22px;margin:28px 0 0;padding:0;list-style:none;font-size:.9375rem;color:var(--ink2)}
 .facts li{display:inline-flex;align-items:center;gap:8px}
 .facts svg{width:18px;height:18px;color:var(--sage-dd)}
