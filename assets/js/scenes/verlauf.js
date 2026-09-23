@@ -72,7 +72,8 @@ const MONTHS = ['Jan.', 'Feb.', 'März', 'Apr.', 'Mai', 'Juni', 'Juli', 'Aug.', 
 const ANCHOR = Date.UTC(2026, 8, 21); // a Monday late in the month, like the reference shot
 const DAY = 86400000;
 const fmtDate = ms => { const d = new Date(ms); return `${d.getUTCDate()}. ${MONTHS[d.getUTCMonth()]}`; };
-const axisLabels = days => [fmtDate(ANCHOR - Math.round(days / 2) * DAY), fmtDate(ANCHOR)];
+// first and last day of the shown range, at the left and right end of the axis
+const axisLabels = days => [fmtDate(ANCHOR - (days - 1) * DAY), fmtDate(ANCHOR)];
 
 /* Four taps' worth of range switching, entirely as a function of t: which two
    ranges are blending, and how far between them. */

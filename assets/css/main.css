@@ -140,7 +140,6 @@ button { font: inherit; color: inherit; }
   position: absolute; z-index: 4; left: var(--gutter); top: 50%;
   width: min(30vw, 460px); transform: translateY(-50%);
   display: grid;
-  transition: transform .9s var(--ease);
 }
 .caps.right { transform: translate(calc(100vw - 2 * var(--gutter) - min(30vw, 460px)), -50%); }
 .cap p { margin-top: 20px; color: rgba(255, 255, 255, .62); }
