@@ -53,7 +53,7 @@
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.01 });
     var pending = [];
-    $$('.rv, .t-week').forEach(function (el) {
+    $$('.rv').forEach(function (el) {
       // Anything already on screen at load shows immediately, no blank first paint.
       var r = el.getBoundingClientRect();
       if (r.top < window.innerHeight * 0.92) el.classList.add('in');
@@ -75,22 +75,19 @@
     var onSweep = function () { if (!sweepQueued) { sweepQueued = true; setTimeout(sweep, 120); } };
     window.addEventListener('scroll', onSweep, { passive: true });
   } else {
-    $$('.rv, .t-week').forEach(function (el) { el.classList.add('in'); });
+    $$('.rv').forEach(function (el) { el.classList.add('in'); });
   }
 
   /* ----------------------------------------------------- hero parallax */
   var heroArt = $('.hero-art');
   if (heroArt && !reduce && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    var floats = $$('.float', heroArt);
-    var phone = $('.phone', heroArt);
+    var front = $('.phone-front', heroArt);
+    var back = $('.phone-back', heroArt);
     var tx = 0, ty = 0, cx = 0, cy = 0, raf = 0;
     var tick = function () {
       cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
-      floats.forEach(function (f, i) {
-        var k = i === 0 ? 14 : -18;
-        f.style.transform = 'translate3d(' + (cx * k) + 'px,' + (cy * k) + 'px,0)';
-      });
-      if (phone) phone.style.transform = 'rotate(-2deg) translate3d(' + (cx * -5) + 'px,' + (cy * -5) + 'px,0)';
+      if (front) front.style.transform = 'rotate(-2deg) translate3d(' + (cx * -6) + 'px,' + (cy * -6) + 'px,0)';
+      if (back) back.style.transform = 'rotate(4deg) translate3d(' + (cx * 10) + 'px,' + (cy * 10) + 'px,0)';
       if (Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001) raf = requestAnimationFrame(tick); else raf = 0;
     };
     $('.hero').addEventListener('pointermove', function (e) {
