@@ -19,7 +19,7 @@ apps-website/
 │       ├── screens/           # App-Screenshots (WebP), scan-face = KI-Bild für den Scan-Mock
 │       ├── marketing/         # Vorher/Nachher-Illustration (KI-generiert, so gekennzeichnet)
 │       ├── og.jpg             # Vorschaubild für Links (1200×630)
-│       ├── favicon.svg
+│       ├── app-icon.png, favicon.png
 │       └── apple-touch-icon.png
 ├── legal/
 │   ├── index.html             # Übersicht Rechtstexte
