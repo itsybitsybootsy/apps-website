@@ -5,7 +5,7 @@
    The finger is a touch indicator like iOS screen recordings show. Scenes
    describe it with keyframes, so it scrubs backwards cleanly. */
 
-import { clamp, lerp, ease, css } from './engine.js';
+import { clamp, lerp, ease, css } from './engine.js?v=3';
 
 export const UI_W = 393;
 export const UI_H = 852;

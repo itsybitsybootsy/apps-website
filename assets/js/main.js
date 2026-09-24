@@ -13,8 +13,8 @@
    - only drive the finger while ctx.active === this scene
    - sample data lives in scenes/data.js so all scenes tell the same story */
 
-import { createStage, captions, seg, css, ease, lerp, reduceMotion, toggle } from './engine.js';
-import { mountPhone } from './phone.js';
+import { createStage, captions, seg, css, ease, lerp, reduceMotion, toggle } from './engine.js?v=3';
+import { mountPhone } from './phone.js?v=3';
 
 /* index.html sets .anim early and drops it again unless this module reports in,
    so the page still reads fine without JS or if a module fails to load. */
@@ -71,7 +71,7 @@ function placeAt(keys, p) {
 }
 
 /* Scenes load independently: a missing or broken scene must not take the page down. */
-const load = name => import(`./scenes/${name}.js`).then(m => m.default).catch(err => { console.warn(`scene ${name}:`, err); return null; });
+const load = name => import(`./scenes/${name}.js?v=3`).then(m => m.default).catch(err => { console.warn(`scene ${name}:`, err); return null; });
 
 async function buildShow() {
   const track = $('[data-track="app"]');

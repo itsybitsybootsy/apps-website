@@ -6,10 +6,10 @@
    ("Routinekontrolle") play on the clock (engine once()) once reached, so
    they read the same at any scroll speed. */
 
-import { seg, ease, css, text, toggle, lerp, once } from '../engine.js';
-import { fingerPath } from '../phone.js';
-import { statusBar, tabBar, icon, h } from '../ui-kit.js';
-import { routine } from './data.js';
+import { seg, ease, css, text, toggle, lerp, once } from '../engine.js?v=3';
+import { fingerPath } from '../phone.js?v=3';
+import { statusBar, tabBar, icon, h } from '../ui-kit.js?v=3';
+import { routine } from './data.js?v=3';
 
 /* Small local icon, not in ui-kit: the "slider.horizontal.3" management glyph. */
 const filterIcon = (w = 18) => `<svg viewBox="0 0 24 24" width="${w}" height="${w}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
