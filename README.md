@@ -16,18 +16,20 @@ apps-website/
 │   ├── css/app.css            # iPhone-Rahmen und nachgebaute App-Oberfläche (iOS-Punkte)
 │   ├── css/scenes/*.css       # Stile je Szene
 │   ├── css/legal.css          # Layout der Rechtstexte
-│   ├── js/main.js             # Zeitleiste beider Stages, Nav, Reveals
+│   ├── js/main.js             # Zeitleiste der schwarzen Bühne, Position des iPhones, Nav
 │   ├── js/engine.js           # Scroll-Engine: Fortschritt, Szenen, Captions
 │   ├── js/phone.js            # Live-iPhone (393×852 pt) und Finger
-│   ├── js/rail.js             # Große Zahl neben dem iPhone
 │   ├── js/ui-kit.js           # Statusleiste, Tab-Leiste, Icons
-│   ├── js/face3d.js           # 3D-Gesicht (WebGL, ohne Bibliothek)
-│   ├── js/scenes/*.js         # Szenen: today, scan, results, verlauf, score, routine, streak
-│   ├── models/                # Gesichtsmesh (MediaPipe, Apache 2.0) und SVG-Fallback
+│   ├── js/faceseq.js          # Gesicht als Bildsequenz (65 Frames) mit Landmarken
+│   ├── js/scenes/*.js         # Szenen: camera, results, verlauf, score, routine, streak
+│   ├── face/                  # Frames des Kopfs, landmarks.json, front.webp
 │   └── img/                   # Icons, App-Store-Badge, og.jpg
 ├── legal/                     # Rechtstexte
 └── *.html                     # Weiterleitungen für alte URLs
 ```
+
+Das Gesicht stammt aus dem Kopfscan von Lee Perry-Smith (CC BY 3.0, Namensnennung im Footer).
+Ein eigenes Video lässt sich mit `website-shots/tools/video-to-seq.py` in dieselben Dateien umwandeln.
 
 Die App wird nicht mit Screenshots gezeigt, sondern in HTML nachgebaut und beim Scrollen
 bedient (Finger tippt, Werte zählen hoch). Jede Szene ist eine reine Funktion des

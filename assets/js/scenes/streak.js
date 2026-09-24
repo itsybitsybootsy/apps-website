@@ -1,14 +1,16 @@
 /* Scene: the "Serie" sheet (StreakProfileView) and the full screen milestone
-   celebration (StreakMilestoneCelebrationView). The sheet slides up while the
-   qualifying-scan count and the twelve week "Konsequenz" mosaic fill in
-   together (one cell flagged as a grace day), the milestone ladder lights up
-   row by row, then the screen scrolls to reveal it before the milestone
-   moment takes over full screen: a restrained, static acknowledgement (no
-   confetti, matching StreakMilestoneCelebrationView's Fitness.app style
-   rebuild) where the medal crest settles in, the finger taps "Weiter", and
-   the celebration dismisses back to the settled Serie sheet. */
+   celebration (StreakMilestoneCelebrationView). The sheet slides up on
+   scroll; once it has landed, the qualifying-scan count and the twelve week
+   "Konsequenz" mosaic fill together on the clock (engine once(), one shared
+   run so the number and the grid always read as the same progress), the
+   milestone ladder lights up row by row the same way, then the screen
+   scrolls to reveal it before the milestone moment takes over full screen: a
+   restrained, static acknowledgement (no confetti, matching
+   StreakMilestoneCelebrationView's Fitness.app style rebuild) where the
+   medal crest springs in on its own clock, the finger taps "Weiter", and the
+   celebration dismisses back to the settled Serie sheet before t = 1. */
 
-import { seg, ease, css, text, toggle, pulse, lerp, clamp } from '../engine.js';
+import { seg, ease, css, text, toggle, pulse, lerp, clamp, once } from '../engine.js';
 import { fingerPath } from '../phone.js';
 import { statusBar, icon, h } from '../ui-kit.js';
 import { streak } from './data.js';
@@ -36,29 +38,28 @@ function buildMosaic() {
   return { days, graceIndex: MOSAIC_TOTAL - 6 };
 }
 
-const SHEET_ENTER = [0, .08];
-/* count and mosaic share a window so the number and the grid always read as
-   the same progress, never "28" over an empty grid */
-const COUNT = [.03, .30];
-const MOSAIC = [.03, .30];
-const CELL_DUR = .05;
-const TIER = [.26, .32];
-const RUNLINE = [.30, .36];
-const MILE_LABEL = [.36, .40];
-const MILE_START = .38, MILE_STEP = .025, MILE_DUR = .07;
-const SCROLL = [.54, .68];
-const CELEB = [.84, .88];
-const MEDAL = [.85, .89];
-const CTEXT = [.87, .905];
-const BTN = [.875, .90];
-const TAP_T = .93;
-const DISMISS = [.935, .985];
+/* beats in local t (streak range [.895, 1] of the show, ≈73svh: retimed
+   tight so nothing sits still for long, discrete events below run on the
+   clock instead of needing scroll range of their own) */
+const SHEET_ENTER = [0, .06];
+const FILL_AT = .04;               // count + mosaic, once(), shared clock
+const CELL_DUR = 4 / MOSAIC_TOTAL; // per-cell pop width inside that clock
+const TIER = [.12, .18];
+const RUNLINE = [.17, .22];
+const MILE_LABEL = [.24, .28];
+const MILE_AT = [.28, .32, .36, .40]; // once() triggers, one per row
+const SCROLL = [.44, .58];
+const CELEB = [.66, .72];
+const MEDAL_AT = .68;               // once()
+const CTEXT = [.70, .76];
+const BTN = [.72, .75];
+const TAP_T = .80;
+const DISMISS = [.82, .92];
 
-export default function streakScene({ phone, rail }) {
+export default function streakScene({ phone }) {
   let sheetEl, celebEl, sheetPanel, sheetBody, headNum, tierCrest, runLine;
   let cells, mosaicCount, gracePill, consLabel, mileLabel, mileRows, weiterBtn, medalEl, celebTexts;
   const { days: mosaicDays, graceIndex } = buildMosaic();
-  const cellStart = i => MOSAIC[0] + (i / MOSAIC_TOTAL) * (MOSAIC[1] - MOSAIC[0]);
 
   return {
     init() {
@@ -131,14 +132,37 @@ export default function streakScene({ phone, rail }) {
     },
 
     update(t, ctx) {
-      // sheet: slides up over a dimmed backdrop
+      // sheet: slides up over a dimmed backdrop (spatial, follows scroll)
       const enter = ease.inOut(seg(t, SHEET_ENTER[0], SHEET_ENTER[1]));
       css(sheetEl, 'opacity', seg(t, 0, .01).toFixed(3));
       css(sheetEl, '--scrim', enter.toFixed(3));
       css(sheetPanel, 'transform', `translateY(${lerp(798, 0, ease.outQuint(seg(t, SHEET_ENTER[0], SHEET_ENTER[1]))).toFixed(1)}px)`);
 
-      const count = Math.round(streak.days * ease.outQuint(seg(t, COUNT[0], COUNT[1])));
+      // count + mosaic: one clock once scroll reaches it, so the number and
+      // the grid always read as the same progress at any scroll speed
+      const fillP = once('st-fill', t >= FILL_AT, 900);
+      const count = Math.round(streak.days * ease.outQuint(fillP));
       text(headNum, count);
+
+      let revealed = 0;
+      cells.forEach((cell, i) => {
+        const start = i / MOSAIC_TOTAL;
+        const on = fillP >= start;
+        if (on) revealed++;
+        toggle(cell, 'on', on && mosaicDays[i] && i !== graceIndex);
+        toggle(cell, 'miss', on && !mosaicDays[i]);
+        toggle(cell, 'grace', on && i === graceIndex);
+        const k = ease.outBack(seg(fillP, start, start + CELL_DUR));
+        css(cell, 'transform', `scale(${(on ? lerp(.82, 1, k) : 1).toFixed(3)})`);
+      });
+      let filled = 0;
+      for (let i = 0; i < revealed; i++) if (mosaicDays[i]) filled++;
+      text(mosaicCount, `${filled} dieser ${MOSAIC_TOTAL} Tage sind gefüllt.`);
+
+      const graceStart = graceIndex / MOSAIC_TOTAL;
+      const graceE = ease.outQuint(seg(fillP, graceStart + CELL_DUR, graceStart + CELL_DUR + .1));
+      css(gracePill, 'opacity', graceE.toFixed(3));
+      css(gracePill, 'transform', `translateY(${lerp(6, 0, graceE).toFixed(1)}px)`);
 
       const tierE = ease.outQuint(seg(t, TIER[0], TIER[1]));
       css(tierCrest.parentElement, 'opacity', tierE.toFixed(3));
@@ -147,60 +171,40 @@ export default function streakScene({ phone, rail }) {
       const runE = ease.outQuint(seg(t, RUNLINE[0], RUNLINE[1]));
       css(runLine, 'opacity', runE.toFixed(3));
 
-      // mosaic: cells are always visible as empty cells, and fill in place
-      // (oldest column first) in the same window as the count above, so the
-      // number and the grid always read as one synced progress
-      let revealed = 0;
-      cells.forEach((cell, i) => {
-        const start = cellStart(i);
-        const on = t >= start;
-        if (on) revealed++;
-        toggle(cell, 'on', on && mosaicDays[i] && i !== graceIndex);
-        toggle(cell, 'miss', on && !mosaicDays[i]);
-        toggle(cell, 'grace', on && i === graceIndex);
-        const k = ease.outBack(seg(t, start, start + CELL_DUR));
-        css(cell, 'transform', `scale(${(on ? lerp(.82, 1, k) : 1).toFixed(3)})`);
-      });
-      let filled = 0;
-      for (let i = 0; i < revealed; i++) if (mosaicDays[i]) filled++;
-      text(mosaicCount, `${filled} dieser ${MOSAIC_TOTAL} Tage sind gefüllt.`);
-
-      const graceE = ease.outQuint(seg(t, cellStart(graceIndex) + CELL_DUR, cellStart(graceIndex) + CELL_DUR + .08));
-      css(gracePill, 'opacity', graceE.toFixed(3));
-      css(gracePill, 'transform', `translateY(${lerp(6, 0, graceE).toFixed(1)}px)`);
-
-      const clE = ease.outQuint(seg(t, MOSAIC[0], MOSAIC[0] + .04));
+      const clE = ease.outQuint(seg(t, FILL_AT, FILL_AT + .04));
       css(consLabel, 'opacity', clE.toFixed(3));
       const mlE = ease.outQuint(seg(t, MILE_LABEL[0], MILE_LABEL[1]));
       css(mileLabel, 'opacity', mlE.toFixed(3));
 
       // milestone rows are always visible (name readable, crest neutral),
       // never a blank card; each crest lights up and gets its "Erreicht"
-      // badge in turn, like a checklist filling in rather than appearing
+      // badge on its own clock once scroll reaches it, like a checklist
+      // filling in rather than the whole card fading up at once
       mileRows.forEach(({ crest, badge }, i) => {
-        const a = MILE_START + i * MILE_STEP;
-        const on = t >= a;
-        toggle(crest, 'on', on);
-        const k = ease.outBack(seg(t, a, a + MILE_DUR));
-        css(crest, 'transform', `scale(${(on ? lerp(.8, 1, k) : 1).toFixed(3)})`);
-        css(badge, 'opacity', (on ? ease.outQuint(seg(t, a, a + MILE_DUR)) : 0).toFixed(3));
+        const k = once(`st-mile-${i}`, t >= MILE_AT[i], 320);
+        toggle(crest, 'on', k > 0);
+        css(crest, 'transform', `scale(${(k > 0 ? lerp(.8, 1, ease.outBack(k)) : 1).toFixed(3)})`);
+        css(badge, 'opacity', ease.outQuint(k).toFixed(3));
       });
 
+      // scroll the sheet up to reveal the milestones fully (spatial)
       const scrollE = ease.inOut(seg(t, SCROLL[0], SCROLL[1]));
       css(sheetBody, 'transform', `translateY(${(-190 * scrollE).toFixed(1)}px)`);
 
       // milestone celebration, full screen, over the sheet: a restrained,
       // static acknowledgement that rises in, holds, then dismisses back to
-      // the (already settled) Serie sheet once "Weiter" is tapped
+      // the (already settled) Serie sheet once "Weiter" is tapped, landing
+      // well before t = 1
       const celebIn = ease.outQuint(seg(t, CELEB[0], CELEB[1]));
       const celebOut = ease.inOut(seg(t, DISMISS[0], DISMISS[1]));
       const celebK = celebIn * (1 - celebOut);
       css(celebEl, 'opacity', celebK.toFixed(3));
       css(celebEl, 'transform', `translateY(${(lerp(50, 0, celebIn) + lerp(0, 40, celebOut)).toFixed(1)}px) scale(${(lerp(.97, 1, celebIn) - .05 * celebOut).toFixed(3)})`);
 
-      const medalE = ease.outBack(seg(t, MEDAL[0], MEDAL[1]));
-      css(medalEl, 'transform', `scale(${lerp(.6, 1, clamp(medalE, 0, 1.15)).toFixed(3)})`);
-      css(medalEl, 'opacity', ease.out(seg(t, MEDAL[0], MEDAL[0] + .04)).toFixed(3));
+      // medal: springs in on its own clock once the celebration has landed
+      const medalP = once('st-medal', t >= MEDAL_AT, 450);
+      css(medalEl, 'transform', `scale(${lerp(.6, 1, clamp(ease.outBack(medalP), 0, 1.15)).toFixed(3)})`);
+      css(medalEl, 'opacity', Math.min(1, medalP * 6).toFixed(3));
 
       const textE = ease.outQuint(seg(t, CTEXT[0], CTEXT[1]));
       celebTexts.forEach((elx, i) => {
@@ -210,12 +214,9 @@ export default function streakScene({ phone, rail }) {
 
       const btnE = ease.outQuint(seg(t, BTN[0], BTN[1]));
       css(weiterBtn, 'opacity', btnE.toFixed(3));
-      css(weiterBtn, 'transform', `translateY(${lerp(10, 0, btnE).toFixed(1)}px) scale(${(1 - pulse(t, TAP_T - .012, TAP_T + .1) * .05).toFixed(3)})`);
+      css(weiterBtn, 'transform', `translateY(${lerp(10, 0, btnE).toFixed(1)}px) scale(${(1 - pulse(t, TAP_T - .012, TAP_T + .08) * .05).toFixed(3)})`);
 
       if (ctx.active === this) {
-        // stays populated through the dismiss and to the very end
-        rail.set({ num: count, label: 'Tage in Folge', k: seg(t, .04, .12) });
-
         phone.finger(fingerPath(phone, t, [
           { t: 0, at: [200, 940], show: 0 },
           { t: BTN[0] - .005, at: weiterBtn, show: 0 },

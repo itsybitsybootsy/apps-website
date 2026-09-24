@@ -1,13 +1,15 @@
 /* Scene: the "Verlauf" segment of the Progress tab (ProgressTrendChart +
-   ProgressMetricTrendChart). First scene of the "life" stage, so it is on
-   screen from t = 0 (no enter transition needed, only the chart's own
-   draw-in). The line and its typical-range band morph between 7 T / 14 T /
-   30 T as the finger taps the range pill, three times in a row, entirely as
-   a pure function of t: every range's data is resampled once at module load
-   onto the same fixed grid, so any two ranges can be linearly blended frame
-   by frame with nothing to remember between frames. */
+   ProgressMetricTrendChart). Hidden at t = 0; the finger taps the Verlauf
+   tab (fixed position, same spot in every screen) and this screen fades in
+   over Results. The line and its typical-range band morph between 7 T /
+   14 T / 30 T as the finger taps the range pill, three times in a row,
+   entirely as a pure function of t: every range's data is resampled once at
+   module load onto the same fixed grid, so any two ranges can be linearly
+   blended frame by frame with nothing to remember between frames. The
+   initial dots' pop-in is the one discrete (clock driven, once()) beat here;
+   everything else is spatial and follows scroll directly. */
 
-import { seg, ease, css, attr, text, lerp, clamp } from '../engine.js';
+import { seg, ease, css, attr, text, lerp, clamp, once } from '../engine.js';
 import { fingerPath } from '../phone.js';
 import { statusBar, tabBar, h } from '../ui-kit.js';
 import { blemishes, metrics } from './data.js';
@@ -70,17 +72,18 @@ const MONTHS = ['Jan.', 'Feb.', 'März', 'Apr.', 'Mai', 'Juni', 'Juli', 'Aug.', 
 const ANCHOR = Date.UTC(2026, 8, 21); // a Monday late in the month, like the reference shot
 const DAY = 86400000;
 const fmtDate = ms => { const d = new Date(ms); return `${d.getUTCDate()}. ${MONTHS[d.getUTCMonth()]}`; };
-const axisLabels = days => [fmtDate(ANCHOR - Math.round(days / 2) * DAY), fmtDate(ANCHOR)];
+// first and last day of the shown range, at the left and right end of the axis
+const axisLabels = days => [fmtDate(ANCHOR - (days - 1) * DAY), fmtDate(ANCHOR)];
 
 /* Four taps' worth of range switching, entirely as a function of t: which two
    ranges are blending, and how far between them. */
 const phaseOf = t => {
-  if (t < .19) return { from: 14, to: 14, u: 0 };
-  if (t < .33) return { from: 14, to: 7, u: ease.inOut(seg(t, .19, .33)) };
-  if (t < .44) return { from: 7, to: 7, u: 0 };
-  if (t < .58) return { from: 7, to: 14, u: ease.inOut(seg(t, .44, .58)) };
-  if (t < .69) return { from: 14, to: 14, u: 0 };
-  if (t < .85) return { from: 14, to: 30, u: ease.inOut(seg(t, .69, .85)) };
+  if (t < .20) return { from: 14, to: 14, u: 0 };
+  if (t < .33) return { from: 14, to: 7, u: ease.inOut(seg(t, .20, .33)) };
+  if (t < .45) return { from: 7, to: 7, u: 0 };
+  if (t < .58) return { from: 7, to: 14, u: ease.inOut(seg(t, .45, .58)) };
+  if (t < .70) return { from: 14, to: 14, u: 0 };
+  if (t < .85) return { from: 14, to: 30, u: ease.inOut(seg(t, .70, .85)) };
   return { from: 30, to: 30, u: 0 };
 };
 
@@ -96,10 +99,10 @@ const laneSeries = (value, idx) => {
 };
 const laneD = series => smoothPath(series.map((v, i) => [(i / (series.length - 1)) * LANE_W, LANE_H - (v / 10) * LANE_H]));
 
-export default function verlauf({ phone, rail }) {
+export default function verlauf({ phone }) {
   let el, body, chartClip, bandPath, linePath, dotGroups = {};
   let hl, rangeEls = {}, rangeRects = {};
-  let axisA, axisB;
+  let axisA, axisB, tabVerlauf;
   let laneEls = [];
 
   return {
@@ -162,12 +165,16 @@ export default function verlauf({ phone, rail }) {
       css(hl, 'width', `${rangeRects[7].width}px`);
       axisA = el.querySelector('[data-axis="a"]');
       axisB = el.querySelector('[data-axis="b"]');
+      tabVerlauf = el.querySelector('[data-tab="verlauf"]');
       laneEls = [...el.querySelectorAll('.vl-lane')].map(row => ({
         row, clip: row.querySelector('.vl-lane-clip'),
       }));
     },
 
     update(t, ctx) {
+      // hidden until its turn, then a quick fade over the results screen
+      css(el, 'opacity', ease.out(seg(t, 0, .04)).toFixed(3));
+      css(el, 'visibility', t > 0 ? 'visible' : 'hidden');
       const { from, to, u } = phaseOf(t);
       const A = rangeData[from], B = rangeData[to];
 
@@ -181,18 +188,22 @@ export default function verlauf({ phone, rail }) {
       attr(linePath, 'd', smoothPath(linePts));
       attr(bandPath, 'd', areaPath(topPts, botPts));
 
-      // draws itself: a clip that opens left-to-right over the first ~10%
-      const reveal = ease.outQuint(seg(t, 0, .10));
+      // draws itself: a clip that opens left-to-right, once the tab tap has
+      // landed and the screen is actually on screen (see the finger path)
+      const reveal = ease.outQuint(seg(t, .05, .16));
       css(chartClip, 'clipPath', `inset(0 ${((1 - reveal) * 100).toFixed(2)}% 0 0)`);
-      css(bandPath, 'opacity', (clamp(seg(t, .02, .12)) * .18).toFixed(3));
+      css(bandPath, 'opacity', (clamp(seg(t, .07, .18)) * .18).toFixed(3));
 
+      // the first dots are a one-shot pop, on the clock so they read the
+      // same snap regardless of scroll speed; later range switches just
+      // crossfade the dot groups (still scroll driven, no re-pop)
       RANGES.forEach(d => {
         const w = (d === from ? 1 - u : 0) + (d === to ? u : 0);
         dotGroups[d].forEach((c, i) => {
           css(c, 'opacity', w.toFixed(3));
           if (d === 14) {
-            const k = ease.outBack(clamp(seg(t, .03 + i * .008, .08 + i * .008)));
-            css(c, 'transform', `scale(${lerp(.3, 1, k).toFixed(3)})`);
+            const k = once(`vl-dot${i}`, t > .06 + i * .015, 300);
+            css(c, 'transform', `scale(${lerp(.3, 1, ease.outBack(k)).toFixed(3)})`);
           } else {
             css(c, 'transform', 'scale(1)');
           }
@@ -214,7 +225,7 @@ export default function verlauf({ phone, rail }) {
       text(axisB, b);
 
       laneEls.forEach(({ row, clip }, i) => {
-        const rt0 = .05 + i * .022, rt1 = rt0 + .12;
+        const rt0 = .10 + i * .022, rt1 = rt0 + .12;
         const p = clamp(seg(t, rt0, rt1));
         css(row, 'opacity', ease.out(p).toFixed(3));
         css(row, 'transform', `translateY(${(1 - ease.out(p)) * 8}px)`);
@@ -222,17 +233,23 @@ export default function verlauf({ phone, rail }) {
       });
 
       if (ctx.active === this) {
-        rail.set({ num: '3', unit: '', label: 'Unreinheiten zuletzt, vorher 9' });
         phone.finger(fingerPath(phone, t, [
-          { t: .10, at: [350, 960], show: 0 },
-          { t: .16, at: rangeEls[7], show: 1 },
-          { t: .19, at: rangeEls[7], show: 1, tap: true },
-          { t: .30, at: rangeEls[7], show: 1 },
-          { t: .41, at: rangeEls[14], show: 1 },
-          { t: .44, at: rangeEls[14], show: 1, tap: true },
-          { t: .55, at: rangeEls[14], show: 1 },
-          { t: .66, at: rangeEls[30], show: 1 },
-          { t: .69, at: rangeEls[30], show: 1, tap: true },
+          // the tap that causes this screen: the finger lands on the
+          // Verlauf tab (fixed position, same spot the tab bar always
+          // occupies) just as the screen fades in over Results
+          { t: 0, at: tabVerlauf, show: 0 },
+          { t: .015, at: tabVerlauf, show: 1 },
+          { t: .03, at: tabVerlauf, show: 1, tap: true },
+          { t: .08, at: tabVerlauf, show: 0 },
+          { t: .12, at: [350, 960], show: 0 },
+          { t: .17, at: rangeEls[7], show: 1 },
+          { t: .20, at: rangeEls[7], show: 1, tap: true },
+          { t: .31, at: rangeEls[7], show: 1 },
+          { t: .42, at: rangeEls[14], show: 1 },
+          { t: .45, at: rangeEls[14], show: 1, tap: true },
+          { t: .56, at: rangeEls[14], show: 1 },
+          { t: .67, at: rangeEls[30], show: 1 },
+          { t: .70, at: rangeEls[30], show: 1, tap: true },
           { t: .85, at: rangeEls[30], show: 1 },
           { t: .96, at: [350, 960], show: 0 },
         ]));

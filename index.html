@@ -3,28 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#000000">
 <meta name="color-scheme" content="light">
-<title>Skinmetrics | Sieh, was der Spiegel nicht zeigt</title>
+<title>Skinmetrics | Deine Haut, jeden Tag gemessen</title>
 <meta name="description" content="Ein Scan am Tag. Skinmetrics bewertet deine Haut von 0 bis 100 und zeigt dir über Wochen, wie sie sich verändert. Für iPhone im App Store.">
 <link rel="canonical" href="https://skinmetrics.app/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="de_AT">
 <meta property="og:site_name" content="Skinmetrics">
-<meta property="og:title" content="Skinmetrics | Sieh, was der Spiegel nicht zeigt">
+<meta property="og:title" content="Skinmetrics | Deine Haut, jeden Tag gemessen">
 <meta property="og:description" content="Ein Scan am Tag, ein Hautscore von 0 bis 100 und ein Verlauf, der zeigt, wie sich deine Haut über Wochen entwickelt.">
 <meta property="og:url" content="https://skinmetrics.app/">
 <meta property="og:image" content="https://skinmetrics.app/assets/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/img/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="stylesheet" href="assets/css/main.css?v=1">
+<link rel="stylesheet" href="assets/css/main.css?v=2">
 <link rel="stylesheet" href="assets/css/app.css?v=1">
-<link rel="stylesheet" href="assets/css/scenes/today.css?v=1">
-<link rel="stylesheet" href="assets/css/scenes/scan.css?v=1">
+<link rel="stylesheet" href="assets/css/scenes/camera.css?v=1">
 <link rel="stylesheet" href="assets/css/scenes/results.css?v=1">
 <link rel="stylesheet" href="assets/css/scenes/life-a.css?v=1">
 <link rel="stylesheet" href="assets/css/scenes/life.css?v=1">
+<script>
+  /* animated start states right away; fall back to the plain layout if the module never runs */
+  document.documentElement.classList.add('anim');
+  setTimeout(function () { if (!window.smReady) document.documentElement.classList.remove('anim'); }, 4000);
+</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"MobileApplication","name":"Skinmetrics","operatingSystem":"iOS 26.2","applicationCategory":"HealthApplication","inLanguage":["de","en","es","fr","it","nl","pt"],"publisher":{"@type":"Organization","name":"Q Systems","email":"hello@q-systems.app"}}
 </script>
@@ -34,7 +38,6 @@
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
   <symbol id="i-menu" viewBox="0 0 24 24"><path d="M5 9h14M5 15h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
@@ -45,8 +48,7 @@
   <nav class="nav-pill" aria-label="Hauptnavigation">
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links"><svg aria-hidden="true"><use href="#i-menu"/></svg>Menü</button>
     <div class="nav-links" id="nav-links">
-      <a href="#scan">Scan</a>
-      <a href="#alltag">Im Alltag</a>
+      <a href="#top">Scan</a>
       <a href="#daten">Datenschutz</a>
       <a href="#preis">Preis</a>
       <a href="#fragen">Fragen</a>
@@ -56,85 +58,44 @@
 </header>
 
 <main id="main">
-<div class="top-sentinel" data-top-sentinel aria-hidden="true"></div>
 
-<!-- =========================================================== HERO -->
-<section class="hero" id="top">
-  <div class="hero-copy" data-hero-copy>
-    <span class="chip">Für iPhone im App Store</span>
-    <h1 class="display"><span>Sieh, was der</span> <span class="dim">Spiegel nicht zeigt.</span></h1>
-    <p class="lead">Ein Scan am Tag. Skinmetrics bewertet deine Haut von 0 bis 100 und zeigt dir über Wochen, wie sie sich entwickelt.</p>
-    <div class="cta-row">
-      <a class="store-badge" href="https://apps.apple.com/app/id0000000000"><img src="assets/img/app-store-badge-de.svg" width="150" height="50" alt="Laden im App Store"></a>
-      <a class="btn btn-line" href="#scan">So läuft ein Scan</a>
-    </div>
-  </div>
-  <div class="hero-face" data-hero-face aria-hidden="true"><canvas></canvas></div>
-</section>
-
-<!-- =========================================================== STAGE 1: SCAN
-     Pinned stage, overlapping the hero like spacefs.com. The phone runs a
-     recreation of the app; scroll position drives every tap and animation. -->
-<section class="stage stage-scan" id="scan" aria-label="So läuft ein Scan ab">
-  <div class="stage-track" data-track="scan">
+<!-- =========================================================== THE SHOW
+     One black, pinned stage. It opens as the app's camera with the headline
+     over it, runs the three photo scan and the analysis on a large face, then
+     the camera shrinks into an iPhone that keeps being operated: results,
+     Verlauf, Hautscore, Routine, Serie. Timeline: assets/js/main.js. -->
+<section class="show" id="top" aria-label="So funktioniert Skinmetrics">
+  <div class="stage-track" data-track="app">
     <div class="stage-sticky">
-      <div class="stage-panel" data-panel="scan">
-        <div class="stage-copy">
-          <div class="caps" data-caps="scan">
-            <div class="cap"><span class="eyebrow">Der Scan</span><h2 class="h3">Morgens ein Tipp.</h2><p>Der Scan liegt mitten in der Leiste unten. Einmal tippen, die Kamera öffnet sich.</p></div>
-            <div class="cap"><span class="eyebrow">Foto 1 von 3</span><h2 class="h3">Erst von vorne.</h2><p>Die Kamera führt dich ins Oval. Sobald Haltung und Schärfe passen, löst sie von selbst aus.</p></div>
-            <div class="cap"><span class="eyebrow">Foto 2 von 3</span><h2 class="h3">Dann ein Stück nach links.</h2><p>Ein Pfeil am Rand zeigt dir, wohin. Der Ring leuchtet auf, sobald der Winkel stimmt.</p></div>
-            <div class="cap"><span class="eyebrow">Foto 3 von 3</span><h2 class="h3">Und nach rechts.</h2><p>Drei Fotos, etwa fünf Sekunden. Von der Seite sieht die Analyse auch deine Wangen gut.</p></div>
-            <div class="cap"><span class="eyebrow">Analyse</span><h2 class="h3">Zone für Zone.</h2><p>Eine KI sieht sich Stirn, Wangen, Nase und Kinn an und zählt die Unreinheiten in jedem Bereich.</p></div>
-            <div class="cap"><span class="eyebrow">Ergebnis</span><h2 class="h3">Dein Hautscore.</h2><p>Ein Gesamtwert von 0 bis 100 und fünf Einzelwerte von 1 bis 10. Dazu, wie viel sich seit dem letzten Scan getan hat.</p></div>
-            <div class="cap"><span class="eyebrow">Ergebnis</span><h2 class="h3">Genauer hingesehen.</h2><p>Die Bereiche mit den meisten Unreinheiten bekommen eine eigene Notiz. Jede Zone hat ihren eigenen Wert.</p></div>
-          </div>
-          <div class="seg-bars" data-bars="scan" aria-hidden="true"><i></i><i></i><i></i></div>
-        </div>
-        <div class="stage-phone">
-          <div class="iphone" data-phone="scan" aria-hidden="true" inert><div class="iphone-screen"><div class="ui"></div></div></div>
-        </div>
-        <div class="stage-callouts" data-callouts="scan" aria-hidden="true" inert></div>
-        <p class="stage-note">Nachgebaute Ansicht der App mit Beispieldaten</p>
-        <span class="stage-hint" data-hint="scan" aria-hidden="true"><svg><use href="#i-down"/></svg>Weiter scrollen</span>
-      </div>
-    </div>
-  </div>
-</section>
+      <div class="stage" data-panel="app">
+        <div class="cam" data-cam aria-hidden="true"></div>
 
-<!-- =========================================================== ROWS -->
-<section class="sec rows-sec" id="ablauf">
-  <div class="wrap">
-    <h2 class="h2 rv"><span>Ein Scan am Tag.</span> <span class="dim">Den Rest rechnet die App.</span></h2>
-    <p class="lead lead-xl" data-words>Skinmetrics misst jeden Tag auf dieselbe Weise. So wird aus vielen Momentaufnahmen ein Verlauf, dem du trauen kannst.</p>
-  </div>
-  <ol class="rows">
-    <li class="row rv"><span class="row-n">01</span><h3>Drei Winkel, etwa fünf Sekunden</h3><p>Frontal, links und rechts. Die Kamera löst von selbst aus, sobald Haltung und Schärfe passen.</p></li>
-    <li class="row rv"><span class="row-n">02</span><h3>Fünf Werte, ein Hautscore</h3><p>Klarheit, Textur, Feuchte, Rötung und Ebenheit bekommen je einen Wert von 1 bis 10. Dazu kommt ein Gesamtwert von 0 bis 100.</p></li>
-    <li class="row rv"><span class="row-n">03</span><h3>Wochen statt Tagesform</h3><p>Nach etwa zwei Wochen mit regelmäßigen Scans steht deine Ausgangslage. Ab dann vergleicht die App ganze Wochen.</p></li>
-    <li class="row rv"><span class="row-n">04</span><h3>Deine Routine im Blick</h3><p>Morgens und abends hakst du ab, was du benutzt hast. Die App prüft, ob sich Wirkstoffe in die Quere kommen.</p></li>
-  </ol>
-</section>
-
-<!-- =========================================================== STAGE 2: IM ALLTAG (dark) -->
-<section class="stage stage-life" id="alltag" aria-label="Was die App im Alltag zeigt">
-  <div class="stage-track" data-track="life">
-    <div class="stage-sticky">
-      <div class="stage-panel dark" data-panel="life">
-        <div class="stage-copy">
-          <div class="caps" data-caps="life">
-            <div class="cap"><span class="eyebrow">Verlauf</span><h2 class="h3">Ein schlechter Tag ist noch kein Trend.</h2><p>Bei jedem Scan zählt die App die entzündeten Unreinheiten. Der schattierte Bereich zeigt deine typische Spanne, nicht die Schwankung von Tag zu Tag.</p></div>
-            <div class="cap"><span class="eyebrow">Hautscore</span><h2 class="h3">Eine Zahl, die du nachvollziehen kannst.</h2><p>Hinter dem Hautscore stehen fünf Einzelwerte, jeder mit eigener Kurve. Bei jedem gilt: höher ist besser.</p></div>
-            <div class="cap"><span class="eyebrow">Routine</span><h2 class="h3">Abhaken, was du benutzt hast.</h2><p>Morgens und abends deine Produkte. Die KI prüft die Routine und sagt dir, wenn sich Wirkstoffe nicht vertragen.</p></div>
-            <div class="cap"><span class="eyebrow">Serie</span><h2 class="h3">Dranbleiben ohne Druck.</h2><p>Jeder Tag mit Scan zählt für deine Serie. Verpasst du einen, springt ein Gnadentag ein. Nach vier Wochen hast du einen ganzen Hautzyklus begleitet.</p></div>
+        <div class="hero-copy" data-hero-copy>
+          <h1 class="display"><span>Deine Haut,</span> <span>jeden Tag gemessen.</span></h1>
+          <p class="lead">Skinmetrics scannt dein Gesicht mit dem iPhone und zeigt dir über Wochen, was sich wirklich verändert.</p>
+          <div class="cta-row">
+            <a class="store-badge" href="https://apps.apple.com/app/id0000000000"><img src="assets/img/app-store-badge-de.svg" width="150" height="50" alt="Laden im App Store"></a>
+            <span class="avail">Für iPhone. Abo jährlich oder vierteljährlich.</span>
           </div>
-          <div class="seg-bars" data-bars="life" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
         </div>
-        <div class="stage-phone">
-          <div class="iphone" data-phone="life" aria-hidden="true" inert><div class="iphone-screen"><div class="ui"></div></div></div>
+
+        <div class="caps" data-caps>
+          <div class="cap"><h2 class="h-stage">Erst von vorne.</h2><p>Die Kamera führt dich ins Oval und löst selbst aus, sobald Haltung und Schärfe passen.</p></div>
+          <div class="cap"><h2 class="h-stage">Dann nach links.</h2><p>Ein Pfeil am Rand zeigt dir, wohin. Der Ring leuchtet auf, sobald der Winkel stimmt.</p></div>
+          <div class="cap"><h2 class="h-stage">Und nach rechts.</h2><p>Drei Fotos, etwa fünf Sekunden. Von der Seite sieht die Analyse auch deine Wangen gut.</p></div>
+          <div class="cap"><h2 class="h-stage">Zone für Zone.</h2><p>Eine KI bewertet Stirn, Wangen, Nase und Kinn einzeln, jeweils mit einem Wert von 0 bis 100.</p></div>
+          <div class="cap"><h2 class="h-stage">Dein Hautscore.</h2><p>Ein Wert von 0 bis 100. Dahinter stehen fünf Einzelwerte von 1 bis 10, jeweils im Vergleich zum letzten Scan.</p></div>
+          <div class="cap"><h2 class="h-stage">Ein schlechter Tag ist noch kein Trend.</h2><p>Bei jedem Scan zählt die App die entzündeten Unreinheiten. Der schattierte Bereich zeigt deine typische Spanne.</p></div>
+          <div class="cap"><h2 class="h-stage">Fünf Werte, jeder mit eigener Kurve.</h2><p>Klarheit, Textur, Feuchte, Rötung und Ebenheit, jeweils von 1 bis 10. Bei jedem gilt: höher ist besser.</p></div>
+          <div class="cap"><h2 class="h-stage">Abhaken, was du benutzt hast.</h2><p>Morgens und abends deine Produkte. Die KI prüft die Routine und sagt dir, wenn sich Wirkstoffe nicht vertragen.</p></div>
+          <div class="cap"><h2 class="h-stage">Dranbleiben ohne Druck.</h2><p>Jeder Tag mit Scan zählt für deine Serie. Verpasst du einen, springt ein Gnadentag ein.</p></div>
         </div>
-        <div class="stage-callouts" data-callouts="life" aria-hidden="true" inert></div>
-        <p class="stage-note">Nachgebaute Ansicht der App mit Beispieldaten</p>
+
+        <div class="stage-phone" data-phone-wrap>
+          <div class="iphone" data-phone="app" aria-hidden="true" inert><div class="iphone-screen"><div class="ui"></div></div></div>
+        </div>
+        <div class="stage-callouts" data-callouts="app" aria-hidden="true" inert></div>
+        <p class="stage-note" data-note>Nachgebaute Ansicht der App mit Beispieldaten</p>
       </div>
     </div>
   </div>
@@ -142,11 +103,11 @@
 
 <!-- =========================================================== PRIVACY -->
 <section class="sec privacy-sec" id="daten">
-  <div class="wrap privacy-grid">
-    <h2 class="h3 rv"><span>Deine Fotos bleiben</span> <span class="dim">auf deinem iPhone.</span></h2>
+  <div class="wrap">
+    <p class="statement" data-words>Deine Fotos bleiben auf deinem iPhone.</p>
     <div class="privacy-copy">
-      <p class="rv d1">Fotos, Verlauf und Routine speichert die App auf dem Gerät. Für eine Analyse geht eine verkleinerte Kopie des Fotos verschlüsselt an Gemini, die KI von Google, zusammen mit Angaben aus deinem Hautprofil. Ein Konto brauchst du nicht, Werbung gibt es keine, und in den Einstellungen löschst du nach einer Bestätigung alle Daten.</p>
-      <p class="rv d2"><a class="link-arrow" href="legal/datenschutz.html#ds-skinmetrics">Datenschutzerklärung lesen<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
+      <p>Für eine Analyse geht eine verkleinerte Kopie verschlüsselt an Gemini, die KI von Google, zusammen mit Angaben aus deinem Hautprofil. Ein Konto brauchst du nicht, Werbung gibt es keine, und in den Einstellungen löschst du alle Daten.</p>
+      <p><a class="link-arrow" href="legal/datenschutz.html#ds-skinmetrics">Datenschutzerklärung lesen<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
     </div>
   </div>
 </section>
@@ -154,37 +115,30 @@
 <!-- =========================================================== PRICE -->
 <section class="sec price-sec" id="preis">
   <div class="wrap">
-    <div class="sec-head center">
-      <h2 class="h2 rv">Ein Abo, alles drin.</h2>
-      <p class="lead rv d1">Skinmetrics gibt es jährlich oder vierteljährlich. Beide Abos enthalten dieselben Funktionen.</p>
+    <div class="sec-head">
+      <h2 class="h2">Ein Abo, alles drin.</h2>
+      <p class="lead">Skinmetrics gibt es jährlich oder vierteljährlich, eine kostenlose Version gibt es nicht. Beide Abos enthalten dieselben Funktionen, und kündigen kannst du jederzeit in den Einstellungen deines iPhones.</p>
     </div>
     <div class="plans">
-      <article class="plan plan-dark rv">
+      <article class="plan plan-dark">
         <div class="plan-top"><h3>Jährlich</h3><span class="plan-tag">Empfohlen</span></div>
         <p class="plan-sub">Einmal im Jahr bezahlt.</p>
-        <ul class="plan-list">
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Hautscore mit allen fünf Einzelwerten</li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Verlauf für Unreinheiten, Hautscore und Einzelwerte</li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Vergleich vorher und nachher</li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Routine mit Prüfung der Wirkstoffe</li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Serie mit bis zu drei Gnadentagen pro Woche</li>
-        </ul>
         <a class="btn btn-light" href="https://apps.apple.com/app/id0000000000">Im App Store ansehen</a>
       </article>
-      <article class="plan rv d1">
+      <article class="plan">
         <div class="plan-top"><h3>Vierteljährlich</h3></div>
         <p class="plan-sub">Alle drei Monate bezahlt.</p>
-        <ul class="plan-list">
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Hautscore mit allen fünf Einzelwerten</li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Verlauf für Unreinheiten, Hautscore und Einzelwerte</li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Vergleich vorher und nachher</li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Routine mit Prüfung der Wirkstoffe</li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Serie mit bis zu drei Gnadentagen pro Woche</li>
-        </ul>
         <a class="btn btn-line" href="https://apps.apple.com/app/id0000000000">Im App Store ansehen</a>
       </article>
     </div>
-    <p class="small center rv">Den Preis in deiner Währung zeigt dir der App Store, bevor du etwas abschließt. Kündigen kannst du jederzeit in den Einstellungen deines iPhones.</p>
+    <ul class="incl">
+      <li><svg aria-hidden="true"><use href="#i-check"/></svg>Täglicher Scan mit Hautscore und fünf Einzelwerten</li>
+      <li><svg aria-hidden="true"><use href="#i-check"/></svg>Verlauf für Unreinheiten, Hautscore und Einzelwerte</li>
+      <li><svg aria-hidden="true"><use href="#i-check"/></svg>Vergleich vorher und nachher</li>
+      <li><svg aria-hidden="true"><use href="#i-check"/></svg>Routine mit Prüfung der Wirkstoffe</li>
+      <li><svg aria-hidden="true"><use href="#i-check"/></svg>Serie mit bis zu drei Gnadentagen pro Woche</li>
+    </ul>
+    <p class="small">Den Preis in deiner Währung zeigt dir der App Store, bevor du etwas abschließt.</p>
   </div>
 </section>
 
@@ -192,22 +146,16 @@
 <section class="sec" id="fragen">
   <div class="wrap faq-grid">
     <div class="faq-head">
-      <h2 class="h2 rv">Fragen</h2>
-      <p class="lead rv d1">Fehlt etwas? <a href="mailto:hello@q-systems.app">Schreib uns eine Mail</a>, wir antworten persönlich.</p>
+      <h2 class="h2">Fragen</h2>
+      <p class="lead">Fehlt etwas? <a href="mailto:hello@q-systems.app">Schreib uns eine Mail</a>, wir antworten persönlich.</p>
     </div>
-    <div class="faq rv d1">
+    <div class="faq">
       <details><summary>Stellt Skinmetrics Diagnosen?<svg class="pm" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans">Nein. Die Analyse beschreibt nur, was auf dem Foto zu sehen ist. Skinmetrics ist kein Medizinprodukt und ersetzt keine ärztliche Beratung, Diagnose oder Behandlung. Wenn dich eine Stelle beunruhigt oder sich ein Muttermal verändert, geh bitte zu einer Dermatologin oder einem Dermatologen.</div></details>
-      <details><summary>Warum drei Fotos pro Scan?<svg class="pm" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans">Von vorne liegen die Wangen schräg im Bild. Deshalb macht die Kamera ein Foto frontal und je eines leicht nach links und nach rechts gedreht. Das dauert etwa fünf Sekunden, ausgelöst wird automatisch.</div></details>
-      <details><summary>Wie entsteht der Hautscore?<svg class="pm" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans">Eine KI bewertet deine Fotos in fünf Bereichen von 1 bis 10 (Klarheit, Textur, Feuchte, Rötung, Ebenheit) und vergibt dazu einen Gesamtwert von 0 bis 100. Ein einzelner Wert ist eine Momentaufnahme. Aussagekräftig wird erst der Verlauf über mehrere Wochen.</div></details>
-      <details><summary>Wann sehe ich Veränderungen?<svg class="pm" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans">Deinen ersten Hautscore bekommst du nach dem ersten Scan. Für einen Trend braucht es mehr. Nach etwa zwei Wochen mit regelmäßigen Scans steht deine Ausgangslage, danach vergleicht die App ganze Wochen. Wie schnell sich etwas tut, hängt von deiner Haut und deiner Pflege ab.</div></details>
-      <details><summary>Sagt mir die App, welches Produkt hilft?<svg class="pm" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans">Nicht automatisch. Skinmetrics speichert zu jedem Scan, welche Produkte du benutzt hast, und der Verlauf zeigt, wie sich deine Haut seitdem entwickelt. Wenn du ein Produkt neu anfängst, siehst du also, was danach passiert. Eine eigene Auswertung pro Produkt gibt es derzeit nicht.</div></details>
       <details><summary>Was passiert mit meinen Fotos?<svg class="pm" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans">Sie liegen auf deinem iPhone. Wenn du einen Scan auswertest oder beim Einrichten deine Produkte fotografierst, geht eine verkleinerte Kopie verschlüsselt an Google, dessen KI das Bild beurteilt. Dazu kommen Angaben aus deinem Hautprofil, etwa Hauttyp, Altersspanne, Allergien und Hautprobleme. Die vollständige Liste steht in der <a href="legal/datenschutz.html#ds-skinmetrics">Datenschutzerklärung</a>.</div></details>
       <details><summary>Brauche ich ein Konto?<svg class="pm" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans">Nein. Du öffnest die App und fängst an. Deine Daten liegen auf dem iPhone, auf unseren Servern gibt es kein Profil von dir. Löschst du die App, sind sie vom iPhone weg. Sie können aber noch in einem Backup deines iPhones in iCloud stecken.</div></details>
       <details><summary>Was kostet Skinmetrics?<svg class="pm" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans">Skinmetrics ist ein Abo, jährlich oder vierteljährlich. Den Preis in deiner Währung zeigt dir der App Store, bevor du etwas abschließt. Kündigen kannst du jederzeit in den Einstellungen deines iPhones.</div></details>
       <details><summary>Welches iPhone brauche ich?<svg class="pm" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans">Ein iPhone mit iOS 26.2 oder neuer. Auf dem iPad läuft die App ebenfalls, gestaltet ist sie aber fürs iPhone.</div></details>
-      <details><summary>In welchen Sprachen gibt es die App?<svg class="pm" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans">Deutsch, Englisch, Französisch, Italienisch, Niederländisch, Portugiesisch und Spanisch. Die App folgt der Sprache deines iPhones.</div></details>
       <details><summary>Gibt es Skinmetrics für Android?<svg class="pm" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans">Noch nicht, die App für Android ist in Arbeit. Wenn du uns eine kurze <a href="mailto:hello@q-systems.app?subject=Skinmetrics%20f%C3%BCr%20Android">Mail</a> schreibst, melden wir uns, sobald sie da ist.</div></details>
-      <details><summary>Wer steckt hinter Skinmetrics?<svg class="pm" aria-hidden="true"><use href="#i-plus"/></svg></summary><div class="ans">Q Systems, ein kleines Studio aus Österreich. Wir bauen Apps fürs iPhone und finanzieren Skinmetrics allein über das Abo, nicht über Werbung oder Daten. Die Angaben zum Unternehmen findest du im <a href="legal/impressum.html">Impressum</a>.</div></details>
     </div>
   </div>
 </section>
@@ -215,13 +163,14 @@
 <!-- =========================================================== CTA -->
 <section class="cta-sec" id="start">
   <div class="cta-panel">
-    <div class="cta-face" data-cta-face aria-hidden="true"><canvas></canvas></div>
-    <h2 class="h2 rv">Deine Haut, Woche für Woche.</h2>
-    <p class="lead rv d1">Skinmetrics gibt es für iPhone im App Store. Die App für Android kommt bald.</p>
-    <div class="cta-row center rv d2">
-      <a class="store-badge" href="https://apps.apple.com/app/id0000000000"><img src="assets/img/app-store-badge-de.svg" width="150" height="50" alt="Laden im App Store"></a>
+    <div class="cta-copy">
+      <h2 class="display-2">Morgen früh, <span class="dim">erster Scan.</span></h2>
+      <div class="cta-row">
+        <a class="store-badge" href="https://apps.apple.com/app/id0000000000"><img src="assets/img/app-store-badge-de.svg" width="150" height="50" alt="Laden im App Store"></a>
+        <span class="avail">Die App für Android kommt bald.</span>
+      </div>
+      <p class="small">Skinmetrics ist kein Medizinprodukt und ersetzt keine ärztliche Beratung, Diagnose oder Behandlung.</p>
     </div>
-    <p class="small rv">Skinmetrics ist kein Medizinprodukt und ersetzt keine ärztliche Beratung, Diagnose oder Behandlung.</p>
   </div>
 </section>
 
@@ -252,11 +201,11 @@
     </div>
     <div class="foot-bottom">
       <span>© <span data-year>2026</span> Q Systems</span>
-      <span>Die App auf dieser Seite ist nachgebaut und zeigt Beispieldaten. Das Gesicht ist ein Modell aus Punkten, kein echter Mensch. Apple, iPhone, iPad, iOS und App Store sind Marken von Apple Inc.</span>
+      <span>Die App auf dieser Seite ist nachgebaut und zeigt Beispieldaten. Das Gesicht stammt aus einem Kopfscan von Lee Perry-Smith (Infinite-Realities), lizenziert unter CC BY 3.0. Apple, iPhone, iPad, iOS und App Store sind Marken von Apple Inc.</span>
     </div>
   </div>
 </footer>
 
-<script type="module" src="assets/js/main.js?v=1"></script>
+<script type="module" src="assets/js/main.js?v=2" onerror="document.documentElement.classList.remove('anim')"></script>
 </body>
 </html>

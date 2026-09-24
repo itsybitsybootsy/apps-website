@@ -56,6 +56,26 @@ export function toggle(el, cls, on) {
   if (el && el.classList.contains(cls) !== on) el.classList.toggle(cls, on);
 }
 
+/* One-shot events. Scroll decides WHEN something happens, the clock decides
+   HOW it plays: once(key, on, ms) returns 0..1, running from 0 to 1 over ms
+   after `on` first becomes true, and snapping back to 0 when `on` turns false
+   (scrolling back re-arms it). Used for shutters, check marks, count ups. */
+const shots = new Map();
+let animating = false;
+export function once(key, on, ms = 600) {
+  if (!on || reduceMotion) { shots.delete(key); return on ? 1 : 0; }
+  const now = performance.now();
+  if (!shots.has(key)) shots.set(key, now);
+  const k = clamp((now - shots.get(key)) / ms);
+  if (k < 1) animating = true;
+  return k;
+}
+
+/* Re-arms every one-shot whose key starts with prefix. */
+export function resetOnce(prefix) {
+  for (const k of shots.keys()) if (k.startsWith(prefix)) shots.delete(k);
+}
+
 /* Formats a number the German way: 1,5 instead of 1.5 */
 export const de = (n, d = 0) => n.toFixed(d).replace('.', ',');
 
@@ -94,14 +114,15 @@ export function createStage(track, { scenes = [], onFrame } = {}) {
     const dt = Math.min(64, now - (last || now));
     last = now;
     measure();
-    // frame rate independent damping, roughly 0.14 per 60 Hz frame
-    const k = reduceMotion ? 1 : 1 - Math.pow(1 - .14, dt / 16.67);
+    // light damping (about 50 ms) so wheel steps don't stutter; easing lives inside each beat
+    const k = reduceMotion ? 1 : 1 - Math.pow(1 - .3, dt / 16.67);
     current += (target - current) * k;
     if (Math.abs(target - current) < 1e-5) current = target;
+    animating = false;
     try { render(); }
     finally {
-      // settle, then sleep until the next scroll or resize wakes us
-      if (visible && current !== target) requestAnimationFrame(frame);
+      // settle (and finish one-shot events), then sleep until the next scroll or resize
+      if (visible && (current !== target || animating)) requestAnimationFrame(frame);
       else { running = false; last = 0; }
     }
   };
@@ -142,7 +163,8 @@ export function captions(els, ranges) {
     range: [0, 1],
     helper: true,
     update(_t, ctx) {
-      let idx = 0;
+      // before the first start no caption shows (the hero owns the screen)
+      let idx = -1;
       ranges.forEach((start, i) => { if (ctx.p >= start) idx = i; });
       els.forEach((el, i) => {
         toggle(el, 'on', i === idx);

@@ -2,12 +2,19 @@
    SkinScoreInfoSheet): the score dial, the Kennzahlen breakdown with its tick
    bars, and the Radar. Opens with the finger tapping "Profil" in the same
    segmented control the Verlauf scene left on "Verlauf", so it reads as one
-   continuous tab rather than a hard cut. The dial then sweeps and counts up
-   exactly like the real SkinScoreDial replay: the ruler band, the value
-   colour and the pill all react to the score as it climbs through the
-   thresholds, not just at the final value. */
+   continuous tab rather than a hard cut.
 
-import { seg, ease, css, attr, text, toggle, lerp, clamp } from '../engine.js';
+   Spatial motion (the crossfade, the finger, the body scroll) follows scroll
+   directly. The three discrete beats - the dial's count up and arc sweep,
+   the Kennzahlen bars, and the radar growing in - play on the clock via
+   once() once scroll reaches them, so they read the same snap regardless of
+   scroll speed and always finish on a readable, held plateau rather than
+   stopping mid-motion if the user pauses. The dial still replays the real
+   SkinScoreDial's band/colour thresholds as it climbs, not just at the final
+   value; the radar is gated on the card actually being visible, not a guess
+   at scroll position. */
+
+import { seg, ease, css, attr, text, toggle, lerp, clamp, once } from '../engine.js';
 import { fingerPath } from '../phone.js';
 import { statusBar, tabBar, icon, h } from '../ui-kit.js';
 import { score as scoreData, bandFor, metrics } from './data.js';
@@ -68,12 +75,28 @@ const radarLabels = () => metrics.map((m, i) => {
 // the status bar / topmask, above the floating tab bar
 const VIEW_TOP = 54, VIEW_BOTTOM = 852 - 88;
 
-export default function scoreScene({ phone, rail }) {
+/* UI-point position of an element via the offsetLeft/offsetParent chain
+   instead of phone.at()'s getBoundingClientRect math. Needed for finger
+   targets read during the score push-in (main.js zooms the whole phone
+   wrapper 1.45x via a transform on an ancestor of .ui): phone.at() divides
+   by phone.scale alone, which tracks the iphone frame's own fit and knows
+   nothing about that extra wrapper transform, so it returns the wrong point
+   whenever the wrapper zoom isn't 1. offsetLeft/offsetTop are pure layout
+   values and are never affected by an ancestor's CSS transform, so this is
+   correct at any zoom level. Safe to cache once: these targets don't move. */
+const uiPoint = (phone, el) => {
+  let x = el.offsetLeft, y = el.offsetTop, n = el.offsetParent;
+  while (n && n !== phone.ui) { x += n.offsetLeft; y += n.offsetTop; n = n.offsetParent; }
+  return [x + el.offsetWidth / 2, y + el.offsetHeight / 2];
+};
+
+export default function scoreScene({ phone }) {
   let el, body, scrollMax = 0, tabRoutine;
   let segProfil, segVerlauf, segHl, segRects = {};
   let dialNum, dialBand, valueArc, knob, rulerArcs = [];
   let rows = [], radarFill, radarLine, radarGhost, radarDots = [];
   let radarTop = 0, radarH = 0;
+  let tabRoutinePt = [0, 0], rowPts = [];
 
   return {
     init() {
@@ -185,6 +208,10 @@ export default function scoreScene({ phone, rail }) {
       const radarRect0 = radarSection.getBoundingClientRect();
       radarTop = (radarRect0.top - bodyRect0.top) / phone.scale;
       radarH = radarRect0.height / phone.scale;
+
+      // cached UI-point targets for the finger during the push-in zoom (see uiPoint above)
+      tabRoutinePt = uiPoint(phone, tabRoutine);
+      rowPts = rows.map(({ row }) => uiPoint(phone, row));
     },
 
     update(t, ctx) {
@@ -207,8 +234,11 @@ export default function scoreScene({ phone, rail }) {
       toggle(segProfil, 'on', su >= .5);
       toggle(segVerlauf, 'on', su < .5);
 
-      // dial: sweep + count, replaying the real band/colour thresholds as it climbs
-      const dialP = ease.outQuint(clamp(seg(t, .10, .40)));
+      // dial: sweep + count, on the clock once reached (900ms, the same
+      // duration the real SkinScoreDial.replay() uses), replaying the real
+      // band/colour thresholds as it climbs rather than only at the final value
+      const dialK = once('ss-dial', t > .08, 900);
+      const dialP = ease.outQuint(dialK);
       const displayed = Math.round(scoreData.after * dialP);
       text(dialNum, displayed);
       const bandKey = bandKeyFor(Math.max(1, displayed));
@@ -227,9 +257,11 @@ export default function scoreScene({ phone, rail }) {
       css(dialBand, 'color', `var(--ss-${bandKey}-ink)`);
       css(dialBand, 'background', displayed > 0 ? `var(--ss-${bandKey}-fill)` : 'transparent');
 
-      // Kennzahlen rows: bars fill and numbers count, staggered
+      // Kennzahlen rows: one clock-driven beat, staggered per row from the
+      // same progress (700ms) rather than five separate scroll windows
+      const kzK = once('ss-kz', t > .22, 700);
       rows.forEach(({ val, ticks, target }, i) => {
-        const p = ease.outQuint(clamp(seg(t, .32 + i * .03, .32 + i * .03 + .16)));
+        const p = ease.outQuint(clamp((kzK - i * .15) / (1 - i * .15)));
         text(val, Math.round(target * p));
         const filled = target * p;
         ticks.forEach((tick, ti) => {
@@ -238,20 +270,9 @@ export default function scoreScene({ phone, rail }) {
         });
       });
 
-      // scroll down to reveal the radar, finger drags
+      // scroll down to reveal the radar, finger drags (spatial, stays scroll driven)
       const scrollP = ease.inOut(clamp(seg(t, .74, .90)));
       css(body, 'transform', `translateY(${(-scrollMax * scrollP).toFixed(1)}px)`);
-
-      // radar grows in as it scrolls into view
-      const radarP = ease.outBack(clamp(seg(t, .80, .97)));
-      const values = metrics.map(m => m.value / 10);
-      const ghostValues = metrics.map(m => m.prev / 10);
-      const pts = values.map((v, i) => radarPoint(i, v, radarP));
-      attr(radarFill, 'd', polyD(pts));
-      attr(radarLine, 'd', polyD(pts));
-      attr(radarGhost, 'd', polyD(ghostValues.map((v, i) => radarPoint(i, v, radarP))));
-      radarDots.forEach((c, i) => { attr(c, 'cx', pts[i][0].toFixed(1)); attr(c, 'cy', pts[i][1].toFixed(1)); });
-      css(radarFill, 'opacity', clamp(seg(t, .78, .86)).toFixed(3));
 
       // literally "is the radar card at least half on screen", from the same
       // scroll math driving the body's transform above, not a fixed t guess
@@ -259,13 +280,19 @@ export default function scoreScene({ phone, rail }) {
       const cardVisible = Math.max(0, Math.min(cardTop + radarH, VIEW_BOTTOM) - Math.max(cardTop, VIEW_TOP));
       const radarOnScreen = radarH > 0 && cardVisible / radarH >= .5;
 
+      // radar grows in on the clock once it is actually visible, not a t guess
+      const radarK = once('ss-radar', radarOnScreen, 700);
+      const radarP = ease.outBack(radarK);
+      const values = metrics.map(m => m.value / 10);
+      const ghostValues = metrics.map(m => m.prev / 10);
+      const pts = values.map((v, i) => radarPoint(i, v, radarP));
+      attr(radarFill, 'd', polyD(pts));
+      attr(radarLine, 'd', polyD(pts));
+      attr(radarGhost, 'd', polyD(ghostValues.map((v, i) => radarPoint(i, v, radarP))));
+      radarDots.forEach((c, i) => { attr(c, 'cx', pts[i][0].toFixed(1)); attr(c, 'cy', pts[i][1].toFixed(1)); });
+      css(radarFill, 'opacity', clamp(radarK * 1.3).toFixed(3));
+
       if (ctx.active === this) {
-        // stays off until the tap so it never shows "0" over the old Verlauf body
-        if (t > .02) {
-          rail.set(radarOnScreen
-            ? { num: '5', unit: '', label: 'Werte im Radar' }
-            : { num: displayed, unit: '/100', label: bandFor(Math.max(1, displayed)) });
-        }
         phone.finger(fingerPath(phone, t, [
           // already waiting just below "Profil", not flying in from off
           // screen (Verlauf's own exit isn't ours to touch)
@@ -273,17 +300,22 @@ export default function scoreScene({ phone, rail }) {
           { t: .008, at: segProfil, show: 1 },
           { t: .02, at: segProfil, show: 1, tap: true },
           { t: .10, at: segProfil, show: 1 },
-          { t: .16, at: segProfil, show: 0 },
-          { t: .62, at: [196, 780], show: 0 },
-          { t: .70, at: [196, 640], show: 1 },
+          // drifts down over the Kennzahlen rows while they fill (continuous
+          // motion instead of parking, so nothing sits idle mid scene). Uses
+          // the cached rowPts, not a live phone.at(row) read, because this
+          // whole stretch plays during the score push-in zoom (see uiPoint).
+          { t: .16, at: [rowPts[0][0] + 60, rowPts[0][1]], show: 1 },
+          { t: .40, at: [rowPts[3][0] + 60, rowPts[3][1]], show: 1 },
+          { t: .60, at: [196, 640], show: 1 },
           { t: .74, at: [196, 640], show: 1, press: .8 },
           { t: .90, at: [196, 300], show: 1, press: .8 },
           { t: .93, at: [196, 300], show: 0 },
           // taps "Routine" in the tab bar at the very end, so the next
-          // scene's tab switch reads as caused by this gesture
-          { t: .965, at: tabRoutine, show: 1 },
-          { t: .985, at: tabRoutine, show: 1, tap: true },
-          { t: 1, at: tabRoutine, show: 0 },
+          // scene's tab switch reads as caused by this gesture (cached
+          // tabRoutinePt, not a live read: still inside the zoom's release)
+          { t: .965, at: tabRoutinePt, show: 1 },
+          { t: .985, at: tabRoutinePt, show: 1, tap: true },
+          { t: 1, at: tabRoutinePt, show: 0 },
         ]));
       }
     },
