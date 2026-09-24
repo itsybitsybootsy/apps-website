@@ -54,3 +54,14 @@ Dann im Browser: http://localhost:8080/
   `https://apps.apple.com/app/id0000000000`. Nach dem Launch in `index.html` durch die echte
   App-Store-URL ersetzen (alle Vorkommen von `id0000000000`). Die Badge stammt von Apple (`assets/img/app-store-badge-de.svg`).
 - Rechtstext-Quellen und Build-Skripte liegen bewusst **nicht** in diesem Repo (siehe `.gitignore`).
+
+## Cache busting
+
+GitHub Pages serves every file with `max-age=600`, so right after a deploy a
+browser can pair the new `index.html` with old cached scripts. Every stylesheet
+and script URL therefore carries the same `?v=N`, including the relative ES
+module imports inside `assets/js` (a module loaded under two different query
+strings runs twice, so keep them identical). Before each deploy, bump N
+everywhere at once:
+
+    perl -pi -e 's/\?v=\d+/?v=4/g' index.html assets/js/*.js assets/js/scenes/*.js

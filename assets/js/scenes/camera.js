@@ -8,9 +8,9 @@
    Spatial motion follows scroll; the shutter flash, thumbnails and value
    count ups play on the clock once their moment is reached (engine once()). */
 
-import { seg, ease, css, attr, text, toggle, lerp, clamp, once } from '../engine.js';
-import { h } from '../ui-kit.js';
-import { analysisSteps, zones } from './data.js';
+import { seg, ease, css, attr, text, toggle, lerp, clamp, once } from '../engine.js?v=3';
+import { h } from '../ui-kit.js?v=3';
+import { analysisSteps, zones } from './data.js?v=3';
 
 /* beats in local t (camera range .05 → .49 of the stage) */
 const B = {
@@ -37,7 +37,7 @@ const ZONE_LABELS = [
 /* The photographic head sequence (faceseq.js) behind a small adapter that maps
    the scene's oval geometry onto the frame. */
 async function makeFace(canvas) {
-  const { createFaceSeq } = await import('../faceseq.js');
+  const { createFaceSeq } = await import('../faceseq.js?v=3');
   const f = createFaceSeq(canvas, {});
   await f.ready;
   const base = new URL('../../face/seq-640/', import.meta.url);

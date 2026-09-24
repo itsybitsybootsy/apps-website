@@ -7,10 +7,10 @@
    No screenshots: everything is live HTML; the only image is the scan's
    front frame, cropped like the app crops the check-in photo. */
 
-import { seg, ease, css, text, attr, once, resetOnce, lerp } from '../engine.js';
-import { fingerPath } from '../phone.js';
-import { statusBar, h } from '../ui-kit.js';
-import { score, metrics, zones, closeUps, sparkline } from './data.js';
+import { seg, ease, css, text, attr, once, resetOnce, lerp } from '../engine.js?v=3';
+import { fingerPath } from '../phone.js?v=3';
+import { statusBar, h } from '../ui-kit.js?v=3';
+import { score, metrics, zones, closeUps, sparkline } from './data.js?v=3';
 
 /* ---------------------------------------------------------------- local icons (not in ui-kit) */
 const expandIcon = (w = 15) =>

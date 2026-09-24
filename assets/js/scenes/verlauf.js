@@ -9,10 +9,10 @@
    initial dots' pop-in is the one discrete (clock driven, once()) beat here;
    everything else is spatial and follows scroll directly. */
 
-import { seg, ease, css, attr, text, lerp, clamp, once } from '../engine.js';
-import { fingerPath } from '../phone.js';
-import { statusBar, tabBar, h } from '../ui-kit.js';
-import { blemishes, metrics } from './data.js';
+import { seg, ease, css, attr, text, lerp, clamp, once } from '../engine.js?v=3';
+import { fingerPath } from '../phone.js?v=3';
+import { statusBar, tabBar, h } from '../ui-kit.js?v=3';
+import { blemishes, metrics } from './data.js?v=3';
 
 /* ---------------------------------------------------------------- data prep (pure, once) */
 const RANGES = [7, 14, 30];
