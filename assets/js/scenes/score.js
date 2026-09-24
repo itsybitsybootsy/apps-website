@@ -14,10 +14,10 @@
    value; the radar is gated on the card actually being visible, not a guess
    at scroll position. */
 
-import { seg, ease, css, attr, text, toggle, lerp, clamp, once } from '../engine.js?v=3';
-import { fingerPath } from '../phone.js?v=3';
-import { statusBar, tabBar, icon, h } from '../ui-kit.js?v=3';
-import { score as scoreData, bandFor, metrics } from './data.js?v=3';
+import { seg, ease, css, attr, text, toggle, lerp, clamp, once } from '../engine.js?v=4';
+import { fingerPath } from '../phone.js?v=4';
+import { statusBar, tabBar, icon, h } from '../ui-kit.js?v=4';
+import { score as scoreData, bandFor, metrics } from './data.js?v=4';
 
 /* ---------------------------------------------------------------- dial geometry (SkinScoreDial) */
 const DIAM = 248, R = DIAM / 2;
