@@ -10,10 +10,10 @@
    medal crest springs in on its own clock, the finger taps "Weiter", and the
    celebration dismisses back to the settled Serie sheet before t = 1. */
 
-import { seg, ease, css, text, toggle, pulse, lerp, clamp, once } from '../engine.js?v=3';
-import { fingerPath } from '../phone.js?v=3';
-import { statusBar, icon, h } from '../ui-kit.js?v=3';
-import { streak } from './data.js?v=3';
+import { seg, ease, css, text, toggle, pulse, lerp, clamp, once } from '../engine.js?v=4';
+import { fingerPath } from '../phone.js?v=4';
+import { statusBar, icon, h } from '../ui-kit.js?v=4';
+import { streak } from './data.js?v=4';
 
 /* Small deterministic PRNG so the mosaic history is the same on every load
    and scrubs cleanly (no Math.random in a pure update). */

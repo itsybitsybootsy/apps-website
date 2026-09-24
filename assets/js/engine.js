@@ -144,6 +144,8 @@ export function createStage(track, { scenes = [], onFrame } = {}) {
   const stage = {
     ctx,
     get progress() { return current; },
+    /** Render once more without a scroll, e.g. when a scene's assets arrive late. */
+    refresh: kick,
     start() {
       scenes.forEach(s => {
         try { if (s.init) s.init(ctx); }

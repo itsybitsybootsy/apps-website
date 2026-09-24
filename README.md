@@ -64,4 +64,4 @@ module imports inside `assets/js` (a module loaded under two different query
 strings runs twice, so keep them identical). Before each deploy, bump N
 everywhere at once:
 
-    perl -pi -e 's/\?v=\d+/?v=4/g' index.html assets/js/*.js assets/js/scenes/*.js
+    perl -pi -e 's/\?v=\d+/?v=5/g' index.html assets/js/*.js assets/js/scenes/*.js
