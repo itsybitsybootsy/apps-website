@@ -119,6 +119,34 @@
       queue();
     }
     function restore() { measure(); queue(); }
+    // Chrome on Android can come to rest mid-swap. scrollend only fires once the
+    // finger is up and the fling has finished, so the glide never fights a touch.
+    // Apple devices (every iOS browser is WebKit) already feel right; leave them native.
+    var apple = /iP(hone|ad|od)/.test(navigator.userAgent)
+      || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
+    var settles = !apple && 'onscrollend' in window;
+    var rests = [.275, .58, .91], lastY = window.scrollY, dir = 0;
+    function track() {
+      var y = window.scrollY;
+      if (y !== lastY) dir = y > lastY ? 1 : -1;
+      lastY = y;
+    }
+    function settle() {
+      var p = (window.scrollY - start) / distance;
+      if (p <= rests[0] || p >= rests[rests.length - 1]) return;
+      var nearest = rests.reduce(function (a, b) { return Math.abs(p - a) < Math.abs(p - b) ? a : b; });
+      var off = Math.abs(p - nearest) * distance;
+      if (off < 2) return;
+      // A brush of the screen returns; anything more finishes the swap it started.
+      var target = off < 28 ? nearest : dir < 0
+        ? rests.filter(function (r) { return r < p; }).pop()
+        : rests.filter(function (r) { return r > p; })[0];
+      window.scrollTo({ top:Math.round(start + target * distance), behavior:'smooth' });
+    }
+    if (settles) {
+      window.addEventListener('scroll', track, { passive:true });
+      window.addEventListener('scrollend', settle);
+    }
     window.addEventListener('scroll', queue, { passive:true });
     window.addEventListener('resize', measure);
     window.addEventListener('pageshow', restore);
@@ -133,6 +161,10 @@
     measure();
     cleanup = function () {
       cancelAnimationFrame(raf);
+      if (settles) {
+        window.removeEventListener('scroll', track);
+        window.removeEventListener('scrollend', settle);
+      }
       window.removeEventListener('scroll', queue);
       window.removeEventListener('resize', measure);
       window.removeEventListener('pageshow', restore);

@@ -57,7 +57,7 @@ Produkttexte müssen dem aktuellen Stand der iOS-App entsprechen.
 ## Cache
 
 Die acht aktiven CSS- und JavaScript-URLs in `index.html` tragen dieselbe Version
-(`?v=42`). Bei Änderungen vor dem nächsten Deploy gemeinsam erhöhen, damit GitHub
+(`?v=43`). Bei Änderungen vor dem nächsten Deploy gemeinsam erhöhen, damit GitHub
 Pages keine alten Dateien aus dem Browsercache mit neuen Dateien kombiniert.
 
 Die Desktop-Bewertungsleiste zeigt nur die Überschrift. Die Karten bleiben Beispieltexte,
