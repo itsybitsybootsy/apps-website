@@ -27,6 +27,7 @@
     document.documentElement.classList.add('has-mobile-story');
 
     var sticky = story.querySelector('.ms-sticky');
+    var frame = story.querySelector('.ms-window');
     var phones = Array.from(story.querySelectorAll('.ms-phone'));
     var steps = Array.from(story.querySelectorAll('.ms-steps span'));
     var border = story.querySelector('.ms-border');
@@ -59,8 +60,9 @@
       if (!visible) return;
       var zoom = .7 + .3 * smooth(phase(p, 0, .24));
       var slide = smooth(phase(p, .31, .53)) + smooth(phase(p, .63, .85));
+      var span = frame.clientWidth || width;
       phones.forEach(function (phone, i) {
-        var x = (i - slide) * (width + 24);
+        var x = (i - slide) * span;
         var away = Math.min(1, Math.abs(i - slide));
         var scale = zoom * (1 - .025 * away);
         phone.style.transform = 'translate3d(calc(-50% + ' + x.toFixed(2) + 'px), calc(-50% + ' + (away * 6).toFixed(2) + 'px), 0) scale(' + scale.toFixed(4) + ')';
@@ -80,19 +82,39 @@
       }
     }
     function queue() { if (!raf) raf = requestAnimationFrame(render); }
+    function usedLength(el, name, fallback) {
+      var raw = getComputedStyle(el).getPropertyValue(name).trim();
+      var value = parseFloat(raw);
+      if (value) return value;
+      var probe = document.createElement('div');
+      probe.style.cssText = 'position:absolute;left:0;top:0;height:0;visibility:hidden;width:var(' + name + ')';
+      el.appendChild(probe);
+      value = probe.getBoundingClientRect().width;
+      probe.remove();
+      return value || fallback;
+    }
     function measure() {
+      if (window.visualViewport) {
+        var seen = Math.round(window.visualViewport.height);
+        if (seen > 0 && Math.abs(sticky.clientHeight - seen) > 1) sticky.style.height = seen + 'px';
+      }
       var nextStart = story.getBoundingClientRect().top + window.scrollY;
-      var nextHeight = sticky.clientHeight, nextWidth = sticky.clientWidth;
+      var box = sticky.getBoundingClientRect();
+      var nextHeight = Math.round(box.height), nextWidth = Math.round(box.width);
       var nextDistance = Math.max(1, story.offsetHeight - nextHeight);
       // FAQ disclosure below the story need not rewrite the whole SVG frame.
       if (nextStart === start && nextHeight === height && nextWidth === width && nextDistance === distance) return;
       start = nextStart; height = nextHeight; width = nextWidth; distance = nextDistance;
+      var host = sticky.getBoundingClientRect();
+      var win = frame.getBoundingClientRect();
+      var radius = usedLength(sticky, '--ms-frame-radius', 36);
       border.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
       story.querySelectorAll('.ms-border rect').forEach(function (rect) {
-        rect.setAttribute('x', '9'); rect.setAttribute('y', '9');
-        rect.setAttribute('width', Math.max(0, width - 18));
-        rect.setAttribute('height', Math.max(0, height - 18));
-        rect.setAttribute('rx', '25');
+        rect.setAttribute('x', String(win.left - host.left));
+        rect.setAttribute('y', String(win.top - host.top));
+        rect.setAttribute('width', String(Math.max(0, win.width)));
+        rect.setAttribute('height', String(Math.max(0, win.height)));
+        rect.setAttribute('rx', String(radius));
       });
       queue();
     }
@@ -100,6 +122,10 @@
     window.addEventListener('scroll', queue, { passive:true });
     window.addEventListener('resize', measure);
     window.addEventListener('pageshow', restore);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', measure);
+      window.visualViewport.addEventListener('scroll', measure);
+    }
     // Content above the tour can change size after image/font loading.
     var resize = new ResizeObserver(measure);
     resize.observe(document.body);
@@ -110,6 +136,10 @@
       window.removeEventListener('scroll', queue);
       window.removeEventListener('resize', measure);
       window.removeEventListener('pageshow', restore);
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener('resize', measure);
+        window.visualViewport.removeEventListener('scroll', measure);
+      }
       resize.disconnect();
       document.documentElement.classList.remove('has-mobile-story', 'mobile-scroll-active');
       story.remove(); story = null;

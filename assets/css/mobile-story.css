@@ -1,4 +1,14 @@
 /* A mobile-only, scroll-scrubbed tour. No scroll locking or wheel interception. */
+@property --ms-gap {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0.5cm;
+}
+@property --ms-frame-radius {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 36px;
+}
 .mobile-story { display:none; }
 
 @media (max-width:640px) and (prefers-reduced-motion:no-preference) {
@@ -12,17 +22,33 @@
     text-align:center;
   }
   .ms-sticky {
+    /* Same margin on every phone: half a centimetre in from this screen's edge. */
+    --ms-gap:0.5cm;
+    --ms-frame-radius:36px;
     position:sticky;
     top:0;
+    width:100%;
     height:100svh;
+    height:100dvh;
     isolation:isolate;
     background:#fff;
   }
-  .ms-window { position:absolute; inset:0; overflow:hidden; }
+  .ms-window {
+    position:absolute;
+    top:var(--ms-gap);
+    right:var(--ms-gap);
+    bottom:var(--ms-gap);
+    left:var(--ms-gap);
+    overflow:hidden;
+    border-radius:var(--ms-frame-radius);
+    /* Keeps the sliding renders inside the stroke, including their shadow. */
+    clip-path:inset(0 round var(--ms-frame-radius));
+  }
   .ms-phone {
     position:absolute;
     left:50%; top:50%;
-    height:min(calc(100svh - 140px), calc((100vw - 48px) * 2.063));
+    height:min(calc(100svh - (2 * var(--ms-gap)) - 96px), calc((100vw - (2 * var(--ms-gap)) - 32px) * 2.063));
+    height:min(calc(100dvh - (2 * var(--ms-gap)) - 96px), calc((100vw - (2 * var(--ms-gap)) - 32px) * 2.063));
     aspect-ratio:540 / 1114;
     margin:0;
     will-change:transform;
@@ -39,8 +65,9 @@
   .ms-phone:not(:first-child) { visibility:hidden; }
   .ms-heading {
     position:absolute;
-    top:max(27px, calc(env(safe-area-inset-top, 0px) + 14px));
-    left:24px; right:24px;
+    top:calc(var(--ms-gap) + 16px);
+    left:calc(var(--ms-gap) + 20px);
+    right:calc(var(--ms-gap) + 20px);
     display:flex; align-items:center; justify-content:flex-end;
     color:#737873;
     pointer-events:none;
@@ -50,8 +77,9 @@
   .ms-count span { opacity:.45; }
   .ms-footer {
     position:absolute;
-    bottom:max(29px, calc(env(safe-area-inset-bottom, 0px) + 12px));
-    left:24px; right:24px;
+    bottom:calc(var(--ms-gap) + 18px);
+    left:calc(var(--ms-gap) + 20px);
+    right:calc(var(--ms-gap) + 20px);
     color:#737873;
   }
   .ms-label { font-size:12px; font-weight:400; }
