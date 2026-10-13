@@ -25,7 +25,10 @@ anschließend frei weiter. Rückwärtsbewegungen bleiben jederzeit möglich.
 Danach scrollt der Browser nativ; auch beim Zurückscrollen und erneuten Betreten
 greift keine Sperre mehr. Die drei Punkte wählen die Ansichten direkt aus.
 Prüfung der Einstiegssperre: `node tests/mobile-story-entry.test.cjs`.
-Die stabile Höhe mit `svh` verhindert Größensprünge beim Einblenden der Browserleiste.
+Der Rahmen folgt mit `dvh` der sichtbaren Bildschirmhöhe, sodass sein Abstand
+rundherum bei 0,5cm bleibt, auch wenn die Browserleiste verschwindet. Die Gerätehöhe
+bleibt an `svh` gebunden. Die Gesamthöhe `360svh + 100dvh` hält die Scroll-Strecke
+konstant und verhindert dabei Sprünge im Fortschritt.
 Der Rahmen blendet auf dem letzten Stück aus und ist ab 100 % vollständig verborgen;
 beim Zurückscrollen erscheint er passend zum Fortschritt wieder.
 Bei reduzierter Bewegung oder ohne JavaScript bleibt die normale App-Demo sichtbar.
@@ -65,7 +68,7 @@ Produkttexte müssen dem aktuellen Stand der iOS-App entsprechen.
 ## Cache
 
 Die acht aktiven CSS- und JavaScript-URLs in `index.html` tragen dieselbe Version
-(`?v=52`). Bei Änderungen vor dem nächsten Deploy gemeinsam erhöhen, damit GitHub
+(`?v=53`). Bei Änderungen vor dem nächsten Deploy gemeinsam erhöhen, damit GitHub
 Pages keine alten Dateien aus dem Browsercache mit neuen Dateien kombiniert.
 
 Die Desktop-Bewertungsleiste zeigt nur die Überschrift. Die Karten bleiben Beispieltexte,

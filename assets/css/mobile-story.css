@@ -19,6 +19,9 @@
     display:block;
     position:relative;
     height:460svh;
+    /* Add the same live viewport height as the sticky stage. Their difference
+       stays 360svh, so collapsing browser chrome never changes scroll progress. */
+    height:calc(360svh + 100dvh);
     margin-top:24px;
     text-align:center;
   }
@@ -29,8 +32,9 @@
     position:sticky;
     top:0;
     width:100%;
-    /* A collapsing browser toolbar must not resize the stage mid-gesture. */
+    /* Keep the frame half a centimetre from the currently visible screen edge. */
     height:100svh;
+    height:100dvh;
     isolation:isolate;
     background:#fff;
   }
@@ -48,7 +52,8 @@
   .ms-phone {
     position:absolute;
     left:50%; top:50%;
-    height:min(calc(100% - 96px), calc((100vw - (2 * var(--ms-gap)) - 32px) * 2.063));
+    /* Device art keeps its size while only the surrounding viewport expands. */
+    height:min(calc(100svh - (2 * var(--ms-gap)) - 96px), calc((100vw - (2 * var(--ms-gap)) - 32px) * 2.063));
     aspect-ratio:540 / 1114;
     margin:0;
     will-change:transform;
