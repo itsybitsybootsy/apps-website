@@ -1,4 +1,4 @@
-/* A mobile-only, scroll-scrubbed tour. No scroll locking or wheel interception. */
+/* The first entry pauses once; subsequent scrolling stays native. */
 @property --ms-gap {
   syntax: "<length>";
   inherits: true;
@@ -76,12 +76,28 @@
   .ms-count span { opacity:.45; }
   .ms-footer {
     position:absolute;
-    bottom:calc(var(--ms-gap) + 18px);
+    bottom:calc(var(--ms-gap) + 6px);
     left:calc(var(--ms-gap) + 20px);
     right:calc(var(--ms-gap) + 20px);
     color:#737873;
+    display:flex; align-items:center; justify-content:space-between;
+    min-height:44px;
   }
-  .ms-label { font-size:12px; font-weight:400; }
+  .ms-label { font-size:12px; font-weight:400; margin:0; }
+  .ms-steps { display:flex; gap:2px; }
+  .ms-step {
+    display:grid; place-items:center;
+    width:44px; height:44px; padding:0;
+    border:0; border-radius:22px;
+    background:transparent; color:inherit; cursor:pointer;
+  }
+  .ms-step::after {
+    content:""; width:6px; height:6px; border-radius:3px;
+    background:currentColor; opacity:.3;
+    transition:opacity 180ms var(--ease-out);
+  }
+  .ms-step[aria-current="step"]::after { width:18px; opacity:1; }
+  .ms-step:focus-visible { outline:2px solid #6f8c74; outline-offset:-4px; }
   .ms-border {
     position:absolute; inset:0;
     width:100%; height:100%;
