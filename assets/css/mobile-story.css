@@ -1,4 +1,4 @@
-/* A mobile-only, scroll-scrubbed tour. No scroll locking or wheel interception. */
+/* A mobile-only, guided tour. The page remains scrollable at both boundaries. */
 @property --ms-gap {
   syntax: "<length>";
   inherits: true;

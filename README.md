@@ -15,9 +15,13 @@ HTML, CSS und JavaScript ohne Build-Schritt, externe Schriften oder Bibliotheken
 - `assets/img/product/`: originale Geräterenderings und App-Screenshots.
 - `legal/`: veröffentlichte Rechtstexte. Quellen und Build-Skripte bleiben privat.
 
-Die Scroll-Sequenz läuft bis 640px Viewportbreite. Das erste Gerät wächst mit dem
-Scroll-Fortschritt, danach wechseln die drei Ansichten seitlich. Die Linie am
-Viewport-Rand zeigt den Gesamtfortschritt der Sequenz. Es gibt keine Scroll-Sperre.
+Die Scroll-Sequenz läuft bis 640px Viewportbreite. Ein Wisch bzw. eine zusammenhängende
+Trackpad-Geste steuert jeweils einen vollständigen Haltepunkt an: Vergrößern,
+Analyse, Routine, Verlauf und Ausstieg. Restlicher Schwung überspringt keinen Screen;
+ein Richtungswechsel kann die laufende Federbewegung direkt umkehren. Oberhalb und
+unterhalb der Tour scrollt die Seite normal. Die stabile Höhe mit `svh` verhindert
+Größensprünge beim Einblenden der Browserleiste. Die Linie am Viewport-Rand zeigt
+den Gesamtfortschritt der Sequenz.
 Der Rahmen blendet auf dem letzten Stück aus und ist ab 100 % vollständig verborgen;
 beim Zurückscrollen erscheint er passend zum Fortschritt wieder.
 Bei reduzierter Bewegung oder ohne JavaScript bleibt die normale App-Demo sichtbar.
@@ -57,7 +61,7 @@ Produkttexte müssen dem aktuellen Stand der iOS-App entsprechen.
 ## Cache
 
 Die acht aktiven CSS- und JavaScript-URLs in `index.html` tragen dieselbe Version
-(`?v=44`). Bei Änderungen vor dem nächsten Deploy gemeinsam erhöhen, damit GitHub
+(`?v=46`). Bei Änderungen vor dem nächsten Deploy gemeinsam erhöhen, damit GitHub
 Pages keine alten Dateien aus dem Browsercache mit neuen Dateien kombiniert.
 
 Die Desktop-Bewertungsleiste zeigt nur die Überschrift. Die Karten bleiben Beispieltexte,
