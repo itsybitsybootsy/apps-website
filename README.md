@@ -15,10 +15,10 @@ HTML, CSS und JavaScript ohne Build-Schritt, externe Schriften oder Bibliotheken
 - `assets/img/product/`: originale Geräterenderings und App-Screenshots.
 - `legal/`: veröffentlichte Rechtstexte. Quellen und Build-Skripte bleiben privat.
 
-Die Scroll-Sequenz läuft bis 640px Viewportbreite. Ein Wisch bzw. eine zusammenhängende
-Trackpad-Geste steuert jeweils einen vollständigen Haltepunkt an: Vergrößern,
-Analyse, Routine, Verlauf und Ausstieg. Restlicher Schwung überspringt keinen Screen;
-ein Richtungswechsel kann die laufende Federbewegung direkt umkehren. Oberhalb und
+Die Scroll-Sequenz läuft bis 640px Viewportbreite. Kleine, langsame Eingaben reagieren
+früh und können ohne Pause Screen für Screen weiterführen. Kräftige Wischbewegungen
+steuern einen vollständigen Haltepunkt an; ihr auslaufender Schwung überspringt keinen
+Screen. Ein Richtungswechsel kann die laufende Federbewegung direkt umkehren. Oberhalb und
 unterhalb der Tour scrollt die Seite normal. Die stabile Höhe mit `svh` verhindert
 Größensprünge beim Einblenden der Browserleiste. Die Linie am Viewport-Rand zeigt
 den Gesamtfortschritt der Sequenz.
@@ -26,6 +26,8 @@ Der Rahmen blendet auf dem letzten Stück aus und ist ab 100 % vollständig verb
 beim Zurückscrollen erscheint er passend zum Fortschritt wieder.
 Bei reduzierter Bewegung oder ohne JavaScript bleibt die normale App-Demo sichtbar.
 Die Tabs wechseln nur durch Nutzereingabe, nicht automatisch.
+Die Eingabelogik lässt sich mit `node tests/mobile-story.test.cjs` prüfen: kleine und
+kräftige Impulse, kontinuierliche Gesten, Momentum, Richtungswechsel und beide Ausstiege.
 Die vier Datenschutz-Karten teilen sich ihr HTML auf Desktop und Handy; mobil stehen
 sie untereinander, auf dem Laptop in einer Reihe. Mobil bleiben sieben FAQ sichtbar.
 Auf dem Laptop sind vier direkt sichtbar, der Rest klappt über „Weitere Fragen“ auf.
@@ -61,7 +63,7 @@ Produkttexte müssen dem aktuellen Stand der iOS-App entsprechen.
 ## Cache
 
 Die acht aktiven CSS- und JavaScript-URLs in `index.html` tragen dieselbe Version
-(`?v=46`). Bei Änderungen vor dem nächsten Deploy gemeinsam erhöhen, damit GitHub
+(`?v=48`). Bei Änderungen vor dem nächsten Deploy gemeinsam erhöhen, damit GitHub
 Pages keine alten Dateien aus dem Browsercache mit neuen Dateien kombiniert.
 
 Die Desktop-Bewertungsleiste zeigt nur die Überschrift. Die Karten bleiben Beispieltexte,

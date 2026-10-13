@@ -1,4 +1,4 @@
-/* One scroll gesture advances one complete screen, including fast flings.
+/* Gentle input can keep advancing; a fast fling is limited to one screen.
    Geometry is measured on resize; scroll frames write transform + progress only. */
 (function () {
   'use strict';
@@ -39,7 +39,7 @@
     var raf = 0, start = 0, distance = 1, width = 1, height = 1, span = 1;
     var index = -1, active = false;
     var motion = null, motionRaf = 0, targetStep = 0;
-    var wheelTime = -Infinity, wheelDir = 0, wheelHeld = false, wheelTravel = 0;
+    var wheelTime = -Infinity, wheelDir = 0, wheelHeld = false, wheelTravel = 0, wheelHard = false, wheelReverse = 0;
     var touch = null, coast = 0, previousY = window.scrollY;
     var clamp = function (n) { return Math.min(1, Math.max(0, n)); };
     var phase = function (p, a, b) { return clamp((p - a) / (b - a)); };
@@ -193,6 +193,12 @@
       motion = { y:window.scrollY, velocity:0, direction:destination > window.scrollY ? 1 : -1, time:performance.now() };
       motionRaf = requestAnimationFrame(animate);
     }
+    function isFlick(delta, elapsed) {
+      // Speed distinguishes a firm flick from a long, slow movement. Once a
+      // flick is detected, its softer momentum tail belongs to the same flick.
+      return elapsed === null ? Math.abs(delta) >= Math.min(80, height * .1)
+        : Math.abs(delta) / Math.max(8, elapsed) >= 1.2;
+    }
     function onWheel(event) {
       // Let pinch-to-zoom and horizontal trackpad gestures keep their meaning.
       if (event.defaultPrevented || event.ctrlKey || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
@@ -201,19 +207,41 @@
       coast = 0;
       var direction = delta > 0 ? 1 : -1;
       var now = performance.now();
-      // A pause or reversal starts a fresh gesture. Residual wheel momentum
-      // belongs to the old gesture and cannot advance a second screen.
-      if (now - wheelTime > 180 || direction !== wheelDir) {
+      var elapsed = now - wheelTime;
+      // Use the same small intent threshold in both directions. Tiny opposite
+      // deltas in a trackpad's tail must not keep flipping the spring's target.
+      var fresh = elapsed > 180;
+      var reverseTravel = 0;
+      if (!fresh && direction !== wheelDir) {
+        wheelReverse += Math.abs(delta);
+        if (wheelReverse < 4) {
+          wheelTime = now;
+          if (event.cancelable && (wheelHeld || canGuide(direction, delta))) event.preventDefault();
+          return;
+        }
+        reverseTravel = wheelReverse - Math.abs(delta);
+        fresh = true;
+      }
+      wheelReverse = 0;
+      if (fresh) {
+        wheelHeld = false;
+        wheelTravel = reverseTravel;
+        wheelHard = false;
+      }
+      wheelHard = wheelHard || isFlick(delta, fresh ? null : elapsed);
+      wheelTime = now; wheelDir = direction;
+      // Gentle continuous scrolling must not need a pause or a forceful push
+      // before it can continue from the screen that has just arrived.
+      if (wheelHeld && !wheelHard && !motion) {
         wheelHeld = false;
         wheelTravel = 0;
       }
-      wheelTime = now; wheelDir = direction;
       if (!wheelHeld && !canGuide(direction, delta)) return;
       if (!event.cancelable) return;
       event.preventDefault();
       if (wheelHeld) return;
       wheelTravel += Math.abs(delta);
-      if (wheelTravel < 12) return;
+      if (wheelTravel < 4) return;
       wheelHeld = true;
       advance(direction);
     }
@@ -221,7 +249,9 @@
       coast = 0;
       if (event.touches.length !== 1) { touch = null; stopMotion(); return; }
       var finger = event.touches[0];
-      touch = { id:finger.identifier, x:finger.clientX, y:finger.clientY, lastY:finger.clientY, turnY:finger.clientY, held:false, direction:0 };
+      touch = { id:finger.identifier, x:finger.clientX, y:finger.clientY, lastY:finger.clientY,
+        turnY:finger.clientY, stepY:finger.clientY, time:performance.now(), axis:null,
+        held:false, hard:false, page:false, direction:0 };
     }
     function onTouchMove(event) {
       if (!touch || event.touches.length !== 1) return;
@@ -230,25 +260,52 @@
       var dx = finger.clientX - touch.x;
       var dy = touch.y - finger.clientY;
       var delta = touch.lastY - finger.clientY;
+      var now = performance.now();
+      var elapsed = now - touch.time;
+      touch.time = now;
       touch.lastY = finger.clientY;
-      if (Math.abs(dx) > Math.abs(dy) || !delta) return;
+      // Choose the gesture's axis once. On a reversal, net distance from the
+      // original touch can pass through zero; that is still the same vertical
+      // drag, not a new horizontal gesture or a reason to stop responding.
+      if (!touch.axis && Math.max(Math.abs(dx), Math.abs(dy)) >= 8) {
+        touch.axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+      }
+      if (touch.axis === 'x' || (!touch.axis && Math.abs(dx) > Math.abs(dy)) || !delta) return;
       var direction = delta > 0 ? 1 : -1;
+      touch.hard = touch.hard || isFlick(delta, elapsed);
       if (!touch.held) touch.direction = direction;
       if (!touch.held && !canGuide(direction, delta)) return;
       if (!event.cancelable) return;
       event.preventDefault();
       if (touch.held) {
         // A deliberate reversal can grab the spring during the same touch.
-        if (direction === touch.direction) touch.turnY = finger.clientY;
-        else if (Math.abs(finger.clientY - touch.turnY) > 24) {
+        if (direction === touch.direction) {
+          touch.turnY = finger.clientY;
+          if (motion) touch.stepY = finger.clientY;
+          else if (!touch.hard && (touch.page || Math.abs(finger.clientY - touch.stepY) >= 8)) {
+            touch.stepY = finger.clientY;
+            if (canGuide(direction, delta)) { touch.page = false; advance(direction); }
+            else {
+              // A slow drag can carry on into the page without lifting. Native
+              // scrolling was canceled earlier in this touch, so hand it across.
+              touch.page = true;
+              window.scrollTo({ top:window.scrollY + delta, behavior:'instant' });
+            }
+          }
+        }
+        else if (Math.abs(finger.clientY - touch.turnY) >= 8) {
           touch.direction = direction;
           touch.turnY = finger.clientY;
-          advance(direction);
+          touch.stepY = finger.clientY;
+          touch.hard = isFlick(delta, elapsed);
+          touch.page = false;
+          if (canGuide(direction, delta)) advance(direction);
         }
         return;
       }
-      if (Math.abs(dy) < 24) return;
-      touch.held = true; touch.direction = direction; touch.turnY = finger.clientY;
+      if (Math.abs(dy) < 8) return;
+      touch.held = true; touch.direction = direction;
+      touch.turnY = finger.clientY; touch.stepY = finger.clientY;
       advance(direction);
     }
     function onTouchEnd() {
