@@ -1,0 +1,69 @@
+/* A mobile-only, scroll-scrubbed tour. No scroll locking or wheel interception. */
+.mobile-story { display:none; }
+
+@media (max-width:640px) and (prefers-reduced-motion:no-preference) {
+  .has-mobile-story #funktionen { padding-left:0; padding-right:0; padding-bottom:0; }
+  .has-mobile-story #funktionen > .explorer-wrap { display:none; }
+  .has-mobile-story .mobile-story {
+    display:block;
+    position:relative;
+    height:460svh;
+    margin-top:24px;
+    text-align:center;
+  }
+  .ms-sticky {
+    position:sticky;
+    top:0;
+    height:100svh;
+    isolation:isolate;
+    background:#fff;
+  }
+  .ms-window { position:absolute; inset:0; overflow:hidden; }
+  .ms-phone {
+    position:absolute;
+    left:50%; top:50%;
+    height:min(calc(100svh - 140px), calc((100vw - 48px) * 2.063));
+    aspect-ratio:540 / 1114;
+    margin:0;
+    will-change:transform;
+    transform:translate(-50%, -50%) scale(.7);
+  }
+  .ms-phone img {
+    display:block;
+    width:100%; height:100%;
+    object-fit:contain;
+    filter:drop-shadow(0 3px 4px rgba(30,37,31,.10)) drop-shadow(0 16px 24px rgba(60,74,61,.14));
+    -webkit-user-drag:none;
+    user-select:none;
+  }
+  .ms-phone:not(:first-child) { visibility:hidden; }
+  .ms-heading {
+    position:absolute;
+    top:max(27px, calc(env(safe-area-inset-top, 0px) + 14px));
+    left:24px; right:24px;
+    display:flex; align-items:center; justify-content:flex-end;
+    color:#737873;
+    pointer-events:none;
+  }
+  .ms-count { font-size:11px; font-variant-numeric:tabular-nums; letter-spacing:.04em; }
+  .ms-count b { font-weight:500; }
+  .ms-count span { opacity:.45; }
+  .ms-footer {
+    position:absolute;
+    bottom:max(29px, calc(env(safe-area-inset-bottom, 0px) + 12px));
+    left:24px; right:24px;
+    color:#737873;
+  }
+  .ms-label { font-size:12px; font-weight:400; }
+  .ms-border {
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    pointer-events:none;
+    opacity:0;
+  }
+  .ms-border rect { fill:none; stroke-width:1.5; }
+  .ms-border-track { stroke:rgba(111,140,116,.09); }
+  .ms-border-fill { stroke:#6f8c74; stroke-linecap:round; stroke-dasharray:100; stroke-dashoffset:100; }
+  .mobile-nav { transition:opacity 180ms var(--ease-out), transform 180ms var(--ease-out), visibility 180ms; }
+  .mobile-scroll-active .mobile-nav { opacity:0; visibility:hidden; transform:translateY(-12px); }
+}
