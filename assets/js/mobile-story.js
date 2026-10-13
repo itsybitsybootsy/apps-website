@@ -34,7 +34,7 @@
     var fill = story.querySelector('.ms-border-fill');
     var count = story.querySelector('.ms-count b');
     var label = story.querySelector('.ms-label');
-    var raf = 0, start = 0, distance = 1, width = 1, height = 1;
+    var raf = 0, start = 0, distance = 1, width = 1, height = 1, span = 1;
     var index = -1, active = false;
     var clamp = function (n) { return Math.min(1, Math.max(0, n)); };
     var phase = function (p, a, b) { return clamp((p - a) / (b - a)); };
@@ -57,17 +57,18 @@
         active = nextActive;
         document.documentElement.classList.toggle('mobile-scroll-active', active);
       }
-      if (!visible) return;
+      if (!visible && index !== -1) return;
       var zoom = .7 + .3 * smooth(phase(p, 0, .24));
       var slide = smooth(phase(p, .31, .53)) + smooth(phase(p, .63, .85));
-      var span = frame.clientWidth || width;
       phones.forEach(function (phone, i) {
         var x = (i - slide) * span;
         var away = Math.min(1, Math.abs(i - slide));
         var scale = zoom * (1 - .025 * away);
         phone.style.transform = 'translate3d(calc(-50% + ' + x.toFixed(2) + 'px), calc(-50% + ' + (away * 6).toFixed(2) + 'px), 0) scale(' + scale.toFixed(4) + ')';
         phone.style.opacity = (1 - .18 * away).toFixed(3);
-        phone.style.visibility = Math.abs(i - slide) < 1.05 ? 'visible' : 'hidden';
+        // Keep the three renders composited. The window clips offscreen phones;
+        // toggling visibility during a fast reversal can drop a frame in WebKit.
+        phone.style.visibility = 'visible';
       });
       var nextIndex = Math.round(slide);
       if (nextIndex !== index) {
@@ -94,10 +95,6 @@
       return value || fallback;
     }
     function measure() {
-      if (window.visualViewport) {
-        var seen = Math.round(window.visualViewport.height);
-        if (seen > 0 && Math.abs(sticky.clientHeight - seen) > 1) sticky.style.height = seen + 'px';
-      }
       var nextStart = story.getBoundingClientRect().top + window.scrollY;
       var box = sticky.getBoundingClientRect();
       var nextHeight = Math.round(box.height), nextWidth = Math.round(box.width);
@@ -107,6 +104,7 @@
       start = nextStart; height = nextHeight; width = nextWidth; distance = nextDistance;
       var host = sticky.getBoundingClientRect();
       var win = frame.getBoundingClientRect();
+      span = win.width;
       var radius = usedLength(sticky, '--ms-frame-radius', 36);
       border.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
       story.querySelectorAll('.ms-border rect').forEach(function (rect) {
@@ -119,59 +117,24 @@
       queue();
     }
     function restore() { measure(); queue(); }
-    // Chrome on Android can come to rest mid-swap. scrollend only fires once the
-    // finger is up and the fling has finished, so the glide never fights a touch.
-    // Apple devices (every iOS browser is WebKit) already feel right; leave them native.
-    var apple = /iP(hone|ad|od)/.test(navigator.userAgent)
-      || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
-    var settles = !apple && 'onscrollend' in window;
-    var rests = [.275, .58, .91], lastY = window.scrollY, dir = 0;
-    function track() {
-      var y = window.scrollY;
-      if (y !== lastY) dir = y > lastY ? 1 : -1;
-      lastY = y;
-    }
-    function settle() {
-      var p = (window.scrollY - start) / distance;
-      if (p <= rests[0] || p >= rests[rests.length - 1]) return;
-      var nearest = rests.reduce(function (a, b) { return Math.abs(p - a) < Math.abs(p - b) ? a : b; });
-      var off = Math.abs(p - nearest) * distance;
-      if (off < 2) return;
-      // A brush of the screen returns; anything more finishes the swap it started.
-      var target = off < 28 ? nearest : dir < 0
-        ? rests.filter(function (r) { return r < p; }).pop()
-        : rests.filter(function (r) { return r > p; })[0];
-      window.scrollTo({ top:Math.round(start + target * distance), behavior:'smooth' });
-    }
-    if (settles) {
-      window.addEventListener('scroll', track, { passive:true });
-      window.addEventListener('scrollend', settle);
-    }
+    // Native scrolling owns position and momentum, including interrupted flings.
+    // Never snap on scrollend: that adds a second scroll after the user stops.
     window.addEventListener('scroll', queue, { passive:true });
     window.addEventListener('resize', measure);
     window.addEventListener('pageshow', restore);
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', measure);
-      window.visualViewport.addEventListener('scroll', measure);
-    }
     // Content above the tour can change size after image/font loading.
     var resize = new ResizeObserver(measure);
     resize.observe(document.body);
     resize.observe(sticky);
     measure();
+    // Position every phone before the first paint, also on restored scroll positions.
+    cancelAnimationFrame(raf);
+    render();
     cleanup = function () {
       cancelAnimationFrame(raf);
-      if (settles) {
-        window.removeEventListener('scroll', track);
-        window.removeEventListener('scrollend', settle);
-      }
       window.removeEventListener('scroll', queue);
       window.removeEventListener('resize', measure);
       window.removeEventListener('pageshow', restore);
-      if (window.visualViewport) {
-        window.visualViewport.removeEventListener('resize', measure);
-        window.visualViewport.removeEventListener('scroll', measure);
-      }
       resize.disconnect();
       document.documentElement.classList.remove('has-mobile-story', 'mobile-scroll-active');
       story.remove(); story = null;
