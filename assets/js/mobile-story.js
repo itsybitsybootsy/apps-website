@@ -1,4 +1,4 @@
-/* Gentle input can keep advancing; a fast fling is limited to one screen.
+/* Gentle input commits early and completes calmly; a fast fling stays bounded.
    Geometry is measured on resize; scroll frames write transform + progress only. */
 (function () {
   'use strict';
@@ -39,6 +39,8 @@
     var raf = 0, start = 0, distance = 1, width = 1, height = 1, span = 1;
     var index = -1, active = false;
     var motion = null, motionRaf = 0, targetStep = 0;
+    var wheelIntent = 1, touchIntent = 4;
+    var quickResponse = .4, gentleResponse = quickResponse * 2;
     var wheelTime = -Infinity, wheelDir = 0, wheelHeld = false, wheelTravel = 0, wheelHard = false, wheelReverse = 0;
     var touch = null, coast = 0, previousY = window.scrollY;
     var clamp = function (n) { return Math.min(1, Math.max(0, n)); };
@@ -142,9 +144,10 @@
       var dt = Math.min(.032, Math.max(0, (now - motion.time) / 1000));
       motion.time = now;
       var destination = start + rests[targetStep] * distance;
-      // Critically damped spring: response 0.4s, damping 1. No overshoot.
-      // Its current position and velocity survive a direction change.
-      var omega = 2 * Math.PI / .4;
+      // A gentle gesture commits just as early, then uses twice the response
+      // time. The destination stays fixed even after input or touch release.
+      // Critical damping avoids overshoot; reversals keep presentation velocity.
+      var omega = 2 * Math.PI / motion.response;
       var delta = motion.y - destination;
       var c = motion.velocity + omega * delta;
       var decay = Math.exp(-omega * dt);
@@ -172,14 +175,15 @@
       if (y < start - 1 || y > end + 1) return false;
       return direction > 0 ? y < end - 1 : y > start + 1;
     }
-    function advance(direction) {
+    function advance(direction, gentle) {
       // A second flick cannot skip a screen whose transition is still running.
       // Reversing is immediate and starts at the current presentation value.
       if (motion && direction === motion.direction) return;
       var base = motion ? targetStep : nearestStep(window.scrollY);
       targetStep = Math.max(0, Math.min(rests.length - 1, base + direction));
       var velocity = motion ? motion.velocity : 0;
-      motion = { y:window.scrollY, velocity:velocity, direction:direction, time:performance.now() };
+      motion = { y:window.scrollY, velocity:velocity, direction:direction,
+        response:gentle ? gentleResponse : quickResponse, time:performance.now() };
       if (!motionRaf) motionRaf = requestAnimationFrame(animate);
     }
     function settle() {
@@ -190,7 +194,8 @@
       var destination = start + rests[step] * distance;
       if (Math.abs(destination - window.scrollY) < 1) return;
       targetStep = step;
-      motion = { y:window.scrollY, velocity:0, direction:destination > window.scrollY ? 1 : -1, time:performance.now() };
+      motion = { y:window.scrollY, velocity:0, direction:destination > window.scrollY ? 1 : -1,
+        response:gentleResponse, time:performance.now() };
       motionRaf = requestAnimationFrame(animate);
     }
     function isFlick(delta, elapsed) {
@@ -241,9 +246,9 @@
       event.preventDefault();
       if (wheelHeld) return;
       wheelTravel += Math.abs(delta);
-      if (wheelTravel < 4) return;
+      if (wheelTravel < wheelIntent) return;
       wheelHeld = true;
-      advance(direction);
+      advance(direction, !wheelHard);
     }
     function onTouchStart(event) {
       coast = 0;
@@ -267,7 +272,7 @@
       // Choose the gesture's axis once. On a reversal, net distance from the
       // original touch can pass through zero; that is still the same vertical
       // drag, not a new horizontal gesture or a reason to stop responding.
-      if (!touch.axis && Math.max(Math.abs(dx), Math.abs(dy)) >= 8) {
+      if (!touch.axis && Math.max(Math.abs(dx), Math.abs(dy)) >= touchIntent) {
         touch.axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
       }
       if (touch.axis === 'x' || (!touch.axis && Math.abs(dx) > Math.abs(dy)) || !delta) return;
@@ -282,9 +287,9 @@
         if (direction === touch.direction) {
           touch.turnY = finger.clientY;
           if (motion) touch.stepY = finger.clientY;
-          else if (!touch.hard && (touch.page || Math.abs(finger.clientY - touch.stepY) >= 8)) {
+          else if (!touch.hard && (touch.page || Math.abs(finger.clientY - touch.stepY) >= touchIntent)) {
             touch.stepY = finger.clientY;
-            if (canGuide(direction, delta)) { touch.page = false; advance(direction); }
+            if (canGuide(direction, delta)) { touch.page = false; advance(direction, !touch.hard); }
             else {
               // A slow drag can carry on into the page without lifting. Native
               // scrolling was canceled earlier in this touch, so hand it across.
@@ -293,20 +298,20 @@
             }
           }
         }
-        else if (Math.abs(finger.clientY - touch.turnY) >= 8) {
+        else if (Math.abs(finger.clientY - touch.turnY) >= touchIntent) {
           touch.direction = direction;
           touch.turnY = finger.clientY;
           touch.stepY = finger.clientY;
           touch.hard = isFlick(delta, elapsed);
           touch.page = false;
-          if (canGuide(direction, delta)) advance(direction);
+          if (canGuide(direction, delta)) advance(direction, !touch.hard);
         }
         return;
       }
-      if (Math.abs(dy) < 8) return;
+      if (Math.abs(dy) < touchIntent) return;
       touch.held = true; touch.direction = direction;
       touch.turnY = finger.clientY; touch.stepY = finger.clientY;
-      advance(direction);
+      advance(direction, !touch.hard);
     }
     function onTouchEnd() {
       // A fling may start above the tour and enter it only after the finger lifts.

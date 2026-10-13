@@ -16,7 +16,9 @@ HTML, CSS und JavaScript ohne Build-Schritt, externe Schriften oder Bibliotheken
 - `legal/`: veröffentlichte Rechtstexte. Quellen und Build-Skripte bleiben privat.
 
 Die Scroll-Sequenz läuft bis 640px Viewportbreite. Kleine, langsame Eingaben reagieren
-früh und können ohne Pause Screen für Screen weiterführen. Kräftige Wischbewegungen
+schon ab 1px Trackpad- bzw. 4px Fingerbewegung. Einmal ausgelöst, läuft der Wechsel
+auch ohne weitere Eingabe zum festgelegten Screen. Sanfte Eingaben verwenden die
+doppelte Feder-Reaktionszeit und können ohne Pause Screen für Screen weiterführen. Kräftige Wischbewegungen
 steuern einen vollständigen Haltepunkt an; ihr auslaufender Schwung überspringt keinen
 Screen. Ein Richtungswechsel kann die laufende Federbewegung direkt umkehren. Oberhalb und
 unterhalb der Tour scrollt die Seite normal. Die stabile Höhe mit `svh` verhindert
@@ -63,7 +65,7 @@ Produkttexte müssen dem aktuellen Stand der iOS-App entsprechen.
 ## Cache
 
 Die acht aktiven CSS- und JavaScript-URLs in `index.html` tragen dieselbe Version
-(`?v=48`). Bei Änderungen vor dem nächsten Deploy gemeinsam erhöhen, damit GitHub
+(`?v=49`). Bei Änderungen vor dem nächsten Deploy gemeinsam erhöhen, damit GitHub
 Pages keine alten Dateien aus dem Browsercache mit neuen Dateien kombiniert.
 
 Die Desktop-Bewertungsleiste zeigt nur die Überschrift. Die Karten bleiben Beispieltexte,

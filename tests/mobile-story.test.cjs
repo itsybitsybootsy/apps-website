@@ -54,7 +54,7 @@ function at(t,index){assert.equal(t.window.scrollY,targets[index]);}
   console.log('PASS consecutive flicks, live reversal and backward exit');
 }
 {
-  const t=setup(targets[1]);t.touchStart(700);assert(t.touchMove(696));t.settle();at(t,1);
+  const t=setup(targets[1]);t.touchStart(700);assert(t.touchMove(697));t.settle();at(t,1);
   assert(t.touchMove(500));t.tick(32);assert(t.touchMove(200));t.touchEnd();t.settle();at(t,2);
   t.touchStart(200);assert(t.touchMove(500));t.touchEnd();t.settle();at(t,1);
   t.touchStart(700);t.touchMove(500);t.tick(32);t.touchMove(300);t.touchMove(340);t.touchEnd();t.settle();at(t,1);
@@ -88,7 +88,7 @@ function at(t,index){assert.equal(t.window.scrollY,targets[index]);}
 }
 {
   const t=setup(targets[1]);t.touchStart(700);
-  for(let i=1;i<=260;i++){t.tick(16);assert(t.touchMove(700-i));}
+  for(let i=1;i<=600;i++){t.tick(16);assert(t.touchMove(700-i));}
   t.touchEnd();t.settle();assert(t.window.scrollY>targets[4], 'one slow drag should be able to reach the exit and continue into the page');
   console.log('PASS slow 1px touch moves continue through the tour and into the page');
 }
@@ -111,7 +111,7 @@ function at(t,index){assert.equal(t.window.scrollY,targets[index]);}
 }
 {
   const t=setup(targets[3]);t.touchStart(200);
-  for(let i=1;i<=260;i++){t.tick(16);assert(t.touchMove(200+i));}
+  for(let i=1;i<=600;i++){t.tick(16);assert(t.touchMove(200+i));}
   t.touchEnd();t.settle();assert(t.window.scrollY<targets[0]);
   console.log('PASS a continuous slow backward drag reaches and leaves the start');
 }
@@ -126,4 +126,24 @@ function at(t,index){assert.equal(t.window.scrollY,targets[index]);}
   t.settle();at(t,2);
   t.wheel(-1);t.wheel(-1,16);t.wheel(-1,16);t.wheel(-1,16);t.settle();at(t,1);
   console.log('PASS trackpad noise does not reverse; a deliberate tiny reverse does');
+}
+{
+  for(const direction of [-1,1]) {
+    const gentle=setup(targets[2]), firm=setup(targets[2]);
+    gentle.wheel(direction);firm.wheel(direction*9000);
+    for(let i=0;i<10;i++){gentle.tick(16);firm.tick(16);}
+    const gentleTravel=Math.abs(gentle.window.scrollY-targets[2]);
+    const firmTravel=Math.abs(firm.window.scrollY-targets[2]);
+    assert(gentleTravel>0 && gentleTravel<firmTravel*.8, 'a tiny input starts immediately but moves more calmly');
+    gentle.settle();at(gentle,direction>0?3:1);
+  }
+  console.log('PASS a single 1px wheel input commits and completes more slowly in both directions');
+}
+{
+  for(const direction of [-1,1]) {
+    const t=setup(targets[2]);t.touchStart(500);t.tick(16);
+    assert(t.touchMove(500-direction*4));t.touchEnd();
+    t.settle();at(t,direction>0?3:1);
+  }
+  console.log('PASS a single gentle 4px touch move completes after release in both directions');
 }
