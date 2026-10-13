@@ -19,9 +19,9 @@
     display:block;
     position:relative;
     height:460svh;
-    /* Add the same live viewport height as the sticky stage. Their difference
-       stays 360svh, so collapsing browser chrome never changes scroll progress. */
-    height:calc(360svh + 100dvh);
+    /* Both use the same visible height, including while browser chrome moves.
+       Their difference stays 360svh, so scroll progress never changes with it. */
+    height:calc(360svh + var(--ms-viewport-height, 100dvh));
     margin-top:24px;
     text-align:center;
   }
@@ -34,7 +34,7 @@
     width:100%;
     /* Keep the frame half a centimetre from the currently visible screen edge. */
     height:100svh;
-    height:100dvh;
+    height:var(--ms-viewport-height, 100dvh);
     isolation:isolate;
     background:#fff;
   }
@@ -45,6 +45,8 @@
     bottom:var(--ms-gap);
     left:var(--ms-gap);
     overflow:hidden;
+    /* Horizontal gestures change the phone; vertical scroll and zoom stay native. */
+    touch-action:pan-y pinch-zoom;
     border-radius:var(--ms-frame-radius);
     /* Keeps the sliding renders inside the stroke, including their shadow. */
     clip-path:inset(0 round var(--ms-frame-radius));

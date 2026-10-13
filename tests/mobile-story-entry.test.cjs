@@ -1,25 +1,29 @@
-// Behavioral coverage for the one-time mobile entry pause.
+// Behavioral coverage for mobile entry, viewport alignment and horizontal swipes.
 const fs = require('node:fs');
 const vm = require('node:vm');
 const assert = require('node:assert/strict');
 const path = require('node:path');
 const source = fs.readFileSync(path.join(__dirname, '../assets/js/mobile-story.js'), 'utf8');
-function setup(initialY = 0) {
+function setup(initialY = 0, withViewport = false) {
   let time = 0, id = 0, frames = new Map(), timers = new Map(), mounted;
   const events = new Map(), docEvents = new Map(), classes = new Set();
-  const node = () => ({style:{}, attrs:{}, listeners:{}, setAttribute(n,v){this.attrs[n]=v;}, removeAttribute(n){delete this.attrs[n];}, addEventListener(n,f){this.listeners[n]=f;}, click(){this.listeners.click?.();}, textContent:''});
+  const node = () => ({style:{setProperty(n,v){this[n]=v;}}, attrs:{}, listeners:{}, setAttribute(n,v){this.attrs[n]=v;}, removeAttribute(n){delete this.attrs[n];}, addEventListener(n,f){this.listeners[n]=f;}, click(){this.listeners.click?.();}, textContent:''});
   const phones = Array.from({length:3}, node), steps = Array.from({length:3},node);
-  const sticky = {...node(),getBoundingClientRect:()=>({width:390,height:844,left:0,top:0})};
-  const frame = {...node(),getBoundingClientRect:()=>({width:352.2,height:806.2,left:18.9,top:18.9})};
+  const visibleHeight = () => parseFloat(story.style['--ms-viewport-height']) || 844;
+  const sticky = {...node(),getBoundingClientRect:()=>({width:390,height:visibleHeight(),left:0,top:0})};
+  const frame = {...node(),contains:target=>target===frame || phones.includes(target),getBoundingClientRect:()=>({width:352.2,height:visibleHeight()-37.8,left:18.9,top:18.9})};
+  const rects = [node(),node()], viewportEvents = new Set();
+  const viewport = {height:844,scale:1,addEventListener:(n,f)=>viewportEvents.add(f),removeEventListener:(n,f)=>viewportEvents.delete(f)};
   const selectors = {'.ms-sticky':sticky,'.ms-window':frame,'.ms-border':node(),'.ms-border-fill':node(),'.ms-count b':node(),'.ms-label':node()};
   const media={matches:true,addEventListener(n,f){this.change=f;}};
   const window = {scrollY:initialY,matchMedia:()=>media,
     addEventListener:(n,f)=>{if(!events.has(n)) events.set(n,new Set());events.get(n).add(f);},
     removeEventListener:(n,f)=>events.get(n)?.delete(f),
     scrollTo({top}){this.scrollY=Math.max(0,Math.min(7000,Math.round(top*2)/2));fire('scroll',{});}};
+  if (withViewport) window.visualViewport = viewport;
   const story = {...node(),offsetHeight:3882,querySelector:s=>selectors[s],
-    querySelectorAll:s=>s==='.ms-phone'?phones:s==='.ms-step'?steps:[node(),node()],
-    getBoundingClientRect:()=>({top:720-window.scrollY}),remove(){mounted=null;}};
+    querySelectorAll:s=>s==='.ms-phone'?phones:s==='.ms-step'?steps:rects,
+    getBoundingClientRect:()=>({top:720-window.scrollY,height:3038+visibleHeight()}),remove(){mounted=null;}};
   const section = {appendChild(e){mounted=e;}};
   const document = {querySelector:s=>s==='#funktionen'?section:null,createElement:()=>story,body:{},
     documentElement:{classList:{add:c=>classes.add(c),remove:(...cs)=>cs.forEach(c=>classes.delete(c)),toggle:(c,b)=>b?classes.add(c):classes.delete(c)}},
@@ -33,13 +37,18 @@ function setup(initialY = 0) {
   function settleMotion(){for(let i=0;frames.size&&i<300;i++)tick();assert.equal(frames.size,0,'animation must settle');}
   function settle(){for(let i=0;(frames.size||timers.size)&&i<300;i++)tick();assert.equal(frames.size+timers.size,0,'arrival and pause must settle');}
   function wheel(delta,dt=220){time+=dt;let canceled=false;fire('wheel',{deltaY:delta,deltaX:0,deltaMode:0,cancelable:true,preventDefault(){canceled=true;}});if(!canceled)window.scrollTo({top:window.scrollY+delta});return canceled;}
-  function finger(y){return {identifier:1,clientX:190,clientY:y};}
-  function touchStart(y){fire('touchstart',{touches:[finger(y)]});}
-  function touchMove(y){let canceled=false;fire('touchmove',{touches:[finger(y)],cancelable:true,preventDefault(){canceled=true;}});return canceled;}
+  function finger(y,x=190){return {identifier:1,clientX:x,clientY:y};}
+  function touchStart(y,x=190,target=null){fire('touchstart',{touches:[finger(y,x)],target});}
+  function touchMove(y,x=190,dt=0){time+=dt;let canceled=false;fire('touchmove',{touches:[finger(y,x)],cancelable:true,preventDefault(){canceled=true;}});return canceled;}
   const touchEnd=()=>fire('touchend',{});
+  const swipeStart=(x,y=420)=>touchStart(y,x,frame);
+  const swipeMove=(x,y=420,dt=16)=>touchMove(y,x,dt);
+  const swipeEnd=(x,y=420,dt=16)=>{time+=dt;fire('touchend',{changedTouches:[finger(y,x)]});};
   const nativeY=y=>window.scrollTo({top:y});
   const remount=()=>{media.matches=false;media.change();media.matches=true;media.change();};
-  return {window,phones,steps,selectors,wheel,tick,settle,settleMotion,touchStart,touchMove,touchEnd,nativeY,fire,docEvents,remount,classes};
+  const resizeViewport=(height,emit=true,scale=1)=>{viewport.height=height;viewport.scale=scale;if(emit)for(const f of viewportEvents)f();};
+  const unmount=()=>{media.matches=false;media.change();};
+  return {window,phones,steps,selectors,wheel,tick,settle,settleMotion,touchStart,touchMove,touchEnd,nativeY,fire,docEvents,remount,classes,story,rects,viewportEvents,resizeViewport,unmount,swipeStart,swipeMove,swipeEnd};
 }
 
 const first=1449; // End of zoom: 720 + .24 * (3882 - 844), rounded to half a px.
@@ -143,4 +152,97 @@ const first=1449; // End of zoom: 720 + .24 * (3882 - 844), rounded to half a px
   t.fire('pageshow',{persisted:true});assert(!t.classes.has('mobile-entry-paused'));
   assert.equal(t.wheel(100),false);
   console.log('PASS initial pageshow preserves arrival; history restoration leaves it free');
+}
+{
+  const t=setup(0,true);
+  // The document scroll can precede both CSS dvh and the viewport resize event.
+  t.resizeViewport(764.375,false);
+  assert(t.wheel(9000));
+  assert.equal(t.story.style['--ms-viewport-height'],'764.38px');
+  assert(Math.abs(Number(t.rects[0].attrs.height)-(764.38-37.8))<.001,
+    'the SVG and visible frame must align without waiting for ResizeObserver');
+  t.settle();assert.equal(t.window.scrollY,first);
+  assert(/scale\(1(?:\.0+)?\)/.test(t.phones[0].style.transform));
+  assert.equal(t.wheel(1),false);
+  console.log('PASS fast entry aligns the frame immediately even before the viewport resize event');
+}
+{
+  const t=setup(0,true);t.steps[1].click();t.settle();
+  const y=t.window.scrollY, transform=t.phones[1].style.transform;
+  const progress=t.selectors['.ms-border-fill'].style.strokeDashoffset;
+  for(const height of [764,784.25,824.75,844]){
+    t.resizeViewport(height);
+    assert.equal(Number(t.rects[0].attrs.height),height-37.8);
+    assert.equal(t.rects[0].attrs.height,t.rects[1].attrs.height);
+    t.settle();assert.equal(t.window.scrollY,y);
+    assert.equal(t.phones[1].style.transform,transform);
+    assert.equal(t.selectors['.ms-border-fill'].style.strokeDashoffset,progress);
+    assert.equal(t.steps[1].attrs['aria-current'],'step');
+  }
+  console.log('PASS browser-bar movement keeps all frame edges aligned without changing the screen or scroll progress');
+}
+{
+  const t=setup(0,true);t.resizeViewport(764);t.settle();
+  const frame=t.rects[0].attrs.height;
+  t.resizeViewport(382,true,2);t.settle();
+  assert.equal(t.rects[0].attrs.height,frame,'pinch zoom must not resize the tour');
+  t.resizeViewport(844);t.settle();assert.equal(Number(t.rects[0].attrs.height),844-37.8);
+  assert.equal(t.viewportEvents.size,1);t.remount();assert.equal(t.viewportEvents.size,1);
+  t.unmount();assert.equal(t.viewportEvents.size,0);
+  console.log('PASS pinch zoom remains native and viewport listeners are cleaned up on unmount');
+}
+{
+  const t=setup();t.steps[0].click();t.settle();
+  for(const [from,to,screen,y] of [[300,60,1,2482],[300,60,2,3484.5],[60,300,1,2482],[60,300,0,1555.5]]){
+    t.swipeStart(from);assert(t.swipeMove(to,420,300));t.swipeEnd(to,420,150);t.settle();
+    assert.equal(t.window.scrollY,y);assert.equal(t.steps[screen].attrs['aria-current'],'step');
+  }
+  assert.equal(t.wheel(10),false);
+  console.log('PASS horizontal swipes select all three phones forwards and backwards and preserve native vertical scrolling');
+}
+{
+  const t=setup();t.steps[0].click();t.settle();t.swipeStart(300);
+  assert(t.swipeMove(210,420,200));t.tick();
+  const x=Number(t.phones[0].style.transform.match(/-50% \+ ([-\d.]+)px/)[1]);
+  assert(Math.abs(x+90)<.3,'the screen must follow the finger, not wait until release');
+  t.swipeEnd(210,420,150);t.settle();assert.equal(t.window.scrollY,1555.5);
+  console.log('PASS dragging follows the finger and a small slow swipe returns to a complete screen');
+}
+{
+  const t=setup();t.steps[0].click();t.settle();
+  t.swipeStart(300);t.swipeMove(265,420,40);t.swipeEnd(265,420,10);t.settle();assert.equal(t.window.scrollY,2482);
+  t.swipeStart(100);t.swipeMove(135,420,40);t.swipeEnd(135,420,10);t.settle();assert.equal(t.window.scrollY,1555.5);
+  t.swipeStart(300);t.swipeMove(265,420,40);t.swipeEnd(265,420,200);t.settle();assert.equal(t.window.scrollY,1555.5);
+  console.log('PASS short flicks work in both directions and holding before release clears stale momentum');
+}
+{
+  const t=setup();t.steps[0].click();t.settle();const y=t.window.scrollY;
+  t.swipeStart(190,500);assert.equal(t.swipeMove(194,400,100),false);t.nativeY(y+100);
+  t.swipeEnd(194,400);t.settle();assert.equal(t.window.scrollY,y+100);
+  t.touchStart(420,300);assert.equal(t.touchMove(420,60,100),false);t.touchEnd();t.settle();
+  assert.equal(t.window.scrollY,y+100,'a swipe outside the phone window must do nothing');
+  console.log('PASS vertical gestures stay native and horizontal gestures outside the phone window are ignored');
+}
+{
+  const t=setup();t.wheel(9000);t.settleMotion();assert(t.classes.has('mobile-entry-paused'));
+  t.swipeStart(300);assert(t.swipeMove(60,420,300));t.swipeEnd(60,420,150);t.settle();
+  assert.equal(t.window.scrollY,2482);assert(!t.classes.has('mobile-entry-paused'));
+  t.nativeY(0);assert.equal(t.wheel(9000),false);
+  console.log('PASS an explicit swipe continues from the first full-size pause without rearming the entry barrier');
+}
+{
+  const t=setup();t.steps[0].click();t.settle();
+  t.swipeStart(100);t.swipeMove(300,420,40);t.swipeEnd(300);t.settle();assert.equal(t.window.scrollY,1555.5);
+  t.swipeStart(380);t.swipeMove(-400,420,40);t.swipeEnd(-400);t.settle();assert.equal(t.window.scrollY,2482);
+  t.steps[2].click();t.settle();t.swipeStart(300);t.swipeMove(60,420,40);t.swipeEnd(60);t.settle();
+  assert.equal(t.window.scrollY,3484.5);
+  console.log('PASS swipe bounds do not wrap and a strong gesture advances at most one phone');
+}
+{
+  const t=setup();t.steps[0].click();t.settle();
+  t.swipeStart(300);t.swipeMove(60,420,200);t.fire('touchcancel',{});t.settle();assert.equal(t.window.scrollY,2482);
+  t.swipeStart(300);t.swipeMove(270,420,200);t.fire('touchstart',{touches:[{},{}]});t.settle();
+  assert.equal(t.window.scrollY,2482,'pinch handoff must not throw the next screen');
+  assert.equal(t.swipeMove(60),false);
+  console.log('PASS cancellation settles on a complete phone and multi-touch hands control back to the browser');
 }

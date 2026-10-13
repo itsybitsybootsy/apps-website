@@ -24,11 +24,20 @@ Scroll-Schwung kann diese Grenze nicht überspringen. Eine neue Bewegung geht
 anschließend frei weiter. Rückwärtsbewegungen bleiben jederzeit möglich.
 Danach scrollt der Browser nativ; auch beim Zurückscrollen und erneuten Betreten
 greift keine Sperre mehr. Die drei Punkte wählen die Ansichten direkt aus.
-Prüfung der Einstiegssperre: `node tests/mobile-story-entry.test.cjs`.
-Der Rahmen folgt mit `dvh` der sichtbaren Bildschirmhöhe, sodass sein Abstand
-rundherum bei 0,5cm bleibt, auch wenn die Browserleiste verschwindet. Die Gerätehöhe
-bleibt an `svh` gebunden. Die Gesamthöhe `360svh + 100dvh` hält die Scroll-Strecke
-konstant und verhindert dabei Sprünge im Fortschritt.
+Im vollformatigen Handybereich wechselt auch seitliches Wischen die Ansicht:
+nach links zur nächsten, nach rechts zur vorherigen. Die Geräte folgen dem Finger;
+beim Loslassen landet die Ansicht vollständig auf einem Screen. Kurze Flicks
+berücksichtigen die Geschwindigkeit, pro Geste geht es höchstens ein Handy weiter.
+Vertikales Scrollen und Pinch-Zoom bleiben möglich; der Fortschrittsrahmen und die
+vertikale Scrollposition bleiben mit der gewählten Ansicht synchron.
+Prüfung von Einstiegssperre, Rahmen und Wischen: `node tests/mobile-story-entry.test.cjs`.
+Der Rahmen folgt direkt der `visualViewport.height`, ohne verzögerte Größenanimation.
+Die Höhe wird bei sichtbaren Größenänderungen und beim Scrollen abgeglichen; SVG
+und Ausschnitt werden gemeinsam ausgerichtet, auch beim schnellen Einstieg.
+Sein Abstand bleibt rundherum bei 0,5cm, auch wenn die Browserleiste verschwindet.
+Die Gerätehöhe bleibt an `svh` gebunden. Die Gesamthöhe aus `360svh` plus derselben
+sichtbaren Höhe hält die Scroll-Strecke konstant und verhindert Fortschrittssprünge.
+Pinch-Zoom bleibt nativ; ohne VisualViewport-API dient `dvh` als Fallback.
 Der Rahmen blendet auf dem letzten Stück aus und ist ab 100 % vollständig verborgen;
 beim Zurückscrollen erscheint er passend zum Fortschritt wieder.
 Bei reduzierter Bewegung oder ohne JavaScript bleibt die normale App-Demo sichtbar.
@@ -68,7 +77,7 @@ Produkttexte müssen dem aktuellen Stand der iOS-App entsprechen.
 ## Cache
 
 Die acht aktiven CSS- und JavaScript-URLs in `index.html` tragen dieselbe Version
-(`?v=53`). Bei Änderungen vor dem nächsten Deploy gemeinsam erhöhen, damit GitHub
+(`?v=55`). Bei Änderungen vor dem nächsten Deploy gemeinsam erhöhen, damit GitHub
 Pages keine alten Dateien aus dem Browsercache mit neuen Dateien kombiniert.
 
 Die Desktop-Bewertungsleiste zeigt nur die Überschrift. Die Karten bleiben Beispieltexte,
