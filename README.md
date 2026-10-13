@@ -18,7 +18,10 @@ HTML, CSS und JavaScript ohne Build-Schritt, externe Schriften oder Bibliotheken
 Die Scroll-Sequenz läuft bis 640px Viewportbreite. Das erste Gerät wächst mit dem
 Scroll-Fortschritt, danach wechseln die drei Ansichten seitlich. Die Linie am
 Viewport-Rand zeigt den Gesamtfortschritt der Sequenz. Beim ersten Herunterscrollen
-hält die eingehende Geste einmal am ersten vollständig sichtbaren Handy an.
+hält die eingehende Geste genau am Ende der ersten Vergrößerung an.
+Das erste Handy bleibt dort mindestens 300ms stehen; auch nachlaufender nativer
+Scroll-Schwung kann diese Grenze nicht überspringen. Eine neue Bewegung geht
+anschließend frei weiter. Rückwärtsbewegungen bleiben jederzeit möglich.
 Danach scrollt der Browser nativ; auch beim Zurückscrollen und erneuten Betreten
 greift keine Sperre mehr. Die drei Punkte wählen die Ansichten direkt aus.
 Prüfung der Einstiegssperre: `node tests/mobile-story-entry.test.cjs`.
@@ -62,7 +65,7 @@ Produkttexte müssen dem aktuellen Stand der iOS-App entsprechen.
 ## Cache
 
 Die acht aktiven CSS- und JavaScript-URLs in `index.html` tragen dieselbe Version
-(`?v=51`). Bei Änderungen vor dem nächsten Deploy gemeinsam erhöhen, damit GitHub
+(`?v=52`). Bei Änderungen vor dem nächsten Deploy gemeinsam erhöhen, damit GitHub
 Pages keine alten Dateien aus dem Browsercache mit neuen Dateien kombiniert.
 
 Die Desktop-Bewertungsleiste zeigt nur die Überschrift. Die Karten bleiben Beispieltexte,

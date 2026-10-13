@@ -5,7 +5,7 @@ const assert = require('node:assert/strict');
 const path = require('node:path');
 const source = fs.readFileSync(path.join(__dirname, '../assets/js/mobile-story.js'), 'utf8');
 function setup(initialY = 0) {
-  let time = 0, id = 0, frames = new Map(), mounted;
+  let time = 0, id = 0, frames = new Map(), timers = new Map(), mounted;
   const events = new Map(), docEvents = new Map(), classes = new Set();
   const node = () => ({style:{}, attrs:{}, listeners:{}, setAttribute(n,v){this.attrs[n]=v;}, removeAttribute(n){delete this.attrs[n];}, addEventListener(n,f){this.listeners[n]=f;}, click(){this.listeners.click?.();}, textContent:''});
   const phones = Array.from({length:3}, node), steps = Array.from({length:3},node);
@@ -27,9 +27,11 @@ function setup(initialY = 0) {
   function fire(name,event){for(const f of events.get(name)||[])f(event);}
   vm.runInNewContext(source,{window,document,performance:{now:()=>time},
     requestAnimationFrame:f=>{frames.set(++id,f);return id;},cancelAnimationFrame:i=>frames.delete(i),
+    setTimeout:(f,ms)=>{timers.set(++id,{f,at:time+ms});return id;},clearTimeout:i=>timers.delete(i),
     getComputedStyle:()=>({getPropertyValue:()=> '36px'}),ResizeObserver:class{observe(){}disconnect(){}}});
-  function tick(ms=16){time+=ms;const batch=[...frames];frames.clear();for(const [,f]of batch)f(time);}
-  function settle(){for(let i=0;frames.size&&i<300;i++)tick();assert.equal(frames.size,0,'animation must settle');}
+  function tick(ms=16){time+=ms;const batch=[...frames];frames.clear();for(const [,f]of batch)f(time);for(const [i,t]of [...timers])if(t.at<=time){timers.delete(i);t.f();}}
+  function settleMotion(){for(let i=0;frames.size&&i<300;i++)tick();assert.equal(frames.size,0,'animation must settle');}
+  function settle(){for(let i=0;(frames.size||timers.size)&&i<300;i++)tick();assert.equal(frames.size+timers.size,0,'arrival and pause must settle');}
   function wheel(delta,dt=220){time+=dt;let canceled=false;fire('wheel',{deltaY:delta,deltaX:0,deltaMode:0,cancelable:true,preventDefault(){canceled=true;}});if(!canceled)window.scrollTo({top:window.scrollY+delta});return canceled;}
   function finger(y){return {identifier:1,clientX:190,clientY:y};}
   function touchStart(y){fire('touchstart',{touches:[finger(y)]});}
@@ -37,10 +39,10 @@ function setup(initialY = 0) {
   const touchEnd=()=>fire('touchend',{});
   const nativeY=y=>window.scrollTo({top:y});
   const remount=()=>{media.matches=false;media.change();media.matches=true;media.change();};
-  return {window,phones,steps,selectors,wheel,tick,settle,touchStart,touchMove,touchEnd,nativeY,fire,docEvents,remount};
+  return {window,phones,steps,selectors,wheel,tick,settle,settleMotion,touchStart,touchMove,touchEnd,nativeY,fire,docEvents,remount,classes};
 }
 
-const first=1555.5;
+const first=1449; // End of zoom: 720 + .24 * (3882 - 844), rounded to half a px.
 {
   const t=setup();assert(t.wheel(9000));
   for(let i=0;i<100;i++){t.wheel(2,0);t.tick(16);}
@@ -61,7 +63,7 @@ const first=1555.5;
   console.log('PASS entering backward from below is never caught');
 }
 {
-  const t=setup(1450);t.touchStart(300);assert(t.touchMove(100));t.tick(32);
+  const t=setup(1350);t.touchStart(300);assert(t.touchMove(100));t.tick(32);
   assert(t.touchMove(0));t.touchEnd();t.settle();assert.equal(t.window.scrollY,first);
   t.touchStart(700);assert.equal(t.touchMove(500),false);t.nativeY(first+200);t.touchEnd();t.settle();assert.equal(t.window.scrollY,first+200);
   console.log('PASS only the incoming touch is held; subsequent touches scroll natively');
@@ -73,7 +75,7 @@ const first=1555.5;
   console.log('PASS a fling entering after touch release is caught once, with free return');
 }
 {
-  const t=setup(1450);t.touchStart(300);t.touchMove(100);t.tick(32);const before=t.window.scrollY;
+  const t=setup(1350);t.touchStart(300);t.touchMove(100);t.tick(32);const before=t.window.scrollY;
   assert(t.touchMove(200));assert(t.touchMove(300));t.touchEnd();t.settle();assert.equal(t.window.scrollY,before-200);
   console.log('PASS the captured finger can reverse freely within the same touch');
 }
@@ -94,4 +96,51 @@ const first=1555.5;
   assert.equal(t.wheel(-9000),false);assert.equal(t.window.scrollY,0);
   assert.equal(t.wheel(9000),false);
   console.log('PASS all three manual controls select their screens without rearming entry');
+}
+{
+  const t=setup();t.wheel(9000);t.tick(32);
+  assert(t.wheel(50,220),'an early new wheel event cannot cancel the zoom');
+  t.settleMotion();assert.equal(t.window.scrollY,first);
+  assert(t.classes.has('mobile-entry-paused'));
+  assert(t.wheel(1,100),'the full-size pause must actually be visible');
+  assert.equal(t.window.scrollY,first);
+  t.tick(210);assert(!t.classes.has('mobile-entry-paused'));
+  assert.equal(t.wheel(1,0),false);assert.equal(t.window.scrollY,first+1);
+  console.log('PASS arrival completes and pauses before a new forward gesture continues');
+}
+{
+  const t=setup();t.touchStart(700);t.touchMove(600);t.touchEnd();t.nativeY(5000);
+  t.settle();
+  for(const y of [1600,4000,6000]){t.nativeY(y);t.settle();assert.equal(t.window.scrollY,first);}
+  assert(/scale\(1(?:\.0+)?\)/.test(t.phones[0].style.transform));
+  t.touchStart(500);assert.equal(t.touchMove(480),false);t.nativeY(first+20);t.touchEnd();
+  assert.equal(t.window.scrollY,first+20);
+  console.log('PASS residual native fling positions cannot bypass the full-size ceiling');
+}
+{
+  const t=setup();t.wheel(9000);t.tick(32);t.touchStart(500);
+  assert(t.touchMove(480),'a new touch cannot cancel the arrival before full size');
+  t.settleMotion();assert.equal(t.window.scrollY,first);
+  t.tick(320);assert(t.touchMove(460));assert.equal(t.window.scrollY,first+20);
+  t.touchEnd();t.settle();assert.equal(t.window.scrollY,first+20);
+  console.log('PASS a touch begun during the pause continues freely afterwards');
+}
+{
+  const t=setup();t.wheel(9000);t.settleMotion();assert(t.classes.has('mobile-entry-paused'));
+  assert.equal(t.wheel(-1,0),false);t.settle();assert.equal(t.window.scrollY,first-1);
+  assert(!t.classes.has('mobile-entry-paused'));
+  console.log('PASS backward input is free even during the short full-size pause');
+}
+{
+  const t=setup();t.touchStart(700);t.touchMove(600);t.fire('touchcancel',{});
+  t.nativeY(5000);t.settle();assert.equal(t.window.scrollY,first);
+  t.nativeY(6000);t.settle();assert.equal(t.window.scrollY,first);
+  console.log('PASS native touch cancellation does not release incoming momentum');
+}
+{
+  const t=setup();t.wheel(9000);t.tick(32);t.fire('pageshow',{persisted:false});
+  t.settleMotion();assert.equal(t.window.scrollY,first);assert(t.classes.has('mobile-entry-paused'));
+  t.fire('pageshow',{persisted:true});assert(!t.classes.has('mobile-entry-paused'));
+  assert.equal(t.wheel(100),false);
+  console.log('PASS initial pageshow preserves arrival; history restoration leaves it free');
 }

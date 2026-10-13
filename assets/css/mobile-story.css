@@ -12,6 +12,7 @@
 .mobile-story { display:none; }
 
 @media (max-width:640px) and (prefers-reduced-motion:no-preference) {
+  html.mobile-entry-paused { overflow-y:hidden; }
   .has-mobile-story #funktionen { padding-left:0; padding-right:0; padding-bottom:0; }
   .has-mobile-story #funktionen > .explorer-wrap { display:none; }
   .has-mobile-story .mobile-story {

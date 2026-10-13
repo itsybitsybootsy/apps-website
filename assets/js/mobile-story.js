@@ -42,7 +42,9 @@
     var label = story.querySelector('.ms-label');
     var raf = 0, start = 0, distance = 1, width = 1, height = 1, span = 1;
     var index = -1, active = false;
-    var entryMotion = null, entryRaf = 0, holdWheel = false;
+    var entryMotion = null, entryRaf = 0;
+    var entryGate = false, entryPauseUntil = 0, entryPauseTimer = 0, resumeWheel = false;
+    var zoomEnd = .24, entryPauseMs = 300;
     var wheelTime = -Infinity, touch = null, origin = null, previousY = window.scrollY;
     var phonePositions = [.275, .58, .91];
     var clamp = function (n) { return Math.min(1, Math.max(0, n)); };
@@ -67,7 +69,7 @@
         document.documentElement.classList.toggle('mobile-scroll-active', active);
       }
       if (!visible && index !== -1) return;
-      var zoom = .7 + .3 * smooth(phase(p, 0, .24));
+      var zoom = .7 + .3 * smooth(phase(p, 0, zoomEnd));
       var slide = smooth(phase(p, .31, .53)) + smooth(phase(p, .63, .85));
       phones.forEach(function (phone, i) {
         var x = (i - slide) * span;
@@ -125,10 +127,27 @@
       });
       queue();
     }
-    function entryPosition() { return start + distance * phonePositions[0]; }
+    // The barrier and the zoom share one endpoint: stop at the first frame
+    // where the phone is full-sized, before any horizontal screen transition.
+    function entryPosition() { return start + distance * zoomEnd; }
     function releaseEntry() {
       cancelAnimationFrame(entryRaf);
-      entryRaf = 0; entryMotion = null; holdWheel = false; origin = null;
+      clearTimeout(entryPauseTimer);
+      entryRaf = 0; entryMotion = null; origin = null;
+      entryGate = false; entryPauseUntil = 0; resumeWheel = false;
+      document.documentElement.classList.remove('mobile-entry-paused');
+    }
+    function finishEntry() {
+      cancelAnimationFrame(entryRaf);
+      entryRaf = 0; entryMotion = null;
+      if (entryPauseUntil !== Infinity) return;
+      // A real, short rest at full size. Removing overflow temporarily also
+      // stops native Android/WebKit momentum that cannot be canceled by a late
+      // touchmove. The scroll handler remains the ceiling for that old fling.
+      entryPauseUntil = performance.now() + entryPauseMs;
+      entryPauseTimer = setTimeout(function () {
+        document.documentElement.classList.remove('mobile-entry-paused');
+      }, entryPauseMs);
     }
     function animateEntry(now) {
       entryRaf = 0;
@@ -146,13 +165,14 @@
       var done = Math.abs(entryMotion.y - destination) < .5 && Math.abs(entryMotion.velocity) < 5;
       window.scrollTo({ top:done ? destination : entryMotion.y, behavior:'instant' });
       cancelAnimationFrame(raf); render();
-      if (done) entryMotion = null;
+      if (done) finishEntry();
       else entryRaf = requestAnimationFrame(animateEntry);
     }
     function catchEntry(kind) {
       entryUsed = true;
+      entryGate = true; entryPauseUntil = Infinity; resumeWheel = false;
+      document.documentElement.classList.add('mobile-entry-paused');
       origin = null;
-      holdWheel = kind === 'wheel';
       if (touch && kind === 'touch') touch.held = true;
       // A native fling can cross the boundary after touchend. Clamp before
       // painting, rather than animating backwards from a skipped screen.
@@ -169,10 +189,11 @@
       var now = performance.now(), fresh = now - wheelTime > 180;
       wheelTime = now;
       if (delta < 0) { releaseEntry(); return; }
-      // Only the incoming burst is held. A new gesture is always the user's
-      // own navigation, even if the arrival animation has not quite finished.
-      if (holdWheel || entryMotion) {
-        if (fresh) { releaseEntry(); return; }
+      // Finish the arrival and short pause before accepting a new forward
+      // gesture. Never let a wheel gap release the barrier halfway through zoom.
+      if (entryGate) {
+        if (fresh) resumeWheel = true;
+        if (resumeWheel && now >= entryPauseUntil) { releaseEntry(); return; }
         if (event.cancelable) event.preventDefault();
         return;
       }
@@ -184,10 +205,15 @@
       }
     }
     function onTouchStart(event) {
-      releaseEntry();
-      if (entryUsed || event.touches.length !== 1) { touch = null; return; }
+      if (event.touches.length !== 1) { touch = null; releaseEntry(); return; }
       var finger = event.touches[0];
-      touch = { id:finger.identifier, x:finger.clientX, y:finger.clientY, lastY:finger.clientY, held:false, manual:false };
+      if (entryGate && performance.now() < entryPauseUntil) {
+        touch = { id:finger.identifier, x:finger.clientX, y:finger.clientY, lastY:finger.clientY, held:true, fresh:true, manual:false };
+        return;
+      }
+      releaseEntry();
+      if (entryUsed) { touch = null; return; }
+      touch = { id:finger.identifier, x:finger.clientX, y:finger.clientY, lastY:finger.clientY, held:false, fresh:false, manual:false };
     }
     function onTouchMove(event) {
       if (!touch || event.touches.length !== 1) return;
@@ -196,7 +222,7 @@
       var delta = touch.lastY - finger.clientY;
       touch.lastY = finger.clientY;
       if (!delta || (!touch.held && !touch.manual && Math.abs(finger.clientX - touch.x) > Math.abs(finger.clientY - touch.y))) return;
-      if (touch.manual || (touch.held && delta < 0)) {
+      if (touch.manual || (touch.held && (delta < 0 || (touch.fresh && performance.now() >= entryPauseUntil)))) {
         // Reversing the captured touch is free too. Native scrolling cannot
         // restart mid-touch after preventDefault, so follow this finger directly.
         releaseEntry(); touch.held = false; touch.manual = true;
@@ -213,9 +239,20 @@
       }
     }
     function onTouchEnd() { touch = null; }
-    function onTouchCancel() { touch = null; releaseEntry(); }
+    // Native cancellation can still be followed by scroll momentum. Keep the
+    // ceiling until a new intentional gesture; pinch starts release it above.
+    function onTouchCancel() { touch = null; }
     function onScroll() {
       var y = window.scrollY;
+      if (entryGate && y > entryPosition() + .5) {
+        // Native flings may keep producing scroll positions after touchend,
+        // including non-cancelable Android moves. They cannot cross this ceiling.
+        window.scrollTo({ top:entryPosition(), behavior:'instant' });
+        finishEntry();
+        previousY = window.scrollY;
+        queue();
+        return;
+      }
       if (!entryUsed && y >= entryPosition()) {
         if (origin && y > previousY && previousY < entryPosition()) catchEntry(origin);
         else entryUsed = true; // Deep links and restored positions are never trapped.
@@ -224,8 +261,11 @@
       queue();
     }
     function onNavigate() { touch = null; releaseEntry(); }
-    function restore() {
-      onNavigate(); measure();
+    function restore(event) {
+      // The initial pageshow can arrive while images are still loading and the
+      // visitor is already scrolling. Only history restoration cancels a gate.
+      if (event && event.persisted) onNavigate();
+      measure();
       previousY = window.scrollY;
       if (window.scrollY >= entryPosition() - 1) entryUsed = true;
       queue();
