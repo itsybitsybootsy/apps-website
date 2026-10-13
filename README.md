@@ -15,21 +15,15 @@ HTML, CSS und JavaScript ohne Build-Schritt, externe Schriften oder Bibliotheken
 - `assets/img/product/`: originale Geräterenderings und App-Screenshots.
 - `legal/`: veröffentlichte Rechtstexte. Quellen und Build-Skripte bleiben privat.
 
-Die Scroll-Sequenz läuft bis 640px Viewportbreite. Kleine, langsame Eingaben reagieren
-schon ab 1px Trackpad- bzw. 4px Fingerbewegung. Einmal ausgelöst, läuft der Wechsel
-auch ohne weitere Eingabe zum festgelegten Screen. Sanfte Eingaben verwenden die
-doppelte Feder-Reaktionszeit und können ohne Pause Screen für Screen weiterführen. Kräftige Wischbewegungen
-steuern einen vollständigen Haltepunkt an; ihr auslaufender Schwung überspringt keinen
-Screen. Ein Richtungswechsel kann die laufende Federbewegung direkt umkehren. Oberhalb und
-unterhalb der Tour scrollt die Seite normal. Die stabile Höhe mit `svh` verhindert
-Größensprünge beim Einblenden der Browserleiste. Die Linie am Viewport-Rand zeigt
-den Gesamtfortschritt der Sequenz.
+Die Scroll-Sequenz läuft bis 640px Viewportbreite. Das erste Gerät wächst mit dem
+Scroll-Fortschritt, danach wechseln die drei Ansichten seitlich. Die Linie am
+Viewport-Rand zeigt den Gesamtfortschritt der Sequenz. Es gibt keine Scroll-Sperre
+und kein Einrasten: Der Browser scrollt nativ, die Screens folgen der Fingerposition.
+Die stabile Höhe mit `svh` verhindert Größensprünge beim Einblenden der Browserleiste.
 Der Rahmen blendet auf dem letzten Stück aus und ist ab 100 % vollständig verborgen;
 beim Zurückscrollen erscheint er passend zum Fortschritt wieder.
 Bei reduzierter Bewegung oder ohne JavaScript bleibt die normale App-Demo sichtbar.
 Die Tabs wechseln nur durch Nutzereingabe, nicht automatisch.
-Die Eingabelogik lässt sich mit `node tests/mobile-story.test.cjs` prüfen: kleine und
-kräftige Impulse, kontinuierliche Gesten, Momentum, Richtungswechsel und beide Ausstiege.
 Die vier Datenschutz-Karten teilen sich ihr HTML auf Desktop und Handy; mobil stehen
 sie untereinander, auf dem Laptop in einer Reihe. Mobil bleiben sieben FAQ sichtbar.
 Auf dem Laptop sind vier direkt sichtbar, der Rest klappt über „Weitere Fragen“ auf.
@@ -65,7 +59,7 @@ Produkttexte müssen dem aktuellen Stand der iOS-App entsprechen.
 ## Cache
 
 Die acht aktiven CSS- und JavaScript-URLs in `index.html` tragen dieselbe Version
-(`?v=49`). Bei Änderungen vor dem nächsten Deploy gemeinsam erhöhen, damit GitHub
+(`?v=50`). Bei Änderungen vor dem nächsten Deploy gemeinsam erhöhen, damit GitHub
 Pages keine alten Dateien aus dem Browsercache mit neuen Dateien kombiniert.
 
 Die Desktop-Bewertungsleiste zeigt nur die Überschrift. Die Karten bleiben Beispieltexte,
