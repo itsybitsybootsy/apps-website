@@ -74,3 +74,10 @@ body.h6-on .desktop-nav-haze { opacity:0; transition:opacity .3s; }
   body.h6-on .site-nav .brand { color:#f2f6f2; }
   body.h6-on .site-nav .button-small { display:none; }
 }
+
+/* phone: the browser bars and the overscroll area above and below the page are black while the hero is on screen */
+@media (max-width:640px) {
+  html.h6-on { background:#070908; }
+  html.h6-on body { background:#fff; }
+  .hero6 { height:100vh; height:100svh; }
+}
