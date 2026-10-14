@@ -1,7 +1,7 @@
 (function () {
   var hero = document.getElementById('hero6');
   if (!hero) return;
-  var photo = hero.querySelector('[data-photo]'), flash = hero.querySelector('.hero6-flash');
+  var photo = hero.querySelector('[data-photo]');
   var imgs = { before: photo.querySelector('[data-img="before"]'), after: photo.querySelector('[data-img="after"]') };
   var btns = [].slice.call(hero.querySelectorAll('[data-g]'));
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -63,7 +63,7 @@
     try { sessionStorage.setItem('sm-g', g); } catch (e) {}
     document.documentElement.setAttribute('data-g', g);
     btns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.g === g)); });
-    photo.classList.remove('live', 'done'); hero.classList.remove('glow'); flash.classList.remove('pop');
+    photo.classList.remove('live', 'done');
     frame({ p: 100, k: 0, inn: replay ? 1 : 0, sc: replay ? 1.035 : 1.06 });
     var base = 'assets/img/hero/' + g + '/', fb = 'assets/img/hero/f/';
     Promise.all([load(imgs.before, base + 'before.webp', fb + 'before.webp'), load(imgs.after, base + 'after.webp', fb + 'after.webp')]).then(function () {
@@ -74,7 +74,7 @@
       mk.src = (imgs.after.currentSrc || imgs.after.src).replace('after.webp', 'mask.webp');
       if (reduce) { frame({ p: 0, k: 1, inn: 1, sc: 1 }); photo.classList.add('done'); return; }
       /* timeline in ms: the old version comes up out of the dark (0 to 1000), holds, the light sweeps across (SWEEP), the camera settles */
-      var T_SWEEP = replay ? 350 : 1700, SWEEP = 3400, SETTLE = 900, TOTAL = T_SWEEP + SWEEP + SETTLE, fired = false;
+      var T_SWEEP = replay ? 350 : 1700, SWEEP = 3400, SETTLE = 900, TOTAL = T_SWEEP + SWEEP + SETTLE;
       var from = replay ? 1.035 : 1.06;
       var t0 = performance.now();
       (function step(now) {
@@ -85,7 +85,6 @@
         var sc = from - (from - 1) * easeOut(k01(t / TOTAL));
         frame({ p: 100 - 100 * k, k: k, inn: inn, sc: sc });
         if (s > 0) photo.classList.add('live');
-        if (s >= .965 && !fired) { fired = true; flash.classList.add('pop'); hero.classList.add('glow'); }
         if (t < TOTAL) requestAnimationFrame(step);
         else { photo.classList.add('done'); frame({ p: 0, k: 1, inn: 1, sc: 1 }); }
       })(t0);
