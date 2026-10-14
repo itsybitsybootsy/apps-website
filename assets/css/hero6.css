@@ -2,7 +2,7 @@
 .hero6 { --pad:clamp(28px,4.5vw,72px); position:relative; height:100vh; height:100svh; min-height:640px; background:#070908; color:#f2f6f2; overflow:hidden; isolation:isolate; }
 .hero6-h1 { position:absolute; z-index:1; left:0; right:0; top:clamp(88px,12svh,112px); margin:0; text-align:center; font-family:Outfit,-apple-system,BlinkMacSystemFont,sans-serif; font-weight:600; font-size:min(7vw,13svh); line-height:1; letter-spacing:-.055em; white-space:nowrap; }
 
-.hero6-photo { --p:100%; position:absolute; z-index:2; left:50%; bottom:0; height:72%; aspect-ratio:1122/1402; transform:translateX(-50%) scale(var(--sc,1)); transform-origin:50% 8%; -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%); }
+.hero6-photo { --p:100%; position:absolute; z-index:2; left:50%; top:28%; height:84%; aspect-ratio:1122/1402; transform:translateX(-50%) scale(var(--sc,1)); transform-origin:50% 8%; -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%); }
 .hero6-photo img { position:absolute; inset:0; width:100%; height:100%; user-select:none; -webkit-user-drag:none; }
 
 .hero6-foot { position:absolute; z-index:4; left:var(--pad); right:var(--pad); bottom:clamp(24px,5svh,52px); display:flex; align-items:flex-end; justify-content:space-between; gap:32px; }
@@ -60,7 +60,7 @@ body.h6-on .desktop-nav-haze { opacity:0; transition:opacity .3s; }
 @media (max-width:640px) {
   .hero6 { --pad:22px; min-height:560px; }
   .hero6-h1 { top:clamp(84px,12svh,104px); padding:0 18px; white-space:normal; font-size:clamp(46px,14.2vw,64px); line-height:.98; letter-spacing:-.05em; text-wrap:balance; }
-  .hero6-photo { height:66%; -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%); }
+  .hero6-photo { top:33%; height:76%; -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%); }
   .hero6-photo .line { box-shadow:0 0 10px 2px rgba(255,226,190,.55); }
   .hero6::after { height:40%; }
   .hero6-foot { left:var(--pad); right:var(--pad); bottom:max(34px,env(safe-area-inset-bottom)); flex-direction:column; align-items:center; gap:16px; text-align:center; }
@@ -75,9 +75,15 @@ body.h6-on .desktop-nav-haze { opacity:0; transition:opacity .3s; }
   body.h6-on .site-nav .button-small { display:none; }
 }
 
-/* phone: the browser bars and the overscroll area above and below the page are black while the hero is on screen */
+/* phone: the hero reaches under the browser bars (large viewport height); the page background is black exactly as tall as the hero,
+   so the status bar, the overscroll and the bottom bar all pick up black, and white starts right where the next section does */
 @media (max-width:640px) {
-  html.h6-on { background:#070908; }
-  html.h6-on body { background:#fff; }
-  .hero6 { height:100vh; height:100svh; }
+  :root { --h6h:100vh; }
+  @supports (height:100lvh) { :root { --h6h:100lvh; } }
+  html { background:#070908; }
+  body { background:linear-gradient(180deg,#070908 0,#070908 var(--h6h),#fff var(--h6h)); }
+  .hero6 { height:var(--h6h); min-height:560px; }
+  .hero6-foot { bottom:calc(max(34px,env(safe-area-inset-bottom)) + var(--h6h) - 100svh); }
+  .hero6-credit { bottom:calc(10px + var(--h6h) - 100svh); }
+  .hero6-switch { bottom:calc(max(34px,env(safe-area-inset-bottom)) + 150px + var(--h6h) - 100svh); }
 }
