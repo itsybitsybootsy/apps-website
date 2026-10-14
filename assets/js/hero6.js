@@ -5,7 +5,12 @@
   var imgs = { before: photo.querySelector('[data-img="before"]'), after: photo.querySelector('[data-img="after"]') };
   var btns = [].slice.call(hero.querySelectorAll('[data-g]'));
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  new IntersectionObserver(function (e) { document.body.classList.toggle('h6-on', e[0].isIntersecting); }).observe(hero);
+  var themeMeta = document.querySelector('meta[name="theme-color"]'), themeLight = themeMeta && themeMeta.getAttribute('content');
+  new IntersectionObserver(function (e) {
+    var on = e[0].isIntersecting;
+    document.body.classList.toggle('h6-on', on); document.documentElement.classList.toggle('h6-on', on);
+    if (themeMeta) themeMeta.setAttribute('content', on ? '#070908' : themeLight);   /* phone browser bars follow the hero */
+  }).observe(hero);
 
   /* Which version: ?g=m or ?g=f in the link (one link per audience), else the last choice, else f. */
   function pick() {
