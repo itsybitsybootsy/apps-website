@@ -75,9 +75,9 @@
       mk.onerror = function () { photo.style.setProperty('--mask', 'url("' + imgs.after.currentSrc + '")'); };
       mk.src = (imgs.after.currentSrc || imgs.after.src).replace('after.webp', 'mask.webp');
       if (reduce) { frame({ p: 0, k: 1, inn: 1, sc: 1 }); photo.classList.add('done'); return; }
-      /* timeline in ms: the old version comes up out of the dark (0 to 1000), holds, the light sweeps across (SWEEP), the camera settles */
-      var T_SWEEP = replay ? 350 : 1700;
-      var SWEEP = replay ? 350 : 3400;
+      /* timeline in ms: hold, light sweeps across, camera settles — same pacing on first load and when switching */
+      var T_SWEEP = 1700;
+      var SWEEP = 3400;
       var SETTLE = 900;
       var TOTAL = T_SWEEP + SWEEP + SETTLE, fired = false;
       var from = replay ? 1.035 : 1.06;
