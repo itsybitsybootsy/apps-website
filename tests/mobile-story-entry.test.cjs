@@ -21,9 +21,9 @@ function setup(initialY = 0, withViewport = false) {
     removeEventListener:(n,f)=>events.get(n)?.delete(f),
     scrollTo({top}){this.scrollY=Math.max(0,Math.min(7000,Math.round(top*2)/2));fire('scroll',{});}};
   if (withViewport) window.visualViewport = viewport;
-  const story = {...node(),offsetHeight:3882,querySelector:s=>selectors[s],
+  const story = {...node(),offsetHeight:3376,querySelector:s=>selectors[s],
     querySelectorAll:s=>s==='.ms-phone'?phones:s==='.ms-step'?steps:rects,
-    getBoundingClientRect:()=>({top:720-window.scrollY,height:3038+visibleHeight()}),remove(){mounted=null;}};
+    getBoundingClientRect:()=>({top:720-window.scrollY,height:2532+visibleHeight()}),remove(){mounted=null;}};
   const section = {appendChild(e){mounted=e;}};
   const document = {querySelector:s=>s==='#funktionen'?section:null,createElement:()=>story,body:{},
     documentElement:{classList:{add:c=>classes.add(c),remove:(...cs)=>cs.forEach(c=>classes.delete(c)),toggle:(c,b)=>b?classes.add(c):classes.delete(c)}},
@@ -51,7 +51,7 @@ function setup(initialY = 0, withViewport = false) {
   return {window,phones,steps,selectors,wheel,tick,settle,settleMotion,touchStart,touchMove,touchEnd,nativeY,fire,docEvents,remount,classes,story,rects,viewportEvents,resizeViewport,unmount,swipeStart,swipeMove,swipeEnd};
 }
 
-const first=1449; // End of zoom: 720 + .24 * (3882 - 844), rounded to half a px.
+const first=1327.5; // End of zoom: 720 + .24 * (3376 - 844), rounded to half a px.
 {
   const t=setup();assert(t.wheel(9000));
   for(let i=0;i<100;i++){t.wheel(2,0);t.tick(16);}
@@ -72,7 +72,7 @@ const first=1449; // End of zoom: 720 + .24 * (3882 - 844), rounded to half a px
   console.log('PASS entering backward from below is never caught');
 }
 {
-  const t=setup(1350);t.touchStart(300);assert(t.touchMove(100));t.tick(32);
+  const t=setup(1200);t.touchStart(300);assert(t.touchMove(100));t.tick(32);
   assert(t.touchMove(0));t.touchEnd();t.settle();assert.equal(t.window.scrollY,first);
   t.touchStart(700);assert.equal(t.touchMove(500),false);t.nativeY(first+200);t.touchEnd();t.settle();assert.equal(t.window.scrollY,first+200);
   console.log('PASS only the incoming touch is held; subsequent touches scroll natively');
@@ -84,7 +84,7 @@ const first=1449; // End of zoom: 720 + .24 * (3882 - 844), rounded to half a px
   console.log('PASS a fling entering after touch release is caught once, with free return');
 }
 {
-  const t=setup(1350);t.touchStart(300);t.touchMove(100);t.tick(32);const before=t.window.scrollY;
+  const t=setup(1200);t.touchStart(300);t.touchMove(100);t.tick(32);const before=t.window.scrollY;
   assert(t.touchMove(200));assert(t.touchMove(300));t.touchEnd();t.settle();assert.equal(t.window.scrollY,before-200);
   console.log('PASS the captured finger can reverse freely within the same touch');
 }
@@ -100,7 +100,7 @@ const first=1449; // End of zoom: 720 + .24 * (3882 - 844), rounded to half a px
   console.log('PASS breakpoint remount keeps the used entry; a new page load resets it');
 }
 {
-  const t=setup();const positions=[1555.5,2482,3484.5];
+  const t=setup();const positions=[1416.5,2188.5,3024];
   for(const i of [0,2,1,0]){t.steps[i].click();t.settle();assert.equal(t.window.scrollY,positions[i]);assert.equal(t.steps[i].attrs['aria-current'],'step');}
   assert.equal(t.wheel(-9000),false);assert.equal(t.window.scrollY,0);
   assert.equal(t.wheel(9000),false);
@@ -193,7 +193,7 @@ const first=1449; // End of zoom: 720 + .24 * (3882 - 844), rounded to half a px
 }
 {
   const t=setup();t.steps[0].click();t.settle();
-  for(const [from,to,screen,y] of [[300,60,1,2482],[300,60,2,3484.5],[60,300,1,2482],[60,300,0,1555.5]]){
+  for(const [from,to,screen,y] of [[300,60,1,2188.5],[300,60,2,3024],[60,300,1,2188.5],[60,300,0,1416.5]]){
     t.swipeStart(from);assert(t.swipeMove(to,420,300));t.swipeEnd(to,420,150);t.settle();
     assert.equal(t.window.scrollY,y);assert.equal(t.steps[screen].attrs['aria-current'],'step');
   }
@@ -205,14 +205,14 @@ const first=1449; // End of zoom: 720 + .24 * (3882 - 844), rounded to half a px
   assert(t.swipeMove(210,420,200));t.tick();
   const x=Number(t.phones[0].style.transform.match(/-50% \+ ([-\d.]+)px/)[1]);
   assert(Math.abs(x+90)<.3,'the screen must follow the finger, not wait until release');
-  t.swipeEnd(210,420,150);t.settle();assert.equal(t.window.scrollY,1555.5);
+  t.swipeEnd(210,420,150);t.settle();assert.equal(t.window.scrollY,1416.5);
   console.log('PASS dragging follows the finger and a small slow swipe returns to a complete screen');
 }
 {
   const t=setup();t.steps[0].click();t.settle();
-  t.swipeStart(300);t.swipeMove(265,420,40);t.swipeEnd(265,420,10);t.settle();assert.equal(t.window.scrollY,2482);
-  t.swipeStart(100);t.swipeMove(135,420,40);t.swipeEnd(135,420,10);t.settle();assert.equal(t.window.scrollY,1555.5);
-  t.swipeStart(300);t.swipeMove(265,420,40);t.swipeEnd(265,420,200);t.settle();assert.equal(t.window.scrollY,1555.5);
+  t.swipeStart(300);t.swipeMove(265,420,40);t.swipeEnd(265,420,10);t.settle();assert.equal(t.window.scrollY,2188.5);
+  t.swipeStart(100);t.swipeMove(135,420,40);t.swipeEnd(135,420,10);t.settle();assert.equal(t.window.scrollY,1416.5);
+  t.swipeStart(300);t.swipeMove(265,420,40);t.swipeEnd(265,420,200);t.settle();assert.equal(t.window.scrollY,1416.5);
   console.log('PASS short flicks work in both directions and holding before release clears stale momentum');
 }
 {
@@ -226,23 +226,23 @@ const first=1449; // End of zoom: 720 + .24 * (3882 - 844), rounded to half a px
 {
   const t=setup();t.wheel(9000);t.settleMotion();assert(t.classes.has('mobile-entry-paused'));
   t.swipeStart(300);assert(t.swipeMove(60,420,300));t.swipeEnd(60,420,150);t.settle();
-  assert.equal(t.window.scrollY,2482);assert(!t.classes.has('mobile-entry-paused'));
+  assert.equal(t.window.scrollY,2188.5);assert(!t.classes.has('mobile-entry-paused'));
   t.nativeY(0);assert.equal(t.wheel(9000),false);
   console.log('PASS an explicit swipe continues from the first full-size pause without rearming the entry barrier');
 }
 {
   const t=setup();t.steps[0].click();t.settle();
-  t.swipeStart(100);t.swipeMove(300,420,40);t.swipeEnd(300);t.settle();assert.equal(t.window.scrollY,1555.5);
-  t.swipeStart(380);t.swipeMove(-400,420,40);t.swipeEnd(-400);t.settle();assert.equal(t.window.scrollY,2482);
+  t.swipeStart(100);t.swipeMove(300,420,40);t.swipeEnd(300);t.settle();assert.equal(t.window.scrollY,1416.5);
+  t.swipeStart(380);t.swipeMove(-400,420,40);t.swipeEnd(-400);t.settle();assert.equal(t.window.scrollY,2188.5);
   t.steps[2].click();t.settle();t.swipeStart(300);t.swipeMove(60,420,40);t.swipeEnd(60);t.settle();
-  assert.equal(t.window.scrollY,3484.5);
+  assert.equal(t.window.scrollY,3024);
   console.log('PASS swipe bounds do not wrap and a strong gesture advances at most one phone');
 }
 {
   const t=setup();t.steps[0].click();t.settle();
-  t.swipeStart(300);t.swipeMove(60,420,200);t.fire('touchcancel',{});t.settle();assert.equal(t.window.scrollY,2482);
+  t.swipeStart(300);t.swipeMove(60,420,200);t.fire('touchcancel',{});t.settle();assert.equal(t.window.scrollY,2188.5);
   t.swipeStart(300);t.swipeMove(270,420,200);t.fire('touchstart',{touches:[{},{}]});t.settle();
-  assert.equal(t.window.scrollY,2482,'pinch handoff must not throw the next screen');
+  assert.equal(t.window.scrollY,2188.5,'pinch handoff must not throw the next screen');
   assert.equal(t.swipeMove(60),false);
   console.log('PASS cancellation settles on a complete phone and multi-touch hands control back to the browser');
 }

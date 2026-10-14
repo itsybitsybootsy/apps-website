@@ -755,9 +755,16 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
   body.has-float-nav main{
     padding-top:calc(76px + env(safe-area-inset-top, 0px));
   }
+  body.has-float-nav main:has(#hero6){
+    padding-top:0;
+  }
 
   /* section backgrounds, alternate like desktop */
-  .section{ padding:76px 22px; text-align:center; background:var(--bg); }
+  .section{ padding:64px 20px; text-align:center; background:var(--bg); }
+  #datenschutz.section,#fragen.section,.closing,.closing-footer{
+    content-visibility:auto;
+    contain-intrinsic-size:auto 720px;
+  }
   .section.gray{ background:var(--bg-2); }
   .section.wash{ background:var(--accent-soft); }
   .container{ padding:0; max-width:none; }
@@ -797,8 +804,8 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
   /* section headings, v0 centered, no eyebrow (except datenschutz) */
   #funktionen > .container > .eyebrow{ display:none; }
   #funktionen > .container > .headline{
-    font-size:clamp(30px,8.4vw,36px);
-    max-width:26ch;
+    font-size:clamp(26px,7.2vw,32px);
+    max-width:24ch;
     margin:0 auto;
     text-wrap:balance;
   }

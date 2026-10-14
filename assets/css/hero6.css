@@ -51,17 +51,20 @@ body.h6-on .desktop-nav-haze { opacity:0; transition:opacity .3s; }
 
 /* phone: same story, stacked. Headline on two lines, the figure large, sentence and badge centred underneath */
 @media (max-width:640px) {
-  .hero6 { --pad:22px; min-height:560px; }
-  .hero6-h1 { top:clamp(84px,12svh,104px); padding:0 18px; white-space:normal; font-size:clamp(46px,14.2vw,64px); line-height:.98; letter-spacing:-.05em; text-wrap:balance; }
-  .hero6-photo { top:33%; height:76%; -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%); }
-  .hero6-photo .line { box-shadow:0 0 10px 2px rgba(255,226,190,.55); }
-  .hero6::after { height:40%; }
-  .hero6-foot { left:var(--pad); right:var(--pad); bottom:max(34px,env(safe-area-inset-bottom)); flex-direction:column; align-items:center; gap:16px; text-align:center; }
-  .hero6-foot p { max-width:19em; font-size:15px; }
-  .hero6-cta { justify-content:center; --store-width:150px; --store-height:50px; }
-  .hero6-credit { left:50%; right:auto; transform:translateX(-50%); bottom:10px; text-align:center; }
-  .hero6-switch { left:auto; right:14px; bottom:calc(max(34px,env(safe-area-inset-bottom)) + 150px); transform:none; flex-direction:column; }
-  .hero6-glow { height:120svh; }
+  .hero6 { --pad:20px; min-height:520px; }
+  .hero6-h1 { top:max(72px,calc(10svh + env(safe-area-inset-top,0px))); padding:0 16px; white-space:normal; font-size:clamp(34px,10.5vw,48px); line-height:1.02; letter-spacing:-.048em; text-wrap:balance; }
+  .hero6-photo { top:33%; height:76%; transform:translateX(-50%) scale(var(--sc,1)) translateZ(0); -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%); }
+  .hero6-photo .line { box-shadow:0 0 8px 1px rgba(255,226,190,.45); }
+  .hero6::after { height:38%; }
+  .hero6-foot { left:var(--pad); right:var(--pad); bottom:max(28px,env(safe-area-inset-bottom)); flex-direction:column; align-items:center; gap:14px; text-align:center; }
+  .hero6-foot p { max-width:22em; font-size:14px; line-height:1.42; }
+  .hero6-cta { justify-content:center; --store-width:138px; --store-height:46px; }
+  .hero6-credit { left:50%; right:auto; transform:translateX(-50%); text-align:center; bottom:8px; font-size:9px; }
+  .hero6-switch { left:auto; right:12px; bottom:calc(max(28px,env(safe-area-inset-bottom)) + 132px); transform:none; flex-direction:column; -webkit-backdrop-filter:none; backdrop-filter:none; background:rgba(10,12,11,.82); }
+  .hero6-switch button { width:34px; height:34px; }
+  .hero6-glow { display:none; }
+  .hero6.hero6-lite .hero6-photo .before { filter:saturate(.7) brightness(.82) contrast(.95); }
+  .hero6.hero6-lite .hero6-photo .after { filter:brightness(calc(1 + .2 * (1 - var(--k,0)))) saturate(calc(1 + .14 * (1 - var(--k,0)))); }
   /* the white phone bar becomes a quiet dark one while the hero is on screen */
   body.h6-on .site-nav { background:transparent; -webkit-backdrop-filter:none; backdrop-filter:none; }
   body.h6-on .site-nav .brand { color:#f2f6f2; }
@@ -75,15 +78,15 @@ body.h6-on .desktop-nav-haze { opacity:0; transition:opacity .3s; }
   @supports (height:100lvh) { :root { --h6h:100lvh; } }
   html { background:#070908; }
   body { background:linear-gradient(180deg,#070908 0,#070908 var(--h6h),#fff var(--h6h)); }
-  .hero6 { height:var(--h6h); min-height:560px; }
-  .hero6-foot { bottom:calc(max(34px,env(safe-area-inset-bottom)) + var(--h6h) - 100svh); }
-  .hero6-credit { bottom:calc(10px + var(--h6h) - 100svh); }
-  .hero6-switch { bottom:calc(max(34px,env(safe-area-inset-bottom)) + 150px + var(--h6h) - 100svh); }
+  .hero6 { height:var(--h6h); min-height:520px; contain:layout style paint; }
+  .hero6-foot { bottom:calc(max(28px,env(safe-area-inset-bottom)) + var(--h6h) - 100svh); }
+  .hero6-credit { bottom:calc(8px + var(--h6h) - 100svh); }
+  .hero6-switch { bottom:calc(max(28px,env(safe-area-inset-bottom)) + 132px + var(--h6h) - 100svh); }
 }
 
 /* once the reveal has finished the figure is one plain, static image: no filters, clip, blend or mask-heavy layers to repaint on scroll */
 .hero6-photo.done { transform:translateX(-50%); }
 .hero6-photo.done .before, .hero6-photo.done .bloom, .hero6-photo.done .line { display:none; }
-.hero6-photo.done .after { clip-path:none; filter:none; }
+.hero6 .hero6-photo.done .after, .hero6.hero6-lite .hero6-photo.done .after { clip-path:none; filter:none; }
 .hero6-glow { will-change:auto; }
 @media (max-width:640px) { .hero6-glow { display:none; } }

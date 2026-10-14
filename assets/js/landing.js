@@ -26,8 +26,9 @@
       });
       tab.addEventListener('keydown', function (event) {
         var next = index;
-        if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
-        else if (event.key === 'ArrowLeft') next = (index + tabs.length - 1) % tabs.length;
+        var direction = document.documentElement.dir === 'rtl' ? -1 : 1;
+        if (event.key === 'ArrowRight') next = (index + tabs.length + direction) % tabs.length;
+        else if (event.key === 'ArrowLeft') next = (index + tabs.length - direction) % tabs.length;
         else if (event.key === 'Home') next = 0;
         else if (event.key === 'End') next = tabs.length - 1;
         else return;
@@ -90,7 +91,11 @@
     faqMore.addEventListener('click', function () {
       var expanded = !faqList.classList.toggle('is-collapsed');
       faqMore.setAttribute('aria-expanded', String(expanded));
-      if (faqLabel) faqLabel.textContent = expanded ? 'Weniger Fragen' : 'Weitere Fragen';
+      if (faqLabel) {
+        var key = expanded ? 'faq.less' : 'faq.more';
+        faqLabel.setAttribute('data-i18n', key);
+        faqLabel.textContent = window.SkinmetricsI18n ? window.SkinmetricsI18n.t(key) : expanded ? 'Weniger Fragen' : 'Weitere Fragen';
+      }
       if (!expanded) faqList.querySelectorAll('.faq-extra').forEach(function (item) { item.open = false; });
     });
   }

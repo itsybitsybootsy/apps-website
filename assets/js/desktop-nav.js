@@ -95,17 +95,18 @@
   });
   closeButton.addEventListener('click', function () { close(true); });
   document.addEventListener('pointerdown', function (event) {
-    if (state === 'closed') return;
+    if (state === 'closed' || document.getElementById('language-dialog').open) return;
     usePointer();
     if (!panel.contains(event.target) && !trigger.contains(event.target)) close(false);
   }, { capture:true });
   document.addEventListener('keydown', function (event) {
-    if (state === 'closed') return;
+    if (state === 'closed' || document.getElementById('language-dialog').open) return;
     panel.removeAttribute('data-pointer');
     if (event.key === 'Escape') {
       event.preventDefault(); panel.setAttribute('data-instant', ''); close(true);
     } else if (event.key === 'Enter') panel.setAttribute('data-instant', '');
   });
+  document.addEventListener('skinmetrics:languageopen', function () { close(false); });
   panel.querySelectorAll('a').forEach(function (link) {
     link.addEventListener('click', function () { close(false); });
   });

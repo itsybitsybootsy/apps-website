@@ -1,6 +1,8 @@
 (function () {
   var hero = document.getElementById('hero6');
   if (!hero) return;
+  var lite = matchMedia('(max-width:640px)').matches || matchMedia('(pointer:coarse)').matches;
+  if (lite) hero.classList.add('hero6-lite');
   var photo = hero.querySelector('[data-photo]');
   var imgs = { before: photo.querySelector('[data-img="before"]'), after: photo.querySelector('[data-img="after"]') };
   var btns = [].slice.call(hero.querySelectorAll('[data-g]'));
@@ -68,8 +70,11 @@
       mk.onerror = function () { photo.style.setProperty('--mask', 'url("' + imgs.after.currentSrc + '")'); };
       mk.src = (imgs.after.currentSrc || imgs.after.src).replace('after.webp', 'mask.webp');
       if (reduce) { frame({ p: 0, k: 1, inn: 1, sc: 1 }); photo.classList.add('done'); return; }
-      /* timeline in ms: the old version comes up out of the dark (0 to 1000), holds, the light sweeps across (SWEEP), the camera settles */
-      var T_SWEEP = replay ? 350 : 1700, SWEEP = 3400, SETTLE = 900, TOTAL = T_SWEEP + SWEEP + SETTLE;
+      /* timeline in ms: hold, light sweeps across, camera settles — same pacing on first load and when switching */
+      var T_SWEEP = 1700;
+      var SWEEP = 3400;
+      var SETTLE = 900;
+      var TOTAL = T_SWEEP + SWEEP + SETTLE;
       var from = replay ? 1.035 : 1.06;
       var t0 = performance.now();
       (function step(now) {
