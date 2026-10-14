@@ -1,6 +1,8 @@
 (function () {
   var hero = document.getElementById('hero6');
   if (!hero) return;
+  var lite = matchMedia('(max-width:640px)').matches || matchMedia('(pointer:coarse)').matches;
+  if (lite) hero.classList.add('hero6-lite');
   var photo = hero.querySelector('[data-photo]'), flash = hero.querySelector('.hero6-flash');
   var imgs = { before: photo.querySelector('[data-img="before"]'), after: photo.querySelector('[data-img="after"]') };
   var btns = [].slice.call(hero.querySelectorAll('[data-g]'));
@@ -74,7 +76,10 @@
       mk.src = (imgs.after.currentSrc || imgs.after.src).replace('after.webp', 'mask.webp');
       if (reduce) { frame({ p: 0, k: 1, inn: 1, sc: 1 }); photo.classList.add('done'); return; }
       /* timeline in ms: the old version comes up out of the dark (0 to 1000), holds, the light sweeps across (SWEEP), the camera settles */
-      var T_SWEEP = replay ? 350 : 1700, SWEEP = 3400, SETTLE = 900, TOTAL = T_SWEEP + SWEEP + SETTLE, fired = false;
+      var T_SWEEP = replay ? (lite ? 220 : 350) : (lite ? 650 : 1700);
+      var SWEEP = lite ? (replay ? 280 : 1100) : (replay ? 350 : 3400);
+      var SETTLE = lite ? 350 : 900;
+      var TOTAL = T_SWEEP + SWEEP + SETTLE, fired = false;
       var from = replay ? 1.035 : 1.06;
       var t0 = performance.now();
       (function step(now) {
@@ -85,7 +90,7 @@
         var sc = from - (from - 1) * easeOut(k01(t / TOTAL));
         frame({ p: 100 - 100 * k, k: k, inn: inn, sc: sc });
         if (s > 0) photo.classList.add('live');
-        if (s >= .965 && !fired) { fired = true; flash.classList.add('pop'); hero.classList.add('glow'); }
+        if (s >= .965 && !fired) { fired = true; if (!lite) { flash.classList.add('pop'); hero.classList.add('glow'); } }
         if (t < TOTAL) requestAnimationFrame(step);
         else { photo.classList.add('done'); frame({ p: 0, k: 1, inn: 1, sc: 1 }); }
       })(t0);

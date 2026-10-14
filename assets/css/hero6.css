@@ -58,17 +58,22 @@ body.h6-on .desktop-nav-haze { opacity:0; transition:opacity .3s; }
 
 /* phone: same story, stacked. Headline on two lines, the figure large, sentence and badge centred underneath */
 @media (max-width:640px) {
-  .hero6 { --pad:22px; min-height:560px; }
-  .hero6-h1 { top:clamp(84px,12svh,104px); padding:0 18px; white-space:normal; font-size:clamp(46px,14.2vw,64px); line-height:.98; letter-spacing:-.05em; text-wrap:balance; }
-  .hero6-photo { height:66%; -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%); }
-  .hero6-photo .line { box-shadow:0 0 10px 2px rgba(255,226,190,.55); }
-  .hero6::after { height:40%; }
-  .hero6-foot { left:var(--pad); right:var(--pad); bottom:max(34px,env(safe-area-inset-bottom)); flex-direction:column; align-items:center; gap:16px; text-align:center; }
-  .hero6-foot p { max-width:19em; font-size:15px; }
-  .hero6-cta { justify-content:center; --store-width:150px; --store-height:50px; }
-  .hero6-credit { bottom:10px; }
-  .hero6-switch { left:auto; right:14px; bottom:calc(max(34px,env(safe-area-inset-bottom)) + 150px); transform:none; flex-direction:column; }
-  .hero6-glow { height:120svh; }
+  .hero6 { --pad:20px; min-height:520px; }
+  .hero6-h1 { top:max(72px,calc(10svh + env(safe-area-inset-top,0px))); padding:0 16px; white-space:normal; font-size:clamp(34px,10.5vw,48px); line-height:1.02; letter-spacing:-.048em; text-wrap:balance; }
+  .hero6-photo { height:58%; transform:translateX(-50%) scale(var(--sc,1)) translateZ(0); -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%); }
+  .hero6-photo .line { box-shadow:0 0 8px 1px rgba(255,226,190,.45); }
+  .hero6::after { height:38%; }
+  .hero6-foot { left:var(--pad); right:var(--pad); bottom:max(28px,env(safe-area-inset-bottom)); flex-direction:column; align-items:center; gap:14px; text-align:center; }
+  .hero6-foot p { max-width:22em; font-size:14px; line-height:1.42; }
+  .hero6-cta { justify-content:center; --store-width:138px; --store-height:46px; }
+  .hero6-credit { bottom:8px; font-size:9px; }
+  .hero6-switch { left:auto; right:12px; bottom:calc(max(28px,env(safe-area-inset-bottom)) + 132px); transform:none; flex-direction:column; -webkit-backdrop-filter:none; backdrop-filter:none; background:rgba(10,12,11,.82); }
+  .hero6-switch button { width:34px; height:34px; }
+  .hero6-glow { display:none; }
+  .hero6.hero6-lite .hero6-photo .bloom { display:none; }
+  .hero6.hero6-lite .hero6-photo .before { filter:saturate(.82) brightness(.88); }
+  .hero6.hero6-lite .hero6-photo .after { filter:none; }
+  .hero6.hero6-lite .hero6-flash { display:none; }
   /* the white phone bar becomes a quiet dark one while the hero is on screen */
   body.h6-on .site-nav { background:transparent; -webkit-backdrop-filter:none; backdrop-filter:none; }
   body.h6-on .site-nav .brand { color:#f2f6f2; }
@@ -79,5 +84,5 @@ body.h6-on .desktop-nav-haze { opacity:0; transition:opacity .3s; }
 @media (max-width:640px) {
   html.h6-on { background:#070908; }
   html.h6-on body { background:#fff; }
-  .hero6 { height:100vh; height:100svh; }
+  .hero6 { height:100vh; height:100svh; height:100dvh; contain:layout style paint; }
 }

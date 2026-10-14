@@ -160,9 +160,19 @@
       });
       return true;
     }
-    function measure() {
+    var measureRaf = 0;
+    function measureNow() {
+      cancelAnimationFrame(measureRaf);
+      measureRaf = 0;
       syncViewport();
       if (measureGeometry()) queue();
+    }
+    function measure() {
+      if (measureRaf) return;
+      measureRaf = requestAnimationFrame(function () {
+        measureRaf = 0;
+        measureNow();
+      });
     }
     // The barrier and the zoom share one endpoint: stop at the first frame
     // where the phone is full-sized, before any horizontal screen transition.
@@ -377,13 +387,13 @@
     window.addEventListener('keydown', onNavigate);
     document.addEventListener('click', onNavigate, true);
     window.addEventListener('resize', measure);
-    if (viewport) viewport.addEventListener('resize', measure, { passive:true });
+    if (viewport) viewport.addEventListener('resize', measureNow, { passive:true });
     window.addEventListener('pageshow', restore);
     // Content above the tour can change size after image/font loading.
     var resize = new ResizeObserver(measure);
-    resize.observe(document.body);
+    resize.observe(section);
     resize.observe(sticky);
-    measure();
+    measureNow();
     if (window.scrollY >= entryPosition() - 1) entryUsed = true;
     // Position every phone before the first paint, also on restored scroll positions.
     cancelAnimationFrame(raf);
@@ -400,7 +410,7 @@
       window.removeEventListener('keydown', onNavigate);
       document.removeEventListener('click', onNavigate, true);
       window.removeEventListener('resize', measure);
-      if (viewport) viewport.removeEventListener('resize', measure);
+      if (viewport) viewport.removeEventListener('resize', measureNow);
       window.removeEventListener('pageshow', restore);
       resize.disconnect();
       document.documentElement.classList.remove('has-mobile-story', 'mobile-scroll-active');
