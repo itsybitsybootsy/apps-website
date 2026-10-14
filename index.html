@@ -4,15 +4,16 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
-<title>Skinmetrics — Kenne deine Haut. Jeden Tag.</title>
+<title>Skinmetrics | Kenne deine Haut. Jeden Tag.</title>
 <meta name="description" content="Scanne deine Haut, verfolge Veränderungen und behalte deine Pflegeroutine im Blick. Skinmetrics für iPhone." />
 <link rel="icon" href="assets/img/favicon.png" type="image/png" />
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
 <link rel="stylesheet" href="assets/css/styles.css?v=55" media="(min-width:641px)" />
 <link rel="stylesheet" href="assets/css/landing.css?v=55" media="(max-width:640px)" />
 <link rel="stylesheet" href="assets/css/closing.css?v=55" />
-<link rel="stylesheet" href="assets/css/desktop-nav.css?v=55" media="(min-width:641px)" />
+<link rel="stylesheet" href="assets/css/desktop-nav.css?v=56" media="(min-width:641px)" />
 <link rel="stylesheet" href="assets/css/mobile-story.css?v=55" />
+<link rel="stylesheet" href="assets/css/hero6.css?v=2" />
 </head>
 <body class="theme-derma has-float-nav" id="top">
 <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><defs><symbol id="ic-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 19.5c.6-3.3 3.2-5 6.5-5s5.9 1.7 6.5 5"/></symbol><symbol id="ic-shield" viewBox="0 0 24 24"><path d="M12 3.5l7 2.8V11c0 4.4-3 8-7 9.5-4-1.5-7-5.1-7-9.5V6.3z"/><path d="M9 12l2 2 4-4"/></symbol><symbol id="ic-trash" viewBox="0 0 24 24"><path d="M4.5 7h15"/><path d="M9 7V4.8h6V7"/><path d="M6.5 7l1 12.5h9L17.5 7"/><path d="M10.5 10.5v6M13.5 10.5v6"/></symbol><symbol id="ic-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9.5" rx="2.2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/><path d="M12 14v2.5"/></symbol><symbol id="ic-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M6.1 6.1l11.8 11.8"/></symbol><symbol id="ic-eye-off" viewBox="0 0 24 24"><path d="M4 12s3.2-5.2 8-5.2c1.3 0 2.5.4 3.5 1M20 12s-3.2 5.2-8 5.2c-1.4 0-2.6-.4-3.6-1"/><path d="M4.5 4.5l15 15"/></symbol></defs></svg>
@@ -21,7 +22,6 @@
 <nav class="desktop-controls desktop-version" aria-label="Hauptnavigation">
   <a class="desktop-home" href="#top" aria-label="Skinmetrics Startseite"><img src="assets/img/app-icon.png" width="48" height="48" alt="" /></a>
   <button type="button" class="desktop-menu-trigger" data-desktop-menu-trigger aria-expanded="false" aria-controls="desktop-menu"><span class="desktop-menu-icon" aria-hidden="true"></span><span class="desktop-menu-trigger-label">Menü</span></button>
-  <a class="desktop-legal" href="legal/datenschutz.html">Datenschutz <span aria-hidden="true">↗</span></a>
 </nav>
 <div class="desktop-menu-popover desktop-version" id="desktop-menu" popover="manual" data-state="closed">
   <div class="desktop-menu-shell">
@@ -44,19 +44,25 @@
   </nav>
 </header>
 <main id="main">
-  <section class="hero promo derma-hero" aria-label="Skinmetrics für iPhone" data-pointer-stage>
-    <div class="hero-glow desktop-version" aria-hidden="true"></div>
-    <div class="promo-copy"><div class="hero-desktop"><h1 class="display">Skinmetrics</h1><p class="hero-subtitle"><span>Deine Haut verstehen.</span> <span>Deine Routine verbessern.</span></p>
-      <div class="section-cta hero-stores">
-        <a href="#laden" class="store-badge hero-store-badge" data-magnetic><img src="assets/img/app-store-badge-de.svg" width="150" height="50" alt="Laden im App Store" /></a>
-        <div class="hero-play-store" data-google-play hidden>
-          <button class="play-store-badge" type="button" disabled aria-label="Google Play – noch nicht verfügbar"><img src="assets/img/google-play-badge-de.png" width="646" height="250" alt="" /></button>
-        </div>
+  <section class="hero6" id="hero6" aria-label="Skinmetrics">
+    <i class="hero6-glow cool" aria-hidden="true"></i><i class="hero6-glow warm" aria-hidden="true"></i>
+    <i class="hero6-flash" aria-hidden="true"></i>
+    <h1 class="hero6-h1">Starte dein <span class="gl">Glow-up.</span></h1>
+    <div class="hero6-photo" aria-hidden="true" data-photo>
+      <img class="before" data-img="before" src="assets/img/hero/f/before.webp" width="1122" height="1402" alt="" fetchpriority="high" decoding="async" />
+      <img class="after" data-img="after" src="assets/img/hero/f/after.webp" width="1122" height="1402" alt="" decoding="async" />
+      <i class="bloom"></i>
+      <i class="line"></i>
+    </div>
+    <div class="hero6-foot">
+      <p>Skinmetrics misst deine Haut jeden Tag, damit du siehst, was sich verändert.</p>
+      <div class="hero6-cta">
+        <a href="#laden" class="store-badge hero-store-badge"><img src="assets/img/app-store-badge-de.svg" width="150" height="50" alt="Laden im App Store" /></a>
+        <div class="hero-play-store" data-google-play hidden><button class="play-store-badge" type="button" disabled aria-label="Google Play, noch nicht verfügbar"><img src="assets/img/google-play-badge-de.png" width="646" height="250" alt="" /></button></div>
       </div>
-    </div></div>
-    <div class="promo-art" data-tilt-area><figure class="hero-shot" data-tilt="5">
-      <img src="assets/img/product/hero.png" alt="Skinmetrics auf drei iPhones: Verlauf, Hautscore und Routine" width="1400" height="1065" fetchpriority="high" decoding="async" />
-    </figure></div>
+    </div>
+    <p class="hero6-credit">Beispielbild, KI-generiert</p>
+    <div class="hero6-switch" role="group" aria-label="Version wählen"><button type="button" data-g="f" aria-pressed="true" aria-label="Version mit ihr" title="Sie"><i></i></button><button type="button" data-g="m" aria-pressed="false" aria-label="Version mit ihm" title="Er"><i></i></button></div>
   </section>
 
   <section class="section tight statement-band desktop-version"><div class="container"><div class="statement-inner"><h2 class="headline statement-headline is-done">Verstehe deine Haut.<br><span class="grad-accent">Verbessere deine Routine jeden Tag.</span></h2><p class="sub lead-copy statement-lead is-visible">Foto machen, KI-Analyse erhalten und Veränderungen über Wochen verfolgen.</p></div></div></section>
@@ -84,7 +90,7 @@
               </figure>
             </div>
             <div class="xp-copy">
-              <span class="eyebrow desktop-version">Detailreiche Analyse</span><h3><span class="desktop-version">Versteh deine Haut — nicht nur eine Zahl.</span><span class="mobile-version">Deine Haut in Zahlen.</span></h3>
+              <span class="eyebrow desktop-version">Detailreiche Analyse</span><h3><span class="desktop-version">Versteh deine Haut, nicht nur eine Zahl.</span><span class="mobile-version">Deine Haut in Zahlen.</span></h3>
               <p><span class="desktop-version">Nach jedem Check-in bekommst du deinen Skin-Score und die Kennzahlen zu Klarheit, Textur, Feuchtigkeit, Rötung und Ebenheit.</span><span class="mobile-version">Hautscore und fünf Kennzahlen nach jedem Scan.</span></p>
             </div>
           </div>
@@ -97,8 +103,8 @@
               </figure>
             </div>
             <div class="xp-copy">
-              <span class="eyebrow desktop-version">Personalisierte Skincare</span><h3><span class="desktop-version">Deine Routine — abgestimmt auf deine Haut.</span><span class="mobile-version">Deine tägliche Routine.</span></h3>
-              <p><span class="desktop-version">Morgens und abends: Reiniger, Serum, Feuchtigkeitspflege und Sonnenschutz — alles an einem Ort. Hake erledigte Schritte ab.</span><span class="mobile-version">Deine Produkte und Pflegeschritte. Morgens und abends.</span></p>
+              <span class="eyebrow desktop-version">Personalisierte Skincare</span><h3><span class="desktop-version">Deine Routine, abgestimmt auf deine Haut.</span><span class="mobile-version">Deine tägliche Routine.</span></h3>
+              <p><span class="desktop-version">Morgens und abends: Reiniger, Serum, Feuchtigkeitspflege und Sonnenschutz, alles an einem Ort. Hake erledigte Schritte ab.</span><span class="mobile-version">Deine Produkte und Pflegeschritte. Morgens und abends.</span></p>
             </div>
           </div>
 
@@ -110,7 +116,7 @@
               </figure>
             </div>
             <div class="xp-copy">
-              <span class="eyebrow desktop-version">Fortschritt</span><h3><span class="desktop-version">Dein Skin-Score — immer im Blick.</span><span class="mobile-version">Veränderungen erkennen.</span></h3>
+              <span class="eyebrow desktop-version">Fortschritt</span><h3><span class="desktop-version">Dein Skin-Score, immer im Blick.</span><span class="mobile-version">Veränderungen erkennen.</span></h3>
               <p><span class="desktop-version">Hautscore, Kennzahlen und Radar-Chart zeigen dir, wie sich deine Haut entwickelt. Vergleiche deine Check-ins und erkenne Trends.</span><span class="mobile-version">Vergleiche deine Scans über Wochen.</span></p>
             </div>
           </div>
@@ -154,7 +160,7 @@
   </section>
   <section class="section desktop-version feedback" id="stimmen" aria-labelledby="reviews-title">
     <div class="container feedback-head"><h2 class="headline" id="reviews-title">Stimmen zur App.</h2></div>
-    <div class="rev-marquee" id="reviews-ribbon" data-reviews-marquee tabindex="0" aria-label="Beispielbewertungen, Animation pausiert bei Fokus"><div class="rev-track"><div class="rev-set"><div class="review"><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div><p>„Ich checke meine Haut jetzt jeden Abend — der Skin-Score ist wie ein kleines Spiel, das mich motiviert dranzubleiben."</p><div class="who"><span class="av" aria-hidden="true">NW</span><div><div class="rn">Nina W.</div><div class="rm">Wien</div></div></div></div><div class="review"><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div><p>„Das Spot-Tracking hat mir gezeigt, dass mein Pickelmal wirklich langsam verblasst. Ohne die App hätte ich das nie so genau gesehen."</p><div class="who"><span class="av" aria-hidden="true">PK</span><div><div class="rn">Paul K.</div><div class="rm">Salzburg</div></div></div></div><div class="review"><div class="stars" aria-label="4 von 5 Sternen">★★★★☆</div><p>„Sehr durchdacht gemacht. Nur die Analyse dauert manchmal ein paar Sekunden länger, als ich erwartet hätte."</p><div class="who"><span class="av" aria-hidden="true">MS</span><div><div class="rn">Michaela S.</div><div class="rm">Graz</div></div></div></div><div class="review"><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div><p>„Endlich eine App, die ehrlich sagt, was mit meinen Fotos passiert. Kein Konto, keine Werbung — genau mein Ding."</p><div class="who"><span class="av" aria-hidden="true">FB</span><div><div class="rn">Felix B.</div><div class="rm">Linz</div></div></div></div><div class="review"><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div><p>„Die Routine mit Morgens- und Abends-Schritten ist super übersichtlich. Endlich vergesse ich keinen Schritt mehr."</p><div class="who"><span class="av" aria-hidden="true">KF</span><div><div class="rn">Katharina F.</div><div class="rm">Klagenfurt</div></div></div></div><div class="review"><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div><p>„Radar-Chart und Skin-Score zeigen mir Trends, die ich im Spiegel nie bemerkt hätte."</p><div class="who"><span class="av" aria-hidden="true">AK</span><div><div class="rn">Anna-Lena K.</div><div class="rm">Salzburg</div></div></div></div></div><div class="rev-set" aria-hidden="true"><div class="review"><div class="stars">★★★★★</div><p>„Ich checke meine Haut jetzt jeden Abend — der Skin-Score ist wie ein kleines Spiel, das mich motiviert dranzubleiben."</p><div class="who"><span class="av" aria-hidden="true">NW</span><div><div class="rn">Nina W.</div><div class="rm">Wien</div></div></div></div><div class="review"><div class="stars">★★★★★</div><p>„Das Spot-Tracking hat mir gezeigt, dass mein Pickelmal wirklich langsam verblasst. Ohne die App hätte ich das nie so genau gesehen."</p><div class="who"><span class="av" aria-hidden="true">PK</span><div><div class="rn">Paul K.</div><div class="rm">Salzburg</div></div></div></div><div class="review"><div class="stars">★★★★☆</div><p>„Sehr durchdacht gemacht. Nur die Analyse dauert manchmal ein paar Sekunden länger, als ich erwartet hätte."</p><div class="who"><span class="av" aria-hidden="true">MS</span><div><div class="rn">Michaela S.</div><div class="rm">Graz</div></div></div></div><div class="review"><div class="stars">★★★★★</div><p>„Endlich eine App, die ehrlich sagt, was mit meinen Fotos passiert. Kein Konto, keine Werbung — genau mein Ding."</p><div class="who"><span class="av" aria-hidden="true">FB</span><div><div class="rn">Felix B.</div><div class="rm">Linz</div></div></div></div><div class="review"><div class="stars">★★★★★</div><p>„Die Routine mit Morgens- und Abends-Schritten ist super übersichtlich. Endlich vergesse ich keinen Schritt mehr."</p><div class="who"><span class="av" aria-hidden="true">KF</span><div><div class="rn">Katharina F.</div><div class="rm">Klagenfurt</div></div></div></div><div class="review"><div class="stars">★★★★★</div><p>„Radar-Chart und Skin-Score zeigen mir Trends, die ich im Spiegel nie bemerkt hätte."</p><div class="who"><span class="av" aria-hidden="true">AK</span><div><div class="rn">Anna-Lena K.</div><div class="rm">Salzburg</div></div></div></div></div></div></div>
+    <div class="rev-marquee" id="reviews-ribbon" data-reviews-marquee tabindex="0" aria-label="Beispielbewertungen, Animation pausiert bei Fokus"><div class="rev-track"><div class="rev-set"><div class="review"><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div><p>„Ich checke meine Haut jetzt jeden Abend, der Skin-Score ist wie ein kleines Spiel, das mich motiviert dranzubleiben."</p><div class="who"><span class="av" aria-hidden="true">NW</span><div><div class="rn">Nina W.</div><div class="rm">Wien</div></div></div></div><div class="review"><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div><p>„Das Spot-Tracking hat mir gezeigt, dass mein Pickelmal wirklich langsam verblasst. Ohne die App hätte ich das nie so genau gesehen."</p><div class="who"><span class="av" aria-hidden="true">PK</span><div><div class="rn">Paul K.</div><div class="rm">Salzburg</div></div></div></div><div class="review"><div class="stars" aria-label="4 von 5 Sternen">★★★★☆</div><p>„Sehr durchdacht gemacht. Nur die Analyse dauert manchmal ein paar Sekunden länger, als ich erwartet hätte."</p><div class="who"><span class="av" aria-hidden="true">MS</span><div><div class="rn">Michaela S.</div><div class="rm">Graz</div></div></div></div><div class="review"><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div><p>„Endlich eine App, die ehrlich sagt, was mit meinen Fotos passiert. Kein Konto, keine Werbung, genau mein Ding."</p><div class="who"><span class="av" aria-hidden="true">FB</span><div><div class="rn">Felix B.</div><div class="rm">Linz</div></div></div></div><div class="review"><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div><p>„Die Routine mit Morgens- und Abends-Schritten ist super übersichtlich. Endlich vergesse ich keinen Schritt mehr."</p><div class="who"><span class="av" aria-hidden="true">KF</span><div><div class="rn">Katharina F.</div><div class="rm">Klagenfurt</div></div></div></div><div class="review"><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div><p>„Radar-Chart und Skin-Score zeigen mir Trends, die ich im Spiegel nie bemerkt hätte."</p><div class="who"><span class="av" aria-hidden="true">AK</span><div><div class="rn">Anna-Lena K.</div><div class="rm">Salzburg</div></div></div></div></div><div class="rev-set" aria-hidden="true"><div class="review"><div class="stars">★★★★★</div><p>„Ich checke meine Haut jetzt jeden Abend, der Skin-Score ist wie ein kleines Spiel, das mich motiviert dranzubleiben."</p><div class="who"><span class="av" aria-hidden="true">NW</span><div><div class="rn">Nina W.</div><div class="rm">Wien</div></div></div></div><div class="review"><div class="stars">★★★★★</div><p>„Das Spot-Tracking hat mir gezeigt, dass mein Pickelmal wirklich langsam verblasst. Ohne die App hätte ich das nie so genau gesehen."</p><div class="who"><span class="av" aria-hidden="true">PK</span><div><div class="rn">Paul K.</div><div class="rm">Salzburg</div></div></div></div><div class="review"><div class="stars">★★★★☆</div><p>„Sehr durchdacht gemacht. Nur die Analyse dauert manchmal ein paar Sekunden länger, als ich erwartet hätte."</p><div class="who"><span class="av" aria-hidden="true">MS</span><div><div class="rn">Michaela S.</div><div class="rm">Graz</div></div></div></div><div class="review"><div class="stars">★★★★★</div><p>„Endlich eine App, die ehrlich sagt, was mit meinen Fotos passiert. Kein Konto, keine Werbung, genau mein Ding."</p><div class="who"><span class="av" aria-hidden="true">FB</span><div><div class="rn">Felix B.</div><div class="rm">Linz</div></div></div></div><div class="review"><div class="stars">★★★★★</div><p>„Die Routine mit Morgens- und Abends-Schritten ist super übersichtlich. Endlich vergesse ich keinen Schritt mehr."</p><div class="who"><span class="av" aria-hidden="true">KF</span><div><div class="rn">Katharina F.</div><div class="rm">Klagenfurt</div></div></div></div><div class="review"><div class="stars">★★★★★</div><p>„Radar-Chart und Skin-Score zeigen mir Trends, die ich im Spiegel nie bemerkt hätte."</p><div class="who"><span class="av" aria-hidden="true">AK</span><div><div class="rn">Anna-Lena K.</div><div class="rm">Salzburg</div></div></div></div></div></div></div>
   </section>
   <section class="section questions" id="fragen" aria-labelledby="faq-title">
     <div class="container faq-layout">
@@ -196,6 +202,7 @@
 <script src="assets/js/desktop-nav.js?v=55"></script>
 <script src="assets/js/landing.js?v=55"></script>
 <script src="assets/js/mobile-story.js?v=55"></script>
+<script src="assets/js/hero6.js?v=2" defer></script>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "854a4d1ae3cc4b05836044b8bea45467"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>

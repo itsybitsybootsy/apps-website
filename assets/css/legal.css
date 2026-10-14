@@ -1,6 +1,6 @@
 /* ==========================================================================
    Skinmetrics · legal pages (Datenschutz / AGB / Impressum)
-   Standalone stylesheet — shares the landing page's design tokens but does
+   Standalone stylesheet, shares the landing page's design tokens but does
    not @import site.css, so it stays safe to load on its own. System fonts
    only, no external resources.
    ========================================================================== */
