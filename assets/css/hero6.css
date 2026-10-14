@@ -21,7 +21,7 @@ body.h6-on .desktop-nav-haze { opacity:0; transition:opacity .3s; }
 .hero6-photo.live .line { opacity:1; }
 .hero6-photo.done .line { opacity:0; }
 /* the switcher: two round portraits, no words. The ringed one is the version you are looking at. */
-.hero6-switch { position:absolute; z-index:5; left:50%; bottom:46px; transform:translateX(-50%); display:inline-flex; gap:6px; padding:4px; border-radius:99px; border:1px solid rgba(255,255,255,.24); background:rgba(10,12,11,.6); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); }
+.hero6-switch { position:absolute; z-index:5; left:50%; bottom:46px; transform:translateX(-50%); display:inline-flex; gap:6px; padding:4px; border-radius:99px; border:1px solid rgba(255,255,255,.24); background:rgba(10,12,11,.82); }
 .hero6-switch button { position:relative; width:38px; height:38px; padding:0; border:0; border-radius:50%; background:#1a1d1b; cursor:pointer; overflow:hidden; opacity:.55; transition:opacity .25s, box-shadow .25s; }
 .hero6-switch button i { position:absolute; inset:0; border-radius:50%; background-repeat:no-repeat; background-color:#1a1d1b; }
 .hero6-switch button:hover { opacity:1; }
@@ -80,3 +80,10 @@ body.h6-on .desktop-nav-haze { opacity:0; transition:opacity .3s; }
   .hero6-credit { bottom:calc(10px + var(--h6h) - 100svh); }
   .hero6-switch { bottom:calc(max(34px,env(safe-area-inset-bottom)) + 150px + var(--h6h) - 100svh); }
 }
+
+/* once the reveal has finished the figure is one plain, static image: no filters, clip, blend or mask-heavy layers to repaint on scroll */
+.hero6-photo.done { transform:translateX(-50%); }
+.hero6-photo.done .before, .hero6-photo.done .bloom, .hero6-photo.done .line { display:none; }
+.hero6-photo.done .after { clip-path:none; filter:none; }
+.hero6-glow { will-change:auto; }
+@media (max-width:640px) { .hero6-glow { display:none; } }
