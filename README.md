@@ -11,6 +11,9 @@ HTML, CSS und JavaScript ohne Build-Schritt, externe Schriften oder Bibliotheken
 - `assets/css/closing.css`: gemeinsamer Abschluss, Footer und FAQ.
 - `assets/css/desktop-nav.css` und `assets/js/desktop-nav.js`: Desktopnavigation mit App-Icon, mittigem Menüknopf und Datenschutz-Link; natives Popover mit Escape, Außenklick und Tastatursteuerung.
 - `assets/js/landing.js`: App-Tabs mit Tastatursteuerung, Magnet-Buttons und die Bewertungsleiste auf dem Desktop.
+- `assets/js/i18n.js`, `assets/js/locales.js` und `assets/css/i18n.css`: Browsersprache und gespeicherte Sprachwahl, übersetzte Produkttexte und Sprachauswahl.
+- `assets/js/language-menu.js`: eigene Sprachansicht mit nativem Dialog, Suche, Tastatursteuerung und Fokusübergabe.
+- `assets/i18n/`: ausformulierte Übersetzungen; `schema.json` beschreibt die Reihenfolge der Texte in jedem Abschnitt.
 - `assets/css/mobile-story.css` und `assets/js/mobile-story.js`: mobile Scroll-Sequenz für Analyse, Routine und Verlauf.
 - `assets/img/product/`: originale Geräterenderings und App-Screenshots.
 - `legal/`: veröffentlichte Rechtstexte. Quellen und Build-Skripte bleiben privat.
@@ -42,6 +45,18 @@ Der Rahmen blendet auf dem letzten Stück aus und ist ab 100 % vollständig verb
 beim Zurückscrollen erscheint er passend zum Fortschritt wieder.
 Bei reduzierter Bewegung oder ohne JavaScript bleibt die normale App-Demo sichtbar.
 Die Tabs wechseln nur durch Nutzereingabe, nicht automatisch.
+Die Sprachauswahl steht links bei den großen Navigationspunkten im Desktop-Menü, hinter dem Globus im mobilen
+Header und im Footer. Alle drei Zugänge öffnen dieselbe eigene Sprachansicht mit Suche und Auswahlmarkierung. Ein explizites
+`?lang=fr` hat Vorrang vor der gespeicherten Sprache, danach folgt die Browsersprache.
+„Automatisch“ löscht die manuelle Auswahl. Unbekannte Sprachen fallen auf Englisch
+zurück; regionale Angaben wie `fr-CA` werden einer vorhandenen Übersetzung zugeordnet.
+19 vollständige Sprachkataloge decken jeweils 120 Texte ab, einschließlich FAQs,
+Barrierefreiheitslabels, Handy-Sequenz und Menü. Arabisch und Hebräisch verwenden RTL.
+Die Rechtstexte und die Texte in den vorhandenen App-Screenshots bleiben unverändert.
+Die Übersetzung erfolgt lokal, ohne Übersetzungsdienst oder Sprach-API.
+Nach Änderungen an den Übersetzungen `python3 scripts/build_locales.py` ausführen.
+Das erzeugte `locales.js` wird mit ausgeliefert; beim Aufrufen ist kein Build nötig.
+Prüfung: `node tests/i18n.test.cjs`.
 Die vier Datenschutz-Karten teilen sich ihr HTML auf Desktop und Handy; mobil stehen
 sie untereinander, auf dem Laptop in einer Reihe. Mobil bleiben sieben FAQ sichtbar.
 Auf dem Laptop sind vier direkt sichtbar, der Rest klappt über „Weitere Fragen“ auf.
@@ -76,8 +91,8 @@ Produkttexte müssen dem aktuellen Stand der iOS-App entsprechen.
 
 ## Cache
 
-Die acht aktiven CSS- und JavaScript-URLs in `index.html` tragen dieselbe Version
-(`?v=55`). Bei Änderungen vor dem nächsten Deploy gemeinsam erhöhen, damit GitHub
+Die zwölf aktiven CSS- und JavaScript-URLs in `index.html` tragen dieselbe Version
+(`?v=60`). Bei Änderungen vor dem nächsten Deploy gemeinsam erhöhen, damit GitHub
 Pages keine alten Dateien aus dem Browsercache mit neuen Dateien kombiniert.
 
 Die Desktop-Bewertungsleiste zeigt nur die Überschrift. Die Karten bleiben Beispieltexte,

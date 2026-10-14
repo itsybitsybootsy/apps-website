@@ -15,21 +15,23 @@
     story = document.createElement('div');
     story.className = 'mobile-story';
     story.setAttribute('aria-label', 'Skinmetrics: Analyse, Routine und Fortschritt');
+    story.setAttribute('data-i18n-aria-label', 'story.label');
     story.innerHTML = '<div class="ms-sticky">'
       + '<div class="ms-heading" aria-hidden="true"><div class="ms-count"><b>01</b><span> / 03</span></div></div>'
       + '<div class="ms-window">'
-      + '<figure class="ms-phone"><img src="assets/img/product/analysis.png" width="540" height="1114" alt="Analyse: Hautscore, Kennzahlen und Hautzonen" decoding="async"></figure>'
-      + '<figure class="ms-phone"><img src="assets/img/product/routine.png" width="540" height="1114" alt="Routine: Hautpflege für morgens und abends" decoding="async"></figure>'
-      + '<figure class="ms-phone"><img src="assets/img/product/progress.png" width="540" height="1114" alt="Fortschritt: Hautscore und Entwicklung im Verlauf" decoding="async"></figure>'
+      + '<figure class="ms-phone"><img src="assets/img/product/analysis.png" width="540" height="1114" data-i18n-alt="story.analysisAlt" alt="Analyse: Hautscore, Kennzahlen und Hautzonen" decoding="async"></figure>'
+      + '<figure class="ms-phone"><img src="assets/img/product/routine.png" width="540" height="1114" data-i18n-alt="story.routineAlt" alt="Routine: Hautpflege für morgens und abends" decoding="async"></figure>'
+      + '<figure class="ms-phone"><img src="assets/img/product/progress.png" width="540" height="1114" data-i18n-alt="story.progressAlt" alt="Fortschritt: Hautscore und Entwicklung im Verlauf" decoding="async"></figure>'
       + '</div>'
-      + '<div class="ms-footer"><p class="ms-label" aria-hidden="true">Analyse</p>'
-      + '<div class="ms-steps" role="group" aria-label="App-Ansicht wählen">'
-      + '<button class="ms-step" type="button" aria-label="Analyse anzeigen" aria-current="step"></button>'
-      + '<button class="ms-step" type="button" aria-label="Routine anzeigen"></button>'
-      + '<button class="ms-step" type="button" aria-label="Verlauf anzeigen"></button></div></div>'
+      + '<div class="ms-footer"><p class="ms-label" data-i18n="features.analysis" aria-hidden="true">Analyse</p>'
+      + '<div class="ms-steps" role="group" data-i18n-aria-label="story.choose" aria-label="App-Ansicht wählen">'
+      + '<button class="ms-step" type="button" data-i18n-aria-label="story.showAnalysis" aria-label="Analyse anzeigen" aria-current="step"></button>'
+      + '<button class="ms-step" type="button" data-i18n-aria-label="story.showRoutine" aria-label="Routine anzeigen"></button>'
+      + '<button class="ms-step" type="button" data-i18n-aria-label="story.showProgress" aria-label="Verlauf anzeigen"></button></div></div>'
       + '<svg class="ms-border" aria-hidden="true"><rect class="ms-border-track"/><rect class="ms-border-fill" pathLength="100"/></svg>'
       + '</div>';
     section.appendChild(story);
+    if (window.SkinmetricsI18n) window.SkinmetricsI18n.apply(story);
     document.documentElement.classList.add('has-mobile-story');
 
     var sticky = story.querySelector('.ms-sticky');
@@ -104,7 +106,9 @@
       if (nextIndex !== index) {
         index = nextIndex;
         count.textContent = '0' + (index + 1);
-        label.textContent = ['Analyse', 'Routine', 'Verlauf'][index];
+        var labelKey = ['features.analysis', 'features.routine', 'features.progress'][index];
+        label.setAttribute('data-i18n', labelKey);
+        label.textContent = window.SkinmetricsI18n ? window.SkinmetricsI18n.t(labelKey) : ['Analyse', 'Routine', 'Verlauf'][index];
         steps.forEach(function (step, i) {
           if (i === index) step.setAttribute('aria-current', 'step');
           else step.removeAttribute('aria-current');
