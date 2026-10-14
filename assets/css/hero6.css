@@ -70,10 +70,8 @@ body.h6-on .desktop-nav-haze { opacity:0; transition:opacity .3s; }
   .hero6-switch { left:auto; right:12px; bottom:calc(max(28px,env(safe-area-inset-bottom)) + 132px); transform:none; flex-direction:column; -webkit-backdrop-filter:none; backdrop-filter:none; background:rgba(10,12,11,.82); }
   .hero6-switch button { width:34px; height:34px; }
   .hero6-glow { display:none; }
-  .hero6.hero6-lite .hero6-photo .bloom { display:none; }
-  .hero6.hero6-lite .hero6-photo .before { filter:saturate(.82) brightness(.88); }
-  .hero6.hero6-lite .hero6-photo .after { filter:none; }
-  .hero6.hero6-lite .hero6-flash { display:none; }
+  .hero6.hero6-lite .hero6-photo .before { filter:saturate(.7) brightness(.82) contrast(.95); }
+  .hero6.hero6-lite .hero6-photo .after { filter:brightness(calc(1 + .2 * (1 - var(--k,0)))) saturate(calc(1 + .14 * (1 - var(--k,0)))); }
   /* the white phone bar becomes a quiet dark one while the hero is on screen */
   body.h6-on .site-nav { background:transparent; -webkit-backdrop-filter:none; backdrop-filter:none; }
   body.h6-on .site-nav .brand { color:#f2f6f2; }
