@@ -12,7 +12,7 @@
 .hero6-cta .hero-store-badge img { width:calc(100% - 2px); height:auto; clip-path:inset(3px 5px); }
 .hero6-cta .play-store-badge img { width:calc(100% - 2px); max-width:none; height:auto; clip-path:inset(12px 5px); }
 .hero6-cta .hero-play-store[hidden] { display:none!important; }
-.hero6-credit { position:absolute; z-index:4; left:50%; bottom:8px; transform:translateX(-50%); margin:0; font-size:10px; color:rgba(255,255,255,.55); text-shadow:0 0 8px #070908,0 0 3px #070908; white-space:nowrap; }
+.hero6-credit { position:absolute; z-index:4; right:var(--pad); bottom:10px; text-align:right; margin:0; font-size:10px; color:rgba(255,255,255,.55); text-shadow:0 0 8px #070908,0 0 3px #070908; white-space:nowrap; }
 body.h6-on .desktop-nav-haze { opacity:0; transition:opacity .3s; }
 
 /* the wipe: the new version replaces the old one from right to left, then the line leaves */
@@ -59,7 +59,7 @@ body.h6-on .desktop-nav-haze { opacity:0; transition:opacity .3s; }
   .hero6-foot { left:var(--pad); right:var(--pad); bottom:max(34px,env(safe-area-inset-bottom)); flex-direction:column; align-items:center; gap:16px; text-align:center; }
   .hero6-foot p { max-width:19em; font-size:15px; }
   .hero6-cta { justify-content:center; --store-width:150px; --store-height:50px; }
-  .hero6-credit { bottom:10px; }
+  .hero6-credit { left:50%; right:auto; transform:translateX(-50%); bottom:10px; text-align:center; }
   .hero6-switch { left:auto; right:14px; bottom:calc(max(34px,env(safe-area-inset-bottom)) + 150px); transform:none; flex-direction:column; }
   .hero6-glow { height:120svh; }
   /* the white phone bar becomes a quiet dark one while the hero is on screen */
