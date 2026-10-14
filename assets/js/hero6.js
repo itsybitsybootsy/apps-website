@@ -3,16 +3,11 @@
   if (!hero) return;
   var lite = matchMedia('(max-width:640px)').matches || matchMedia('(pointer:coarse)').matches;
   if (lite) hero.classList.add('hero6-lite');
-  var photo = hero.querySelector('[data-photo]'), flash = hero.querySelector('.hero6-flash');
+  var photo = hero.querySelector('[data-photo]');
   var imgs = { before: photo.querySelector('[data-img="before"]'), after: photo.querySelector('[data-img="after"]') };
   var btns = [].slice.call(hero.querySelectorAll('[data-g]'));
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var themeMeta = document.querySelector('meta[name="theme-color"]'), themeLight = themeMeta && themeMeta.getAttribute('content');
-  new IntersectionObserver(function (e) {
-    var on = e[0].isIntersecting;
-    document.body.classList.toggle('h6-on', on); document.documentElement.classList.toggle('h6-on', on);
-    if (themeMeta) themeMeta.setAttribute('content', on ? '#070908' : themeLight);   /* phone browser bars follow the hero */
-  }).observe(hero);
+  new IntersectionObserver(function (e) { document.body.classList.toggle('h6-on', e[0].isIntersecting); }).observe(hero);
 
   /* Which version: ?g=m or ?g=f in the link (one link per audience), else the last choice, else f. */
   function pick() {
@@ -65,7 +60,7 @@
     try { sessionStorage.setItem('sm-g', g); } catch (e) {}
     document.documentElement.setAttribute('data-g', g);
     btns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.g === g)); });
-    photo.classList.remove('live', 'done'); hero.classList.remove('glow'); flash.classList.remove('pop');
+    photo.classList.remove('live', 'done');
     frame({ p: 100, k: 0, inn: replay ? 1 : 0, sc: replay ? 1.035 : 1.06 });
     var base = 'assets/img/hero/' + g + '/', fb = 'assets/img/hero/f/';
     Promise.all([load(imgs.before, base + 'before.webp', fb + 'before.webp'), load(imgs.after, base + 'after.webp', fb + 'after.webp')]).then(function () {
@@ -79,7 +74,7 @@
       var T_SWEEP = 1700;
       var SWEEP = 3400;
       var SETTLE = 900;
-      var TOTAL = T_SWEEP + SWEEP + SETTLE, fired = false;
+      var TOTAL = T_SWEEP + SWEEP + SETTLE;
       var from = replay ? 1.035 : 1.06;
       var t0 = performance.now();
       (function step(now) {
@@ -90,7 +85,6 @@
         var sc = from - (from - 1) * easeOut(k01(t / TOTAL));
         frame({ p: 100 - 100 * k, k: k, inn: inn, sc: sc });
         if (s > 0) photo.classList.add('live');
-        if (s >= .965 && !fired) { fired = true; flash.classList.add('pop'); hero.classList.add('glow'); }
         if (t < TOTAL) requestAnimationFrame(step);
         else { photo.classList.add('done'); frame({ p: 0, k: 1, inn: 1, sc: 1 }); }
       })(t0);

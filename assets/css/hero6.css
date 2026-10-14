@@ -2,7 +2,7 @@
 .hero6 { --pad:clamp(28px,4.5vw,72px); position:relative; height:100vh; height:100svh; min-height:640px; background:#070908; color:#f2f6f2; overflow:hidden; isolation:isolate; }
 .hero6-h1 { position:absolute; z-index:1; left:0; right:0; top:clamp(88px,12svh,112px); margin:0; text-align:center; font-family:Outfit,-apple-system,BlinkMacSystemFont,sans-serif; font-weight:600; font-size:min(7vw,13svh); line-height:1; letter-spacing:-.055em; white-space:nowrap; }
 
-.hero6-photo { --p:100%; position:absolute; z-index:2; left:50%; bottom:0; height:72%; aspect-ratio:1122/1402; transform:translateX(-50%) scale(var(--sc,1)); transform-origin:50% 8%; -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%); }
+.hero6-photo { --p:100%; position:absolute; z-index:2; left:50%; top:28%; height:84%; aspect-ratio:1122/1402; transform:translateX(-50%) scale(var(--sc,1)); transform-origin:50% 8%; -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%); }
 .hero6-photo img { position:absolute; inset:0; width:100%; height:100%; user-select:none; -webkit-user-drag:none; }
 
 .hero6-foot { position:absolute; z-index:4; left:var(--pad); right:var(--pad); bottom:clamp(24px,5svh,52px); display:flex; align-items:flex-end; justify-content:space-between; gap:32px; }
@@ -12,7 +12,7 @@
 .hero6-cta .hero-store-badge img { width:calc(100% - 2px); height:auto; clip-path:inset(3px 5px); }
 .hero6-cta .play-store-badge img { width:calc(100% - 2px); max-width:none; height:auto; clip-path:inset(12px 5px); }
 .hero6-cta .hero-play-store[hidden] { display:none!important; }
-.hero6-credit { position:absolute; z-index:4; left:50%; bottom:8px; transform:translateX(-50%); margin:0; font-size:10px; color:rgba(255,255,255,.55); text-shadow:0 0 8px #070908,0 0 3px #070908; white-space:nowrap; }
+.hero6-credit { position:absolute; z-index:4; right:var(--pad); bottom:10px; text-align:right; margin:0; font-size:10px; color:rgba(255,255,255,.55); text-shadow:0 0 8px #070908,0 0 3px #070908; white-space:nowrap; }
 body.h6-on .desktop-nav-haze { opacity:0; transition:opacity .3s; }
 
 /* the wipe: the new version replaces the old one from right to left, then the line leaves */
@@ -21,7 +21,7 @@ body.h6-on .desktop-nav-haze { opacity:0; transition:opacity .3s; }
 .hero6-photo.live .line { opacity:1; }
 .hero6-photo.done .line { opacity:0; }
 /* the switcher: two round portraits, no words. The ringed one is the version you are looking at. */
-.hero6-switch { position:absolute; z-index:5; left:50%; bottom:46px; transform:translateX(-50%); display:inline-flex; gap:6px; padding:4px; border-radius:99px; border:1px solid rgba(255,255,255,.24); background:rgba(10,12,11,.6); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); }
+.hero6-switch { position:absolute; z-index:5; left:50%; bottom:46px; transform:translateX(-50%); display:inline-flex; gap:6px; padding:4px; border-radius:99px; border:1px solid rgba(255,255,255,.24); background:rgba(10,12,11,.82); }
 .hero6-switch button { position:relative; width:38px; height:38px; padding:0; border:0; border-radius:50%; background:#1a1d1b; cursor:pointer; overflow:hidden; opacity:.55; transition:opacity .25s, box-shadow .25s; }
 .hero6-switch button i { position:absolute; inset:0; border-radius:50%; background-repeat:no-repeat; background-color:#1a1d1b; }
 .hero6-switch button:hover { opacity:1; }
@@ -45,13 +45,6 @@ body.h6-on .desktop-nav-haze { opacity:0; transition:opacity .3s; }
 .hero6-photo .line { position:absolute; top:6%; height:78%; left:var(--p); width:2px; background:rgba(255,244,228,.95); transform:translateX(-1px); opacity:0; transition:opacity .5s; box-shadow:0 0 14px 3px rgba(255,226,190,.7), 0 0 60px 14px rgba(255,214,170,.28); border-radius:2px; }
 .hero6-photo.live .line { opacity:1; }
 .hero6-photo.done .line { opacity:0; transition:opacity .8s; }
-.hero6-flash { position:absolute; inset:0; z-index:6; pointer-events:none; opacity:0; background:radial-gradient(ellipse 60% 55% at 50% 58%, rgba(255,240,222,.30), rgba(255,240,222,.08) 55%, transparent 80%); }
-.hero6-flash.pop { animation:h6flash 1.1s ease-out 1; }
-@keyframes h6flash { 0% { opacity:0; } 18% { opacity:1; } 100% { opacity:0; } }
-.hero6-h1 .gl { display:inline-block; }
-.hero6.glow .hero6-h1 .gl { animation:h6gl 1.8s ease-out 1; }
-@keyframes h6gl { 0% { text-shadow:0 0 0 rgba(255,214,170,0); } 30% { text-shadow:0 0 34px rgba(255,214,170,.6), 0 0 6px rgba(255,238,214,.55); } 100% { text-shadow:0 0 0 rgba(255,214,170,0); } }
-@media (prefers-reduced-motion:reduce) { .hero6-flash.pop, .hero6.glow .hero6-h1 .gl { animation:none; } }
 
 /* the figure sinks into the dark at the bottom so the switcher, credit and badges always sit on a clean field */
 .hero6::after { content:""; position:absolute; left:0; right:0; bottom:0; height:34%; z-index:3; pointer-events:none; background:linear-gradient(180deg,rgba(7,9,8,0) 0,rgba(7,9,8,.7) 45%,rgba(7,9,8,.96) 80%,#070908 100%); }
@@ -60,13 +53,13 @@ body.h6-on .desktop-nav-haze { opacity:0; transition:opacity .3s; }
 @media (max-width:640px) {
   .hero6 { --pad:20px; min-height:520px; }
   .hero6-h1 { top:max(72px,calc(10svh + env(safe-area-inset-top,0px))); padding:0 16px; white-space:normal; font-size:clamp(34px,10.5vw,48px); line-height:1.02; letter-spacing:-.048em; text-wrap:balance; }
-  .hero6-photo { height:58%; transform:translateX(-50%) scale(var(--sc,1)) translateZ(0); -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%); }
+  .hero6-photo { top:33%; height:76%; transform:translateX(-50%) scale(var(--sc,1)) translateZ(0); -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%); }
   .hero6-photo .line { box-shadow:0 0 8px 1px rgba(255,226,190,.45); }
   .hero6::after { height:38%; }
   .hero6-foot { left:var(--pad); right:var(--pad); bottom:max(28px,env(safe-area-inset-bottom)); flex-direction:column; align-items:center; gap:14px; text-align:center; }
   .hero6-foot p { max-width:22em; font-size:14px; line-height:1.42; }
   .hero6-cta { justify-content:center; --store-width:138px; --store-height:46px; }
-  .hero6-credit { bottom:8px; font-size:9px; }
+  .hero6-credit { left:50%; right:auto; transform:translateX(-50%); text-align:center; bottom:8px; font-size:9px; }
   .hero6-switch { left:auto; right:12px; bottom:calc(max(28px,env(safe-area-inset-bottom)) + 132px); transform:none; flex-direction:column; -webkit-backdrop-filter:none; backdrop-filter:none; background:rgba(10,12,11,.82); }
   .hero6-switch button { width:34px; height:34px; }
   .hero6-glow { display:none; }
@@ -78,9 +71,22 @@ body.h6-on .desktop-nav-haze { opacity:0; transition:opacity .3s; }
   body.h6-on .site-nav .button-small { display:none; }
 }
 
-/* phone: the browser bars and the overscroll area above and below the page are black while the hero is on screen */
+/* phone: the hero reaches under the browser bars (large viewport height); the page background is black exactly as tall as the hero,
+   so the status bar, the overscroll and the bottom bar all pick up black, and white starts right where the next section does */
 @media (max-width:640px) {
-  html.h6-on { background:#070908; }
-  html.h6-on body { background:#fff; }
-  .hero6 { height:100vh; height:100svh; height:100dvh; contain:layout style paint; }
+  :root { --h6h:100vh; }
+  @supports (height:100lvh) { :root { --h6h:100lvh; } }
+  html { background:#070908; }
+  body { background:linear-gradient(180deg,#070908 0,#070908 var(--h6h),#fff var(--h6h)); }
+  .hero6 { height:var(--h6h); min-height:520px; contain:layout style paint; }
+  .hero6-foot { bottom:calc(max(28px,env(safe-area-inset-bottom)) + var(--h6h) - 100svh); }
+  .hero6-credit { bottom:calc(8px + var(--h6h) - 100svh); }
+  .hero6-switch { bottom:calc(max(28px,env(safe-area-inset-bottom)) + 132px + var(--h6h) - 100svh); }
 }
+
+/* once the reveal has finished the figure is one plain, static image: no filters, clip, blend or mask-heavy layers to repaint on scroll */
+.hero6-photo.done { transform:translateX(-50%); }
+.hero6-photo.done .before, .hero6-photo.done .bloom, .hero6-photo.done .line { display:none; }
+.hero6 .hero6-photo.done .after, .hero6.hero6-lite .hero6-photo.done .after { clip-path:none; filter:none; }
+.hero6-glow { will-change:auto; }
+@media (max-width:640px) { .hero6-glow { display:none; } }
