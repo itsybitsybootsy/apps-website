@@ -27,9 +27,15 @@
   ],
   "hero": [
     "label",
-    "understand",
-    "improve",
-    "image",
+    "headlinePrefix",
+    "headlineAccent",
+    "subtitle",
+    "credit",
+    "switchGroup",
+    "switchFemale",
+    "switchFemaleTitle",
+    "switchMale",
+    "switchMaleTitle",
     "appStore",
     "googlePlay"
   ],

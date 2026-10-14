@@ -36,13 +36,13 @@
   }
   function apply(scope) {
     scope = scope || document;
-    var selector = '[data-i18n],[data-i18n-aria-label],[data-i18n-alt],[data-i18n-content],[data-i18n-placeholder]';
+    var selector = '[data-i18n],[data-i18n-aria-label],[data-i18n-alt],[data-i18n-content],[data-i18n-placeholder],[data-i18n-title]';
     var nodes = Array.from(scope.querySelectorAll(selector));
     if (scope.matches && scope.matches(selector)) nodes.unshift(scope);
     nodes.forEach(function (element) {
       var key = element.getAttribute('data-i18n');
       if (key) translateText(element, t(key));
-      ['aria-label','alt','content','placeholder'].forEach(function (attribute) {
+      ['aria-label','alt','content','placeholder','title'].forEach(function (attribute) {
         var attrKey = element.getAttribute('data-i18n-' + attribute);
         if (attrKey) element.setAttribute(attribute, t(attrKey));
       });
