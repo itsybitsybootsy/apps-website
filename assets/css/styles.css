@@ -225,7 +225,7 @@ body.theme-derma.has-float-back.legal-doc main .section.legal-hero{
 /* statement band, two-part headline side by side, lead below same width */
 body.theme-derma .statement-band{
   padding:80px 0 96px;
-  background:var(--accent-soft);
+  background:#fff;
   text-align:center;
 }
 .statement-inner{
