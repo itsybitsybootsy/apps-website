@@ -128,7 +128,8 @@
     "product",
     "writeUs",
     "legal",
-    "backTop"
+    "backTop",
+    "tryFree"
   ],
   "story": [
     "label",
@@ -146,5 +147,15 @@
     "search",
     "close",
     "empty"
+  ],
+  "steps": [
+    "eyebrow",
+    "title",
+    "scanTitle",
+    "scanBody",
+    "routineTitle",
+    "routineBody",
+    "progressTitle",
+    "progressBody"
   ]
 }

@@ -128,7 +128,8 @@
     "Termék",
     "Írj nekünk",
     "Jogi információk",
-    "Vissza a tetejére ↑"
+    "Vissza a tetejére ↑",
+    "Próbáld ki ingyen!"
   ],
   "story": [
     "Skinmetrics: elemzés, rutin és változások",
@@ -146,5 +147,15 @@
     "Nyelv keresése",
     "Nyelvválasztó bezárása",
     "Nincs találat."
+  ],
+  "steps": [
+    "ÍGY MŰKÖDIK",
+    "A bőröd. Egy jó kezdet.",
+    "Egy fotó. Az első lépés.",
+    "Készíts egy fotót, és ismerd meg jobban a bőrödet egy elemzéssel.",
+    "Hozzád illő bőrápolás.",
+    "Találd meg a személyes bőrápolási rutinodat. Reggelre és estére.",
+    "Folytasd. Lásd a változást.",
+    "Hasonlítsd össze a bejegyzéseidet, és fedezd fel, hogyan változik a bőröd idővel."
   ]
 }

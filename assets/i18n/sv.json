@@ -128,7 +128,8 @@
     "Produkt",
     "Hör av dig",
     "Juridisk information",
-    "Tillbaka upp ↑"
+    "Tillbaka upp ↑",
+    "Prova gratis!"
   ],
   "story": [
     "Skinmetrics: analys, rutin och utveckling",
@@ -146,5 +147,15 @@
     "Sök språk",
     "Stäng språkvalet",
     "Inga språk hittades."
+  ],
+  "steps": [
+    "SÅ FUNGERAR DET",
+    "Din hud. En bra början.",
+    "Ett foto. Ditt första steg.",
+    "Ta ett foto och lär känna din hud bättre med en hudanalys.",
+    "Hudvård som passar dig.",
+    "Hitta din personliga hudvårdsrutin. För morgon och kväll.",
+    "Fortsätt. Se förändringen.",
+    "Jämför dina uppföljningar och upptäck hur din hud förändras över tid."
   ]
 }

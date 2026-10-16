@@ -128,7 +128,8 @@
     "Produkt",
     "Schreib uns",
     "Rechtliches",
-    "Zurück nach oben ↑"
+    "Zurück nach oben ↑",
+    "Jetzt kostenlos testen!"
   ],
   "story": [
     "Skinmetrics: Analyse, Routine und Fortschritt",
@@ -146,5 +147,15 @@
     "Sprache suchen",
     "Sprachauswahl schließen",
     "Keine Sprache gefunden."
+  ],
+  "steps": [
+    "SO FUNKTIONIERT’S",
+    "Deine Haut. Ein guter Anfang.",
+    "Ein Foto. Dein Start.",
+    "Nimm ein Foto auf und lerne deine Haut mit einer Analyse besser kennen.",
+    "Skincare, die zu dir passt.",
+    "Finde deine persönliche Pflegeroutine. Für deinen Morgen und deinen Abend.",
+    "Dranbleiben. Veränderung sehen.",
+    "Vergleiche deine Check-ins und entdecke, wie sich deine Haut über die Zeit entwickelt."
   ]
 }

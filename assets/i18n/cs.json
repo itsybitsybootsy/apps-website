@@ -128,7 +128,8 @@
     "Produkt",
     "Napiš nám",
     "Právní informace",
-    "Zpět nahoru ↑"
+    "Zpět nahoru ↑",
+    "Vyzkoušej zdarma!"
   ],
   "story": [
     "Skinmetrics: analýza, péče a vývoj",
@@ -146,5 +147,15 @@
     "Hledat jazyk",
     "Zavřít výběr jazyka",
     "Žádný jazyk nenalezen."
+  ],
+  "steps": [
+    "JAK TO FUNGUJE",
+    "Tvoje pleť. Dobrý začátek.",
+    "Jedna fotka. První krok.",
+    "Vyfoť se a poznej svou pleť lépe díky analýze.",
+    "Péče, která ti sedí.",
+    "Najdi svou osobní pečující rutinu. Na ráno i večer.",
+    "Pokračuj. Sleduj změny.",
+    "Porovnávej své záznamy a sleduj, jak se tvoje pleť v čase mění."
   ]
 }
