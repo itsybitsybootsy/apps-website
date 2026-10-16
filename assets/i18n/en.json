@@ -128,7 +128,8 @@
     "Product",
     "Get in touch",
     "Legal",
-    "Back to top ↑"
+    "Back to top ↑",
+    "Try it for free!"
   ],
   "story": [
     "Skinmetrics: analysis, routine and progress",
@@ -146,5 +147,15 @@
     "Search languages",
     "Close language selection",
     "No languages found."
+  ],
+  "steps": [
+    "HOW IT WORKS",
+    "Your skin. A fresh start.",
+    "One photo. Your first step.",
+    "Take a photo and get to know your skin better with a skin analysis.",
+    "Skincare that fits you.",
+    "Find your personal skincare routine. For your mornings and evenings.",
+    "Keep going. See the change.",
+    "Compare your check-ins and discover how your skin changes over time."
   ]
 }

@@ -128,7 +128,8 @@
     "Product",
     "Neem contact op",
     "Juridisch",
-    "Terug naar boven ↑"
+    "Terug naar boven ↑",
+    "Probeer het gratis!"
   ],
   "story": [
     "Skinmetrics: analyse, routine en voortgang",
@@ -146,5 +147,15 @@
     "Taal zoeken",
     "Taalkeuze sluiten",
     "Geen talen gevonden."
+  ],
+  "steps": [
+    "ZO WERKT HET",
+    "Jouw huid. Een goed begin.",
+    "Eén foto. Jouw start.",
+    "Maak een foto en leer je huid beter kennen met een huidanalyse.",
+    "Huidverzorging die bij je past.",
+    "Vind jouw persoonlijke verzorgingsroutine. Voor de ochtend en de avond.",
+    "Houd vol. Zie de verandering.",
+    "Vergelijk je check-ins en ontdek hoe je huid in de loop van de tijd verandert."
   ]
 }

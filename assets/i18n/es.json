@@ -128,7 +128,8 @@
     "Producto",
     "Escríbenos",
     "Información legal",
-    "Volver arriba ↑"
+    "Volver arriba ↑",
+    "¡Pruébala gratis!"
   ],
   "story": [
     "Skinmetrics: análisis, rutina y evolución",
@@ -146,5 +147,15 @@
     "Buscar idioma",
     "Cerrar la selección de idioma",
     "No se ha encontrado ningún idioma."
+  ],
+  "steps": [
+    "CÓMO FUNCIONA",
+    "Tu piel. Un buen comienzo.",
+    "Una foto. Tu primer paso.",
+    "Haz una foto y conoce mejor tu piel con un análisis.",
+    "Cuidados a tu medida.",
+    "Encuentra tu rutina de cuidado personal. Para la mañana y la noche.",
+    "Sigue. Observa los cambios.",
+    "Compara tus registros y descubre cómo evoluciona tu piel con el tiempo."
   ]
 }

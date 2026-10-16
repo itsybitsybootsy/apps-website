@@ -1,0 +1,107 @@
+/* A quiet, three-step introduction between the hero and the app demo. */
+.skin-steps {
+  background:#fafbf8;
+  color:#252d28;
+  padding:100px 32px 104px;
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+}
+.skin-steps-inner { max-width:1100px; margin-inline:auto; }
+.skin-steps-heading { max-width:700px; margin-bottom:56px; }
+.skin-steps-eyebrow { margin:0 0 18px; font-size:11px; font-weight:600; letter-spacing:.13em; color:#5b6c5d; }
+.skin-steps h2 { margin:0; font-size:clamp(36px,4.3vw,56px); font-weight:500; line-height:1.08; letter-spacing:-.05em; text-wrap:balance; }
+.skin-steps-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:36px; padding:0; margin:0; list-style:none; }
+.skin-step { min-width:0; }
+.skin-step-visual { height:204px; display:flex; align-items:center; justify-content:center; overflow:hidden; border-radius:4px; }
+.skin-step-scan { background:#eaf0e9; }
+.skin-step-routine { background:#eeece6; }
+.skin-step-progress { background:#e9efec; }
+.skin-step-meta { display:flex; align-items:center; gap:16px; margin:25px 0 18px; color:#657367; font-size:12px; font-variant-numeric:tabular-nums; }
+.skin-step-rule { height:1px; background:#d9dfd7; flex:1; }
+.skin-steps h3 { font-size:21px; line-height:1.25; font-weight:500; letter-spacing:-.035em; margin:0 0 12px; text-wrap:balance; }
+.skin-step > p { font-size:15px; line-height:1.65; color:#626b64; margin:0; max-width:33ch; }
+/* Small product scenes, drawn in CSS and SVG so every edge stays crisp. */
+.skin-step-visual { position:relative; border-radius:14px; height:228px; }
+.skin-step-scan { background:#e8eeea; }
+.skin-step-routine { background:#f0eee7; }
+.skin-step-progress { background:#e8edeb; }
+.skin-artboard { position:relative; width:280px; height:204px; flex:none; }
+.skin-scan-orbit { position:absolute; width:192px; height:192px; border:1px solid #cdd9d0; border-radius:50%; top:6px; left:44px; }
+.skin-scan-orbit::after { content:""; position:absolute; inset:16px; border:1px solid #d5dfd7; border-radius:50%; }
+.skin-camera { position:absolute; width:128px; height:164px; left:76px; top:19px; border-radius:22px; background:#b5c4b7; overflow:hidden; border:4px solid #fbfcfa; box-shadow:0 12px 22px -10px #3b504c50,0 1px 3px #3b504c18; transform:rotate(-6deg); }
+.skin-camera img { position:absolute; width:210px; max-width:none; height:auto; left:-45px; top:-12px; }
+.skin-camera::after { content:""; position:absolute; inset:0; border-radius:18px; box-shadow:inset 0 0 0 1px #263c3020; pointer-events:none; }
+.skin-camera-overlay { position:absolute; inset:0; width:100%; height:100%; stroke:#f6fff6; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.skin-camera-overlay .skin-face-guide { stroke-width:.7; stroke-dasharray:2 3; opacity:.65; }
+.skin-camera-overlay .skin-scan-beam { stroke:#d7fbd9; stroke-width:1; }
+.skin-camera-overlay circle { fill:#e4ffe5; stroke:none; }
+.skin-camera-lens { position:absolute; width:5px; height:5px; background:#f7fcf3; border:1px solid #ffffff60; border-radius:50%; top:8px; left:calc(50% - 2.5px); }
+.skin-scan-chip,.skin-trend-badge { position:absolute; display:flex; align-items:center; gap:9px; padding:12px; background:#ffffffed; border:1px solid #fff; border-radius:13px; box-shadow:0 8px 20px -8px #3b504c35; }
+.skin-scan-chip { right:29px; bottom:24px; transform:rotate(3deg); }
+.skin-scan-chip svg { width:24px; height:24px; stroke:#618268; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+.skin-scan-chip span,.skin-trend-badge span { display:grid; gap:5px; }
+.skin-scan-chip i,.skin-trend-badge i { display:block; width:31px; height:4px; border-radius:4px; background:#91a793; }
+.skin-scan-chip i + i,.skin-trend-badge i + i { width:20px; height:3px; background:#d6dfd6; }
+.skin-product-disc { position:absolute; left:40px; bottom:14px; width:202px; height:44px; border-radius:50%; background:#dfddd2; box-shadow:0 8px 14px -10px #686d5340; }
+.skin-bottle { position:absolute; }
+.skin-bottle-body { position:absolute; bottom:0; width:100%; border:1px solid #ffffff70; box-shadow:inset 5px 0 9px #ffffff40,inset -5px 0 8px #364d3420,0 6px 10px -6px #40452a50; }
+.skin-bottle-pump { width:66px; height:155px; left:62px; bottom:35px; transform:rotate(-7deg); }
+.skin-bottle-pump .skin-bottle-body { height:114px; border-radius:13px 13px 12px 12px; background:linear-gradient(90deg,#b8c8ae,#ced9c5 35%,#b5c4a9); }
+.skin-pump-neck { position:absolute; top:24px; left:24px; width:18px; height:18px; background:#d5dfce; border:1px solid #ffffff60; }
+.skin-pump-head { position:absolute; top:14px; left:24px; width:40px; height:12px; border-radius:4px 5px 0 0; background:#e8eee1; box-shadow:inset 0 -3px 3px #b0bba64d; }
+.skin-bottle-pump svg { display:block; width:22px; height:22px; margin:32px auto 12px; stroke:#6c8064; stroke-width:1.1; }
+.skin-bottle-pump i { display:block; width:26px; height:3px; margin:5px auto; background:#92a587; border-radius:2px; }
+.skin-bottle-pump i + i { width:18px; height:2px; opacity:.65; }
+.skin-bottle-serum { width:51px; height:126px; left:135px; bottom:31px; transform:rotate(8deg); }
+.skin-bottle-serum .skin-bottle-body { height:83px; border-radius:12px 12px 9px 9px; background:linear-gradient(90deg,#8f5736,#bd8854 35%,#936039); border-color:#75492920; }
+.skin-dropper-tip { position:absolute; top:0; left:17px; width:17px; height:28px; border-radius:10px 10px 3px 3px; background:linear-gradient(90deg,#424b42,#60685a,#3d463e); }
+.skin-dropper-cap { position:absolute; top:22px; left:9px; width:33px; height:22px; background:repeating-linear-gradient(90deg,#4a5448 0 2px,#55604f 2px 3px); border-radius:4px 4px 2px 2px; }
+.skin-product-label { position:absolute; left:5px; right:5px; top:24px; height:39px; background:#f2efdf; border-radius:1px; padding-top:12px; }
+.skin-product-label i { display:block; width:23px; height:2px; margin:0 auto 4px; background:#92907a; border-radius:2px; }
+.skin-product-label i:nth-child(2) { width:16px; }
+.skin-product-label i:nth-child(3) { width:10px; opacity:.4; }
+.skin-cream { position:absolute; left:178px; bottom:23px; width:62px; height:47px; border-radius:8px 8px 13px 13px; background:linear-gradient(90deg,#e6e2d4,#faf6ea 40%,#e5dfd0); box-shadow:inset 0 -4px 7px #c7bfa840,0 5px 8px -5px #57503e40; }
+.skin-cream-lid { position:absolute; left:-2px; top:-7px; width:66px; height:14px; border-radius:5px; background:linear-gradient(#fdfbf5,#ddd7c6); border:1px solid #f8f6ed; }
+.skin-cream svg { display:block; margin:15px auto 0; width:19px; height:19px; stroke:#a59d83; stroke-width:1.2; stroke-linecap:round; }
+.skin-products-check { position:absolute; right:36px; top:29px; display:grid; place-items:center; width:33px; height:33px; border-radius:50%; background:#fafcf7; border:3px solid #e0e7d7; box-shadow:0 3px 8px #626c3c10; }
+.skin-products-check svg { width:20px; height:20px; stroke:#69825d; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.skin-trend-card { position:absolute; left:27px; top:25px; width:226px; height:153px; padding:15px; border-radius:16px; border:1px solid #fff; background:#f9fbf8; box-shadow:0 12px 24px -12px #3f594b40,0 1px 2px #3f594b10; transform:rotate(-5deg); }
+.skin-trend-header { display:flex; justify-content:space-between; align-items:center; }
+.skin-trend-header span { display:grid; gap:5px; }
+.skin-trend-header i { width:53px; height:4px; border-radius:3px; background:#8d9e8f; }
+.skin-trend-header i + i { width:31px; height:3px; background:#d6dfd4; }
+.skin-trend-header svg { width:23px; height:23px; padding:4px; box-sizing:content-box; border-radius:9px; background:#e5eee0; stroke:#6f8966; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.skin-trend-chart { display:block; width:100%; height:83px; overflow:visible; }
+.skin-chart-grid { stroke:#e0e7de; stroke-width:.8; stroke-dasharray:2 4; }
+.skin-chart-line { stroke:#6b8c73; stroke-width:2; stroke-linecap:round; }
+.skin-chart-halo { fill:#dfeadc; }
+.skin-chart-point { fill:#6b8c73; stroke:#fff; stroke-width:1.5; }
+.skin-trend-history { display:flex; justify-content:space-between; padding:3px 7px 0; }
+.skin-trend-history span { width:5px; height:5px; background:#d4e0ce; border-radius:50%; }
+.skin-trend-history span:nth-child(3n) { background:#87a37b; }
+.skin-trend-badge { right:15px; bottom:18px; transform:rotate(5deg); padding:10px 12px; }
+.skin-trend-badge svg { width:19px; height:19px; stroke:#658762; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+@media (min-width:641px) and (max-width:900px) {
+  .skin-steps-list { gap:24px; }
+  .skin-step-visual { height:180px; }
+  .skin-steps h3 { font-size:19px; }
+}
+@media (max-width:640px) {
+  .skin-steps { padding:64px 24px 68px; }
+  .skin-steps-heading { margin-bottom:36px; max-width:340px; }
+  .skin-steps-eyebrow { font-size:10px; margin-bottom:14px; }
+  .skin-steps h2 { font-size:38px; }
+  .skin-steps-list { grid-template-columns:1fr; gap:38px; }
+  .skin-step { display:grid; grid-template-columns:minmax(0,1fr) 112px; column-gap:18px; align-items:start; }
+  .skin-step-visual { grid-column:2; grid-row:2 / 4; height:114px; margin-top:2px; }
+  .skin-step-meta { grid-column:1 / -1; grid-row:1; margin:0 0 18px; }
+  .skin-steps h3 { grid-column:1; grid-row:2; font-size:21px; margin-bottom:10px; }
+  .skin-step > p { grid-column:1; grid-row:3; font-size:14px; line-height:1.6; }
+  .skin-artboard { transform:scale(.49); }
+  .skin-step-visual { border-radius:10px; }
+}
+@media (max-width:359px) {
+  .skin-steps { padding-inline:20px; }
+  .skin-steps h2 { font-size:34px; }
+  .skin-step { grid-template-columns:minmax(0,1fr) 88px; gap:0 14px; }
+}
+

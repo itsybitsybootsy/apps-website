@@ -128,7 +128,8 @@
     "Prodotto",
     "Scrivici",
     "Informazioni legali",
-    "Torna in alto ↑"
+    "Torna in alto ↑",
+    "Provala gratis!"
   ],
   "story": [
     "Skinmetrics: analisi, routine e andamento",
@@ -146,5 +147,15 @@
     "Cerca una lingua",
     "Chiudi la scelta della lingua",
     "Nessuna lingua trovata."
+  ],
+  "steps": [
+    "COME FUNZIONA",
+    "La tua pelle. Un nuovo inizio.",
+    "Una foto. Il primo passo.",
+    "Scatta una foto e conosci meglio la tua pelle con un’analisi.",
+    "La skincare che fa per te.",
+    "Trova la tua routine di cura personale. Per la mattina e la sera.",
+    "Continua. Osserva i cambiamenti.",
+    "Confronta i tuoi controlli e scopri come cambia la tua pelle nel tempo."
   ]
 }

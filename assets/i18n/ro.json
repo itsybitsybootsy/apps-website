@@ -128,7 +128,8 @@
     "Produs",
     "Scrie-ne",
     "Informații juridice",
-    "Înapoi sus ↑"
+    "Înapoi sus ↑",
+    "Încearcă gratuit!"
   ],
   "story": [
     "Skinmetrics: analiză, rutină și evoluție",
@@ -146,5 +147,15 @@
     "Caută o limbă",
     "Închide selecția limbii",
     "Nu s-a găsit nicio limbă."
+  ],
+  "steps": [
+    "CUM FUNCȚIONEAZĂ",
+    "Pielea ta. Un început bun.",
+    "O fotografie. Primul pas.",
+    "Fă o fotografie și cunoaște-ți mai bine pielea cu ajutorul unei analize.",
+    "Îngrijire potrivită pentru tine.",
+    "Găsește-ți rutina personală de îngrijire. Pentru dimineață și seară.",
+    "Continuă. Observă schimbarea.",
+    "Compară înregistrările și descoperă cum evoluează pielea ta în timp."
   ]
 }

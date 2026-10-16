@@ -128,7 +128,8 @@
     "Produkt",
     "Napisz do nas",
     "Informacje prawne",
-    "Wróć na górę ↑"
+    "Wróć na górę ↑",
+    "Wypróbuj za darmo!"
   ],
   "story": [
     "Skinmetrics: analiza, pielęgnacja i postępy",
@@ -146,5 +147,15 @@
     "Szukaj języka",
     "Zamknij wybór języka",
     "Nie znaleziono języka."
+  ],
+  "steps": [
+    "JAK TO DZIAŁA",
+    "Twoja skóra. Dobry początek.",
+    "Jedno zdjęcie. Pierwszy krok.",
+    "Zrób zdjęcie i poznaj lepiej swoją skórę dzięki analizie.",
+    "Pielęgnacja dopasowana do Ciebie.",
+    "Znajdź swoją osobistą rutynę pielęgnacyjną. Na rano i wieczór.",
+    "Kontynuuj. Zobacz zmiany.",
+    "Porównuj swoje wpisy i odkrywaj, jak Twoja skóra zmienia się z czasem."
   ]
 }

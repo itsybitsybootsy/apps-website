@@ -128,7 +128,8 @@
     "Ürün",
     "Bize yaz",
     "Yasal bilgiler",
-    "Başa dön ↑"
+    "Başa dön ↑",
+    "Ücretsiz dene!"
   ],
   "story": [
     "Skinmetrics: analiz, rutin ve gelişim",
@@ -146,5 +147,15 @@
     "Dil ara",
     "Dil seçimini kapat",
     "Dil bulunamadı."
+  ],
+  "steps": [
+    "NASIL ÇALIŞIR",
+    "Cildin. Güzel bir başlangıç.",
+    "Bir fotoğraf. İlk adımın.",
+    "Bir fotoğraf çek ve cilt analiziyle cildini daha iyi tanı.",
+    "Sana uygun cilt bakımı.",
+    "Kişisel cilt bakım rutinini bul. Sabah ve akşam için.",
+    "Devam et. Değişimi gör.",
+    "Kayıtlarını karşılaştır ve cildinin zamanla nasıl değiştiğini keşfet."
   ]
 }
