@@ -21,8 +21,8 @@ assert(!page.includes('data-language-search'),'language picker stays search-free
 assert(page.includes('<dialog id="language-dialog"'));
 assert(!page.includes('data-language-picker'));
 assert(page.includes('assets/css/i18n.css?v=61'));
-assert(page.includes('assets/css/hero6.css?v=4'));
-assert(page.includes('assets/js/hero6.js?v=6'));
+assert(page.includes('assets/css/hero6.css?v=16'));
+assert(page.includes('assets/js/hero6.js?v=11'));
 assert(page.indexOf('assets/js/i18n.js')<page.indexOf('assets/js/mobile-story.js'));
 console.log('PASS all '+catalog.languages.length+' catalogues are complete; labels, assets and all three controls are wired');
 

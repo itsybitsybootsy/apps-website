@@ -68,7 +68,8 @@
     photo.classList.remove('live', 'done'); hero.classList.remove('glow'); flash.classList.remove('pop');
     frame({ p: 100, k: 0, inn: replay ? 1 : 0, sc: replay ? 1.035 : 1.06 });
     var base = 'assets/img/hero/' + g + '/', fb = 'assets/img/hero/f/';
-    Promise.all([load(imgs.before, base + 'before.webp', fb + 'before.webp'), load(imgs.after, base + 'after.webp', fb + 'after.webp')]).then(function () {
+    var beforeName = g === 'f' ? 'before-body.webp' : 'before.webp';
+    Promise.all([load(imgs.before, base + beforeName, fb + 'before-body.webp'), load(imgs.after, base + 'after.webp', fb + 'after.webp')]).then(function () {
       if (id !== run) return;
       var mk = new Image();                         // a tightened silhouette keeps the light inside the figure
       mk.onload = function () { photo.style.setProperty('--mask', 'url("' + mk.src + '")'); };
@@ -89,7 +90,10 @@
         var s = k01((t - T_SWEEP) / SWEEP), k = ease(s);
         var sc = from - (from - 1) * easeOut(k01(t / TOTAL));
         frame({ p: 100 - 100 * k, k: k, inn: inn, sc: sc });
-        if (s > 0) photo.classList.add('live');
+        // Both portraits use the same light exit at the end of the wipe.
+        var lightFinished = s >= 1;
+        if (s > 0 && !lightFinished) photo.classList.add('live');
+        if (lightFinished) { photo.classList.remove('live'); photo.classList.add('done'); }
         if (s >= .965 && !fired) { fired = true; flash.classList.add('pop'); hero.classList.add('glow'); }
         if (t < TOTAL) requestAnimationFrame(step);
         else { photo.classList.add('done'); frame({ p: 0, k: 1, inn: 1, sc: 1 }); }
