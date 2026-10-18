@@ -28,6 +28,10 @@
     return 'en';
   }
   function t(key, fallback) { return catalog.locales[locale][key] || catalog.locales.en[key] || fallback || key; }
+  function localeShort(code) {
+    if (!code || code === 'auto') return locale.split('-')[0].toUpperCase();
+    return code.split('-')[0].toUpperCase();
+  }
   function translateText(element, value) {
     // Preserve icons, line breaks, nested spans and links inside labelled nodes.
     var text = Array.from(element.childNodes).find(function (node) { return node.nodeType === 3 && node.nodeValue.trim(); });
@@ -56,6 +60,7 @@
     document.documentElement.dir = language.dir;
     apply(document);
     document.querySelectorAll('[data-language-current]').forEach(function (label) { label.textContent = language.name; });
+    document.querySelectorAll('[data-language-short]').forEach(function (label) { label.textContent = localeShort(choice); });
     document.querySelectorAll('.store-badge img').forEach(function (image) {
       image.src = language.apple || 'assets/img/badges/app-store-en.svg';
     });

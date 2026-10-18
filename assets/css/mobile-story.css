@@ -115,6 +115,6 @@
   .ms-border rect { fill:none; stroke-width:1.5; }
   .ms-border-track { stroke:rgba(111,140,116,.09); }
   .ms-border-fill { stroke:#6f8c74; stroke-linecap:round; stroke-dasharray:100; stroke-dashoffset:100; }
-  .mobile-nav { transition:opacity 180ms var(--ease-out), transform 180ms var(--ease-out), visibility 180ms; }
-  .mobile-scroll-active .mobile-nav { opacity:0; visibility:hidden; transform:translateY(-12px); }
+  .site-header.mobile-version { transition:opacity 200ms var(--ease-out,cubic-bezier(.23,1,.32,1)), transform 200ms var(--ease-out,cubic-bezier(.23,1,.32,1)), visibility 200ms; }
+  .mobile-scroll-active .site-header.mobile-version { opacity:0; visibility:hidden; transform:translateY(calc(-8px - env(safe-area-inset-top, 0px))); pointer-events:none; }
 }

@@ -37,13 +37,9 @@ html:is(:lang(ar),:lang(he),:lang(hi),:lang(ja),:lang(ko),:lang(zh)) :is(.headli
  .language-menu-link:hover { color:#799273; }
 }
 @media (max-width:640px) {
- .mobile-nav { gap:10px; }
- .has-i18n .mobile-language-trigger { flex:none; max-width:96px; margin-inline-start:auto; padding:8px 10px; border:0; background:transparent; font-size:14px; font-weight:600; color:#4f6654; }
- .has-i18n .mobile-language-trigger span { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
- .mobile-privacy-label { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
- .mobile-nav .button-small { min-width:0; max-width:calc(100vw - 260px); flex-shrink:1; padding-inline:12px; gap:8px; }
- .mobile-nav .button-small > [aria-hidden] { flex:none; }
- .mobile-nav .brand { flex-shrink:0; }
+ .has-i18n .mobile-language-trigger { flex:none; display:inline-flex; align-items:center; justify-content:center; gap:6px; min-width:44px; min-height:36px; margin:0; padding:0 10px; border:1px solid rgba(111,140,116,.16); border-radius:980px; background:rgba(247,249,246,.9); font-size:12px; font-weight:650; font-variant-numeric:tabular-nums; letter-spacing:.04em; color:#4f6654; transition:transform 120ms var(--ease-out,cubic-bezier(.23,1,.32,1)), background 180ms ease, border-color 180ms ease; }
+ .has-i18n .mobile-language-trigger:active { transform:scale(.96); }
+ .mobile-lang-code { min-width:1.6em; text-align:center; }
  .closing-footer-bottom { column-gap:16px; row-gap:12px; }
  .language-dialog { padding:12px; padding-bottom:max(12px,env(safe-area-inset-bottom)); }
  .language-dialog[open] { align-items:end; }
@@ -54,8 +50,7 @@ html:is(:lang(ar),:lang(he),:lang(hi),:lang(ja),:lang(ko),:lang(zh)) :is(.headli
  .language-option-name { font-size:14px; }
 }
 @media (max-width:380px) {
- .mobile-nav { padding-inline:16px; gap:8px; }
- .mobile-nav .button-small { max-width:calc(100vw - 212px); }
+ .mobile-nav-title { max-width:9.5em; }
 }
 @media (prefers-reduced-motion:reduce) { .language-option { transition:none; } }
 @media (prefers-reduced-transparency:reduce) { .language-dialog { backdrop-filter:none; -webkit-backdrop-filter:none; background:rgba(238,243,238,.96); } }

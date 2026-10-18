@@ -78,11 +78,18 @@ html[data-g="f"] .hero6-photo { --subject-scale:.86; --subject-shift:-2.1%; }
   .hero6-flash { background:radial-gradient(ellipse 48% 40% at 50% 62%,rgba(255,240,222,.30),rgba(255,240,222,.08) 55%,transparent 85%); }
   .hero6.hero6-lite .hero6-photo .before { filter:saturate(.7) brightness(.82) contrast(.95); }
   .hero6.hero6-lite .hero6-photo .after { filter:brightness(calc(1 + .2 * (1 - var(--k,0)))) saturate(calc(1 + .14 * (1 - var(--k,0)))); }
-  /* the white phone bar becomes a quiet dark one while the hero is on screen */
-  body.h6-on .site-nav { background:transparent; -webkit-backdrop-filter:none; backdrop-filter:none; }
-  body.h6-on .site-nav .brand { color:#f2f6f2; }
-  body.h6-on .site-nav .mobile-language-trigger { color:rgba(242,246,242,.78); }
-  body.h6-on .site-nav .button-small { display:none; }
+  /* floating nav melts into the hero instead of a second full-width bar */
+  body.h6-on .site-nav.mobile-nav {
+    border-color:rgba(255,255,255,.14);
+    background:rgba(10,12,11,.52);
+    box-shadow:0 10px 36px rgba(0,0,0,.32);
+  }
+  body.h6-on .site-nav .mobile-nav-brand { color:#f2f6f2; }
+  body.h6-on .site-nav .mobile-language-trigger {
+    color:#f2f6f2;
+    border-color:rgba(255,255,255,.16);
+    background:rgba(255,255,255,.08);
+  }
 }
 
 /* A bright mobile light pulse with a gradual rise and a smooth release. */
