@@ -35,6 +35,7 @@
         <a href="datenschutz.html" class="on">Datenschutzerklärung</a>
         <a href="agb.html">Nutzungsbedingungen</a>
         <a href="impressum.html">Impressum &amp; Offenlegung</a>
+        <a href="privacy-en.html" hreflang="en" lang="en">English</a>
       </div>
 
       <div class="note">
@@ -78,7 +79,7 @@
         <li>Apple Developer Team ID: <code>VVDVNMA57K</code></li>
       </ul>
 
-      <p>Für alle Fragen zum Datenschutz und für die Ausübung deiner Rechte schreib bitte an <a href="mailto:privacy@q-systems.app">privacy@q-systems.app</a>. Allgemeiner Support läuft über <a href="mailto:hello@q-systems.app">hello@q-systems.app</a>. Du bekommst auf beiden Wegen eine Antwort von derselben Person, Q Systems ist ein Einzelentwickler-Projekt.</p>
+      <p>Für alle Fragen zum Datenschutz und für die Ausübung deiner Rechte schreib bitte an <a href="mailto:privacy@q-systems.app">privacy@q-systems.app</a>. Allgemeiner Support läuft über <a href="mailto:hello@q-systems.app">hello@q-systems.app</a>. Du bekommst auf beiden Wegen eine Antwort von derselben Person — Q Systems ist ein Einzelentwickler-Projekt.</p>
 
       <h3>Kein Datenschutzbeauftragter</h3>
 
@@ -88,12 +89,12 @@
 
       <ul>
         <li><strong>lit. a:</strong> Q Systems ist keine Behörde und keine öffentliche Stelle.</li>
-        <li><strong>lit. b:</strong> Wir überwachen niemanden. Es gibt kein Tracking, keine Analytics-SDKs, keine Profilbildung und keine Nutzerkonten.</li>
-        <li><strong>lit. c:</strong> Skinmetrics verarbeitet Gesundheitsdaten im Sinne von <span class="lawtag">Art. 9 (1) DSGVO</span>. Diese Verarbeitung findet jedoch auf dem Gerät der Nutzerin oder des Nutzers und, soweit eine KI-Analyse angefordert wird, bei den Empfängern der KI-Analyse statt (Vermittlungsdienst, OpenRouter, Modell-Hosts). Q Systems selbst speichert diese Inhalte weder zentral noch dauerhaft. Gemessen an den Kriterien in Erwägungsgrund 91 DSGVO (Zahl der betroffenen Personen, Datenvolumen, Dauer und geografische Reichweite der Verarbeitung <em>durch den Verantwortlichen</em>) beurteilen wir die Verarbeitung derzeit nicht als „umfangreich".</li>
+        <li><strong>lit. b:</strong> Wir überwachen niemanden. Es gibt kein Tracking, keine Analytics-SDKs, keine Profilbildung und keine Nutzerkonten; die pseudonyme Geräte-Kennung dient allein der Sicherheit und Missbrauchsabwehr.</li>
+        <li><strong>lit. c:</strong> Skinmetrics verarbeitet Gesundheitsdaten im Sinne von <span class="lawtag">Art. 9 (1) DSGVO</span>. Diese Verarbeitung findet jedoch auf dem Gerät der Nutzerin oder des Nutzers und — soweit eine KI-Analyse angefordert wird — bei den in Kapitel 5 und 6 genannten Dienstleistern statt. Q Systems selbst speichert diese Inhalte weder zentral noch dauerhaft; der Vermittlungsdienst leitet sie nur durch. Gemessen an den Kriterien in Erwägungsgrund 91 DSGVO (Zahl der betroffenen Personen, Datenvolumen, Dauer und geografische Reichweite der Verarbeitung <em>durch den Verantwortlichen</em>) beurteilen wir die Verarbeitung derzeit nicht als „umfangreich".</li>
       </ul>
 
       <div class="note">
-        <p>Das ist unsere eigene Beurteilung, keine Feststellung der Datenschutzbehörde. Wir prüfen sie erneut, sobald sich die Nutzerzahlen deutlich erhöhen. Seit der Vermittlungsdienst (Cloudflare Worker) die Anfragen weiterleitet, verarbeiten wir technisch bedingt Daten serverseitig, ohne sie zu speichern; wir prüfen die Einschätzung vor diesem Hintergrund neu. Wenn du diese Einschätzung für falsch hältst, schreib uns, wir setzen uns damit auseinander.</p>
+        <p>Das ist unsere eigene Beurteilung, keine Feststellung der Datenschutzbehörde. Wir prüfen sie erneut, sobald sich die Nutzerzahlen deutlich erhöhen oder wir Daten serverseitig verarbeiten sollten. Wenn du diese Einschätzung für falsch hältst, schreib uns — wir setzen uns damit auseinander.</p>
       </div>
 
       <h2 id="geltungsbereich">2 &middot; Geltungsbereich und Grundprinzip</h2>
@@ -110,25 +111,26 @@
       <h3>Was für Skinmetrics gilt</h3>
 
       <ul>
-        <li><strong>Kein Nutzerkonto, kein Login, keine zentrale Nutzerdatenbank.</strong> Wir wissen nicht, wer du bist, und können es auch nicht herausfinden.</li>
+        <li><strong>Kein Nutzerkonto, kein Login, keine zentrale Nutzerdatenbank mit deinen Inhalten.</strong> Wir wissen nicht, wer du bist, und können es auch nicht herausfinden.</li>
         <li><strong>Keine Analytics-, Crash- oder Tracking-SDKs.</strong> Kein Firebase, kein Sentry, kein Crashlytics, kein Mixpanel, kein PostHog, kein Amplitude, kein RevenueCat.</li>
         <li><strong>Keine Werbung.</strong> Derzeit wird in Skinmetrics keine Werbung ausgeliefert.</li>
         <li><strong>Alle App-Inhalte liegen lokal</strong> in der Datenbank der App auf deinem Gerät. Es gibt keine iCloud- oder CloudKit-Synchronisation.</li>
       </ul>
 
-      <h3>Wohin Daten trotzdem gehen, ehrlich</h3>
+      <h3>Wohin Daten trotzdem gehen — ehrlich</h3>
 
-      <p>Ein pauschales „alles bleibt auf deinem Gerät" wäre falsch. Richtig ist:</p>
+      <p>Ein pauschales „alles bleibt auf deinem Gerät“ wäre falsch. Richtig ist:</p>
 
       <ul>
-        <li><strong>Skinmetrics</strong> sendet die von dir aufgenommenen Haut- und Gesichtsfotos zusammen mit deinen Profilangaben, darunter <em>Gesundheitsdaten</em>, über einen von uns betriebenen Vermittlungsdienst (Cloudflare Worker) an OpenRouter in den USA und von dort an Modell-Hosts, um die KI-Analyse zu erzeugen. Ohne diese Übermittlung funktioniert die Analyse nicht. Verläufe, Notizen und Profil bleiben lokal auf deinem Gerät.</li>
+        <li><strong>Für jede KI-Analyse</strong> sendet Skinmetrics deine Haut- und Gesichtsfotos zusammen mit ausgewählten Profilangaben — darunter <em>Gesundheitsdaten</em> — an einen Vermittlungsdienst von Q Systems bei Cloudflare, der sie an OpenRouter und von dort an gehostete KI-Modelle weiterleitet (alle in den USA ansässig oder dort tätig, sofern nicht anders angegeben). Ohne diese Übermittlung funktioniert die Analyse nicht; sie erfolgt nur mit deiner ausdrücklichen Einwilligung. Verläufe, Notizen und das übrige Profil bleiben lokal auf deinem Gerät.</li>
+        <li><strong>Eine pseudonyme Geräte-Kennung</strong> (Apple App Attest) liegt auf unserem Vermittlungsdienst, damit wir echte Installationen von Missbrauch unterscheiden können.</li>
       </ul>
 
-      <p>Die Einzelheiten, welche Felder genau, auf welcher Rechtsgrundlage, mit welcher Einwilligung, stehen im Kapitel zu <a href="#ds-skinmetrics">Skinmetrics</a>. Die beteiligten Empfänger und die Drittlandsfrage behandelt der Abschnitt <a href="#empfaenger">Empfänger und Übermittlung in Drittländer</a>.</p>
+      <p>Die Einzelheiten — welche Felder genau, auf welcher Rechtsgrundlage, mit welcher Einwilligung — stehen im Kapitel zu <a href="#ds-skinmetrics">Skinmetrics</a>. Die beteiligten Empfänger und die Drittlandsfrage behandelt der Abschnitt <a href="#empfaenger">Empfänger und Übermittlung in Drittländer</a>.</p>
 
       <h3>Zielgruppe</h3>
 
-      <p>Skinmetrics richtet sich an Erwachsene. Wir bieten keine Kinder-App an und verarbeiten nicht wissentlich Daten von Kindern. Sollte uns bekannt werden, dass uns Daten eines Kindes zugegangen sind, löschen wir sie.</p>
+      <p>Skinmetrics richtet sich ausschließlich an Erwachsene ab 18 Jahren. Wir verarbeiten nicht wissentlich Daten von Minderjährigen. Sollte uns bekannt werden, dass uns Daten einer minderjährigen Person zugegangen sind, löschen wir sie.</p>
 
       <h2 id="website">3 &middot; Diese Website</h2>
 
@@ -136,7 +138,7 @@
 
       <p>Diese Website ist eine rein statische Seite und wird über <strong>GitHub Pages</strong> ausgeliefert, einen Dienst der GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA (Tochterunternehmen der Microsoft Corporation). Gegenüber Nutzerinnen und Nutzern im EWR tritt nach der Datenschutzerklärung von GitHub auch die GitHub B.V. (Niederlande) als Verantwortliche auf.</p>
 
-      <p>Es gibt <strong>keinen eigenen Server</strong>, keine serverseitigen Skripte, keine Datenbank, kein Kontaktformular und keine Kommentarfunktion. Die Seite besteht aus HTML, CSS und, soweit vorhanden, JavaScript, das ausschließlich im Browser läuft. Schriften sind Systemschriften; es werden keine Google Fonts, keine externen Bibliotheken, keine externen Bilder und keine Werbedienste nachgeladen. Als einzige Drittressource wird das Skript der Reichweitenmessung von Cloudflare geladen (siehe unten).</p>
+      <p>Es gibt <strong>keinen eigenen Server</strong>, keine serverseitigen Skripte, keine Datenbank, kein Kontaktformular und keine Kommentarfunktion. Die Seite besteht aus HTML, CSS und — soweit vorhanden — JavaScript, das ausschließlich im Browser läuft. Schriften sind Systemschriften; es werden keine Google Fonts, keine externen Bibliotheken, keine externen Bilder und keine Werbedienste nachgeladen. Als einzige Drittressource wird das Skript der Reichweitenmessung von Cloudflare geladen (siehe unten).</p>
 
       <h4>Welche Daten GitHub beim Aufruf verarbeitet</h4>
 
@@ -144,7 +146,7 @@
 
       <div class="note">
         <p>„When a GitHub Pages site is visited, the visitor's IP address is logged and stored for security purposes, regardless of whether the visitor has signed into GitHub or not."<br>
-        (Sinngemäß: Beim Besuch einer GitHub-Pages-Seite wird die IP-Adresse der Besucherin oder des Besuchers zu Sicherheitszwecken protokolliert und gespeichert, unabhängig davon, ob sie oder er bei GitHub angemeldet ist.)</p>
+        (Sinngemäß: Beim Besuch einer GitHub-Pages-Seite wird die IP-Adresse der Besucherin oder des Besuchers zu Sicherheitszwecken protokolliert und gespeichert — unabhängig davon, ob sie oder er bei GitHub angemeldet ist.)</p>
       </div>
 
       <p>Nach der allgemeinen Datenschutzerklärung von GitHub werden dabei typischerweise verarbeitet: IP-Adresse, Geräteinformationen, Sitzungsdaten, Datum und Uhrzeit der Anfrage, Gerätetyp, Betriebssystem und Anwendungsversion sowie die aufgerufenen Seiten.</p>
@@ -157,7 +159,7 @@
 
       <p>Wir betreiben die Seite über einen kostenlosen GitHub-Account. GitHub verarbeitet die genannten Protokolldaten für eigene Sicherheitszwecke und tritt insoweit als <strong>eigenständig Verantwortlicher</strong> auf, nicht als unser Auftragsverarbeiter. In der Datenschutzerklärung von GitHub heißt es dazu, GitHub, Inc. bzw. GitHub B.V. verarbeite als „Data Controller", wenn du mit Websites, Anwendungen und Diensten von GitHub interagierst.</p>
 
-      <p>GitHub bietet zwar ein <em>Data Protection Agreement</em> (Auftragsverarbeitungsvertrag) an. Dieses ist jedoch ausdrücklich Bestandteil der <em>GitHub Customer Agreement</em> und setzt ein „written and executed agreement" voraus, es gilt also für vertraglich gebundene Organisations- und Enterprise-Kunden, nicht für einen kostenlosen persönlichen Account. Ein Auftragsverarbeitungsvertrag nach <span class="lawtag">Art. 28 DSGVO</span> besteht zwischen Q Systems und GitHub daher <strong>nicht</strong>.</p>
+      <p>GitHub bietet zwar ein <em>Data Protection Agreement</em> (Auftragsverarbeitungsvertrag) an. Dieses ist jedoch ausdrücklich Bestandteil der <em>GitHub Customer Agreement</em> und setzt ein „written and executed agreement" voraus — es gilt also für vertraglich gebundene Organisations- und Enterprise-Kunden, nicht für einen kostenlosen persönlichen Account. Ein Auftragsverarbeitungsvertrag nach <span class="lawtag">Art. 28 DSGVO</span> besteht zwischen Q Systems und GitHub daher <strong>nicht</strong>.</p>
 
       <div class="note">
         <p>Wir benennen das offen, weil es ein bekannter Schwachpunkt dieser Konstruktion ist: Q Systems entscheidet über den Einsatz von GitHub Pages und ist für diese Entscheidung verantwortlich, hat aber weder Zugriff auf die Protokolle noch eine vertragliche Weisungsbefugnis gegenüber GitHub. Wir können deshalb keine Auskunft über die dort gespeicherten Log-Einträge erteilen und diese auch nicht löschen. Für Rechte gegenüber GitHub wende dich bitte direkt an GitHub. Ein Wechsel auf ein Hosting mit Auftragsverarbeitungsvertrag ist geplant: <span class="ph">[Hosting-Anbieter]</span>.</p>
@@ -173,11 +175,11 @@
 
       <ul>
         <li>Die Auslieferung der Seite über den GitHub-Pages-Host erfolgt ohne <code>Set-Cookie</code>-Header.</li>
-        <li>Die Cookie-Liste von GitHub führt <code>github.io</code> nicht auf. Die dort dokumentierten Cookies, darunter das Sitzungs-Cookie <code>_gh_sess</code>, betreffen <code>github.com</code> und weitere GitHub-eigene Domains, auf denen man sich anmelden kann, nicht die Auslieferung statischer Pages-Inhalte.</li>
+        <li>Die Cookie-Liste von GitHub führt <code>github.io</code> nicht auf. Die dort dokumentierten Cookies — darunter das Sitzungs-Cookie <code>_gh_sess</code> — betreffen <code>github.com</code> und weitere GitHub-eigene Domains, auf denen man sich anmelden kann, nicht die Auslieferung statischer Pages-Inhalte.</li>
         <li>Es werden keine Ressourcen von Drittanbietern nachgeladen, die ihrerseits Cookies setzen könnten; das Cloudflare-Skript setzt nach Angaben von Cloudflare keine Cookies.</li>
       </ul>
 
-      <p><span class="lawtag">Art. 5 (3) ePrivacy-RL 2002/58/EG</span>, in Österreich umgesetzt in <span class="lawtag">§ 165 (3) TKG 2021</span>, verlangt eine Einwilligung nur für das <em>Speichern von Informationen auf dem Endgerät</em> oder den <em>Zugriff auf dort bereits gespeicherte Informationen</em>. Beides findet hier nicht statt. Ein Cookie- oder Consent-Banner ist deshalb nicht erforderlich, nicht, weil wir uns eine Ausnahme zurechtlegen, sondern weil es nichts gibt, wozu eingewilligt werden müsste.</p>
+      <p><span class="lawtag">Art. 5 (3) ePrivacy-RL 2002/58/EG</span>, in Österreich umgesetzt in <span class="lawtag">§ 165 (3) TKG 2021</span>, verlangt eine Einwilligung nur für das <em>Speichern von Informationen auf dem Endgerät</em> oder den <em>Zugriff auf dort bereits gespeicherte Informationen</em>. Beides findet hier nicht statt. Ein Cookie- oder Consent-Banner ist deshalb nicht erforderlich — nicht, weil wir uns eine Ausnahme zurechtlegen, sondern weil es nichts gibt, wozu eingewilligt werden müsste.</p>
 
       <p>Die bloße Übertragung deiner IP-Adresse beim Verbindungsaufbau fällt nicht unter <span class="lawtag">§ 165 (3) TKG 2021</span>, weil dabei nichts auf deinem Gerät gespeichert oder ausgelesen wird. Sie wird ausschließlich nach der DSGVO beurteilt (siehe oben).</p>
 
@@ -189,7 +191,7 @@
 
       <p><strong>Zweck und Rechtsgrundlage:</strong> Verbesserung der Website und Auswertung der Reichweite; berechtigtes Interesse nach <span class="lawtag">Art. 6 (1) f DSGVO</span>. Da nichts auf deinem Endgerät gespeichert oder ausgelesen wird, ist nach unserer Einschätzung keine Einwilligung nach <span class="lawtag">§ 165 (3) TKG 2021</span> erforderlich. Du kannst der Messung widersprechen (Art. 21 DSGVO), z. B. per E-Mail an uns oder durch einen Skript- bzw. Tracking-Blocker in deinem Browser.</p>
 
-      <p><strong>Rolle und Drittland:</strong> Cloudflare verarbeitet die Daten in unserem Auftrag; ob die Übermittlung in die USA sich auf das EU-U.S. Data Privacy Framework oder auf Standardvertragsklauseln stützt, haben wir noch nicht bestätigt: <span class="ph">[Status Cloudflare-DPA und DPF-Zertifizierung]</span>. Datenschutzerklärung von Cloudflare: <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a>.</p>
+      <p><strong>Rolle und Drittland:</strong> Cloudflare verarbeitet die Daten in unserem Auftrag <span class="ph">[[ Auftragsverarbeitungsvertrag bestätigen ]]</span>; die Übermittlung in die USA stützt sich auf das EU-U.S. Data Privacy Framework <span class="ph">[[ DPF-Status verifizieren ]]</span> bzw. Standardvertragsklauseln <span class="ph">[[ bestätigen ]]</span>. Datenschutzerklärung von Cloudflare: <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a>.</p>
 
       <h3>Externe Links</h3>
 
@@ -212,7 +214,7 @@
         <li>Enthält deine Nachricht von dir aus Gesundheitsangaben, stützen wir die Verarbeitung auf deine ausdrückliche Einwilligung nach <span class="lawtag">Art. 9 (2) a DSGVO</span>, die du mit dem Absenden der Nachricht konkludent erteilst und jederzeit widerrufen kannst.</li>
       </ul>
 
-      <p><strong>Löschung:</strong> Wir löschen die Korrespondenz, sobald sie zur Erfüllung des Zwecks nicht mehr erforderlich ist, bei reinen Support-Anfragen in der Regel spätestens <span class="ph">[Frist, z. B. 12 Monate]</span> nach dem endgültigen Abschluss der Sache. Länger bewahren wir E-Mails nur auf, soweit gesetzliche Aufbewahrungspflichten bestehen (etwa <span class="lawtag">§ 132 BAO</span> und <span class="lawtag">§ 212 UGB</span>: sieben Jahre für Belege und Geschäftsbriefe mit steuerlicher oder buchhalterischer Relevanz) oder soweit die Unterlagen zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen benötigt werden.</p>
+      <p><strong>Löschung:</strong> Wir löschen die Korrespondenz, sobald sie zur Erfüllung des Zwecks nicht mehr erforderlich ist — bei reinen Support-Anfragen in der Regel spätestens <span class="ph">[Frist, z. B. 12 Monate]</span> nach dem endgültigen Abschluss der Sache. Länger bewahren wir E-Mails nur auf, soweit gesetzliche Aufbewahrungspflichten bestehen (etwa <span class="lawtag">§ 132 BAO</span> und <span class="lawtag">§ 212 UGB</span>: sieben Jahre für Belege und Geschäftsbriefe mit steuerlicher oder buchhalterischer Relevanz) oder soweit die Unterlagen zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen benötigt werden.</p>
 
       <p><strong>E-Mail-Anbieter:</strong> Unser Postfach wird betrieben bei <span class="ph">[Name und Sitz des E-Mail-Anbieters]</span>. Mit diesem Anbieter besteht ein Auftragsverarbeitungsvertrag nach <span class="lawtag">Art. 28 DSGVO</span>: <span class="ph">[Status des AV-Vertrags bestätigen]</span>.</p>
 
@@ -220,30 +222,26 @@
 
       <h2 id="apps">5 &middot; Skinmetrics</h2>
 
-      <p>Das folgende Kapitel beschreibt, welche Daten Skinmetrics verarbeitet, wo diese liegen und was das Gerät verlässt. Es gibt kein Nutzerkonto und keine Nutzerdatenbank bei uns.</p>
-
-
+      <p>Das folgende Kapitel beschreibt, welche Daten Skinmetrics verarbeitet, wo diese liegen und was das Gerät verlässt. Es gibt kein Nutzerkonto und keine Nutzerdatenbank mit deinen Inhalten bei uns.</p>
 
       <h3 id="ds-skinmetrics">5.1 &middot; Skinmetrics</h3>
 
-      <p>Skinmetrics verarbeitet sensible Hautdaten, deshalb ist dies der Abschnitt, den du wirklich lesen solltest. Wir sagen dir hier ohne Beschönigung, was auf deinem iPhone bleibt und was dein iPhone verlässt. Die kurze Fassung vorweg: <strong>deine Hautfotos und deine Gesundheitsangaben bleiben nicht auf dem Gerät.</strong> Sie werden für jede KI-Analyse über unseren Vermittlungsdienst an OpenRouter in die USA und von dort an Modell-Hosts übermittelt. Alles Weitere erklären wir unten.</p>
-
-      <div class="note">
-        <p><strong>Hinweis zu älteren Fassungen.</strong> Frühere Fassungen dieser Datenschutzerklärung sagten, die App spreche direkt mit Google. Das haben wir durch den oben beschriebenen Vermittlungsdienst ersetzt, die Release-Version der App ruft keinen KI-Anbieter mehr direkt auf. Ebenso irreführend war die pauschale Aussage „deine Inhalte bleiben auf dem iPhone“. Wir haben das korrigiert.</p>
-      </div>
+      <p>Skinmetrics verarbeitet sensible Hautdaten — deshalb ist dies der Abschnitt, den du wirklich lesen solltest. Die kurze Fassung vorweg: <strong>Für jede KI-Analyse verlassen dein Hautfoto und ausgewählte Profilangaben dein iPhone.</strong> Sie gehen über einen Vermittlungsdienst von Q Systems bei Cloudflare an OpenRouter und von dort an gehostete offene KI-Modelle (Meta Llama 4 und Alibaba Qwen3-VL). Die App sendet <strong>nicht</strong> direkt an einen KI-Anbieter und enthält keinen Zugangsschlüssel eines KI-Anbieters. Alles Weitere erklären wir unten.</p>
 
       <h4>Welche Daten Skinmetrics verarbeitet</h4>
 
-      <p>Skinmetrics hat <strong>kein Nutzerkonto, keinen Login und keine zentrale Nutzerdatenbank</strong>. Wir führen keine Nutzerprofile auf einem Server. Alles, was die App erhebt, entsteht auf deinem Gerät:</p>
+      <p>Skinmetrics hat <strong>kein Nutzerkonto und keinen Login</strong>. Wir führen keine Nutzerprofile mit Inhalten auf einem Server. Der überwiegende Teil dessen, was die App erhebt, entsteht und bleibt auf deinem Gerät:</p>
 
       <ul>
-        <li><strong>Bilder deiner Haut und deines Gesichts</strong>, aus Quick Scan und Full Scan (3 Winkel), aus dem täglichen Check-in, aus Face-Captures, Journey-Vorher-Fotos und dem Baseline-Foto.</li>
-        <li><strong>Gesundheitsbezogene Angaben aus deinem Profil</strong>, teils als Freitext, den du selbst schreibst: Hauttyp, Altersspanne, <strong>eigene und familiäre Hautkrebs-Historie</strong> (samt Freitextdetails), häufige Sonnenexposition, <strong>chronische Hauterkrankungen</strong> (samt Details), <strong>Kosmetik-Allergien</strong> (samt Details), <strong>Schwangerschaft und Stillzeit</strong>, Hautprobleme und Hautziele, Umweltfaktoren sowie die KI-Ersteinschätzung als Text.</li>
-        <li><strong>Verlaufs- und Nutzungsdaten der App</strong>: deine Selbstbewertung 1–10, Stimmung, freie Notizen, Skin-Score, Spot-Tracking, Streaks, deine AM/PM-Routine und die von dir gewählten Produkte.</li>
+        <li><strong>Bilder deiner Haut und deines Gesichts</strong> — aus Quick Scan und Full Scan, aus dem täglichen Check-in und aus weiteren Aufnahmefunktionen der App.</li>
+        <li><strong>Gesundheitsbezogene Angaben aus deinem Profil</strong>, teils als Freitext, den du selbst schreibst: Hauttyp, Altersspanne, Angaben zu Hautkrebs-Historie, Sonnenexposition und chronischen Hauterkrankungen, Kosmetik-Allergien (samt Details), Schwangerschaft und Stillzeit, Hautprobleme und Hautziele sowie die KI-Einschätzung als Text.</li>
+        <li><strong>Verlaufs- und Nutzungsdaten der App</strong>: deine Selbstbewertung, Stimmung, freie Notizen, Skin-Score, Spot-Tracking, Streaks, deine AM/PM-Routine und die von dir gewählten Produkte.</li>
+        <li><strong>Eine pseudonyme Geräte-Kennung für unseren Vermittlungsdienst</strong> (Apple App Attest, siehe unten).</li>
         <li><strong>Kein Standort.</strong> Die App speichert lediglich einen groben, von dir selbst gewählten Regionscode wie „EU“ oder „US“, damit die Saisonlogik stimmt. Das ist keine Ortung.</li>
+        <li><strong>Keine Ableitung von Geschlecht oder Alter aus dem Gesicht.</strong> Die App schätzt weder dein Geschlecht noch dein Alter aus deinen Fotos.</li>
       </ul>
 
-      <p>Die Angaben zu Erkrankungen, Allergien, Schwangerschaft und Hautkrebs-Historie sind <strong>Gesundheitsdaten</strong>. Zusammen mit einem Foto deiner Haut sind das <strong>besondere Kategorien personenbezogener Daten</strong> <span class="lawtag">Art. 9 Abs. 1 DSGVO</span>. Für solche Daten gilt ein grundsätzliches Verarbeitungsverbot; der EuGH hat dazu festgehalten, dass das Verbot „<em>irrespective of its stated purpose</em>“ greift, also auch bei bester Absicht (EuGH, C-252/21, Rn. 70). Verarbeiten dürfen wir sie nur, wenn eine der eng auszulegenden Ausnahmen des <span class="lawtag">Art. 9 Abs. 2 DSGVO</span> greift (EuGH ebd., Rn. 76: „<em>must be interpreted strictly</em>“).</p>
+      <p>Die Angaben zu Erkrankungen, Allergien, Schwangerschaft und Hautkrebs-Historie sind <strong>Gesundheitsdaten</strong>. Zusammen mit einem Foto deiner Haut sind das <strong>besondere Kategorien personenbezogener Daten</strong> <span class="lawtag">Art. 9 Abs. 1 DSGVO</span>. Für solche Daten gilt ein grundsätzliches Verarbeitungsverbot; wir dürfen sie nur verarbeiten, wenn eine der eng auszulegenden Ausnahmen des <span class="lawtag">Art. 9 Abs. 2 DSGVO</span> greift (vgl. EuGH, C-252/21). Bei uns ist das deine ausdrückliche Einwilligung.</p>
 
       <h4>Wo deine Daten liegen: auf deinem iPhone</h4>
 
@@ -251,155 +249,144 @@
         <li>Gespeichert wird lokal in <strong>SwiftData</strong>. Fotos liegen als <code>.externalStorage</code>-Anhänge daneben, nicht in der Datenbankdatei.</li>
         <li>Auf das Verzeichnis des Datenspeichers setzt die App <strong><code>FileProtectionType.complete</code></strong>. Solange dein iPhone gesperrt ist, sind die Dateien vom System verschlüsselt und nicht lesbar.</li>
         <li><strong>Kein iCloud-Sync, kein CloudKit.</strong> Wir synchronisieren nichts zwischen deinen Geräten.</li>
-        <li>Die <strong>App Group</strong> existiert nur, damit die Widgets etwas anzeigen können. In der App Group liegen bewusst <strong>nur Skin-Score, Streak und Routinefortschritt</strong>, <strong>keine Fotos und keine Gesundheitstexte</strong>. Das ist eine bewusste Designentscheidung: Widget-Inhalte können auf dem Sperrbildschirm sichtbar sein.</li>
-        <li><strong>Keine Analytics-, Crash- oder Werbe-SDKs.</strong> Kein Firebase, kein Sentry, kein Crashlytics, kein Mixpanel, kein PostHog, kein Amplitude, kein RevenueCat, kein Ad-SDK. Kein App Tracking Transparency, weil nichts getrackt wird.</li>
+        <li>Die <strong>App Group</strong> existiert nur, damit die Widgets etwas anzeigen können. Dort liegt ein kleiner Schnappschuss mit <strong>Skin-Score, Streak und Routinefortschritt</strong> — <strong>keine Fotos und keine Gesundheitstexte</strong>. Das ist eine bewusste Designentscheidung: Widget-Inhalte können auf dem Sperrbildschirm sichtbar sein.</li>
+        <li><strong>Keine Werbe-, Tracking- oder Crash-SDKs.</strong> Kein Firebase, kein Sentry, kein Crashlytics, kein Mixpanel, kein PostHog, kein Amplitude, kein RevenueCat, kein Ad-SDK. Kein App Tracking Transparency, weil nichts getrackt wird.</li>
+        <li><strong>Optionale anonyme Produktstatistik:</strong> Im Code der App ist eine optionale, anonyme Produktstatistik (Anbieter Supabase) vorbereitet. Sie ist zum Start <strong>ausgeschaltet und nicht konfiguriert</strong>; es werden dadurch keine Daten übertragen. Sollte sie jemals aktiviert werden, wäre sie <strong>nur per Opt-in</strong> (standardmäßig aus), würde nur Zähler und Labels übertragen — keine Fotos und keine Gesundheitswerte — und eine zufällige, pro Installation erzeugte Kennung verwenden. Wir würden diese Erklärung vor einer Aktivierung aktualisieren.</li>
       </ul>
 
       <div class="note">
-        <p><strong>Backup, das musst du wissen.</strong> Weil deine Daten im normalen App-Container liegen, werden sie vom <strong>iPhone-Backup miterfasst</strong>: also im iCloud-Backup oder im lokalen Backup auf deinem Mac/PC. Dort gelten dann Apples Regeln und Verschlüsselung, nicht unsere. Wir haben darauf keinen Einfluss und können es dir auch nicht abnehmen. Wenn du das nicht willst, schalte in den iOS-Einstellungen unter <em>Apple-ID → iCloud → Backup → Apps</em> das Backup für Skinmetrics ab oder verwende ein verschlüsseltes lokales Backup.</p>
+        <p><strong>Backup — das musst du wissen.</strong> Weil deine Daten im normalen App-Container liegen, werden sie je nach deinen Apple-Einstellungen vom <strong>iPhone-Backup miterfasst</strong>: also im iCloud-Backup oder im lokalen Backup auf deinem Mac/PC. Dort gelten Apples Regeln und Verschlüsselung, nicht unsere. Wir haben darauf keinen Einfluss. Wenn du das nicht willst, schalte in den iOS-Einstellungen unter <em>Apple-ID → iCloud → Backup → Apps</em> das Backup für Skinmetrics ab oder verwende ein verschlüsseltes lokales Backup.</p>
       </div>
 
-      <h4>Was an die KI-Verarbeiter geht, der kritische Punkt</h4>
+      <h4>Was bei einer KI-Analyse dein Gerät verlässt</h4>
 
-      <p>Für jede KI-Analyse sendet die App ihre Anfrage über <strong>TLS an einen Cloudflare Worker</strong> mit dem Namen <code>skinmetrics-ai</code>, den Q Systems in einem eigenen Cloudflare-Konto betreibt. Die App weist sich mit <strong>Apple App Attest</strong> aus. <strong>Die Release-Version der App ruft keinen KI-Anbieter direkt auf.</strong> Der Worker hält den Schlüssel für OpenRouter, prüft Gerätebestätigung, Kontingente und Ratenbegrenzung und leitet die Anfrage an <strong>OpenRouter, Inc. (USA)</strong> weiter, mit den Vorgaben <code>data_collection=deny</code> und <code>zdr</code> (Zero Data Retention). Findet sich kein Endpunkt, der diese Vorgaben erfüllt, <strong>scheitert die Anfrage</strong>. Es gibt keinen Ausweichweg und keinen direkten Aufruf eines anderen Anbieters.</p>
+      <p>Für jede KI-Analyse sendet die App eine verschlüsselte (HTTPS) Anfrage an den Vermittlungsdienst <code>skinmetrics-ai</code>. Das ist ein von Q Systems betriebener <strong>Cloudflare Worker</strong> in Q Systems’ eigenem Cloudflare-Konto. Der Dienst prüft zuerst, dass die Anfrage von einer echten Installation der App stammt (<strong>Apple App Attest</strong>), und leitet sie dann an <strong>OpenRouter</strong> (OpenRouter, Inc., USA) weiter. OpenRouter vermittelt an gehostete offene Modelle: <strong>Meta Llama 4 Scout/Maverick</strong> und <strong>Alibaba Qwen3-VL</strong>. Google bzw. Gemini wird in der veröffentlichten App nicht verwendet; in der App ist kein Zugangsschlüssel eines KI-Anbieters enthalten.</p>
 
-      <p>OpenRouter leitet an offene Modelle weiter, die Drittanbieter betreiben und die OpenRouter auswählt: <strong>Meta Llama 4 Maverick</strong> (Läsionszählung und andere Textauswertungen), <strong>Google Gemma 4 26B</strong> (Skin-Score und Mehrwinkel-Scan) und <strong>Alibaba Qwen3-VL</strong> (Fotos von Produktregalen). Welches Modell für welche Aufgabe gilt, ist auf unserem Server festgelegt, die App kann es nicht wählen. Gemma ist ein offenes Modell, das die Hosts betreiben, nicht Googles Gemini-Schnittstelle. Zu den möglichen Hosts kann auch Google (Vertex AI) gehören.</p>
-
-      <p><strong>Übermittelt wird nicht nur das Bild.</strong> Konkret geht Folgendes in die KI-Analyse:</p>
+      <p><strong>Übermittelt wird nicht nur das Bild.</strong> Pro Anfrage geht Folgendes hinaus:</p>
 
       <ul>
-        <li>das <strong>Foto</strong>, vorher auf maximal <strong>1024 Pixel</strong> Kantenlänge verkleinert und als JPEG komprimiert (Qualität 0,8; bei Vergleichsbildern 0,5);</li>
-        <li>im Text-Prompt zusätzlich: <strong>Altersspanne, Hauttyp, Saison, deine Hautprobleme und -ziele, deine aktuellen Produkte und deine Routine, deine Allergien samt Details und Angaben zu Schwangerschaft und Stillzeit, außerdem bei Mehrwinkel-Scans deine durchschnittliche Selbsteinschätzung samt Verlauf.</strong> Angaben zu Hautkrebs-Historie und chronischen Hauterkrankungen bleiben auf dem Gerät und werden nicht an die KI übermittelt.</li>
+        <li>das <strong>Foto bzw. die Fotos</strong>, vorher auf maximal <strong>1024 Pixel</strong> Kantenlänge verkleinert und als JPEG komprimiert;</li>
+        <li>die für die Eignung von Produkten und Routinen <strong>relevanten Profilangaben</strong>: Altersspanne, Hauttyp, Hautprobleme und -ziele sowie — <strong>nur, wenn du sie angegeben hast</strong> — Angaben zu Schwangerschaft/Stillzeit und zu Allergien (samt Details);</li>
+        <li>die <strong>Namen</strong> der Produkte in deiner Routine bzw. der verwendeten Produkte;</li>
+        <li>eine <strong>Zusammenfassung deines Verlaufs</strong> (z. B. Zahl der Check-ins, durchschnittliche Selbstbewertung und Trend).</li>
       </ul>
 
-      <p>Das heißt im Klartext: <strong>Gesundheitsdaten nach Art. 9 DSGVO werden an ein US-Unternehmen und an Modell-Hosts übermittelt</strong>, bei jedem einzelnen Scan. Nicht übermittelt werden deine freien Notizen aus dem Check-in, deine Stimmungseinträge, deine Streak-Daten und dein übriger Fotoverlauf; die verlassen das Gerät nicht. Zum Vergleich kann das Foto deines vorherigen Check-ins mitgesendet werden.</p>
+      <p>Das heißt im Klartext: <strong>Gesundheitsdaten nach Art. 9 DSGVO verlassen bei einer KI-Analyse dein Gerät und werden an US-Unternehmen übermittelt.</strong></p>
 
-      <p>Technisch nutzt die App für diese Verbindung eine <code>URLSessionConfiguration.ephemeral</code> (keine persistenten Caches, Cookies oder Credentials auf dem Gerät) und erzwingt TLS ab Version 1.2.</p>
+      <p><strong>Nie an die KI gesendet</strong> werden deine Antworten zu <strong>Hautkrebs-Historie</strong> und zu <strong>chronischen Erkrankungen</strong>. Sie bleiben ausschließlich auf deinem Gerät. Deine gespeicherten Fotos aus dem Verlauf, Stimmungseinträge und freien Notizen sind kein Bestandteil dieser Anfragen.</p>
 
-      <h4>Was bei uns im Vermittlungsdienst gespeichert wird</h4>
+      <h4>Was unser Vermittlungsdienst speichert — und was nicht</h4>
 
       <ul>
-        <li><strong>Gerätebestätigung (App Attest):</strong> Schlüsselkennung, öffentlicher Schlüssel und Zähler. Diese Angaben sind pseudonym. Wir löschen sie nach 180 Tagen ohne Nutzung.</li>
-        <li><strong>Kontingentzähler:</strong> bis zu einem Tag.</li>
-        <li><strong>IP-Adresse:</strong> nur als gesalzener Hash zur Ratenbegrenzung. Die Infrastruktur von Cloudflare sieht die IP-Adresse, wie bei jeder Verbindung, im Klartext.</li>
-        <li><strong>Keine Inhalte:</strong> Fotos und Texte speichern wir nicht. Die Protokollierung (Observability) des Workers ist abgeschaltet.</li>
+        <li><strong>Nicht gespeichert und nicht protokolliert:</strong> Bilder, Prompts und Antworten werden vom Dienst weder gespeichert noch protokolliert (die Beobachtungs- und Log-Funktionen des Dienstes sind abgeschaltet).</li>
+        <li><strong>Pseudonyme Geräte-Kennung:</strong> Pro Installation speichert der Dienst die Kennung des App-Attest-Schlüssels, den zugehörigen öffentlichen Schlüssel und einen Zähler. Das ist ein pseudonymer Geräte-Identifier, mit dem wir dich nicht namentlich identifizieren können. Der Eintrag wird <strong>nach 180 Tagen ohne Nutzung automatisch gelöscht</strong>.</li>
+        <li><strong>Kontingentzähler</strong> (Missbrauchs- und Kostenbegrenzung) verfallen spätestens innerhalb eines Tages.</li>
+        <li><strong>IP-Adressen</strong> speichern wir nicht im Klartext. Für die Begrenzung der Anfragehäufigkeit verwenden wir nur einen mit einem täglich wechselnden Salt gebildeten Hash-Wert (HMAC). Technisch bedingt sieht Cloudflare als Infrastrukturanbieter die IP-Adresse bei jeder Verbindung.</li>
       </ul>
 
-      <h4>Was OpenRouter und die Modell-Hosts mit den Daten tun dürfen</h4>
+      <h4>Was OpenRouter und die Modell-Anbieter tun</h4>
 
-      <p>Mit <code>data_collection=deny</code> verlangen wir, dass Endpunkte die Inhalte nicht für eigene Zwecke sammeln, und mit <code>zdr</code>, dass sie keine Inhalte aufbewahren. Nach der Definition in OpenRouters veröffentlichten Auftragsverarbeitungsbedingungen bedeutet Zero Data Retention: API-Inhalte werden nach Abschluss der Anfrage nicht dauerhaft gespeichert, abgesehen von kurzer Verarbeitung im Arbeitsspeicher und gesetzlich vorgeschriebenen Aufzeichnungen. Dieselben Bedingungen sagen auch, dass die ZDR-Einstufung <strong>keine Garantie von OpenRouter</strong> dafür ist, dass der jeweilige Host das einhält. Wir können dir deshalb nicht zusichern, dass bei den Hosts nichts gespeichert wird.</p>
+      <p>Wir weisen OpenRouter bei jeder Anfrage an, nur Anbieter zu verwenden, die Eingaben <strong>nicht speichern und nicht zum Training nutzen</strong> (Provider-Routing mit <code>data_collection=deny</code> und Zero-Data-Retention, <code>zdr</code>). Findet sich kein Anbieter, der diese Bedingung erfüllt, <strong>bricht der Dienst ab</strong> (er „schlägt geschlossen fehl“), statt die Anfrage an einen anderen Anbieter zu schicken.</p>
 
       <div class="note">
-        <p><strong>Was wir noch nicht bestätigt haben.</strong> Folgende Punkte sind offen, und wir behaupten sie deshalb nicht:</p>
-        <ul>
-          <li>Ob wir die Auftragsverarbeitungsbedingungen von OpenRouter abgeschlossen haben: <span class="ph">[Status Auftragsverarbeitungsvertrag mit OpenRouter nach Art. 28 DSGVO]</span>. In diesen Bedingungen ist der Kunde Verantwortlicher und OpenRouter Auftragsverarbeiter.</li>
-          <li>Ob OpenRouter unter dem EU-U.S. Data Privacy Framework zertifiziert ist und wie die Firma genau firmiert und wo sie ihre Anschrift hat: <span class="ph">[DPF-Zertifizierungsstatus und Anschrift von OpenRouter, Inc.]</span>.</li>
-          <li>Wir haben die Auswahl per Vorgabe auf Anbieter mit Sitz in den USA beschränkt: <strong>Google (Vertex AI), DigitalOcean und Parasail</strong> für Llama 4 Maverick, <strong>Google (Vertex AI), DeepInfra, Cloudflare, CoreWeave und Parasail</strong> für Gemma 4 und <strong>DeepInfra</strong> für Qwen3-VL. In welchen Ländern diese Anbieter die Daten tatsächlich verarbeiten, haben wir noch nicht bestätigt: <span class="ph">[Verarbeitungsländer der Hosts]</span>.</li>
-          <li>Ob für Cloudflare ein Auftragsverarbeitungsvertrag besteht und welchen DPF-Status Cloudflare für den Worker hat: <span class="ph">[Status Cloudflare-DPA und DPF-Zertifizierung]</span>.</li>
-        </ul>
+        <p><strong>Was wir nicht zusichern können.</strong> Die Modelle werden von Dritten betrieben, die OpenRouter auswählt; diese Unterauftragnehmer kennen wir im Einzelfall nicht im Voraus. Wir haben auf deren Verarbeitung keinen unmittelbaren Einfluss und sind darauf angewiesen, dass sie ihre Zusagen einhalten. Wir sagen nicht zu, dass bei Dritten „nichts gespeichert“ wird; wir sagen zu, dass wir nur Anbieter anfragen, die Nichtspeicherung und Nichtnutzung zum Training zusagen. Zur eigenen Protokollierung von OpenRouter: <span class="ph">[[ Angaben von OpenRouter zur eigenen Protokollierung von Metadaten prüfen und hier ergänzen ]]</span>.</p>
       </div>
 
-      <p><strong>Datenstandort.</strong> Wir können dir keine EU-Datenresidenz zusichern. OpenRouter wählt den Host aus unserer Liste, und wir haben die Länder, in denen die Hosts verarbeiten, noch nicht bestätigt.</p>
+      <p>Technisch nutzt die App eine <code>URLSessionConfiguration.ephemeral</code> (keine persistenten Caches, Cookies oder Credentials auf dem Gerät) und erzwingt TLS ab Version 1.2.</p>
+
+      <h4>KI-Ergebnisse können falsch sein</h4>
+
+      <p>Die Analysen sind <strong>KI-Schätzungen</strong> und können ungenau sein. Insbesondere Lichtverhältnisse, Bildqualität und <strong>Hautton</strong> können die Ergebnisse verfälschen; Modelle können für bestimmte Hauttöne schlechter funktionieren. Verlass dich bei Sorgen nicht auf die App, sondern suche ärztlichen Rat.</p>
 
       <h4>Auf welcher Rechtsgrundlage wir das tun</h4>
 
-      <p>Wir trennen sauber zwischen zwei Ebenen, weil der EuGH das ausdrücklich verlangt: bei besonderen Kategorien braucht es <strong>zusätzlich</strong> zur Rechtsgrundlage aus Art. 6 eine Ausnahme aus Art. 9 (vgl. C-252/21, Rn. 70, 76, 89, 90).</p>
+      <p>Bei besonderen Kategorien braucht es <strong>zusätzlich</strong> zur Rechtsgrundlage aus Art. 6 eine Ausnahme aus Art. 9.</p>
 
       <ul>
-        <li><strong>Betrieb der App</strong>, Bereitstellung von Verlauf, Routine, Streaks, Widgets, Abo-Verwaltung: <span class="lawtag">Art. 6 Abs. 1 lit. b DSGVO</span> (Erfüllung des Nutzungsvertrags). Der EuGH legt „erforderlich“ dabei eng aus: Die Verarbeitung muss „<em>objectively indispensable for a purpose that is integral to the contractual obligation</em>“ sein, und dass sie „<em>may be referred to in the contract or may be merely useful</em>“, genügt ausdrücklich <strong>nicht</strong> (C-252/21, Tenor Nr. 4 und Rn. 99).</li>
-        <li><strong>Hautfotos und Gesundheitsangaben, insbesondere deren Übermittlung an die Empfänger der KI-Analyse</strong>: <span class="lawtag">Art. 9 Abs. 2 lit. a DSGVO</span>, deine <strong>ausdrückliche Einwilligung</strong>, in Verbindung mit <span class="lawtag">Art. 6 Abs. 1 lit. a DSGVO</span>. Ohne diese Einwilligung findet keine KI-Analyse statt.</li>
+        <li><strong>Betrieb der App</strong> — Verlauf, Routine, Streaks, Widgets, Abo-Verwaltung: <span class="lawtag">Art. 6 Abs. 1 lit. b DSGVO</span> (Erfüllung des Nutzungsvertrags).</li>
+        <li><strong>Pseudonyme Geräte-Kennung, Kontingent- und Missbrauchsschutz</strong> im Vermittlungsdienst: <span class="lawtag">Art. 6 Abs. 1 lit. b DSGVO</span> (Vertragserfüllung) bzw. <span class="lawtag">Art. 6 Abs. 1 lit. f DSGVO</span> (berechtigtes Interesse an Sicherheit und Missbrauchsabwehr).</li>
+        <li><strong>Hautfotos und Gesundheitsangaben, insbesondere deren Übermittlung für die KI-Analyse</strong>: <span class="lawtag">Art. 9 Abs. 2 lit. a DSGVO</span> in Verbindung mit <span class="lawtag">Art. 6 Abs. 1 lit. a DSGVO</span> — deine <strong>ausdrückliche Einwilligung</strong>.</li>
         <li><strong>Lokale Benachrichtigungen</strong>: deine Einwilligung über den iOS-Systemdialog, jederzeit in den iOS-Einstellungen widerrufbar.</li>
       </ul>
 
-      <p>Damit die Einwilligung nach Art. 9 Abs. 2 lit. a wirksam ist, muss sie <strong>ausdrücklich</strong> erklärt werden, eine bloß konkludente Handlung oder ein „Weiter“-Tap genügt nicht. Sie muss <strong>informiert</strong> sein: du musst wissen, dass Fotos <em>und</em> Gesundheitsangaben über unseren Vermittlungsdienst an OpenRouter in die USA und von dort an Modell-Hosts gehen, und welche Zusagen wir zu diesen Empfängern belegen können und welche noch offen sind. Sie muss <strong>granular</strong> sein: Der EuGH hält fest, dass Einwilligung als nicht freiwillig gilt, „<em>if it does not allow separate consent to be given to different personal data processing operations despite it being appropriate in the individual case</em>“ (C-252/21, Rn. 144 unter Verweis auf ErwGr. 43 DSGVO). Und du kannst sie <strong>jederzeit widerrufen</strong>, so einfach wie du sie erteilt hast <span class="lawtag">Art. 7 Abs. 3 DSGVO</span>; der Widerruf wirkt für die Zukunft und lässt die Rechtmäßigkeit der bis dahin erfolgten Verarbeitung unberührt. Die Einwilligung ist <strong>versioniert</strong>: Mit den neuen Verarbeitern (Einwilligungsversion 3) fragt die App alle Nutzerinnen und Nutzer erneut. Die Beweislast für eine wirksame Einwilligung liegt bei uns <span class="lawtag">Art. 7 Abs. 1 DSGVO</span> (so ausdrücklich auch C-252/21, Tenor Nr. 8: „<em>which it is for that operator to prove</em>“).</p>
+      <p>Die Einwilligung für Fotos und Gesundheitsdaten holt die App <strong>gesondert und ausdrücklich</strong> in der App ein — nicht als Teil allgemeiner Bedingungen und nicht durch ein bloßes „Weiter“. Sie ist <strong>versioniert</strong>: ändert sich die Verarbeitung, fragen wir erneut. Du kannst sie <strong>jederzeit widerrufen</strong>, so einfach wie du sie erteilt hast, in der App unter <em>Einstellungen → Datenschutz</em> <span class="lawtag">Art. 7 Abs. 3 DSGVO</span>. Der Widerruf wirkt für die Zukunft und lässt die Rechtmäßigkeit der bisherigen Verarbeitung unberührt. Die Beweislast für eine wirksame Einwilligung liegt bei uns <span class="lawtag">Art. 7 Abs. 1 DSGVO</span>.</p>
 
-      <h4>Harte Paywall, Einwilligung und Koppelungsverbot</h4>
+      <h4>Einwilligung und Freiwilligkeit</h4>
 
-      <p>Skinmetrics ist nach dem Onboarding <strong>ohne Abo nicht nutzbar</strong> („harte Paywall“). Und die KI-Analyse, also genau die Verarbeitung, für die wir deine Art.-9-Einwilligung brauchen, ist der Kernzweck der App. Das wirft die Frage auf, ob eine Einwilligung unter diesen Umständen überhaupt <strong>freiwillig</strong> ist <span class="lawtag">Art. 4 Z 11, Art. 7 Abs. 4 DSGVO</span>.</p>
-
-      <p>Ehrliche Einordnung: Der EuGH stellt darauf ab, ob die betroffene Person „<em>has no genuine or free choice or is unable to refuse or withdraw consent without detriment</em>“ (C-252/21, Rn. 143). Art. 7 Abs. 4 DSGVO und die tragende Passage in Rn. 150 des Meta-Urteils knüpfen aber beide ausdrücklich an Verarbeitungen an, die „<em>not necessary for the performance of the contract</em>“ sind. Genau darin liegt der Unterschied zu den bekannten „Pay-or-Okay“-Fällen: Dort soll die Einwilligung in <em>zweckfremde</em> Werbeverarbeitung erkauft werden. Bei Skinmetrics ist die Übermittlung des Fotos an das KI-Modell <strong>die vom Nutzer bestellte Leistung selbst</strong>, ohne sie gibt es kein Analyseergebnis. Auch die <a href="https://www.edpb.europa.eu/news/news/2024/edpb-consent-or-pay-models-should-offer-real-choice_en" target="_blank" rel="noopener">EDSA-Stellungnahme 08/2024 zu „Consent or Pay“</a> hilft hier nur begrenzt weiter: Sie ist ausdrücklich auf <strong>große Online-Plattformen</strong> zugeschnitten (so auch das EuG in T-319/24, Rn. 2–3, mit Verweis auf die VLOP-/Gatekeeper-Definitionen aus DSA und DMA) und trifft zur leistungsnotwendigen Verarbeitung <strong>weder eine erlaubende noch eine verbietende Aussage</strong>. Eine einzelne iOS-App liegt außerhalb ihres Anwendungsbereichs.</p>
-
-      <div class="note">
-        <p><strong>Das Restrisiko bleibt trotzdem, und wir benennen es.</strong> Drei Punkte sind unbequem: (1) Es gibt derzeit <strong>keine Variante der KI-Analyse ohne Übermittlung an OpenRouter und die Modell-Hosts</strong>, wer der Übermittlung in die USA nicht zustimmt, kann die App nicht sinnvoll nutzen. (2) Die Einwilligung ist mit einer <strong>kostenpflichtigen Pflichtleistung</strong> verbunden, und Apples eigene Regel 5.1.1(ii) lautet: „<em>Paid functionality must not be dependent on or require a user to grant access to this data.</em>“ (3) Die Beweislast für die Freiwilligkeit liegt bei uns. Die App holt dazu eine <strong>ausdrückliche, nicht vorangekreuzte Einwilligung</strong> ein, die ausdrücklich die Übermittlung an OpenRouter und die Modell-Hosts in die USA und gegebenenfalls weitere Länder nennt und die du in den Einstellungen widerrufen kannst. Ob wir sie künftig in zwei getrennte Schritte aufteilen, prüfen wir. Ohne diese Einwilligung läuft keine KI-Analyse, die nicht-KI-gestützten Teile der App (Verlauf, Routine, Streaks) funktionieren weiter. Das ist wichtig für das Freiwilligkeitsargument.</p>
-      </div>
+      <p>Die Einwilligung ist für die KI-Funktionen <strong>erforderlich</strong>: Ohne sie ist die KI-Analyse der App nicht verfügbar, denn die Analyse kann ohne Übermittlung des Fotos nicht erbracht werden. Die Einwilligung ist eigenständig und nicht an die Zustimmung zu anderen Verarbeitungen gekoppelt; es gibt keine Werbe- oder Tracking-Verarbeitung, in die du zusätzlich einwilligen müsstest. Zur Frage, welche Teile der App ohne Einwilligung nutzbar bleiben und wie das mit dem Abo-Modell zusammenspielt: <span class="ph">[[ Umfang der Nutzbarkeit ohne Einwilligung festlegen; Freiwilligkeit (Art. 7 Abs. 4 DSGVO, App Review Guideline 5.1.1(ii)) durch Rechtsberatung bestätigen lassen ]]</span>.</p>
 
       <h4>Übermittlung in die USA</h4>
 
-      <p>OpenRouter ist ein US-Unternehmen, und die Modell-Hosts können außerhalb des EWR sitzen. Jede Analyse ist damit eine <strong>Drittlandübermittlung</strong> nach Kapitel V DSGVO. Dafür gibt es eine klare Prüfreihenfolge: zuerst Angemessenheitsbeschluss <span class="lawtag">Art. 45 DSGVO</span>, dann geeignete Garantien <span class="lawtag">Art. 46 DSGVO</span>, und <strong>erst ganz zuletzt</strong> die Ausnahmen des <span class="lawtag">Art. 49 DSGVO</span>.</p>
+      <p>OpenRouter, Cloudflare und die von OpenRouter ausgewählten Modell-Anbieter können ihren Sitz oder ihre Server in den Vereinigten Staaten haben. Jede Analyse kann damit eine <strong>Drittlandübermittlung</strong> nach Kapitel V DSGVO sein. Die Prüfreihenfolge: zuerst Angemessenheitsbeschluss <span class="lawtag">Art. 45 DSGVO</span> (EU-U.S. Data Privacy Framework, soweit der Empfänger zertifiziert ist), dann geeignete Garantien <span class="lawtag">Art. 46 DSGVO</span> (Standardvertragsklauseln), <strong>erst zuletzt</strong> die Ausnahmen des <span class="lawtag">Art. 49 DSGVO</span>.</p>
 
       <ul>
-        <li><strong>Art. 45, EU-U.S. Data Privacy Framework.</strong> Die Europäische Kommission hat mit dem <a href="https://eur-lex.europa.eu/eli/dec_impl/2023/1795/oj" target="_blank" rel="noopener">Durchführungsbeschluss (EU) 2023/1795</a> ein angemessenes Schutzniveau für DPF-zertifizierte US-Empfänger festgestellt. <strong>Ob OpenRouter, Inc. zertifiziert ist, haben wir noch nicht bestätigt</strong>: <span class="ph">[DPF-Zertifizierungsstatus von OpenRouter, Inc.]</span>. Die offizielle Teilnehmerliste steht auf <a href="https://www.dataprivacyframework.gov/" target="_blank" rel="noopener">dataprivacyframework.gov</a>.</li>
-        <li><strong>Art. 46, Standardvertragsklauseln.</strong> Ob mit OpenRouter oder anderen Empfängern Standardvertragsklauseln nach dem <a href="https://eur-lex.europa.eu/eli/dec_impl/2021/914/oj" target="_blank" rel="noopener">Durchführungsbeschluss (EU) 2021/914</a> vereinbart sind und ob wir eine Folgenabschätzung für die Übermittlung (Transfer Impact Assessment) durchgeführt haben, ist <strong>noch nicht bestätigt</strong>: <span class="ph">[Status Standardvertragsklauseln und Transfer Impact Assessment]</span>.</li>
-        <li><strong>Modell-Hosts.</strong> Für die Verarbeitungsländer der Hosts fehlt uns die Bestätigung, siehe Kapitel <a href="#empfaenger">Empfänger und Übermittlung in Drittländer</a>.</li>
+        <li><strong>Art. 45 — Data Privacy Framework.</strong> Zertifizierungsstatus der Empfänger: OpenRouter <span class="ph">[[ DPF-Status verifizieren ]]</span>, Cloudflare <span class="ph">[[ DPF-Status verifizieren ]]</span>, Modell-Anbieter <span class="ph">[[ DPF-Status je Anbieter verifizieren ]]</span>.</li>
+        <li><strong>Art. 46 — Standardvertragsklauseln und Auftragsverarbeitungsverträge.</strong> Wo kein Angemessenheitsbeschluss greift, stützen wir uns auf Standardvertragsklauseln nach dem <a href="https://eur-lex.europa.eu/eli/dec_impl/2021/914/oj" target="_blank" rel="noopener">Durchführungsbeschluss (EU) 2021/914</a>. Auftragsverarbeitungsverträge mit Cloudflare und OpenRouter bestehen: <span class="ph">[[ Status bestätigen, erst nach Abschluss veröffentlichen ]]</span>.</li>
       </ul>
 
-      <p>Das sagen wir ohne Umschweife: Solange diese Punkte nicht belegt sind, können wir dir nicht zusichern, dass für jede Übermittlung ein Instrument nach Art. 45 oder 46 DSGVO besteht.</p>
-
       <div class="note">
-        <p><strong>Warum wir uns <em>nicht</em> auf Art. 49 Abs. 1 lit. a stützen.</strong> Man liest oft, die ausdrückliche Einwilligung nach <span class="lawtag">Art. 49 Abs. 1 lit. a DSGVO</span> trage jede Drittlandübermittlung. Für Skinmetrics trifft das nicht zu. Der Europäische Datenschutzausschuss legt in den <a href="https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-22018-derogations-article-49-under-regulation_de" target="_blank" rel="noopener">Leitlinien 2/2018 zu den Ausnahmen nach Art. 49</a> fest, dass die Ausnahmen <strong>eng auszulegen sind, Ausnahmecharakter haben und Übermittlungen nur „gelegentlich und nicht wiederholt“</strong> erfolgen dürfen, sie dürfen nicht zur Regel werden und nicht der Normalfall des Datenflusses sein. Bei Skinmetrics geht aber <strong>jeder einzelne Scan</strong> an OpenRouter und die Modell-Hosts: systematisch, wiederholt, für alle Nutzer, dauerhaft. Das ist genau der Fall, den die Leitlinien ausschließen. Die tragfähige Grundlage ist deshalb <strong>Art. 45 (DPF) beziehungsweise Art. 46 (SCC plus Transfer Impact Assessment) mit einem abgeschlossenen Auftragsverarbeitungsvertrag</strong>, nicht Art. 49. Ob diese Voraussetzungen erfüllt sind, ist, wie oben beschrieben, noch nicht bestätigt. Deine ausdrückliche Einwilligung brauchen wir davon unabhängig für die Verarbeitung der Gesundheitsdaten als solche <span class="lawtag">Art. 9 Abs. 2 lit. a DSGVO</span>.</p>
+        <p><strong>Warum wir uns nicht auf Art. 49 Abs. 1 lit. a stützen.</strong> Die Ausnahmen des Art. 49 sind nach den <a href="https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-22018-derogations-article-49-under-regulation_de" target="_blank" rel="noopener">EDSA-Leitlinien 2/2018</a> eng auszulegen und für Übermittlungen gedacht, die „gelegentlich und nicht wiederholt“ erfolgen. Bei Skinmetrics geht jede KI-Analyse über diesen Weg. Tragfähige Grundlagen sind deshalb Art. 45 bzw. Art. 46. Deine ausdrückliche Einwilligung brauchen wir unabhängig davon für die Verarbeitung der Gesundheitsdaten als solche <span class="lawtag">Art. 9 Abs. 2 lit. a DSGVO</span>.</p>
       </div>
 
-      <p><strong>Und die ehrliche Restunsicherheit zum DPF.</strong> Der Angemessenheitsbeschluss ist zum Stand <strong>25.07.2026 in Kraft</strong>. Das Gericht der Europäischen Union hat ihn am <strong>03.09.2025</strong> in der Rechtssache <strong>T-553/23 (Latombe/Kommission)</strong> bestätigt und die Nichtigkeitsklage abgewiesen; gegen dieses Urteil ist seit <strong>31.10.2025</strong> ein Rechtsmittel beim EuGH anhängig (<strong>C-703/25 P</strong>), über das bis zum Abrufdatum nicht entschieden ist. Hinzu kommt: Das <strong>PCLOB</strong>, eine der Aufsichtsinstitutionen, auf die sich der Beschluss stützt, ist seit Januar 2025 <strong>ohne Beschlussfähigkeit</strong>, und der US Supreme Court hat am <strong>29.06.2026</strong> in <strong>Trump v. Slaughter</strong> entschieden, dass der gesetzliche Kündigungsschutz für FTC-Commissioners verfassungswidrig ist, die FTC ist aber die Behörde, die die DPF-Grundsätze durchsetzen soll. Ob das den Angemessenheitsbeschluss zu Fall bringt, ist offen; er bleibt „<em>formally in force unless and until it is repealed by the Commission or annulled by the Union courts</em>“. <strong>Wir sagen dir das, weil es dein Risiko mitbestimmt: Es ist nicht auszuschließen, dass die Grundlage für US-Transfers kurzfristig wegfällt.</strong> Deshalb ist die vertragliche Absicherung über SCC plus DPA für uns kein optionales Extra, sondern die Rückfallebene.</p>
+      <p>Zum aktuellen Stand und zur Restunsicherheit beim EU-U.S. Data Privacy Framework siehe Abschnitt <a href="#empfaenger">Empfänger und Übermittlung in Drittländer</a>.</p>
+
+      <h4>Nur für Erwachsene</h4>
+
+      <p>Skinmetrics ist ausschließlich für Personen ab <strong>18 Jahren</strong> bestimmt. Das Alter erklärst du im Onboarding selbst; wir prüfen es nicht weiter. Wir verarbeiten nicht wissentlich Daten von Minderjährigen. Das digitale Einwilligungsalter in Österreich liegt bei 14 Jahren; wir verlangen bewusst 18. Erfahren wir, dass uns Daten einer minderjährigen Person erreicht haben, löschen wir sie.</p>
 
       <h4>Skinmetrics ist kein Medizinprodukt</h4>
 
       <p>In der App und hier gilt derselbe Satz:</p>
 
-      <p><em>„Diese KI-Analyse dient nur zur Information und ist keine medizinische Diagnose. Bei medizinischen Fragen wende dich an eine Dermatologin/einen Dermatologen oder eine Ärztin/einen Arzt. Skinmetrics ist kein Medizinprodukt.“</em>, und: <em>„Skinmetrics ist kein Medizinprodukt und ersetzt keine ärztliche Beratung, Diagnose oder Behandlung.“</em></p>
+      <p><em>„Diese KI-Analyse dient nur zur Information und ist keine medizinische Diagnose. Bei medizinischen Fragen wende dich an eine Dermatologin/einen Dermatologen oder eine Ärztin/einen Arzt. Skinmetrics ist kein Medizinprodukt.“</em> — und: <em>„Skinmetrics ist kein Medizinprodukt und ersetzt keine ärztliche Beratung, Diagnose oder Behandlung.“</em></p>
 
-      <p>Das ist keine Floskel, sondern eine bewusste rechtliche Abgrenzung. Nach <span class="lawtag">Art. 2 Z 1 MDR (EU) 2017/745</span> ist <strong>Software</strong> ein Medizinprodukt, wenn sie vom Hersteller für einen medizinischen Zweck bestimmt ist, genannt sind unter anderem <strong>Diagnose, Verhütung, Überwachung, Vorhersage, Prognose, Behandlung oder Linderung von Krankheiten</strong>. Erwägungsgrund 19 MDR stellt im Gegenzug klar, dass <strong>Software für Zwecke in den Bereichen Lebensstil und Wohlbefinden kein Medizinprodukt</strong> ist. Entscheidend ist also die <strong>Zweckbestimmung</strong>, und die bestimmt sich nach <span class="lawtag">Art. 2 Z 12 MDR</span> ausdrücklich auch nach dem <strong>„Werbe- oder Verkaufsmaterial bzw. den Werbe- oder Verkaufsangaben“</strong>.</p>
+      <p>Das ist eine bewusste rechtliche Abgrenzung. Nach <span class="lawtag">Art. 2 Z 1 MDR (EU) 2017/745</span> ist Software ein Medizinprodukt, wenn sie vom Hersteller für einen medizinischen Zweck bestimmt ist (etwa Diagnose, Verhütung, Überwachung, Vorhersage, Prognose, Behandlung oder Linderung von Krankheiten). Software für Zwecke in den Bereichen Lebensstil und Wohlbefinden ist nach Erwägungsgrund 19 MDR kein Medizinprodukt. Entscheidend ist die <strong>Zweckbestimmung</strong>, die sich nach <span class="lawtag">Art. 2 Z 12 MDR</span> auch nach Werbe- und Verkaufsangaben richtet.</p>
 
-      <p>Technisch hilft uns die Abgrenzung nicht. Nach der Leitlinie <a href="https://health.ec.europa.eu/latest-updates/update-mdcg-2019-11-rev1-qualification-and-classification-software-regulation-eu-2017745-and-2025-06-17_en" target="_blank" rel="noopener">MDCG 2019-11 Rev. 1</a> (17.06.2025) ist Software dann kein Medizinprodukt, wenn sie über „<em>storage, archival, communication, simple search, lossless compression</em>“ nicht hinausgeht und nicht dem Nutzen eines individuellen Patienten dient. Beides trifft auf Skinmetrics <strong>nicht</strong> zu: Die App analysiert ein Bild und liefert ein Ergebnis für genau eine Person. <strong>Was Skinmetrics aus der MDR heraushält, ist ausschließlich die Zweckbestimmung.</strong></p>
-
-      <p>Deshalb gilt für uns verbindlich, in der App wie in der Werbung: Skinmetrics beschreibt das <strong>kosmetische Erscheinungsbild</strong> der Haut, Textur, Poren, Trockenheit, Rötungsempfinden, Verlauf, und schlägt <strong>Pflegeprodukte und Routinen</strong> vor. Skinmetrics <strong>nennt keine Krankheiten und keinen Krankheitsverdacht</strong>, gibt <strong>keine Risiko-, Vorhersage- oder Prognoseaussagen</strong> zu Erkrankungen ab, betreibt <strong>kein Screening und keine Früherkennung</strong>, <strong>überwacht keine Läsionen mit Auffälligkeitswarnung</strong> und spricht keine krankheitsbezogenen Triage-Empfehlungen aus.</p>
-
-      <div class="note">
-        <p><strong>Was diese Abgrenzung sofort zerstören würde.</strong> Ein einziger Marketingsatz wie „erkennt Hautkrebs“, „Melanom-Check“, „Hautkrebsvorsorge“, „dermatologisch validiert“ oder „bewertet dein Muttermal“, im App-Store-Text, auf der Website, in einem Screenshot oder in einer Push-Nachricht, macht Skinmetrics nach <span class="lawtag">Art. 2 Z 12 MDR</span> zum Medizinprodukt. Nach <strong>Anhang VIII Regel 11 MDR</strong> wäre das mindestens <strong>Klasse IIa</strong> („Software, die dazu bestimmt ist, Informationen zu liefern, die zu Entscheidungen für diagnostische oder therapeutische Zwecke herangezogen werden“), mit ernsthaftem Argument für IIb, und damit zwingend mit <strong>Benannter Stelle, CE-Kennzeichnung, ISO 13485, klinischer Bewertung, EUDAMED, UDI und PRRC</strong>. Der Marktvergleich belegt das: SkinVision, SkinScreener und dermanostic sind allesamt als <strong>Medizinprodukte der Klasse IIa nach MDR zertifiziert</strong>. Wer dieselbe Aussage ohne CE-Kennzeichnung trifft, ist nicht in einer Grauzone, sondern im Konflikt mit dem Marktzugangsverbot, mit Verwaltungsstrafe nach dem österreichischen MPG 2021 und lauterkeitsrechtlicher Haftung nach <span class="lawtag">§§ 1, 2 UWG</span>. <strong>Die Zweckbestimmung muss über App, App-Store-Eintrag, Website, Onboarding, Ergebnisscreen und Push-Nachrichten hinweg identisch sein.</strong></p>
-      </div>
+      <p>Deshalb gilt für uns: Skinmetrics beschreibt das <strong>kosmetische Erscheinungsbild</strong> der Haut und schlägt <strong>Pflegeprodukte und Routinen</strong> vor. Skinmetrics stellt <strong>keine Diagnose</strong>, <strong>erkennt keine Krankheiten</strong>, nennt keinen Krankheitsverdacht, gibt keine Risiko-, Vorhersage- oder Prognoseaussagen zu Erkrankungen ab und betreibt kein Screening. <span class="ph">[[ Wortlaut der Ergebnisanzeige (Verdict-Texte) durch Rechtsberatung anhand MDCG 2019-11 Rev. 1 prüfen lassen ]]</span></p>
 
       <h4>Was Apple zusätzlich verlangt</h4>
 
-      <p>Unabhängig von der DSGVO gelten Apples <a href="https://developer.apple.com/app-store/review/guidelines/" target="_blank" rel="noopener">App Review Guidelines</a> (abgerufen 25.07.2026):</p>
+      <p>Unabhängig von der DSGVO gelten Apples <a href="https://developer.apple.com/app-store/review/guidelines/" target="_blank" rel="noopener">App Review Guidelines</a>. Für diese Erklärung relevant sind insbesondere:</p>
 
       <ul>
-        <li><strong>1.4.1 (Physical Harm).</strong> Medizin-Apps, die ungenaue Daten liefern oder zur Diagnose genutzt werden könnten, prüft Apple strenger. Genauigkeitsbehauptungen müssen mit Daten und Methodik belegt werden, „<em>if the level of accuracy or methodology cannot be validated, we will reject your app</em>“, und Apps, die medizinische Messungen „<em>using only the sensors on the device</em>“ behaupten, sind nicht zugelassen. Apps sollen Nutzer daran erinnern, zusätzlich ärztlichen Rat einzuholen. <strong>Für uns heißt das: keine Genauigkeitsversprechen und ein sichtbarer Arzt-Hinweis.</strong></li>
-        <li><strong>5.1.1(i) (Privacy Policies).</strong> Die Datenschutzerklärung muss klar benennen, <em>welche</em> Daten erhoben werden, <em>wie</em> und wofür, muss bestätigen, dass Dritte, mit denen Daten geteilt werden, ein gleichwertiges Schutzniveau bieten, und muss Aufbewahrung, Löschung sowie <strong>Widerruf der Einwilligung</strong> erklären. Genau das leistet dieser Abschnitt.</li>
-        <li><strong>5.1.1(ii) und (iii).</strong> Einwilligung ist erforderlich, der Widerruf muss leicht zugänglich sein, und Datenminimierung gilt: Skinmetrics verlangt im Release <strong>keinen Zugriff auf deine Fotomediathek</strong>, sondern nur die Kamera.</li>
-        <li><strong>5.1.2(i) und (vi).</strong> Weitergabe personenbezogener Daten an Dritte, Apple nennt ausdrücklich <em>third-party AI</em>, ist offenzulegen und einwilligungspflichtig. Und: Daten aus Kamera- und Foto-APIs „<em>may not be used for marketing, advertising or use-based data mining, including by third parties</em>“.</li>
-        <li><strong>5.1.3(i) und (ii) (Health and Health Research).</strong> Gesundheits- und Fitnessdaten <strong>dürfen nicht für Werbung, Marketing oder nutzungsbasiertes Data Mining verwendet werden</strong>. Außerdem: „<em>may not store personal health information in iCloud</em>“, dieser Punkt ist wegen des iPhone-Backups oben von uns noch abschließend zu bewerten.</li>
+        <li><strong>1.4.1</strong> (Physical Harm): Medizinnahe Apps werden strenger geprüft; wir geben keine Genauigkeitsversprechen ab und weisen auf ärztlichen Rat hin.</li>
+        <li><strong>5.1.1(i)</strong> (Privacy Policies): Die Datenschutzerklärung nennt, welche Daten erhoben werden, wie und wofür, an wen sie gehen, sowie Aufbewahrung, Löschung und Widerruf der Einwilligung.</li>
+        <li><strong>5.1.1(ii) und (iii)</strong>: Einwilligung, leicht zugänglicher Widerruf und Datenminimierung. Skinmetrics verlangt im Release <strong>keinen Zugriff auf deine Fotomediathek</strong>, sondern nur die Kamera.</li>
+        <li><strong>5.1.2(i)</strong>: Die Weitergabe personenbezogener Daten an Dritte — Apple nennt ausdrücklich Dritt-KI — wird offengelegt und beruht auf deiner Einwilligung.</li>
+        <li><strong>5.1.3</strong> (Health and Health Research): Gesundheitsdaten werden nicht für Werbung, Marketing oder Data Mining verwendet. Die App synchronisiert keine Gesundheitsangaben mit iCloud; dass das iPhone-Backup (je nach deiner Einstellung) App-Daten enthalten kann, siehe oben. <span class="ph">[[ Bewertung von 5.1.3 im Hinblick auf Geräte-Backups durch Berater bestätigen ]]</span></li>
       </ul>
 
       <p>Wir halten das ein: <strong>Es gibt in Skinmetrics keine Werbung, kein Werbe-SDK, kein Tracking und keinen Weiterverkauf von Daten</strong>, und deine Hautdaten werden für nichts anderes als deine Analyse verwendet.</p>
 
-      <h4>Berechtigungen, und was Skinmetrics bewusst <em>nicht</em> tut</h4>
+      <h4>Berechtigungen — und was Skinmetrics bewusst <em>nicht</em> tut</h4>
 
       <ul>
-        <li><strong>Kamera</strong> (<code>NSCameraUsageDescription</code>), für Scans und Check-in-Fotos. Die Gesichtserkennung und Ausrichtungsprüfung läuft <strong>vollständig lokal</strong> über Apples Vision-Framework; dafür verlässt kein Bild das Gerät.</li>
-        <li><strong>Lokale Benachrichtigungen</strong>, Erinnerungen an Routine und Check-in. Sie werden auf dem Gerät erzeugt; es gibt <strong>keine Push-Server und keine Push-Token</strong>.</li>
-        <li><strong>Keine Fotomediathek</strong> im Release (der Zugriff existiert nur in Debug-Builds), <strong>kein Standort</strong>, <strong>kein HealthKit</strong>, <strong>kein App Tracking Transparency</strong>, <strong>kein Mikrofon</strong>, <strong>kein Kontaktzugriff</strong>.</li>
-        <li>Die App nutzt Background App Refresh (<code>fetch</code>) und das URL-Schema <code>dermascan://</code>. Beides überträgt keine Inhalte an uns.</li>
+        <li><strong>Kamera</strong> (<code>NSCameraUsageDescription</code>) — für Scans und Check-in-Fotos. Gesichtserkennung und Ausrichtungsprüfung laufen <strong>lokal</strong> über Apples Vision-Framework; dafür verlässt kein Bild das Gerät.</li>
+        <li><strong>Lokale Benachrichtigungen</strong> — Erinnerungen an Routine und Check-in. Sie werden auf dem Gerät erzeugt; es gibt <strong>keine Push-Server und keine Push-Token</strong>.</li>
+        <li><strong>Keine Fotomediathek</strong> im Release, <strong>kein Standort</strong>, <strong>kein HealthKit</strong>, <strong>kein App Tracking Transparency</strong>, <strong>kein Mikrofon</strong>, <strong>kein Kontaktzugriff</strong>.</li>
+        <li>Die App nutzt Background App Refresh und das URL-Schema <code>skinmetrics://</code>. Beides überträgt keine Inhalte an uns.</li>
       </ul>
 
-      <h4>Produktkatalog und Affiliate-Links</h4>
+      <h4>Produktlinks</h4>
 
-      <p>Der Produktkatalog mit rund 649 Einträgen liegt <strong>vollständig lokal in der App</strong>. Es findet keine Abfrage bei einem Shop statt, solange du nichts antippst. Tippst du auf einen Produktlink, öffnet sich eine Amazon-Suchseite in deinem Browser, <strong>ab diesem Moment ist Amazon eigener Verantwortlicher</strong> <span class="lawtag">Art. 4 Z 7 DSGVO</span> für alles, was dort passiert; es gilt deren Datenschutzerklärung. Wir übermitteln dabei <strong>keine Analysedaten, keine Fotos, keine Skin-Scores und kein Nutzerprofil</strong> an den Shop.</p>
+      <p>Der Produktkatalog liegt <strong>lokal in der App</strong>. Es findet keine Abfrage bei einem Shop statt, solange du nichts antippst. Tippst du auf einen Produktlink, öffnet sich eine Suchseite von <strong>Amazon.de</strong> oder <strong>dm.de</strong> in deinem Browser — <strong>ab diesem Moment ist der jeweilige Anbieter eigener Verantwortlicher</strong> <span class="lawtag">Art. 4 Z 7 DSGVO</span> für alles, was dort passiert; es gilt dessen Datenschutzerklärung. Wir übermitteln dabei <strong>keine Analysedaten, keine Fotos, keine Skin-Scores und kein Nutzerprofil</strong>.</p>
 
-      <p>Eine Affiliate-Integration (Skimlinks/Sovrn) ist im Code vorhanden, aber <strong>derzeit deaktiviert</strong>, die Händler-Kennung ist leer, Links werden unverändert durchgereicht, es wird also keine Provision generiert und kein Affiliate-Netzwerk kontaktiert. <strong>Sofern wir Affiliate-Links aktivieren</strong>, kennzeichnen wir sie <strong>unmittelbar beim jeweiligen Link</strong> als Werbung, nicht am Bildschirmende und nicht nur in den AGB. Das folgt aus dem Verbot getarnter redaktioneller Werbung <span class="lawtag">Anh. Z 11 UWG</span>, dem Vorenthalten wesentlicher Informationen <span class="lawtag">§ 2 Abs. 4 UWG</span> und der Erkennbarkeit kommerzieller Kommunikation <span class="lawtag">§ 6 ECG</span>; <span class="lawtag">§ 26 MedienG</span> kann daneben einschlägig sein, soweit man die App oder die Website als periodisches elektronisches Medium ansieht. <strong>Art. 26 DSA gilt hier nicht</strong>: Diese Vorschrift adressiert Anbieter von <em>Online-Plattformen</em> im Sinne von Art. 3 lit. i DSA, also Hostingdienste, die nutzergenerierte Inhalte öffentlich verbreiten, Skinmetrics tut das nicht, und Kleinstunternehmen sind nach Art. 19 DSA von Abschnitt 3 ohnehin ausgenommen.</p>
+      <p>Ein Affiliate-Programm ist <strong>deaktiviert</strong>: Links werden unverändert durchgereicht, es wird keine Provision erzielt und kein Affiliate-Netzwerk kontaktiert. <strong>Sollten wir es aktivieren</strong>, kennzeichnen wir betroffene Links unmittelbar beim Link als Werbung (vgl. <span class="lawtag">Anh. Z 11 UWG</span>, <span class="lawtag">§ 2 Abs. 4 UWG</span>, <span class="lawtag">§ 6 ECG</span>).</p>
 
       <h4>Abo und Zahlung</h4>
 
-      <p>Skinmetrics ist nach dem Onboarding nur mit einem Abo nutzbar. Die Abwicklung läuft <strong>ausschließlich über Apples StoreKit</strong> und deinen App-Store-Account. <strong>Wir sehen weder deinen Namen noch deine Zahlungsdaten, deine Kreditkarte oder deine Rechnungsadresse.</strong> Wir erfahren von Apple nur, ob auf diesem Gerät ein gültiges Abo vorliegt. Für die Zahlung selbst ist <strong>Apple</strong> verantwortlich; es gelten die Datenschutzbestimmungen von Apple. Kündigung und Rechnungen findest du in deinen App-Store-Einstellungen.</p>
+      <p>Abos (jährlich oder vierteljährlich, automatisch verlängernd) werden <strong>über Apples StoreKit</strong> und deinen App-Store-Account abgewickelt. <strong>Wir sehen weder deinen Namen noch deine Zahlungsdaten, deine Kreditkarte oder deine Rechnungsadresse.</strong> Wir erfahren von Apple nur, ob auf diesem Gerät ein gültiges Abo vorliegt. Für die Zahlung ist <strong>Apple</strong> verantwortlich; es gelten die Datenschutzbestimmungen von Apple. Kündigung und Rechnungen findest du in deinen App-Store-Einstellungen.</p>
 
-      <h4>Deine Rechte, und wie du sie hier praktisch ausübst</h4>
+      <h4>Deine Rechte — und wie du sie hier praktisch ausübst</h4>
 
-      <p>Weil wir keine Kopie deiner Daten haben, ist der schnellste Weg meist der über die App selbst:</p>
+      <p>Weil wir von deinen Inhalten keine Kopie haben, ist der schnellste Weg meist der über die App selbst:</p>
 
       <ul>
-        <li><strong>Löschung</strong> <span class="lawtag">Art. 17 DSGVO</span>: In den Einstellungen findest du <strong>„Clear All Data“</strong>. Damit werden alle lokal gespeicherten Daten samt Fotos entfernt. Zusätzlich löscht das Deinstallieren der App den gesamten Container. Denk an dein Backup (siehe oben).</li>
-        <li><strong>Datenübertragbarkeit und Auskunft</strong> <span class="lawtag">Art. 15, 20 DSGVO</span>: Die App bietet einen <strong>Klartext-Export als .txt-Datei</strong>, den du teilen kannst. Er enthält deine Scans, Check-ins inklusive der KI-Texte, Spots und Produkte, <strong>aus Praktikabilitätsgründen keine Fotos</strong>. Deine Fotos kannst du über die App selbst sichern.</li>
-        <li><strong>Widerruf der Einwilligung</strong> <span class="lawtag">Art. 7 Abs. 3 DSGVO</span>: jederzeit, mit Wirkung für die Zukunft. Nach dem Widerruf werden keine weiteren Inhalte zur KI-Analyse übermittelt.</li>
+        <li><strong>Löschung</strong> <span class="lawtag">Art. 17 DSGVO</span>: In den Einstellungen findest du <strong>„Clear All Data“</strong>. Damit werden alle personenbezogenen Daten auf dem Gerät gelöscht — Profil, Fotos, Gesundheitsangaben, Einwilligungen, die Analyse-Kennung, Benachrichtigungen und der Widget-Schnappschuss — und die pseudonyme Geräte-Kennung wird zurückgesetzt. Das Deinstallieren der App löscht zusätzlich den gesamten Container. Denk an dein Backup (siehe oben).</li>
+        <li><strong>Serverseitig</strong> gibt es nichts zu löschen außer dem pseudonymen App-Attest-Schlüsseleintrag. Er wird nach 180 Tagen ohne Nutzung automatisch gelöscht; auf Wunsch löschen wir ihn auch früher per E-Mail an <a href="mailto:privacy@q-systems.app">privacy@q-systems.app</a> (siehe auch Abschnitt „Wenn wir dich nicht identifizieren können“).</li>
+        <li><strong>Auskunft und Datenübertragbarkeit</strong> <span class="lawtag">Art. 15, 20 DSGVO</span>: Die App bietet für <strong>alle Nutzerinnen und Nutzer kostenlos</strong> einen <strong>Export (JSON und Fotos)</strong>, den du speichern oder teilen kannst.</li>
+        <li><strong>Widerruf der Einwilligung</strong> <span class="lawtag">Art. 7 Abs. 3 DSGVO</span>: jederzeit unter <em>Einstellungen → Datenschutz</em>, mit Wirkung für die Zukunft. Nach dem Widerruf finden keine weiteren Übermittlungen für die KI-Analyse statt.</li>
         <li><strong>Berichtigung, Einschränkung, Widerspruch</strong> <span class="lawtag">Art. 16, 18, 21 DSGVO</span>: Deine Profilangaben kannst du in der App jederzeit ändern oder löschen.</li>
-        <li><strong>Gegenüber Cloudflare, OpenRouter und den Modell-Hosts</strong> kannst du deine Rechte ebenfalls geltend machen; wir unterstützen dich dabei, soweit uns diese Empfänger das ermöglichen.</li>
         <li><strong>Beschwerderecht</strong> <span class="lawtag">Art. 77 DSGVO</span>: bei der <a href="https://www.dsb.gv.at/" target="_blank" rel="noopener">Österreichischen Datenschutzbehörde</a> oder der Aufsichtsbehörde deines Aufenthaltsorts.</li>
       </ul>
 
@@ -409,10 +396,9 @@
         <p><strong>Medizinischer Hinweis.</strong> Diese KI-Analyse dient nur zur Information und ist keine medizinische Diagnose. Bei medizinischen Fragen wende dich an eine Dermatologin/einen Dermatologen oder eine Ärztin/einen Arzt. <strong>Skinmetrics ist kein Medizinprodukt</strong> und ersetzt keine ärztliche Beratung, Diagnose oder Behandlung.</p>
       </div>
 
-
       <h2 id="empfaenger">6 &middot; Empfänger und Übermittlung in Drittländer</h2>
 
-      <p>Wir verkaufen keine Daten und geben nichts zu Werbe- oder Analysezwecken weiter. Es gibt nur eine überschaubare Zahl von Empfängern, und jeder davon ist technisch notwendig. Dieser Abschnitt beschreibt <em>wer</em> die Empfänger sind, in <em>welcher Rolle</em> sie handeln und worauf sich eine Übermittlung in ein Drittland stützt. <em>Welche</em> Daten Skinmetrics überträgt, steht im App-Kapitel.</p>
+      <p>Wir verkaufen keine Daten und geben nichts zu Werbe- oder Analysezwecken weiter. Es gibt nur eine überschaubare Zahl von Empfängern, und jeder davon ist technisch notwendig. Dieser Abschnitt beschreibt <em>wer</em> die Empfänger sind, in <em>welcher Rolle</em> sie handeln und worauf sich eine Übermittlung in ein Drittland stützt. <em>Welche</em> Daten Skinmetrics überträgt, steht im App-Kapitel. Die Pflicht-Angaben zu Auftragsverarbeitungsverträgen und Standardvertragsklauseln sind unten als Platzhalter markiert, bis die Verträge geprüft und abgeschlossen sind.</p>
 
       <h3>Zum Stand des EU-U.S. Data Privacy Framework (2026)</h3>
 
@@ -424,48 +410,44 @@
         <li>Das Gericht der Europäischen Union (EuG) hat mit Urteil vom <strong>3. September 2025</strong> in der Rechtssache <strong>T-553/23 (Latombe/Kommission)</strong> die Nichtigkeitsklage gegen den Angemessenheitsbeschluss <strong>abgewiesen</strong> und dessen Gültigkeit bestätigt.</li>
         <li>Gegen dieses Urteil wurde im <strong>Oktober 2025 ein Rechtsmittel zum Europäischen Gerichtshof</strong> eingelegt. Das Verfahren ist noch anhängig.</li>
         <li>Der Angemessenheitsbeschluss ist <strong>weder aufgehoben noch ausgesetzt</strong> und bleibt bis zu einer anderslautenden Entscheidung eine gültige Grundlage für Übermittlungen.</li>
-        <li>Kritisch bleibt, dass das <em>Privacy and Civil Liberties Oversight Board</em> (PCLOB) seit der Abberufung mehrerer Mitglieder im Januar 2025 nicht mehr beschlussfähig ist. Damit ist eine der Säulen des Rahmens, die unabhängige Kontrolle der US-Nachrichtendienste und die Unterstützung des Rechtsbehelfsmechanismus, geschwächt.</li>
+        <li>Kritisch bleibt, dass das <em>Privacy and Civil Liberties Oversight Board</em> (PCLOB) seit der Abberufung mehrerer Mitglieder im Januar 2025 nicht mehr beschlussfähig ist. Damit ist eine der Säulen des Rahmens — die unabhängige Kontrolle der US-Nachrichtendienste und die Unterstützung des Rechtsbehelfsmechanismus — geschwächt.</li>
       </ul>
 
       <div class="note">
         <p>Ehrlich gesagt: Es ist nicht ausgeschlossen, dass der EuGH den Angemessenheitsbeschluss später kippt, so wie zuvor Safe Harbor und den Privacy Shield. Sollte das geschehen, prüfen wir für jeden Empfänger erneut, ob Standardvertragsklauseln nach <span class="lawtag">Art. 46 (2) c DSGVO</span> und ergänzende Maßnahmen ausreichen, und ändern die Apps notfalls. Wir aktualisieren dann auch diese Erklärung.</p>
       </div>
 
-      <h3>Cloudflare, Vermittlungsdienst der KI-Analyse (Worker)</h3>
+      <h3>Cloudflare — Vermittlungsdienst der App (Worker)</h3>
 
       <ul>
-        <li><strong>Empfänger:</strong> Cloudflare, Inc., San Francisco, USA. Der Worker mit dem Namen <code>skinmetrics-ai</code> läuft im Cloudflare-Konto von Q Systems.</li>
+        <li><strong>Empfänger:</strong> Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, USA — als Infrastrukturanbieter für den von Q Systems betriebenen Dienst <code>skinmetrics-ai</code> (Cloudflare Worker im Cloudflare-Konto von Q Systems).</li>
         <li><strong>Betroffene App:</strong> Skinmetrics.</li>
-        <li><strong>Zweck:</strong> Entgegennahme der KI-Anfrage aus der App, Prüfung der Gerätebestätigung (Apple App Attest), der Kontingente und der Ratenbegrenzung sowie Weiterleitung an OpenRouter. Der Zugangsschlüssel zu OpenRouter liegt im Worker und nicht in der App.</li>
-        <li><strong>Rolle:</strong> Cloudflare verarbeitet die Daten in unserem Auftrag (Auftragsverarbeiter, <span class="lawtag">Art. 28 DSGVO</span>).</li>
-        <li><strong>Daten:</strong> Foto und Prompt laufen durch den Worker, werden dort aber nicht gespeichert. Gespeichert werden Schlüsselkennung, öffentlicher Schlüssel und Zähler der Gerätebestätigung (pseudonym, Löschung nach 180 Tagen ohne Nutzung), Kontingentzähler (bis zu einem Tag) und die IP-Adresse nur als gesalzener Hash zur Ratenbegrenzung. Die Infrastruktur von Cloudflare sieht die IP-Adresse, wie bei jeder Verbindung, im Klartext. Die Protokollierung des Workers ist abgeschaltet.</li>
-        <li><strong>Drittland:</strong> USA. Ob der Auftragsverarbeitungsvertrag von Cloudflare für dieses Konto abgeschlossen ist und ob Cloudflare unter dem EU-U.S. Data Privacy Framework zertifiziert ist, haben wir noch nicht bestätigt: <span class="ph">[Status Cloudflare-DPA und DPF-Zertifizierung für den Worker]</span>. Bis dahin sagen wir nicht zu, dass eines von beiden besteht.</li>
+        <li><strong>Zweck:</strong> Prüfung der Installation per Apple App Attest, Begrenzung der Anfragehäufigkeit, Weiterleitung der Anfrage an OpenRouter.</li>
+        <li><strong>Daten:</strong> Anfrageinhalte (Fotos, Profilangaben) laufen nur durch und werden von uns weder gespeichert noch protokolliert; gespeichert werden App-Attest-Kennung, öffentlicher Schlüssel und Zähler (180 Tage ohne Nutzung), Kontingentzähler (höchstens ein Tag) und ein täglich wechselnder gesalzener Hash der IP-Adresse. Die IP-Adresse selbst ist für Cloudflare als Infrastrukturanbieter technisch sichtbar.</li>
+        <li><strong>Rolle:</strong> Auftragsverarbeiter von Q Systems <span class="lawtag">Art. 28 DSGVO</span>. Auftragsverarbeitungsvertrag: <span class="ph">[[ Status bestätigen ]]</span>.</li>
+        <li><strong>Drittland:</strong> USA. Grundlage: <span class="lawtag">Art. 45 DSGVO</span> (Data Privacy Framework) <span class="ph">[[ DPF-Status verifizieren ]]</span>, andernfalls <span class="lawtag">Art. 46 DSGVO</span> (Standardvertragsklauseln) <span class="ph">[[ Status bestätigen ]]</span>.</li>
       </ul>
 
-      <h3>OpenRouter, Weiterleitung an die KI-Modelle</h3>
+      <h3>OpenRouter — Vermittlung an KI-Modelle</h3>
 
       <ul>
-        <li><strong>Empfänger:</strong> OpenRouter, Inc., USA, Anschrift: <span class="ph">[genaue Firmierung und Anschrift von OpenRouter, Inc.]</span>.</li>
+        <li><strong>Empfänger:</strong> OpenRouter, Inc., USA <span class="ph">[[ vollständige Anschrift ergänzen ]]</span>.</li>
         <li><strong>Betroffene App:</strong> Skinmetrics.</li>
-        <li><strong>Zweck:</strong> Weiterleitung der Anfrage an ein Modell, das ein Dritter betreibt. Ohne diese Übermittlung gibt es kein Ergebnis.</li>
-        <li><strong>Unsere Vorgaben:</strong> Der Worker sendet jede Anfrage mit <code>data_collection=deny</code> und <code>zdr</code>. Findet sich kein Endpunkt, der diese Vorgaben erfüllt, scheitert die Anfrage. Es gibt keinen Ausweichweg und keinen direkten Aufruf eines anderen Anbieters.</li>
-        <li><strong>Rolle:</strong> In den veröffentlichten Auftragsverarbeitungsbedingungen von OpenRouter ist der Kunde Verantwortlicher und OpenRouter Auftragsverarbeiter. Ob wir diese Bedingungen abgeschlossen haben, ist noch nicht bestätigt: <span class="ph">[Status Auftragsverarbeitungsvertrag mit OpenRouter nach Art. 28 DSGVO]</span>.</li>
-        <li><strong>Drittland:</strong> USA. Ob OpenRouter, Inc. unter dem EU-U.S. Data Privacy Framework zertifiziert ist, haben wir noch nicht bestätigt: <span class="ph">[DPF-Zertifizierungsstatus von OpenRouter, Inc.]</span>. Ebenso ist offen, ob Standardvertragsklauseln vereinbart sind.</li>
+        <li><strong>Zweck:</strong> Weiterleitung der Analyseanfrage an gehostete offene Modelle (Meta Llama 4 Scout/Maverick, Alibaba Qwen3-VL) und Rückgabe der Antwort.</li>
+        <li><strong>Daten:</strong> Fotos (verkleinert), relevante Profilangaben, Produktnamen und eine Verlaufszusammenfassung — siehe Kapitel Skinmetrics. Wir fordern bei jeder Anfrage nur Anbieter an, die Daten nicht speichern und nicht zum Training verwenden (<code>data_collection=deny</code>, <code>zdr</code>); sonst bricht der Dienst ab.</li>
+        <li><strong>Rolle:</strong> Auftragsverarbeiter von Q Systems <span class="lawtag">Art. 28 DSGVO</span> <span class="ph">[[ Rollenverteilung und Auftragsverarbeitungsvertrag bestätigen ]]</span>.</li>
+        <li><strong>Drittland:</strong> USA. Grundlage: <span class="lawtag">Art. 45 DSGVO</span> <span class="ph">[[ DPF-Status verifizieren ]]</span>, andernfalls <span class="lawtag">Art. 46 DSGVO</span> <span class="ph">[[ Status bestätigen ]]</span>.</li>
       </ul>
 
-      <p><strong>Was „Zero Data Retention“ hier bedeutet.</strong> Wir verwenden die Definition aus OpenRouters eigenen Bedingungen: API-Inhalte werden nach Abschluss der Anfrage nicht dauerhaft gespeichert, abgesehen von kurzer Verarbeitung im Arbeitsspeicher und Aufzeichnungen, die das Gesetz verlangt. Diese Bedingungen sagen auch, dass die ZDR-Einstufung eines Endpunkts keine Garantie von OpenRouter für die Einhaltung durch den jeweiligen Host ist. Wir können dir deshalb nicht zusichern, dass bei den Hosts nichts gespeichert wird.</p>
-
-      <h3>Modell-Hosts hinter OpenRouter</h3>
+      <h3>Von OpenRouter ausgewählte Modell-Anbieter</h3>
 
       <ul>
-        <li><strong>Empfänger:</strong> Drittanbieter, die offene Modelle betreiben und die OpenRouter für jede Anfrage auswählt. Wir wählen den einzelnen Host nicht aus.</li>
-        <li><strong>Betroffene App:</strong> Skinmetrics.</li>
-        <li><strong>Modelle:</strong> Meta Llama 4 Maverick (Läsionszählung und andere Textauswertungen), Google Gemma 4 26B (Skin-Score und Mehrwinkel-Scan) und Alibaba Qwen3-VL (Fotos von Produktregalen). Welches Modell für welche Aufgabe gilt, ist auf unserem Server festgelegt, die App kann es nicht wählen.</li>
-        <li><strong>Klarstellung zu Google:</strong> Gemma ist ein offenes Modell, das die Hosts betreiben, nicht Googles Gemini-Schnittstelle. Zu den möglichen Hosts kann auch Google (Vertex AI) gehören.</li>
-        <li><strong>Welche Hosts, in welchen Ländern:</strong> Wir haben die Auswahl per Vorgabe auf Anbieter mit Sitz in den USA beschränkt: <strong>Google (Vertex AI), DigitalOcean und Parasail</strong> für Llama 4 Maverick, <strong>Google (Vertex AI), DeepInfra, Cloudflare, CoreWeave und Parasail</strong> für Gemma 4 und <strong>DeepInfra</strong> für Qwen3-VL. In welchen Ländern diese Anbieter die Daten tatsächlich verarbeiten, haben wir noch nicht bestätigt: <span class="ph">[Verarbeitungsländer der Hosts]</span>. Sie können Daten auch außerhalb des EWR verarbeiten.</li>
+        <li><strong>Empfänger:</strong> Unternehmen, die die genannten Modelle hosten und die OpenRouter je Anfrage auswählt. Wir erfahren im Vorhinein nicht abschließend, welche das sind. Auswahl nur unter Anbietern, die Nichtspeicherung und Nichtnutzung zum Training zusagen; wir haben mit ihnen keinen eigenen Vertrag.</li>
+        <li><strong>Standort:</strong> <span class="ph">[[ Standorte und Rechtsträger der eingesetzten Anbieter ermitteln ]]</span>; eine Verarbeitung in den USA oder anderen Drittländern ist möglich.</li>
+        <li><strong>Drittland:</strong> je nach Anbieter <span class="lawtag">Art. 45</span> bzw. <span class="lawtag">Art. 46 DSGVO</span> <span class="ph">[[ DPF-Status/Garantien je Anbieter verifizieren ]]</span>.</li>
       </ul>
 
-      <h3>Apple, App Store, Käufe und Abonnements</h3>
+      <h3>Apple — App Store, Käufe und Abonnements</h3>
 
       <ul>
         <li><strong>Empfänger:</strong> Apple Distribution International Ltd., Hollyhill Industrial Estate, Hollyhill, Cork, Irland (verantwortlich für den EWR), sowie Apple Inc., One Apple Park Way, Cupertino, CA 95014, USA.</li>
@@ -479,23 +461,23 @@
 
       <p><strong>Benachrichtigungen:</strong> Skinmetrics verwendet ausschließlich <strong>lokale</strong> Benachrichtigungen, die auf deinem Gerät geplant und ausgelöst werden. Es gibt <strong>keine</strong> Push-Benachrichtigungen über Apples Server; entsprechend wird kein Push-Token an uns oder an Apple übermittelt.</p>
 
-      <p><strong>Drittland:</strong> Eine Zertifizierung von Apple Inc. unter dem EU-U.S. Data Privacy Framework konnten wir auf der offiziellen Teilnehmerliste <strong>nicht feststellen</strong>. Apple selbst gibt in seiner Datenschutzerklärung an, internationale Übermittlungen aus dem EWR, dem Vereinigten Königreich und der Schweiz auf <strong>Standardvertragsklauseln</strong> zu stützen, also auf geeignete Garantien nach <span class="lawtag">Art. 46 (2) c DSGVO</span>. Da Apple hier ohnehin eigenständig verantwortlich ist, richtet sich die Zulässigkeit dieser Übermittlungen nach Apples eigenen Angaben.</p>
+      <p><strong>Drittland:</strong> Eine Zertifizierung von Apple Inc. unter dem EU-U.S. Data Privacy Framework konnten wir auf der offiziellen Teilnehmerliste <strong>nicht feststellen</strong>. Apple selbst gibt in seiner Datenschutzerklärung an, internationale Übermittlungen aus dem EWR, dem Vereinigten Königreich und der Schweiz auf <strong>Standardvertragsklauseln</strong> zu stützen — also auf geeignete Garantien nach <span class="lawtag">Art. 46 (2) c DSGVO</span>. Da Apple hier ohnehin eigenständig verantwortlich ist, richtet sich die Zulässigkeit dieser Übermittlungen nach Apples eigenen Angaben.</p>
 
       <p>Datenschutzerklärung von Apple: <a href="https://www.apple.com/legal/privacy/de-ww/" target="_blank" rel="noopener">apple.com/legal/privacy</a>.</p>
 
 
-      <h3>GitHub, Hosting dieser Website</h3>
+      <h3>GitHub — Hosting dieser Website</h3>
 
       <ul>
         <li><strong>Empfänger:</strong> GitHub, Inc., San Francisco, USA; gegenüber dem EWR daneben GitHub B.V., Niederlande.</li>
         <li><strong>Betroffener Bereich:</strong> ausschließlich diese Website, keine der Apps.</li>
         <li><strong>Rolle:</strong> eigenständig Verantwortlicher für die Server-Protokolle; kein Auftragsverarbeitungsvertrag (siehe <a href="#website">Diese Website</a>).</li>
-        <li><strong>Drittland:</strong> USA. <strong>GitHub, Inc. ist unter dem EU-U.S. Data Privacy Framework aktiv zertifiziert</strong>, mit einem eigenen Teilnehmereintrag (Nr. 6174), nicht über die Zertifizierung der Muttergesellschaft Microsoft. Erfasst sind zusätzlich die UK Extension und das Swiss-U.S. DPF; die Zertifizierung deckt <em>Non-HR-Daten</em> ab, was für Website-Besuchsdaten einschlägig ist. Grundlage der Übermittlung ist damit <span class="lawtag">Art. 45 (1) DSGVO</span>. Für Übermittlungen außerhalb des DPF stützt sich GitHub nach eigenen Angaben auf die Standardvertragsklauseln nach dem Durchführungsbeschluss (EU) 2021/914.</li>
+        <li><strong>Drittland:</strong> USA. <strong>GitHub, Inc. ist unter dem EU-U.S. Data Privacy Framework aktiv zertifiziert</strong> — mit einem eigenen Teilnehmereintrag (Nr. 6174), nicht über die Zertifizierung der Muttergesellschaft Microsoft. Erfasst sind zusätzlich die UK Extension und das Swiss-U.S. DPF; die Zertifizierung deckt <em>Non-HR-Daten</em> ab, was für Website-Besuchsdaten einschlägig ist. Grundlage der Übermittlung ist damit <span class="lawtag">Art. 45 (1) DSGVO</span> <span class="ph">[[ DPF-Status verifizieren ]]</span>. Für Übermittlungen außerhalb des DPF stützt sich GitHub nach eigenen Angaben auf die Standardvertragsklauseln nach dem Durchführungsbeschluss (EU) 2021/914.</li>
       </ul>
 
       <p>Datenschutzerklärung von GitHub (Fassung wirksam ab 27. April 2026): <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub General Privacy Statement</a>.</p>
 
-      <h3>Cloudflare, Reichweitenmessung dieser Website</h3>
+      <h3>Cloudflare — Reichweitenmessung dieser Website (Web Analytics)</h3>
 
       <ul>
         <li><strong>Empfänger:</strong> Cloudflare, Inc., San Francisco, USA.</li>
@@ -506,8 +488,8 @@
       <h3>Weitere mögliche Empfänger</h3>
 
       <ul>
-        <li><strong>Anbieter unseres E-Mail-Postfachs:</strong> <span class="ph">[Name und Sitz des E-Mail-Anbieters]</span>, Auftragsverarbeiter nach <span class="lawtag">Art. 28 DSGVO</span>.</li>
-        <li><strong>Steuerberatung und Buchhaltung:</strong> <span class="ph">[Name und Sitz, falls beauftragt]</span>, soweit Belege mit Personenbezug anfallen.</li>
+        <li><strong>Anbieter unseres E-Mail-Postfachs:</strong> <span class="ph">[Name und Sitz des E-Mail-Anbieters]</span> — Auftragsverarbeiter nach <span class="lawtag">Art. 28 DSGVO</span>.</li>
+        <li><strong>Steuerberatung und Buchhaltung:</strong> <span class="ph">[Name und Sitz, falls beauftragt]</span> — soweit Belege mit Personenbezug anfallen.</li>
         <li><strong>Behörden und Gerichte:</strong> soweit wir gesetzlich zur Auskunft verpflichtet sind, <span class="lawtag">Art. 6 (1) c DSGVO</span>.</li>
       </ul>
 
@@ -518,11 +500,11 @@
       <p>Wir speichern personenbezogene Daten nur so lange, wie es für den jeweiligen Zweck erforderlich ist, und löschen sie danach oder anonymisieren sie.</p>
 
       <ul>
-        <li><strong>Daten in den Apps:</strong> Alle App-Inhalte liegen in der lokalen Datenbank auf deinem Gerät. Sie bleiben dort, bis du sie selbst löschst oder die App deinstallierst. Beim Löschen der App entfernt iOS den gesamten App-Container einschließlich der Datenbank und der Fotos. Es gibt <strong>keine serverseitige Kopie deiner Fotos, Texte und Profilangaben bei Q Systems</strong>, die nach der Deinstallation zurückbliebe. Was unser Vermittlungsdienst für die KI-Analyse technisch vorhält, steht weiter unten in dieser Aufzählung. Skinmetrics bietet eine Funktion zum vollständigen Löschen aller Daten.</li>
+        <li><strong>Daten in der App:</strong> Alle App-Inhalte liegen in der lokalen Datenbank auf deinem Gerät. Sie bleiben dort, bis du sie selbst löschst („Clear All Data“) oder die App deinstallierst. Beim Löschen der App entfernt iOS den gesamten App-Container einschließlich der Datenbank und der Fotos. Es gibt <strong>keine serverseitige Kopie deiner Inhalte bei Q Systems</strong>.</li>
+        <li><strong>Vermittlungsdienst:</strong> Bilder, Prompts und Antworten werden nicht gespeichert. Die pseudonyme App-Attest-Kennung (Schlüssel-ID, öffentlicher Schlüssel, Zähler) wird nach <strong>180 Tagen ohne Nutzung</strong> gelöscht; Kontingentzähler verfallen innerhalb eines Tages; IP-Adressen werden nur als täglich wechselnder gesalzener Hash zur Anfragebegrenzung verwendet.</li>
         <li><strong>E-Mail-Korrespondenz:</strong> siehe <a href="#kontakt">Kontaktaufnahme per E-Mail</a>.</li>
-        <li><strong>Server-Protokolle der Website:</strong> liegen ausschließlich bei GitHub. GitHub veröffentlicht dazu keine konkrete Frist; wir haben darauf keinen Zugriff und können sie nicht löschen.</li>
-        <li><strong>Daten im Vermittlungsdienst (Cloudflare Worker):</strong> Schlüsselkennung, öffentlicher Schlüssel und Zähler der Gerätebestätigung (App Attest, pseudonym) löschen wir nach 180 Tagen ohne Nutzung. Kontingentzähler bewahren wir bis zu einem Tag auf. Die IP-Adresse speichern wir nur als gesalzenen Hash zur Ratenbegrenzung. Fotos und Texte speichern wir nicht, die Protokollierung des Workers ist abgeschaltet.</li>
-        <li><strong>Inhalte, die an OpenRouter und die Modell-Hosts übermittelt wurden:</strong> Wir senden die Anfragen mit den Optionen <code>data_collection=deny</code> und <code>zdr</code> (Zero Data Retention). Nach der Definition in OpenRouters Auftragsverarbeitungsbedingungen bedeutet das, dass API-Inhalte nach Abschluss der Anfrage nicht dauerhaft gespeichert werden, abgesehen von kurzer Verarbeitung im Arbeitsspeicher und gesetzlich vorgeschriebenen Aufzeichnungen. Dieselben Bedingungen halten fest, dass die ZDR-Einstufung keine Garantie von OpenRouter dafür ist, dass der jeweilige Host dies einhält. Eine eigene, überprüfte Aufbewahrungsfrist der Hosts können wir dir nicht nennen, und wir erfinden keine.</li>
+        <li><strong>Server-Protokolle der Website:</strong> liegen bei GitHub. GitHub veröffentlicht dazu keine konkrete Frist; wir haben darauf keinen Zugriff und können sie nicht löschen.</li>
+        <li><strong>Inhalte, die an OpenRouter und Modell-Anbieter übermittelt wurden:</strong> Wir fordern nur Anbieter an, die Nichtspeicherung und Nichtnutzung zum Training zusagen (Zero Data Retention). Darüber hinaus gelten deren Regeln; eine eigene Protokollierung von OpenRouter: <span class="ph">[[ prüfen und ergänzen ]]</span>.</li>
         <li><strong>Kaufbezogene Unterlagen:</strong> Belege und Geschäftsbriefe mit steuerlicher Relevanz bewahren wir sieben Jahre auf (<span class="lawtag">§ 132 BAO</span>, <span class="lawtag">§ 212 UGB</span>). Diese Unterlagen stammen von Apple und sind in aller Regel aggregiert und ohne Personenbezug.</li>
       </ul>
 
@@ -542,21 +524,22 @@
 
       <p>Wende dich dafür an <a href="mailto:privacy@q-systems.app">privacy@q-systems.app</a>. Wir antworten unverzüglich, spätestens innerhalb eines Monats (<span class="lawtag">Art. 12 (3) DSGVO</span>). Die Bearbeitung ist kostenlos.</p>
 
-      <h3>Wenn wir dich nicht identifizieren können, Art. 11 DSGVO</h3>
+      <h3>Wenn wir dich nicht identifizieren können — Art. 11 DSGVO</h3>
 
       <p>Das ist der Punkt, an dem wir besonders genau sein müssen, weil er leicht wie eine Ausrede klingt.</p>
 
-      <p>Die App hat kein Nutzerkonto und keinen Login. Für die Gerätebestätigung (App Attest) speichert der Vermittlungsdienst eine pseudonyme Schlüsselkennung, die wir keiner Person zuordnen können. Wir speichern keine App-Inhalte auf eigenen Servern. Das bedeutet: <strong>Wenn du uns schreibst, können wir nicht überprüfen, wer du bist, und wir haben auch keine Daten, die wir dir zuordnen könnten.</strong></p>
+      <p>Die App hat kein Nutzerkonto und keinen Login. Serverseitig speichert unser Vermittlungsdienst lediglich eine <strong>pseudonyme Geräte-Kennung</strong> (App-Attest-Schlüssel-ID, öffentlicher Schlüssel, Zähler), die sich nicht ohne Weiteres einer Person zuordnen lässt. Das bedeutet: <strong>Wenn du uns schreibst, können wir nicht ohne Weiteres überprüfen, wer du bist — und wir haben außer dieser Kennung keine Daten, die wir dir zuordnen könnten.</strong></p>
 
-      <p><span class="lawtag">Art. 11 (1) DSGVO</span> stellt klar, dass wir nicht verpflichtet sind, zusätzliche Informationen aufzubewahren oder zu erheben, nur um dich identifizieren zu können. Nach <span class="lawtag">Art. 11 (2) DSGVO</span> gelten die Rechte aus <span class="lawtag">Art. 15 bis 20 DSGVO</span> in diesem Fall nicht, soweit wir nachweisen können, dass wir dich nicht identifizieren können, es sei denn, du stellst uns zusätzliche Informationen zur Verfügung, die eine Identifizierung ermöglichen.</p>
+      <p><span class="lawtag">Art. 11 (1) DSGVO</span> stellt klar, dass wir nicht verpflichtet sind, zusätzliche Informationen aufzubewahren oder zu erheben, nur um dich identifizieren zu können. Nach <span class="lawtag">Art. 11 (2) DSGVO</span> gelten die Rechte aus <span class="lawtag">Art. 15 bis 20 DSGVO</span> in diesem Fall nicht, soweit wir nachweisen können, dass wir dich nicht identifizieren können — es sei denn, du stellst uns zusätzliche Informationen zur Verfügung, die eine Identifizierung ermöglichen.</p>
 
       <p>Wir nutzen das nicht als Schutzschild. Konkret heißt das:</p>
 
       <ul>
-        <li><strong>Deine Daten sind nicht bei uns, sondern bei dir.</strong> Alle App-Inhalte liegen auf deinem Gerät und stehen dir dort jederzeit vollständig zur Verfügung. Du kannst sie in der App ansehen, ändern und löschen. Eine Auskunft von uns würde dir nichts zeigen, was du nicht ohnehin schon vor dir hast, und eine Löschung durch uns kann nichts löschen, was wir nicht haben.</li>
+        <li><strong>Deine Inhalte sind nicht bei uns, sondern bei dir.</strong> Alle App-Inhalte liegen auf deinem Gerät und stehen dir dort jederzeit vollständig zur Verfügung. Du kannst sie in der App ansehen, exportieren, ändern und löschen. Eine Löschung durch uns kann nichts löschen, was wir nicht haben.</li>
+        <li><strong>Die pseudonyme Geräte-Kennung</strong> wird mit „Clear All Data“ auf dem Gerät zurückgesetzt, nach 180 Tagen ohne Nutzung automatisch gelöscht und kann auf Anfrage per E-Mail früher gelöscht werden. Wie wir eine Anfrage einer Kennung zuordnen, ohne dich dafür zu identifizieren: <span class="ph">[[ Zuordnungsverfahren festlegen, z. B. Anzeige der Kennung in der App ]]</span>.</li>
         <li><strong>Für Daten, die uns tatsächlich erreichen, gelten deine Rechte uneingeschränkt.</strong> Das betrifft vor allem E-Mail-Korrespondenz. Hier können wir dich über deine Absenderadresse zuordnen, und wir erteilen Auskunft und löschen auf Wunsch.</li>
-        <li><strong>Wir schaffen kein Konto, nur um Rechte ausüben zu können.</strong> Das wäre datenschutzrechtlich unsinnig: Wir müssten dich zuerst identifizierbar machen, um dir anschließend Auskunft über die dadurch entstandenen Daten geben zu können.</li>
-        <li><strong>Bei Rechten gegenüber Dritten helfen wir weiter.</strong> Wenn du Rechte gegenüber Cloudflare, OpenRouter, Apple oder GitHub geltend machen willst, sag uns, worum es geht, wir nennen dir, welche Daten die jeweilige App an wen übermittelt hat, damit du deine Anfrage dort konkret stellen kannst.</li>
+        <li><strong>Wir schaffen kein Konto, nur um Rechte ausüben zu können.</strong></li>
+        <li><strong>Bei Rechten gegenüber Dritten helfen wir weiter.</strong> Wenn du Rechte gegenüber Cloudflare, OpenRouter, Apple oder GitHub geltend machen willst, sag uns, worum es geht — wir nennen dir, welche Daten die App an wen übermittelt, damit du deine Anfrage dort konkret stellen kannst.</li>
       </ul>
 
       <h3>Beschwerderecht</h3>
@@ -575,17 +558,17 @@
 
       <h2 id="sicherheit">9 &middot; Datensicherheit</h2>
 
-      <p>Nach <span class="lawtag">Art. 32 DSGVO</span> müssen wir dem Risiko angemessene technische und organisatorische Maßnahmen treffen. Wir beschreiben hier, was die Apps tatsächlich tun, keine Maßnahmen, die wir nicht umgesetzt haben.</p>
+      <p>Nach <span class="lawtag">Art. 32 DSGVO</span> müssen wir dem Risiko angemessene technische und organisatorische Maßnahmen treffen. Wir beschreiben hier, was die Apps tatsächlich tun — keine Maßnahmen, die wir nicht umgesetzt haben.</p>
 
       <h3>Was umgesetzt ist</h3>
 
       <ul>
         <li><strong>App-Sandbox von iOS:</strong> Jede App läuft in einem eigenen, vom System abgeschotteten Verzeichnis. Andere Apps können nicht auf ihre Daten zugreifen.</li>
-        <li><strong>Verschlüsselung im Ruhezustand:</strong> iOS verschlüsselt den Gerätespeicher. Skinmetrics setzt für das Verzeichnis der lokalen Datenbank zusätzlich die stärkste iOS-Schutzklasse (<em>Complete File Protection</em>). Die Daten sind damit nur entschlüsselbar, solange das Gerät entsperrt ist. Voraussetzung ist, dass du auf deinem iPhone einen Gerätecode eingerichtet hast, ohne Code gibt es keinen wirksamen Schutz im Ruhezustand.</li>
+        <li><strong>Verschlüsselung im Ruhezustand:</strong> iOS verschlüsselt den Gerätespeicher. Skinmetrics setzt für das Verzeichnis der lokalen Datenbank zusätzlich die stärkste iOS-Schutzklasse (<em>Complete File Protection</em>). Die Daten sind damit nur entschlüsselbar, solange das Gerät entsperrt ist. Voraussetzung ist, dass du auf deinem iPhone einen Gerätecode eingerichtet hast — ohne Code gibt es keinen wirksamen Schutz im Ruhezustand.</li>
         <li><strong>Transportverschlüsselung:</strong> Alle Netzwerkverbindungen laufen über HTTPS mit TLS 1.2 oder höher. Unverschlüsselte Verbindungen sind in den Apps nicht zugelassen.</li>
-        <li><strong>Keine dauerhaften Netzwerk-Caches:</strong> Skinmetrics verwendet für die Verbindung zur KI-Schnittstelle eine flüchtige Sitzungskonfiguration, sodass Antworten nicht auf der Festplatte zwischengespeichert werden.</li>
+        <li><strong>Keine dauerhaften Netzwerk-Caches:</strong> Skinmetrics verwendet für die Verbindung zum Vermittlungsdienst eine flüchtige Sitzungskonfiguration, sodass Antworten nicht auf der Festplatte zwischengespeichert werden.</li>
         <li><strong>Datenminimierung vor der Übertragung:</strong> Bilder werden vor dem Versand auf maximal 1024 Pixel Kantenlänge verkleinert und komprimiert. Es wird nur das übertragen, was für die jeweilige Analyse gebraucht wird.</li>
-        <li><strong>Keine Konten, keine Passwörter:</strong> Da es keine Nutzerkonten gibt, gibt es auch keine Zugangsdaten, die gestohlen werden könnten, und keine zentrale Datenbank, die kompromittiert werden könnte.</li>
+        <li><strong>Keine Konten, keine Passwörter:</strong> Da es keine Nutzerkonten gibt, gibt es auch keine Zugangsdaten, die gestohlen werden könnten, und keine zentrale Datenbank mit deinen Inhalten, die kompromittiert werden könnte. Serverseitig liegt nur die pseudonyme App-Attest-Kennung.</li>
         <li><strong>Lokale Verarbeitung, wo möglich:</strong> Gesichtserkennung und Bildausrichtung in Skinmetrics laufen über das Vision-Framework von Apple ausschließlich auf dem Gerät.</li>
       </ul>
 
@@ -594,8 +577,8 @@
       <div class="note">
         <p>Kein System ist absolut sicher. Insbesondere:</p>
         <p><strong>Übertragung im Internet.</strong> Die Übertragung von Daten über das Internet kann Sicherheitslücken aufweisen. Ein lückenloser Schutz vor Zugriff durch Dritte ist nicht möglich.</p>
-        <p><strong>Verarbeitung bei den Empfängern der KI-Analyse.</strong> Sobald Inhalte unseren Vermittlungsdienst verlassen, gelten die Sicherheitsorganisation und die Zusagen von OpenRouter und der Modell-Hosts. Wir können dazu keine Zusagen machen, die über deren Angaben hinausgehen.</p>
-        <p><strong>Vermittlungsdienst.</strong> Skinmetrics ruft keinen KI-Anbieter mehr direkt vom Gerät aus auf. Die App sendet ihre Anfragen über TLS an einen Cloudflare Worker, den wir selbst im eigenen Cloudflare-Konto betreiben. Die Release-Version der App ruft keinen KI-Anbieter direkt auf. Dafür tragen wir die Verantwortung für die Absicherung dieses Dienstes selbst, einschließlich Attestierung, Kontingenten und Ratenbegrenzung. Näheres steht im Kapitel <a href="#ds-skinmetrics">Skinmetrics</a>.</p>
+        <p><strong>Verarbeitung bei Dienstleistern.</strong> Sobald Inhalte deine App verlassen, gilt die Sicherheitsorganisation von Cloudflare, OpenRouter und den von OpenRouter ausgewählten Modell-Anbietern. Wir können dazu keine Zusagen machen, die über deren Angaben hinausgehen.</p>
+        <p><strong>Vermittlungsdienst und Geräteprüfung.</strong> Anfragen laufen über den Vermittlungsdienst von Q Systems (Cloudflare Worker). Er prüft jede Installation mit Apple App Attest, begrenzt Anfragen pro Gerät und speichert keine Bilder, Prompts oder Antworten. Kein System ist fehlerfrei; App Attest setzt ein echtes Gerät mit aktuellem iOS voraus und ist keine absolute Garantie gegen Missbrauch.</p>
         <p><strong>Exportierte Daten.</strong> Wenn du in Skinmetrics einen Datenexport erstellst und teilst, verlässt diese Datei den geschützten Bereich der App. Was danach damit geschieht, liegt bei dir und beim Ziel, an das du sie sendest.</p>
         <p><strong>Dein Gerät.</strong> Ohne Gerätecode, mit einem gerooteten oder mit Jailbreak versehenen Gerät oder bei Weitergabe des entsperrten Geräts an Dritte greifen die beschriebenen Schutzmechanismen nicht.</p>
       </div>
@@ -608,10 +591,10 @@
 
       <p>Zusätzlich zu dieser Erklärung findest du zu jeder App im App Store Apples eigene <strong>App-Datenschutzangaben</strong> („App Privacy Details", umgangssprachlich <em>Nutrition Labels</em>). Sie stehen auf der Produktseite jeder App unter „App-Datenschutz" und fassen in Apples standardisierten Kategorien zusammen, welche Daten erhoben, ob sie mit deiner Identität verknüpft und ob sie zum Tracking verwendet werden.</p>
 
-      <p>Technisch untermauert wird das durch die <strong>Privacy Manifests</strong> (<code>PrivacyInfo.xcprivacy</code>) in den Apps. Darin deklarieren wir gegenüber Apple die erhobenen Datenarten, ihren Verwendungszweck und die Gründe für die Nutzung bestimmter Systemschnittstellen. Xcode fasst die Manifests der App und aller eingebundenen Bibliotheken beim Build zu einem Privacy Report zusammen, der in die Angaben im App Store einfließt. In allen Apps von Q Systems ist dabei <em>Tracking</em> auf „false" gesetzt.</p>
+      <p>Technisch untermauert wird das durch die <strong>Privacy Manifests</strong> (<code>PrivacyInfo.xcprivacy</code>) in der App. Darin deklarieren wir gegenüber Apple die erhobenen Datenarten, ihren Verwendungszweck und die Gründe für die Nutzung bestimmter Systemschnittstellen. Xcode fasst die Manifests der App und aller eingebundenen Bibliotheken beim Build zu einem Privacy Report zusammen, der in die Angaben im App Store einfließt. In Skinmetrics ist dabei <em>Tracking</em> auf „false" gesetzt.</p>
 
       <div class="note">
-        <p>Die Angaben im App Store folgen Apples festen Kategorien und sind deshalb gröber als diese Erklärung. Wenn du wissen willst, welches Feld genau an wen geht, ist das jeweilige App-Kapitel hier die genauere Quelle. Sollten sich beide Darstellungen einmal widersprechen, gilt diese Datenschutzerklärung, und wir korrigieren die App-Store-Angaben. Sag uns bitte Bescheid, wenn dir ein Widerspruch auffällt.</p>
+        <p>Die Angaben im App Store folgen Apples festen Kategorien und sind deshalb gröber als diese Erklärung. Wenn du wissen willst, welches Feld genau an wen geht, ist das jeweilige App-Kapitel hier die genauere Quelle. Sollten sich beide Darstellungen einmal widersprechen, gilt diese Datenschutzerklärung — und wir korrigieren die App-Store-Angaben. Sag uns bitte Bescheid, wenn dir ein Widerspruch auffällt.</p>
       </div>
 
       <h3>Anforderungen von Apple an diese Erklärung</h3>
@@ -620,20 +603,20 @@
 
       <ul>
         <li>angibt, welche Daten die App erhebt, wie sie erhoben werden und wofür sie verwendet werden;</li>
-        <li>bestätigt, dass jeder Dritte, mit dem Nutzerdaten geteilt werden, Analysewerkzeuge, Werbenetzwerke, Drittanbieter-SDKs sowie verbundene Unternehmen, dasselbe oder ein gleichwertiges Schutzniveau bietet;</li>
+        <li>bestätigt, dass jeder Dritte, mit dem Nutzerdaten geteilt werden — Analysewerkzeuge, Werbenetzwerke, Drittanbieter-SDKs sowie verbundene Unternehmen — dasselbe oder ein gleichwertiges Schutzniveau bietet;</li>
         <li>die Aufbewahrungs- und Löschregeln erläutert und beschreibt, wie eine Einwilligung widerrufen und die Löschung der Daten verlangt werden kann.</li>
       </ul>
 
-      <p>Diese Erklärung erfüllt diese Punkte in den Abschnitten <a href="#empfaenger">Empfänger und Übermittlung in Drittländer</a>, <a href="#speicherdauer">Speicherdauer</a> und <a href="#rechte">Deine Rechte</a> sowie in den App-Kapiteln. Zu den Empfängern halten wir fest: Die eingesetzten Dienste von Apple und Open-Meteo unterliegen jeweils eigenen, veröffentlichten Datenschutzzusagen und, soweit Übermittlungen in die USA betroffen sind, dem EU-U.S. Data Privacy Framework beziehungsweise Standardvertragsklauseln; damit gelten für die weitergegebenen Daten Schutzstandards, die dem in dieser Erklärung beschriebenen Niveau entsprechen. Für Cloudflare (Vermittlungsdienst der KI-Analyse), OpenRouter und die Modell-Hosts können wir das derzeit noch nicht bestätigen, die offenen Punkte stehen im Abschnitt <a href="#empfaenger">Empfänger und Übermittlung in Drittländer</a>. Ein Verkauf oder eine Weitergabe zu Werbezwecken findet bei keinem dieser Empfänger statt.</p>
+      <p>Diese Erklärung erfüllt diese Punkte in den Abschnitten <a href="#empfaenger">Empfänger und Übermittlung in Drittländer</a>, <a href="#speicherdauer">Speicherdauer</a> und <a href="#rechte">Deine Rechte</a> sowie in den App-Kapiteln. Zu den Empfängern halten wir fest: Die eingesetzten Dienste von Cloudflare, OpenRouter und Apple unterliegen jeweils eigenen, veröffentlichten Datenschutzzusagen und — soweit Übermittlungen in die USA betroffen sind — dem EU-U.S. Data Privacy Framework beziehungsweise Standardvertragsklauseln; damit sollen für die weitergegebenen Daten Schutzstandards gelten, die dem in dieser Erklärung beschriebenen Niveau entsprechen <span class="ph">[[ nach Abschluss der Verträge bestätigen ]]</span>. Ein Verkauf oder eine Weitergabe zu Werbezwecken findet bei keinem dieser Empfänger statt.</p>
 
-      <p>Ergänzend gilt 5.1.1(v): Unsere Apps verlangen keinen Login. Es gibt kein Konto, das gelöscht werden müsste, die Löschung erfolgt durch Löschen der Daten in der App oder durch Deinstallation.</p>
+      <p>Ergänzend gilt 5.1.1(v): Unsere Apps verlangen keinen Login. Es gibt kein Konto, das gelöscht werden müsste — die Löschung erfolgt durch Löschen der Daten in der App oder durch Deinstallation.</p>
 
       <h2 id="aenderungen">11 &middot; Änderungen dieser Datenschutzerklärung</h2>
 
       <p>Wir passen diese Erklärung an, wenn sich die Apps, die eingesetzten Dienste oder die Rechtslage ändern. Maßgeblich ist immer die hier veröffentlichte Fassung.</p>
 
       <ul>
-        <li><strong>Stand dieser Fassung:</strong> <span class="ph">[Datum]</span>, Version <span class="ph">[Versionsnummer]</span>.</li>
+        <li><strong>Stand dieser Fassung:</strong> Oktober 2026, Version <span class="ph">[[ Versionsnummer ]]</span>.</li>
         <li><strong>Frühere Fassungen</strong> stellen wir auf Anfrage an <a href="mailto:privacy@q-systems.app">privacy@q-systems.app</a> zur Verfügung.</li>
         <li><strong>Benachrichtigung:</strong> Da wir keine Nutzerkonten und keine Kontaktdaten haben, können wir dich nicht individuell informieren. Wesentliche Änderungen kündigen wir deshalb vorab auf dieser Seite an und weisen zusätzlich in der betroffenen App darauf hin.</li>
         <li><strong>Einwilligungen:</strong> Wenn eine Änderung eine Verarbeitung betrifft, die auf deiner Einwilligung beruht, holen wir dafür eine neue Einwilligung ein. Eine stillschweigende Ausweitung bestehender Einwilligungen findet nicht statt.</li>
