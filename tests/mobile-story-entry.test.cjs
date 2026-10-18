@@ -54,7 +54,6 @@ function setup(initialY = 0, withViewport = false) {
 const first=1327.5; // End of zoom: 720 + .24 * (3376 - 844), rounded to half a px.
 {
   const t=setup();assert(t.wheel(9000));
-  for(let i=0;i<100;i++){t.wheel(2,0);t.tick(16);}
   t.settle();assert.equal(t.window.scrollY,first);
   assert.equal(t.wheel(1),false);assert.equal(t.window.scrollY,first+1);
   assert.equal(t.wheel(9000,16),false);assert.equal(t.window.scrollY,7000);
@@ -110,12 +109,8 @@ const first=1327.5; // End of zoom: 720 + .24 * (3376 - 844), rounded to half a 
   const t=setup();t.wheel(9000);t.tick(32);
   assert(t.wheel(50,220),'an early new wheel event cannot cancel the zoom');
   t.settleMotion();assert.equal(t.window.scrollY,first);
-  assert(t.classes.has('mobile-entry-paused'));
-  assert(t.wheel(1,100),'the full-size pause must actually be visible');
-  assert.equal(t.window.scrollY,first);
-  t.tick(210);assert(!t.classes.has('mobile-entry-paused'));
   assert.equal(t.wheel(1,0),false);assert.equal(t.window.scrollY,first+1);
-  console.log('PASS arrival completes and pauses before a new forward gesture continues');
+  console.log('PASS arrival completes at full size without a scroll lock');
 }
 {
   const t=setup();t.touchStart(700);t.touchMove(600);t.touchEnd();t.nativeY(5000);
@@ -130,15 +125,14 @@ const first=1327.5; // End of zoom: 720 + .24 * (3376 - 844), rounded to half a 
   const t=setup();t.wheel(9000);t.tick(32);t.touchStart(500);
   assert(t.touchMove(480),'a new touch cannot cancel the arrival before full size');
   t.settleMotion();assert.equal(t.window.scrollY,first);
-  t.tick(320);assert(t.touchMove(460));assert.equal(t.window.scrollY,first+20);
+  assert(t.touchMove(460));assert.equal(t.window.scrollY,first+20);
   t.touchEnd();t.settle();assert.equal(t.window.scrollY,first+20);
   console.log('PASS a touch begun during the pause continues freely afterwards');
 }
 {
-  const t=setup();t.wheel(9000);t.settleMotion();assert(t.classes.has('mobile-entry-paused'));
+  const t=setup();t.wheel(9000);t.settleMotion();
   assert.equal(t.wheel(-1,0),false);t.settle();assert.equal(t.window.scrollY,first-1);
-  assert(!t.classes.has('mobile-entry-paused'));
-  console.log('PASS backward input is free even during the short full-size pause');
+  console.log('PASS backward input stays free after the first arrival');
 }
 {
   const t=setup();t.touchStart(700);t.touchMove(600);t.fire('touchcancel',{});
@@ -148,8 +142,8 @@ const first=1327.5; // End of zoom: 720 + .24 * (3376 - 844), rounded to half a 
 }
 {
   const t=setup();t.wheel(9000);t.tick(32);t.fire('pageshow',{persisted:false});
-  t.settleMotion();assert.equal(t.window.scrollY,first);assert(t.classes.has('mobile-entry-paused'));
-  t.fire('pageshow',{persisted:true});assert(!t.classes.has('mobile-entry-paused'));
+  t.settleMotion();assert.equal(t.window.scrollY,first);
+  t.fire('pageshow',{persisted:true});
   assert.equal(t.wheel(100),false);
   console.log('PASS initial pageshow preserves arrival; history restoration leaves it free');
 }
@@ -224,9 +218,9 @@ const first=1327.5; // End of zoom: 720 + .24 * (3376 - 844), rounded to half a 
   console.log('PASS vertical gestures stay native and horizontal gestures outside the phone window are ignored');
 }
 {
-  const t=setup();t.wheel(9000);t.settleMotion();assert(t.classes.has('mobile-entry-paused'));
+  const t=setup();t.wheel(9000);t.settleMotion();
   t.swipeStart(300);assert(t.swipeMove(60,420,300));t.swipeEnd(60,420,150);t.settle();
-  assert.equal(t.window.scrollY,2188.5);assert(!t.classes.has('mobile-entry-paused'));
+  assert.equal(t.window.scrollY,2188.5);
   t.nativeY(0);assert.equal(t.wheel(9000),false);
   console.log('PASS an explicit swipe continues from the first full-size pause without rearming the entry barrier');
 }
