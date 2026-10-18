@@ -43,7 +43,7 @@ body{
   letter-spacing:-.01em;
 }
 
-/* Skinmetrics — one flat wash everywhere (html → hero) */
+/* Skinmetrics, one flat wash everywhere (html → hero) */
 html:has(body.theme-derma){ background:#eef3ee; }
 body.theme-derma{
   --accent:#6f8c74; --accent-deep:#4f6654; --accent-soft:#eef3ee; --wash:#eef3ee;
@@ -57,7 +57,7 @@ body.theme-derma main,
 body.theme-derma .derma-hero,
 body.theme-derma .promo.derma-hero{ background:#eef3ee; }
 
-/* legal subpages — white, no green gaps between sections */
+/* legal subpages, white, no green gaps between sections */
 html:has(body.theme-derma.has-float-back){ background:#fff; }
 body.theme-derma.has-float-back{ background:#fff; }
 body.theme-derma.has-float-back::before{ background:#fff; }
@@ -124,7 +124,7 @@ img{ max-width:100%; display:block; }
   box-shadow:0 2px 10px rgba(111,140,116,.22); transition:background .2s var(--ease), transform 160ms var(--ease-out); }
 .float-buy:hover{ background:var(--accent-deep); color:#fff; }
 
-/* back link — legal / sub pages */
+/* back link, legal / sub pages */
 .has-float-back main{ padding-top:72px; }
 .float-back{
   position:fixed; top:16px; left:22px; z-index:9000;
@@ -182,7 +182,7 @@ h1,h2,h3,h4{ font-weight:600; letter-spacing:-.015em; line-height:1.06; }
 .section .lead-copy{ max-width:720px; margin:0 auto; }
 .section-cta{ margin-top:34px; }
 
-/* legal doc pages — compact top spacing, no gnav bar (desktop + mobile) */
+/* legal doc pages, compact top spacing, no gnav bar (desktop + mobile) */
 body.legal-doc .gnav{ display:none; }
 body.theme-derma.has-float-back.legal-doc main{ padding-top:56px; }
 body.theme-derma.has-float-back.legal-doc main .section.legal-hero{
@@ -205,7 +205,7 @@ body.theme-derma.has-float-back.legal-doc main .section.legal-hero{
 .hero-shot{ margin:0; width:100%; }
 .hero-shot img{ width:100%; height:auto; display:block; }
 
-/* Skinmetrics hero — real simulator shots, transparent background */
+/* Skinmetrics hero, real simulator shots, transparent background */
 .derma-hero{ min-height:auto; padding-bottom:0; padding-top:calc(88px + 64px); background:#eef3ee; isolation:isolate; }
 .hero-glow{
   position:absolute; inset:0; pointer-events:none; z-index:1;
@@ -222,10 +222,10 @@ body.theme-derma.has-float-back.legal-doc main .section.legal-hero{
   filter:drop-shadow(0 3px 4px rgba(30,37,31,.10)) drop-shadow(0 22px 30px rgba(60,74,61,.12));
 }
 
-/* statement band — two-part headline side by side, lead below same width */
+/* statement band, two-part headline side by side, lead below same width */
 body.theme-derma .statement-band{
   padding:80px 0 96px;
-  background:var(--accent-soft);
+  background:#fff;
   text-align:center;
 }
 .statement-inner{
@@ -560,7 +560,7 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
   .seg button{ padding:4px 3px; font-size:10px; white-space:normal; line-height:1.15; display:flex; align-items:center; justify-content:center; }
 }
 
-/* reviews marquee — endless CSS keyframe loop, duplicated set.
+/* reviews marquee, endless CSS keyframe loop, duplicated set.
    Shift distance is set in px via --rev-shift (JS) because Safari/WebKit
    mis-calculates translate(-50%) on max-content flex tracks, leaving a blank
    gap after the last card before the duplicate set re-enters. */
@@ -589,7 +589,7 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
 @keyframes rev-scroll{ from{ transform:translate3d(0,0,0); } to{ transform:translate3d(calc(var(--rev-shift, 0px) * -1),0,0); } }
 @-webkit-keyframes rev-scroll{ from{ -webkit-transform:translate3d(0,0,0); } to{ -webkit-transform:translate3d(calc(var(--rev-shift, 0px) * -1),0,0); } }
 
-/* mobile review stack — hidden on desktop */
+/* mobile review stack, hidden on desktop */
 .rev-mobile-stack{ display:none; }
 
 /* stat band */
@@ -634,7 +634,7 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
 .privc .card p b{ color:var(--text); font-weight:600; }
 @media (max-width:820px){ .privc{ grid-template-columns:1fr; gap:14px; } .privc .card{ padding:32px 30px; } }
 
-/* privacy section — visual layout (index) */
+/* privacy section, visual layout (index) */
 .priv-trust{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; max-width:760px; margin:32px auto 0; padding:0 22px; }
 .priv-trust span{ display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:500; padding:9px 16px; border-radius:980px; background:#fff; color:var(--text); border:1px solid var(--hair); box-shadow:0 1px 2px rgba(0,0,0,.04); }
 .priv-trust .ic{ width:16px; height:16px; color:var(--accent-deep); stroke-width:2; }
@@ -668,7 +668,7 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
 
 
 /* ============================================================
-   SMALL SCREENS — the hand-set line breaks are part of the layout,
+   SMALL SCREENS, the hand-set line breaks are part of the layout,
    so keep them and scale the type down instead. The old floors
    (40px display / 32px headline) pushed the longest lines past a
    390px viewport and made the whole page scroll sideways.
@@ -694,11 +694,11 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
   }
 }
 
-/* mobile-only blocks — hidden on desktop */
+/* mobile-only blocks, hidden on desktop */
 .mobile-only{ display:none; }
 
 /* ============================================================
-   SKINMETRICS — Mobile (≤640px)
+   SKINMETRICS, Mobile (≤640px)
    ============================================================ */
 @media (max-width:640px){
   .mobile-only{ display:block; }
@@ -721,7 +721,7 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
   body.theme-derma .promo.derma-hero,
   body.has-float-nav main{ background:#eef3ee; }
 
-  /* ── mobile nav — floating pill, offset from hero ── */
+  /* ── mobile nav, floating pill, offset from hero ── */
   .mobile-nav{
     display:flex;
     position:fixed;
@@ -755,9 +755,16 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
   body.has-float-nav main{
     padding-top:calc(76px + env(safe-area-inset-top, 0px));
   }
+  body.has-float-nav main:has(#hero6){
+    padding-top:0;
+  }
 
-  /* section backgrounds — alternate like desktop */
-  .section{ padding:76px 22px; text-align:center; background:var(--bg); }
+  /* section backgrounds, alternate like desktop */
+  .section{ padding:64px 20px; text-align:center; background:var(--bg); }
+  #datenschutz.section,#fragen.section,.closing,.closing-footer{
+    content-visibility:auto;
+    contain-intrinsic-size:auto 720px;
+  }
   .section.gray{ background:var(--bg-2); }
   .section.wash{ background:var(--accent-soft); }
   .container{ padding:0; max-width:none; }
@@ -794,16 +801,16 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
     box-shadow:none;
   }
 
-  /* section headings — v0 centered, no eyebrow (except datenschutz) */
+  /* section headings, v0 centered, no eyebrow (except datenschutz) */
   #funktionen > .container > .eyebrow{ display:none; }
   #funktionen > .container > .headline{
-    font-size:clamp(30px,8.4vw,36px);
-    max-width:26ch;
+    font-size:clamp(26px,7.2vw,32px);
+    max-width:24ch;
     margin:0 auto;
     text-wrap:balance;
   }
 
-  /* datenschutz — wide card grid like desktop */
+  /* datenschutz, wide card grid like desktop */
   #datenschutz.section{ padding-left:12px; padding-right:12px; }
   #datenschutz > .container.wide{ margin-top:32px; padding:0 6px; }
   #datenschutz .priv-grid .cell{
@@ -814,7 +821,7 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
   }
   #datenschutz .priv-grid .cell .bemoji{ color:var(--accent-deep); }
 
-  /* ── feature explorer — tabs, title, phone, compact detail ── */
+  /* ── feature explorer, tabs, title, phone, compact detail ── */
   .explorer-wrap{ margin-top:0; padding:0; overflow:visible; }
   .explorer{ overflow:visible; }
   .explorer-tabs{
@@ -897,7 +904,7 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
     filter:drop-shadow(0 3px 4px rgba(30,37,31,.10)) drop-shadow(0 16px 24px rgba(60,74,61,.12));
   }
 
-  /* ── reviews — card boxes like desktop ── */
+  /* ── reviews, card boxes like desktop ── */
   .mobile-rev-head{ text-align:center; padding:0 16px; }
   .m-rev-stars{ font-size:13px; letter-spacing:1.5px; color:#f5a623; }
   .m-rev-big{
@@ -1041,7 +1048,7 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
   .faq.faq-open .ans-inner{ padding-bottom:24px; }
   .section.gray:has(.faq-wrap){ background:var(--bg-2); }
 
-  /* ── CTA — desktop green style ── */
+  /* ── CTA, desktop green style ── */
   .section.cta-close{
     background:var(--bg);
     color:var(--text);
@@ -1094,7 +1101,7 @@ footer{ background:var(--bg-2); color:var(--text-2); font-size:12px; line-height
 /* ============================================================
    REAL DEVICE SCREENSHOTS inside the CSS phone frame.
    Captured on the iPhone 17 simulator, so the shot already
-   contains the status bar and the Dynamic Island — these frames
+   contains the status bar and the Dynamic Island, these frames
    therefore omit the .island element the mock screens draw.
    ============================================================ */
 .phone.shot .screen{ background:#000; display:block; }

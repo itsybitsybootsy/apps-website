@@ -4,74 +4,138 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" content="#ffffff" />
-<title>Skinmetrics — Kenne deine Haut. Jeden Tag.</title>
-<meta name="description" content="Scanne deine Haut, verfolge Veränderungen und behalte deine Pflegeroutine im Blick. Skinmetrics für iPhone." />
+<title data-i18n="meta.title">Skinmetrics | Kenne deine Haut. Jeden Tag.</title>
+<meta data-i18n-content="meta.description" name="description" content="Scanne deine Haut, verfolge Veränderungen und behalte deine Pflegeroutine im Blick. Skinmetrics für iPhone." />
 <link rel="icon" href="assets/img/favicon.png" type="image/png" />
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
-<link rel="stylesheet" href="assets/css/styles.css?v=55" media="(min-width:641px)" />
-<link rel="stylesheet" href="assets/css/landing.css?v=55" media="(max-width:640px)" />
-<link rel="stylesheet" href="assets/css/closing.css?v=55" />
-<link rel="stylesheet" href="assets/css/desktop-nav.css?v=55" media="(min-width:641px)" />
-<link rel="stylesheet" href="assets/css/mobile-story.css?v=55" />
+<link rel="stylesheet" href="assets/css/styles.css?v=62" media="(min-width:641px)" />
+<link rel="stylesheet" href="assets/css/landing.css?v=61" media="(max-width:640px)" />
+<link rel="stylesheet" href="assets/css/closing.css?v=65" />
+<link rel="stylesheet" href="assets/css/desktop-nav.css?v=61" media="(min-width:641px)" />
+<link rel="stylesheet" href="assets/css/mobile-story.css?v=61" />
+<link rel="stylesheet" href="assets/css/hero6.css?v=16" />
+<link rel="stylesheet" href="assets/css/i18n.css?v=61" />
+<link rel="stylesheet" href="assets/css/how-it-works.css?v=5" />
 </head>
 <body class="theme-derma has-float-nav" id="top">
 <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><defs><symbol id="ic-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 19.5c.6-3.3 3.2-5 6.5-5s5.9 1.7 6.5 5"/></symbol><symbol id="ic-shield" viewBox="0 0 24 24"><path d="M12 3.5l7 2.8V11c0 4.4-3 8-7 9.5-4-1.5-7-5.1-7-9.5V6.3z"/><path d="M9 12l2 2 4-4"/></symbol><symbol id="ic-trash" viewBox="0 0 24 24"><path d="M4.5 7h15"/><path d="M9 7V4.8h6V7"/><path d="M6.5 7l1 12.5h9L17.5 7"/><path d="M10.5 10.5v6M13.5 10.5v6"/></symbol><symbol id="ic-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9.5" rx="2.2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/><path d="M12 14v2.5"/></symbol><symbol id="ic-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M6.1 6.1l11.8 11.8"/></symbol><symbol id="ic-eye-off" viewBox="0 0 24 24"><path d="M4 12s3.2-5.2 8-5.2c1.3 0 2.5.4 3.5 1M20 12s-3.2 5.2-8 5.2c-1.4 0-2.6-.4-3.6-1"/><path d="M4.5 4.5l15 15"/></symbol></defs></svg>
-<a class="skip-link" href="#main">Zum Inhalt</a>
+<a data-i18n="nav.skip" class="skip-link" href="#main">Zum Inhalt</a>
 <div class="desktop-nav-haze desktop-version" aria-hidden="true"></div>
-<nav class="desktop-controls desktop-version" aria-label="Hauptnavigation">
-  <a class="desktop-home" href="#top" aria-label="Skinmetrics Startseite"><img src="assets/img/app-icon.png" width="48" height="48" alt="" /></a>
-  <button type="button" class="desktop-menu-trigger" data-desktop-menu-trigger aria-expanded="false" aria-controls="desktop-menu"><span class="desktop-menu-icon" aria-hidden="true"></span><span class="desktop-menu-trigger-label">Menü</span></button>
-  <a class="desktop-legal" href="legal/datenschutz.html">Datenschutz <span aria-hidden="true">↗</span></a>
+<nav data-i18n-aria-label="nav.main" class="desktop-controls desktop-version" aria-label="Hauptnavigation">
+  <a data-i18n-aria-label="nav.home" class="desktop-home" href="#top" aria-label="Skinmetrics Startseite"><img src="assets/img/app-icon.png" width="48" height="48" alt="" /></a>
+  <button type="button" class="desktop-menu-trigger" data-desktop-menu-trigger aria-expanded="false" aria-controls="desktop-menu"><span class="desktop-menu-icon" aria-hidden="true"></span><span data-i18n="nav.menu" class="desktop-menu-trigger-label">Menü</span></button>
+  <a data-i18n="nav.privacy" class="desktop-legal" href="legal/datenschutz.html">Datenschutz <span aria-hidden="true">↗</span></a>
 </nav>
 <div class="desktop-menu-popover desktop-version" id="desktop-menu" popover="manual" data-state="closed">
   <div class="desktop-menu-shell">
-  <button type="button" class="desktop-menu-close" aria-label="Menü schließen" autofocus><span class="desktop-menu-group desktop-menu-group-closed" aria-hidden="true"><span class="desktop-menu-icon"></span><span>Menü</span></span><span class="desktop-menu-group desktop-menu-group-open" aria-hidden="true"><span class="desktop-menu-icon"></span><span>Schließen</span></span></button>
-  <nav class="desktop-menu-content" aria-label="Skinmetrics Menü">
+  <button data-i18n-aria-label="nav.closeMenu" type="button" class="desktop-menu-close" aria-label="Menü schließen" autofocus><span class="desktop-menu-group desktop-menu-group-closed" aria-hidden="true"><span class="desktop-menu-icon"></span><span data-i18n="nav.menu">Menü</span></span><span class="desktop-menu-group desktop-menu-group-open" aria-hidden="true"><span class="desktop-menu-icon"></span><span data-i18n="nav.close">Schließen</span></span></button>
+  <nav data-i18n-aria-label="nav.menuLabel" class="desktop-menu-content" aria-label="Skinmetrics Menü">
     <div class="desktop-menu-columns">
-      <div class="desktop-menu-column"><p class="desktop-menu-caption">Die App</p><a class="desktop-menu-primary" href="#top">Übersicht</a><a class="desktop-menu-primary" href="#funktionen">Funktionen</a><a class="desktop-menu-primary" href="#stimmen">Bewertungen</a></div>
-      <div class="desktop-menu-column"><p class="desktop-menu-caption">Gut zu wissen</p><a class="desktop-menu-primary" href="#datenschutz">Deine Daten</a><a class="desktop-menu-secondary" href="#fragen">Fragen &amp; Antworten</a><a class="desktop-menu-secondary" href="legal/datenschutz.html">Datenschutz</a><a class="desktop-menu-secondary" href="legal/agb.html">Nutzungsbedingungen</a><a class="desktop-menu-secondary" href="legal/impressum.html">Impressum</a></div>
+      <div class="desktop-menu-column"><p data-i18n="nav.app" class="desktop-menu-caption">Die App</p><a data-i18n="nav.overview" class="desktop-menu-primary" href="#top">Übersicht</a><a data-i18n="nav.features" class="desktop-menu-primary" href="#funktionen">Funktionen</a><a data-i18n="nav.reviews" class="desktop-menu-primary" href="#stimmen">Bewertungen</a><button class="desktop-menu-primary language-menu-link" type="button" data-language-open aria-haspopup="dialog" aria-controls="language-dialog"><span data-i18n="language.label">Sprache</span><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="m6 3 5 5-5 5"/></svg></button></div>
+      <div class="desktop-menu-column"><p data-i18n="nav.goodToKnow" class="desktop-menu-caption">Gut zu wissen</p><a data-i18n="nav.data" class="desktop-menu-primary" href="#datenschutz">Deine Daten</a><a data-i18n="nav.faq" class="desktop-menu-secondary" href="#fragen">Fragen &amp; Antworten</a><a data-i18n="nav.privacy" class="desktop-menu-secondary" href="legal/datenschutz.html">Datenschutz</a><a data-i18n="nav.terms" class="desktop-menu-secondary" href="legal/agb.html">Nutzungsbedingungen</a><a data-i18n="nav.imprint" class="desktop-menu-secondary" href="legal/impressum.html">Impressum</a></div>
     </div>
-    <div class="desktop-menu-footer"><div class="desktop-menu-contact"><p class="desktop-menu-caption">Kontakt</p><a href="mailto:hello@q-systems.app">hello@q-systems.app</a></div><a href="#laden">Für iPhone <span aria-hidden="true">↗</span></a></div>
+    <div class="desktop-menu-footer"><div class="desktop-menu-contact"><p data-i18n="nav.contact" class="desktop-menu-caption">Kontakt</p><a href="mailto:hello@q-systems.app">hello@q-systems.app</a></div><a data-i18n="nav.iphone" href="#laden">Für iPhone <span aria-hidden="true">↗</span></a></div>
   </nav>
   </div>
 </div>
 
 <header class="site-header mobile-version">
-  <nav class="site-nav mobile-nav" id="mobile-nav" aria-label="Navigation">
-    <a href="#top" class="brand" aria-label="Skinmetrics Startseite"><img src="assets/img/app-icon.png" alt="" width="28" height="28" />Skinmetrics</a>
-    <div class="nav-links"><a href="#funktionen">Die App</a><a href="#datenschutz">Datenschutz</a></div>
-    <a href="legal/datenschutz.html" class="button button-small" data-magnetic>Datenschutz <span aria-hidden="true">↗</span></a>
+  <nav data-i18n-aria-label="nav.navigation" class="site-nav mobile-nav" id="mobile-nav" aria-label="Navigation">
+    <a data-i18n-aria-label="nav.home" href="#top" class="brand" aria-label="Skinmetrics Startseite"><img src="assets/img/app-icon.png" alt="" width="28" height="28" />Skinmetrics</a>
+    <div class="nav-links"><a data-i18n="nav.app" href="#funktionen">Die App</a><a data-i18n="nav.privacy" href="#datenschutz">Datenschutz</a></div>
+    <button class="language-trigger mobile-language-trigger" type="button" data-language-open aria-haspopup="dialog" aria-controls="language-dialog" data-i18n-aria-label="language.label" aria-label="Sprache"><span data-language-current>Deutsch</span></button>
+    <a href="legal/datenschutz.html" class="button button-small" data-magnetic><span class="mobile-privacy-label" data-i18n="nav.privacy">Datenschutz</span><span aria-hidden="true">↗</span></a>
   </nav>
 </header>
 <main id="main">
-  <section class="hero promo derma-hero" aria-label="Skinmetrics für iPhone" data-pointer-stage>
-    <div class="hero-glow desktop-version" aria-hidden="true"></div>
-    <div class="promo-copy"><div class="hero-desktop"><h1 class="display">Skinmetrics</h1><p class="hero-subtitle"><span>Deine Haut verstehen.</span> <span>Deine Routine verbessern.</span></p>
-      <div class="section-cta hero-stores">
-        <a href="#laden" class="store-badge hero-store-badge" data-magnetic><img src="assets/img/app-store-badge-de.svg" width="150" height="50" alt="Laden im App Store" /></a>
-        <div class="hero-play-store" data-google-play hidden>
-          <button class="play-store-badge" type="button" disabled aria-label="Google Play – noch nicht verfügbar"><img src="assets/img/google-play-badge-de.png" width="646" height="250" alt="" /></button>
-        </div>
+  <section class="hero6" id="hero6" data-i18n-aria-label="hero.label" aria-label="Skinmetrics">
+    <i class="hero6-glow cool" aria-hidden="true"></i><i class="hero6-glow warm" aria-hidden="true"></i>
+    <i class="hero6-flash" aria-hidden="true"></i>
+    <h1 class="hero6-h1"><span data-i18n="hero.headlinePrefix">Starte dein </span><span class="gl" data-i18n="hero.headlineAccent">Glow-up.</span></h1>
+    <div class="hero6-photo" aria-hidden="true" data-photo>
+      <img class="before" data-img="before" src="assets/img/hero/f/before-body.webp" width="1122" height="1402" alt="" fetchpriority="high" decoding="async" />
+      <img class="after" data-img="after" src="assets/img/hero/f/after.webp" width="1122" height="1402" alt="" decoding="async" />
+      <i class="bloom"></i>
+      <i class="line"></i>
+    </div>
+    <div class="hero6-foot">
+      <div class="hero6-cta">
+        <a href="#laden" class="store-badge hero-store-badge"><img src="assets/img/app-store-badge-de.svg" width="150" height="50" data-i18n-alt="hero.appStore" alt="Laden im App Store" /></a>
+        <div class="hero-play-store" data-google-play hidden><button class="play-store-badge" type="button" disabled data-i18n-aria-label="hero.googlePlay" aria-label="Google Play, noch nicht verfügbar"><img src="assets/img/google-play-badge-de.png" width="646" height="250" alt="" /></button></div>
       </div>
-    </div></div>
-    <div class="promo-art" data-tilt-area><figure class="hero-shot" data-tilt="5">
-      <img src="assets/img/product/hero.png" alt="Skinmetrics auf drei iPhones: Verlauf, Hautscore und Routine" width="1400" height="1065" fetchpriority="high" decoding="async" />
-    </figure></div>
+    </div>
+    <p class="hero6-credit" data-i18n="hero.credit">Beispielbild, KI-generiert</p>
+    <div class="hero6-switch" role="group" data-i18n-aria-label="hero.switchGroup" aria-label="Version wählen"><button type="button" data-g="f" aria-pressed="true" data-i18n-aria-label="hero.switchFemale" data-i18n-title="hero.switchFemaleTitle" aria-label="Version mit ihr" title="Sie"><i></i></button><button type="button" data-g="m" aria-pressed="false" data-i18n-aria-label="hero.switchMale" data-i18n-title="hero.switchMaleTitle" aria-label="Version mit ihm" title="Er"><i></i></button></div>
   </section>
 
-  <section class="section tight statement-band desktop-version"><div class="container"><div class="statement-inner"><h2 class="headline statement-headline is-done">Verstehe deine Haut.<br><span class="grad-accent">Verbessere deine Routine jeden Tag.</span></h2><p class="sub lead-copy statement-lead is-visible">Foto machen, KI-Analyse erhalten und Veränderungen über Wochen verfolgen.</p></div></div></section>
+  <section class="skin-steps" id="so-funktionierts" aria-labelledby="skin-steps-title">
+    <div class="skin-steps-inner">
+      <header class="skin-steps-heading">
+        <p class="skin-steps-eyebrow" data-i18n="steps.eyebrow">SO FUNKTIONIERT’S</p>
+        <h2 id="skin-steps-title" data-i18n="steps.title">Deine Haut. Ein guter Anfang.</h2>
+      </header>
+      <ol class="skin-steps-list">
+        <li class="skin-step">
+          <div class="skin-step-visual skin-step-scan" aria-hidden="true">
+            <div class="skin-artboard skin-scan-scene">
+              <div class="skin-scan-orbit"></div>
+              <div class="skin-camera">
+                <img src="assets/img/hero/f/before-body.webp" alt="" width="1122" height="1402" loading="lazy" decoding="async" />
+                <svg class="skin-camera-overlay" viewBox="0 0 128 164" fill="none"><path d="M21 47V33h14m58 0h14v14M21 112v14h14m58 0h14v-14"/><path class="skin-face-guide" d="M64 43c-21 0-30 15-28 36s12 36 28 36 26-15 28-36-7-36-28-36Z"/><path class="skin-scan-beam" d="M15 82h98"/><circle cx="42" cy="82" r="2"/><circle cx="85" cy="82" r="2"/></svg>
+                <span class="skin-camera-lens"></span>
+              </div>
+              <div class="skin-scan-chip"><svg viewBox="0 0 24 24" fill="none"><path d="M8 3H4a1 1 0 0 0-1 1v4m13-5h4a1 1 0 0 1 1 1v4M3 16v4a1 1 0 0 0 1 1h4m8 0h4a1 1 0 0 0 1-1v-4m-14-4 3 3 6-6"/></svg><span><i></i><i></i></span></div>
+            </div>
+          </div>
+          <div class="skin-step-meta"><span aria-hidden="true">01</span><span class="skin-step-rule"></span></div>
+          <h3 data-i18n="steps.scanTitle">Ein Foto. Dein Start.</h3>
+          <p data-i18n="steps.scanBody">Nimm ein Foto auf und lerne deine Haut mit einer Analyse besser kennen.</p>
+        </li>
+        <li class="skin-step">
+          <div class="skin-step-visual skin-step-routine" aria-hidden="true">
+            <div class="skin-artboard skin-products-scene">
+              <div class="skin-product-disc"></div>
+              <div class="skin-bottle skin-bottle-pump"><span class="skin-pump-head"></span><span class="skin-pump-neck"></span><div class="skin-bottle-body"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3C10 7 6 11 6 15a6 6 0 0 0 12 0c0-4-4-8-6-12Z"/></svg><i></i><i></i></div></div>
+              <div class="skin-bottle skin-bottle-serum"><span class="skin-dropper-tip"></span><span class="skin-dropper-cap"></span><div class="skin-bottle-body"><span class="skin-product-label"><i></i><i></i><i></i></span></div></div>
+              <div class="skin-cream"><span class="skin-cream-lid"></span><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></div>
+              <span class="skin-products-check"><svg viewBox="0 0 24 24" fill="none"><path d="m6 12 4 4 8-8"/></svg></span>
+            </div>
+          </div>
+          <div class="skin-step-meta"><span aria-hidden="true">02</span><span class="skin-step-rule"></span></div>
+          <h3 data-i18n="steps.routineTitle">Skincare, die zu dir passt.</h3>
+          <p data-i18n="steps.routineBody">Finde deine persönliche Pflegeroutine. Für deinen Morgen und deinen Abend.</p>
+        </li>
+        <li class="skin-step">
+          <div class="skin-step-visual skin-step-progress" aria-hidden="true">
+            <div class="skin-artboard skin-progress-scene">
+              <div class="skin-trend-card">
+                <div class="skin-trend-header"><span><i></i><i></i></span><svg viewBox="0 0 24 24" fill="none"><path d="m5 16 6-6 4 4 5-8m-6 0h6v6"/></svg></div>
+                <svg class="skin-trend-chart" viewBox="0 0 220 100" fill="none"><defs><linearGradient id="skin-trend-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#95b49a" stop-opacity=".3"/><stop offset="1" stop-color="#95b49a" stop-opacity="0"/></linearGradient></defs><path class="skin-chart-grid" d="M8 25h204M8 55h204M8 85h204"/><path fill="url(#skin-trend-fill)" d="M8 77C29 77 27 60 49 64s27-21 48-17 28 6 44-11 31-2 47-12 15-10 24-10v77H8Z"/><path class="skin-chart-line" d="M8 77C29 77 27 60 49 64s27-21 48-17 28 6 44-11 31-2 47-12 15-10 24-10"/><circle class="skin-chart-halo" cx="212" cy="14" r="7"/><circle class="skin-chart-point" cx="212" cy="14" r="3"/></svg>
+                <div class="skin-trend-history"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              </div>
+              <div class="skin-trend-badge"><svg viewBox="0 0 24 24" fill="none"><path d="m6 15 6-6 6 6M12 9v11"/></svg><span><i></i><i></i></span></div>
+            </div>
+          </div>
+          <div class="skin-step-meta"><span aria-hidden="true">03</span><span class="skin-step-rule"></span></div>
+          <h3 data-i18n="steps.progressTitle">Dranbleiben. Veränderung sehen.</h3>
+          <p data-i18n="steps.progressBody">Vergleiche deine Check-ins und entdecke, wie sich deine Haut über die Zeit entwickelt.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
   <!-- FEATURE EXPLORER (segmented tabs) -->
   <section class="section features" id="funktionen" aria-labelledby="features-title">
     <div class="container">
-      <h2 class="headline" id="features-title"><span class="desktop-version">Eine App. Deine ganze Routine.</span><span class="mobile-version">Alles an einem Ort.</span></h2>
+      <h2 class="headline" id="features-title"><span data-i18n="features.desktopTitle" class="desktop-version">Eine App. Deine ganze Routine.</span><span data-i18n="features.mobileTitle" class="mobile-version">Alles an einem Ort.</span></h2>
     </div>
     <div class="container wide explorer-wrap">
       <div class="explorer" data-explorer>
         <div class="explorer-tabs">
-          <div class="seg" role="tablist" aria-label="App-Ansichten">
-            <button type="button" role="tab" id="tab-analysis" aria-controls="panel-analysis">Analyse</button>
-            <button type="button" role="tab" id="tab-routine" aria-controls="panel-routine">Routine</button>
-            <button type="button" role="tab" id="tab-progress" aria-controls="panel-progress">Verlauf</button>
+          <div data-i18n-aria-label="features.views" class="seg" role="tablist" aria-label="App-Ansichten">
+            <button data-i18n="features.analysis" type="button" role="tab" id="tab-analysis" aria-controls="panel-analysis">Analyse</button>
+            <button data-i18n="features.routine" type="button" role="tab" id="tab-routine" aria-controls="panel-routine">Routine</button>
+            <button data-i18n="features.progress" type="button" role="tab" id="tab-progress" aria-controls="panel-progress">Verlauf</button>
           </div>
         </div>
         <div class="xp-panels">
@@ -80,12 +144,12 @@
           <div class="xp-panel on" role="tabpanel" id="panel-analysis" aria-labelledby="tab-analysis">
             <div class="xp-art">
               <figure class="feature-shot">
-                <img src="assets/img/product/analysis.png" alt="Skinmetrics: Detailreiche Analyse mit Skin-Score, Kennzahlen und Hautzonen" width="540" height="1114" loading="lazy" decoding="async">
+                <img data-i18n-alt="features.analysisAlt" src="assets/img/product/analysis.png" alt="Skinmetrics: Detailreiche Analyse mit Skin-Score, Kennzahlen und Hautzonen" width="540" height="1114" loading="lazy" decoding="async">
               </figure>
             </div>
             <div class="xp-copy">
-              <span class="eyebrow desktop-version">Detailreiche Analyse</span><h3><span class="desktop-version">Versteh deine Haut — nicht nur eine Zahl.</span><span class="mobile-version">Deine Haut in Zahlen.</span></h3>
-              <p><span class="desktop-version">Nach jedem Check-in bekommst du deinen Skin-Score und die Kennzahlen zu Klarheit, Textur, Feuchtigkeit, Rötung und Ebenheit.</span><span class="mobile-version">Hautscore und fünf Kennzahlen nach jedem Scan.</span></p>
+              <span data-i18n="features.analysisEyebrow" class="eyebrow desktop-version">Detailreiche Analyse</span><h3><span data-i18n="features.analysisTitle" class="desktop-version">Versteh deine Haut — nicht nur eine Zahl.</span><span data-i18n="features.analysisMobileTitle" class="mobile-version">Deine Haut in Zahlen.</span></h3>
+              <p><span data-i18n="features.analysisBody" class="desktop-version">Nach jedem Check-in bekommst du deinen Skin-Score und die Kennzahlen zu Klarheit, Textur, Feuchtigkeit, Rötung und Ebenheit.</span><span data-i18n="features.analysisMobileBody" class="mobile-version">Hautscore und fünf Kennzahlen nach jedem Scan.</span></p>
             </div>
           </div>
 
@@ -93,12 +157,12 @@
           <div class="xp-panel" role="tabpanel" id="panel-routine" aria-labelledby="tab-routine">
             <div class="xp-art">
               <figure class="feature-shot">
-                <img src="assets/img/product/routine.png" alt="Skinmetrics: Personalisierte Skincare-Routine mit Morgens- und Abends-Schritten" width="540" height="1114" loading="lazy" decoding="async">
+                <img data-i18n-alt="features.routineAlt" src="assets/img/product/routine.png" alt="Skinmetrics: Personalisierte Skincare-Routine mit Morgens- und Abends-Schritten" width="540" height="1114" loading="lazy" decoding="async">
               </figure>
             </div>
             <div class="xp-copy">
-              <span class="eyebrow desktop-version">Personalisierte Skincare</span><h3><span class="desktop-version">Deine Routine — abgestimmt auf deine Haut.</span><span class="mobile-version">Deine tägliche Routine.</span></h3>
-              <p><span class="desktop-version">Morgens und abends: Reiniger, Serum, Feuchtigkeitspflege und Sonnenschutz — alles an einem Ort. Hake erledigte Schritte ab.</span><span class="mobile-version">Deine Produkte und Pflegeschritte. Morgens und abends.</span></p>
+              <span data-i18n="features.routineEyebrow" class="eyebrow desktop-version">Personalisierte Skincare</span><h3><span data-i18n="features.routineTitle" class="desktop-version">Deine Routine — abgestimmt auf deine Haut.</span><span data-i18n="features.routineMobileTitle" class="mobile-version">Deine tägliche Routine.</span></h3>
+              <p><span data-i18n="features.routineBody" class="desktop-version">Morgens und abends: Reiniger, Serum, Feuchtigkeitspflege und Sonnenschutz — alles an einem Ort. Hake erledigte Schritte ab.</span><span data-i18n="features.routineMobileBody" class="mobile-version">Deine Produkte und Pflegeschritte. Morgens und abends.</span></p>
             </div>
           </div>
 
@@ -106,12 +170,12 @@
           <div class="xp-panel" role="tabpanel" id="panel-progress" aria-labelledby="tab-progress">
             <div class="xp-art">
               <figure class="feature-shot">
-                <img src="assets/img/product/progress.png" alt="Skinmetrics: Fortschritt mit Hautscore und Kennzahlen" width="540" height="1114" loading="lazy" decoding="async">
+                <img data-i18n-alt="features.progressAlt" src="assets/img/product/progress.png" alt="Skinmetrics: Fortschritt mit Hautscore und Kennzahlen" width="540" height="1114" loading="lazy" decoding="async">
               </figure>
             </div>
             <div class="xp-copy">
-              <span class="eyebrow desktop-version">Fortschritt</span><h3><span class="desktop-version">Dein Skin-Score — immer im Blick.</span><span class="mobile-version">Veränderungen erkennen.</span></h3>
-              <p><span class="desktop-version">Hautscore, Kennzahlen und Radar-Chart zeigen dir, wie sich deine Haut entwickelt. Vergleiche deine Check-ins und erkenne Trends.</span><span class="mobile-version">Vergleiche deine Scans über Wochen.</span></p>
+              <span data-i18n="features.progressEyebrow" class="eyebrow desktop-version">Fortschritt</span><h3><span data-i18n="features.progressTitle" class="desktop-version">Dein Skin-Score — immer im Blick.</span><span data-i18n="features.progressMobileTitle" class="mobile-version">Veränderungen erkennen.</span></h3>
+              <p><span data-i18n="features.progressBody" class="desktop-version">Hautscore, Kennzahlen und Radar-Chart zeigen dir, wie sich deine Haut entwickelt. Vergleiche deine Check-ins und erkenne Trends.</span><span data-i18n="features.progressMobileBody" class="mobile-version">Vergleiche deine Scans über Wochen.</span></p>
             </div>
           </div>
 
@@ -120,82 +184,95 @@
     </div>
   </section>
 
-  <section class="section gray privacy" id="datenschutz" aria-label="Datenschutz"><div class="privacy-content">    <div class="container">
-      <h2 class="headline" id="privacy-title"><span class="desktop-version">Datenschutz</span><span class="mobile-version">Deine Haut. Deine Daten.</span></h2>
-      <p class="sub lead-copy mobile-version" style="margin-top:14px">Deine Hautdaten sind persönlich. So gehen wir damit um.</p>
+  <section data-i18n-aria-label="nav.privacy" class="section gray privacy" id="datenschutz" aria-label="Datenschutz"><div class="privacy-content">    <div class="container">
+      <h2 class="headline" id="privacy-title"><span data-i18n="nav.privacy" class="desktop-version">Datenschutz</span><span data-i18n="privacy.mobileTitle" class="mobile-version">Deine Haut. Deine Daten.</span></h2>
+      <p data-i18n="privacy.intro" class="sub lead-copy mobile-version" style="margin-top:14px">Deine Hautdaten sind persönlich. So gehen wir damit um.</p>
     </div>
 
     <div class="container wide " style="margin-top:48px">
       <div class="priv-grid">
         <div class="cell">
           <div class="bemoji"><svg class="ic" aria-hidden="true"><use href="#ic-lock"/></svg></div>
-          <h3>Lokal verschlüsselt</h3>
-          <p>Dein Verlauf und deine Routine liegen verschlüsselt auf deinem iPhone. Ohne Konto.</p>
+          <h3 data-i18n="privacy.localTitle">Lokal verschlüsselt</h3>
+          <p data-i18n="privacy.localBody">Dein Verlauf und deine Routine liegen verschlüsselt auf deinem iPhone. Ohne Konto.</p>
         </div>
         <div class="cell">
           <div class="bemoji"><svg class="ic" aria-hidden="true"><use href="#ic-shield"/></svg></div>
-          <h3>Nur mit deiner Zustimmung</h3>
-          <p>Für die KI-Analyse gehen dein Foto und relevante Profilangaben nur mit deiner ausdrücklichen Zustimmung über einen Vermittlungsdienst an gehostete KI-Modelle (OpenRouter).</p>
+          <h3 data-i18n="privacy.consentTitle">Nur mit deiner Zustimmung</h3>
+          <p data-i18n="privacy.consentBody">Für die KI-Analyse gehen dein Foto und relevante Profilangaben mit deiner Zustimmung über unseren Vermittlungsdienst an KI-Modelle in den USA.</p>
         </div>
         <div class="cell">
           <div class="bemoji"><svg class="ic" aria-hidden="true"><use href="#ic-trash"/></svg></div>
-          <h3>Du behältst die Kontrolle</h3>
-          <p>Du kannst deine lokalen Daten jederzeit löschen. Der Export (JSON und Fotos) ist für alle kostenlos.</p>
+          <h3 data-i18n="privacy.controlTitle">Du behältst die Kontrolle</h3>
+          <p data-i18n="privacy.controlBody">Du kannst deine lokalen Daten jederzeit löschen. Ein Textexport ist mit Premium möglich.</p>
         </div>
         <div class="cell">
           <div class="bemoji"><svg class="ic" aria-hidden="true"><use href="#ic-ban"/></svg></div>
-          <h3>Keine Werbung</h3>
-          <p>Kein Werbe-Tracking und kein Weiterverkauf deiner Daten.</p>
+          <h3 data-i18n="privacy.adsTitle">Keine Werbung</h3>
+          <p data-i18n="privacy.adsBody">Kein Werbe-Tracking und kein Weiterverkauf deiner Daten.</p>
         </div>
       </div>
-      <div class="section-cta " style="margin-top:40px"><a href="legal/datenschutz.html?v=48" class="link" style="font-size:19px">Vollständige Datenschutzerklärung</a></div>
+      <div class="section-cta " style="margin-top:40px"><a data-i18n="privacy.full" href="legal/datenschutz.html?v=48" class="link" style="font-size:19px">Vollständige Datenschutzerklärung</a></div>
     </div>
     </div>
   </section>
   <section class="section desktop-version feedback" id="stimmen" aria-labelledby="reviews-title">
-    <div class="container feedback-head"><h2 class="headline" id="reviews-title">Stimmen zur App.</h2></div>
-    <div class="rev-marquee" id="reviews-ribbon" data-reviews-marquee tabindex="0" aria-label="Beispielbewertungen, Animation pausiert bei Fokus"><div class="rev-track"><div class="rev-set"><div class="review"><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div><p>„Ich checke meine Haut jetzt jeden Abend — der Skin-Score ist wie ein kleines Spiel, das mich motiviert dranzubleiben."</p><div class="who"><span class="av" aria-hidden="true">NW</span><div><div class="rn">Nina W.</div><div class="rm">Wien</div></div></div></div><div class="review"><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div><p>„Das Spot-Tracking hat mir gezeigt, dass mein Pickelmal wirklich langsam verblasst. Ohne die App hätte ich das nie so genau gesehen."</p><div class="who"><span class="av" aria-hidden="true">PK</span><div><div class="rn">Paul K.</div><div class="rm">Salzburg</div></div></div></div><div class="review"><div class="stars" aria-label="4 von 5 Sternen">★★★★☆</div><p>„Sehr durchdacht gemacht. Nur die Analyse dauert manchmal ein paar Sekunden länger, als ich erwartet hätte."</p><div class="who"><span class="av" aria-hidden="true">MS</span><div><div class="rn">Michaela S.</div><div class="rm">Graz</div></div></div></div><div class="review"><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div><p>„Endlich eine App, die ehrlich sagt, was mit meinen Fotos passiert. Kein Konto, keine Werbung — genau mein Ding."</p><div class="who"><span class="av" aria-hidden="true">FB</span><div><div class="rn">Felix B.</div><div class="rm">Linz</div></div></div></div><div class="review"><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div><p>„Die Routine mit Morgens- und Abends-Schritten ist super übersichtlich. Endlich vergesse ich keinen Schritt mehr."</p><div class="who"><span class="av" aria-hidden="true">KF</span><div><div class="rn">Katharina F.</div><div class="rm">Klagenfurt</div></div></div></div><div class="review"><div class="stars" aria-label="5 von 5 Sternen">★★★★★</div><p>„Radar-Chart und Skin-Score zeigen mir Trends, die ich im Spiegel nie bemerkt hätte."</p><div class="who"><span class="av" aria-hidden="true">AK</span><div><div class="rn">Anna-Lena K.</div><div class="rm">Salzburg</div></div></div></div></div><div class="rev-set" aria-hidden="true"><div class="review"><div class="stars">★★★★★</div><p>„Ich checke meine Haut jetzt jeden Abend — der Skin-Score ist wie ein kleines Spiel, das mich motiviert dranzubleiben."</p><div class="who"><span class="av" aria-hidden="true">NW</span><div><div class="rn">Nina W.</div><div class="rm">Wien</div></div></div></div><div class="review"><div class="stars">★★★★★</div><p>„Das Spot-Tracking hat mir gezeigt, dass mein Pickelmal wirklich langsam verblasst. Ohne die App hätte ich das nie so genau gesehen."</p><div class="who"><span class="av" aria-hidden="true">PK</span><div><div class="rn">Paul K.</div><div class="rm">Salzburg</div></div></div></div><div class="review"><div class="stars">★★★★☆</div><p>„Sehr durchdacht gemacht. Nur die Analyse dauert manchmal ein paar Sekunden länger, als ich erwartet hätte."</p><div class="who"><span class="av" aria-hidden="true">MS</span><div><div class="rn">Michaela S.</div><div class="rm">Graz</div></div></div></div><div class="review"><div class="stars">★★★★★</div><p>„Endlich eine App, die ehrlich sagt, was mit meinen Fotos passiert. Kein Konto, keine Werbung — genau mein Ding."</p><div class="who"><span class="av" aria-hidden="true">FB</span><div><div class="rn">Felix B.</div><div class="rm">Linz</div></div></div></div><div class="review"><div class="stars">★★★★★</div><p>„Die Routine mit Morgens- und Abends-Schritten ist super übersichtlich. Endlich vergesse ich keinen Schritt mehr."</p><div class="who"><span class="av" aria-hidden="true">KF</span><div><div class="rn">Katharina F.</div><div class="rm">Klagenfurt</div></div></div></div><div class="review"><div class="stars">★★★★★</div><p>„Radar-Chart und Skin-Score zeigen mir Trends, die ich im Spiegel nie bemerkt hätte."</p><div class="who"><span class="av" aria-hidden="true">AK</span><div><div class="rn">Anna-Lena K.</div><div class="rm">Salzburg</div></div></div></div></div></div></div>
+    <div class="container feedback-head"><h2 data-i18n="reviews.title" class="headline" id="reviews-title">Stimmen zur App.</h2></div>
+    <div data-i18n-aria-label="reviews.label" class="rev-marquee" id="reviews-ribbon" data-reviews-marquee tabindex="0" aria-label="Beispielbewertungen, Animation pausiert bei Fokus"><div class="rev-track"><div class="rev-set"><div class="review"><div data-i18n-aria-label="reviews.fiveStars" class="stars" aria-label="5 von 5 Sternen">★★★★★</div><p data-i18n="reviews.one">„Ich checke meine Haut jetzt jeden Abend — der Skin-Score ist wie ein kleines Spiel, das mich motiviert dranzubleiben."</p><div class="who"><span class="av" aria-hidden="true">NW</span><div><div class="rn">Nina W.</div><div class="rm">Wien</div></div></div></div><div class="review"><div data-i18n-aria-label="reviews.fiveStars" class="stars" aria-label="5 von 5 Sternen">★★★★★</div><p data-i18n="reviews.two">„Das Spot-Tracking hat mir gezeigt, dass mein Pickelmal wirklich langsam verblasst. Ohne die App hätte ich das nie so genau gesehen."</p><div class="who"><span class="av" aria-hidden="true">PK</span><div><div class="rn">Paul K.</div><div class="rm">Salzburg</div></div></div></div><div class="review"><div data-i18n-aria-label="reviews.fourStars" class="stars" aria-label="4 von 5 Sternen">★★★★☆</div><p data-i18n="reviews.three">„Sehr durchdacht gemacht. Nur die Analyse dauert manchmal ein paar Sekunden länger, als ich erwartet hätte."</p><div class="who"><span class="av" aria-hidden="true">MS</span><div><div class="rn">Michaela S.</div><div class="rm">Graz</div></div></div></div><div class="review"><div data-i18n-aria-label="reviews.fiveStars" class="stars" aria-label="5 von 5 Sternen">★★★★★</div><p data-i18n="reviews.four">„Endlich eine App, die ehrlich sagt, was mit meinen Fotos passiert. Kein Konto, keine Werbung — genau mein Ding."</p><div class="who"><span class="av" aria-hidden="true">FB</span><div><div class="rn">Felix B.</div><div class="rm">Linz</div></div></div></div><div class="review"><div data-i18n-aria-label="reviews.fiveStars" class="stars" aria-label="5 von 5 Sternen">★★★★★</div><p data-i18n="reviews.five">„Die Routine mit Morgens- und Abends-Schritten ist super übersichtlich. Endlich vergesse ich keinen Schritt mehr."</p><div class="who"><span class="av" aria-hidden="true">KF</span><div><div class="rn">Katharina F.</div><div class="rm">Klagenfurt</div></div></div></div><div class="review"><div data-i18n-aria-label="reviews.fiveStars" class="stars" aria-label="5 von 5 Sternen">★★★★★</div><p data-i18n="reviews.six">„Radar-Chart und Skin-Score zeigen mir Trends, die ich im Spiegel nie bemerkt hätte."</p><div class="who"><span class="av" aria-hidden="true">AK</span><div><div class="rn">Anna-Lena K.</div><div class="rm">Salzburg</div></div></div></div></div><div class="rev-set" aria-hidden="true"><div class="review"><div class="stars">★★★★★</div><p data-i18n="reviews.one">„Ich checke meine Haut jetzt jeden Abend — der Skin-Score ist wie ein kleines Spiel, das mich motiviert dranzubleiben."</p><div class="who"><span class="av" aria-hidden="true">NW</span><div><div class="rn">Nina W.</div><div class="rm">Wien</div></div></div></div><div class="review"><div class="stars">★★★★★</div><p data-i18n="reviews.two">„Das Spot-Tracking hat mir gezeigt, dass mein Pickelmal wirklich langsam verblasst. Ohne die App hätte ich das nie so genau gesehen."</p><div class="who"><span class="av" aria-hidden="true">PK</span><div><div class="rn">Paul K.</div><div class="rm">Salzburg</div></div></div></div><div class="review"><div class="stars">★★★★☆</div><p data-i18n="reviews.three">„Sehr durchdacht gemacht. Nur die Analyse dauert manchmal ein paar Sekunden länger, als ich erwartet hätte."</p><div class="who"><span class="av" aria-hidden="true">MS</span><div><div class="rn">Michaela S.</div><div class="rm">Graz</div></div></div></div><div class="review"><div class="stars">★★★★★</div><p data-i18n="reviews.four">„Endlich eine App, die ehrlich sagt, was mit meinen Fotos passiert. Kein Konto, keine Werbung — genau mein Ding."</p><div class="who"><span class="av" aria-hidden="true">FB</span><div><div class="rn">Felix B.</div><div class="rm">Linz</div></div></div></div><div class="review"><div class="stars">★★★★★</div><p data-i18n="reviews.five">„Die Routine mit Morgens- und Abends-Schritten ist super übersichtlich. Endlich vergesse ich keinen Schritt mehr."</p><div class="who"><span class="av" aria-hidden="true">KF</span><div><div class="rn">Katharina F.</div><div class="rm">Klagenfurt</div></div></div></div><div class="review"><div class="stars">★★★★★</div><p data-i18n="reviews.six">„Radar-Chart und Skin-Score zeigen mir Trends, die ich im Spiegel nie bemerkt hätte."</p><div class="who"><span class="av" aria-hidden="true">AK</span><div><div class="rn">Anna-Lena K.</div><div class="rm">Salzburg</div></div></div></div></div></div></div>
   </section>
   <section class="section questions" id="fragen" aria-labelledby="faq-title">
     <div class="container faq-layout">
-      <h2 class="headline" id="faq-title">Noch Fragen?</h2>
+      <h2 data-i18n="faq.title" class="headline" id="faq-title">Noch Fragen?</h2>
       <div class="faq-list is-collapsed">
-        <details class="desktop-version"><summary>Brauche ich ein Konto?<span aria-hidden="true">+</span></summary><p>Nein. Du kannst Skinmetrics ohne Registrierung und ohne Login verwenden.</p></details>
-        <details><summary>Wie funktioniert die Hautanalyse?<span aria-hidden="true">+</span></summary><p>Du fotografierst deine Haut. Mit deiner Zustimmung werden das Foto und relevante Profilangaben über einen Vermittlungsdienst von gehosteten KI-Modellen analysiert (OpenRouter; Meta Llama, Alibaba Qwen). Das Ergebnis kannst du anschließend in der App ansehen.</p></details>
-        <details><summary>Was zeigt mir der Hautscore?<span aria-hidden="true">+</span></summary><p>Der Hautscore fasst die KI-Einschätzung deiner Haut zusammen. Einzelne Kennzahlen und dein Verlauf helfen dir beim Vergleichen. Die Einschätzung kann ungenau sein und ist keine medizinische Messung.</p></details>
-        <details><summary>Wie mache ich gut vergleichbare Fotos?<span aria-hidden="true">+</span></summary><p>Fotografiere möglichst immer bei ähnlichem Licht, aus derselben Entfernung und im gleichen Winkel. Vermeide Filter, starke Schatten und direktes Gegenlicht. Unterschiedliche Aufnahmebedingungen können das Ergebnis beeinflussen.</p></details>
+        <details class="desktop-version"><summary data-i18n="faq.accountQ">Brauche ich ein Konto?<span aria-hidden="true">+</span></summary><p data-i18n="faq.accountA">Nein. Du kannst Skinmetrics ohne Registrierung und ohne Login verwenden.</p></details>
+        <details><summary data-i18n="faq.analysisQ">Wie funktioniert die Hautanalyse?<span aria-hidden="true">+</span></summary><p data-i18n="faq.analysisA">Du fotografierst deine Haut. Mit deiner Zustimmung werden das Foto und relevante Profilangaben über unseren Vermittlungsdienst von KI-Modellen analysiert. Das Ergebnis kannst du anschließend in der App ansehen.</p></details>
+        <details><summary data-i18n="faq.scoreQ">Was zeigt mir der Hautscore?<span aria-hidden="true">+</span></summary><p data-i18n="faq.scoreA">Der Hautscore fasst die KI-Einschätzung deiner Haut zusammen. Einzelne Kennzahlen und dein Verlauf helfen dir beim Vergleichen. Die Einschätzung kann ungenau sein und ist keine medizinische Messung.</p></details>
+        <details><summary data-i18n="faq.photosQ">Wie mache ich gut vergleichbare Fotos?<span aria-hidden="true">+</span></summary><p data-i18n="faq.photosA">Fotografiere möglichst immer bei ähnlichem Licht, aus derselben Entfernung und im gleichen Winkel. Vermeide Filter, starke Schatten und direktes Gegenlicht. Unterschiedliche Aufnahmebedingungen können das Ergebnis beeinflussen.</p></details>
         <div id="faq-rest">
-        <details class="faq-extra"><summary>Brauche ich eine Internetverbindung?<span aria-hidden="true">+</span></summary><p>Für eine neue KI-Analyse ja: Das Foto wird übermittelt (Vermittlungsdienst, OpenRouter). Deine bereits gespeicherten Verläufe und deine Routine liegen auf deinem iPhone.</p></details>
-        <details class="faq-extra desktop-version"><summary>Wo werden meine Fotos gespeichert?<span aria-hidden="true">+</span></summary><p>Dein gespeicherter Fotoverlauf liegt lokal auf deinem iPhone. Ein iPhone-Backup kann auch diese App-Daten enthalten. Für eine KI-Analyse wird eine verkleinerte Kopie des jeweiligen Fotos an unseren Vermittlungsdienst übertragen.</p></details>
-        <details class="faq-extra"><summary>Welche Daten gehen an die KI?<span aria-hidden="true">+</span></summary><p>Neben dem Foto werden relevante Angaben aus deinem Profil übertragen, etwa Hauttyp, Hautziele, Routine und Angaben zu Allergien oder Schwangerschaft, sofern du sie gemacht hast. Antworten zu Hautkrebs-Historie und chronischen Erkrankungen bleiben auf dem Gerät. Das geschieht für die KI-Analyse. <a href="legal/datenschutz.html#ds-skinmetrics">Details zum Datenschutz.</a></p></details>
-        <details class="faq-extra desktop-version"><summary>Werden meine Daten zwischen Geräten synchronisiert?<span aria-hidden="true">+</span></summary><p>Aktuell gibt es keine iCloud- oder CloudKit-Synchronisation. Ein iPhone-Backup ist davon zu unterscheiden: Es kann deine lokal gespeicherten App-Daten sichern.</p></details>
-        <details class="faq-extra"><summary>Kann ich meine Daten exportieren oder löschen?<span aria-hidden="true">+</span></summary><p>In den Einstellungen der App kannst du deine lokalen Daten löschen. Der Export (JSON und Fotos) ist für alle kostenlos.</p></details>
-        <details class="faq-extra desktop-version"><summary>Was kann ich mit meiner Routine machen?<span aria-hidden="true">+</span></summary><p>Du kannst deine Produkte und Pflegeschritte für morgens und abends organisieren und erledigte Schritte abhaken.</p></details>
-        <details class="faq-extra"><summary>Ist das eine medizinische Diagnose?<span aria-hidden="true">+</span></summary><p>Nein. Skinmetrics hilft dir, deine Haut zu beobachten, und ersetzt keine ärztliche Beratung, Diagnose oder Behandlung.</p></details>
+        <details class="faq-extra"><summary data-i18n="faq.internetQ">Brauche ich eine Internetverbindung?<span aria-hidden="true">+</span></summary><p data-i18n="faq.internetA">Für eine neue KI-Analyse ja: Das Foto wird über unseren Vermittlungsdienst an KI-Modelle in den USA übermittelt. Deine bereits gespeicherten Verläufe und deine Routine liegen auf deinem iPhone.</p></details>
+        <details class="faq-extra desktop-version"><summary data-i18n="faq.storageQ">Wo werden meine Fotos gespeichert?<span aria-hidden="true">+</span></summary><p data-i18n="faq.storageA">Dein gespeicherter Fotoverlauf liegt lokal auf deinem iPhone. Ein iPhone-Backup kann auch diese App-Daten enthalten. Für eine KI-Analyse wird eine verkleinerte Kopie des jeweiligen Fotos über unseren Vermittlungsdienst an KI-Modelle übertragen.</p></details>
+        <details class="faq-extra"><summary data-i18n="faq.googleQ">Welche Daten gehen an die KI?<span aria-hidden="true">+</span></summary><p data-i18n="faq.googleA">Neben dem Foto werden relevante Angaben aus deinem Profil übertragen, etwa Hauttyp, Hautziele, Routine und Angaben zu Allergien oder Erkrankungen. Das geschieht für die KI-Analyse. <a data-i18n="faq.privacyLink" href="legal/datenschutz.html#ds-skinmetrics">Details zum Datenschutz.</a></p></details>
+        <details class="faq-extra desktop-version"><summary data-i18n="faq.syncQ">Werden meine Daten zwischen Geräten synchronisiert?<span aria-hidden="true">+</span></summary><p data-i18n="faq.syncA">Aktuell gibt es keine iCloud- oder CloudKit-Synchronisation. Ein iPhone-Backup ist davon zu unterscheiden: Es kann deine lokal gespeicherten App-Daten sichern.</p></details>
+        <details class="faq-extra"><summary data-i18n="faq.exportQ">Kann ich meine Daten exportieren oder löschen?<span aria-hidden="true">+</span></summary><p data-i18n="faq.exportA">In den Einstellungen der App kannst du deine lokalen Daten löschen. Der Textexport ist eine Premium-Funktion. Er enthält unter anderem Scans, Check-ins und Routinedaten; er ist kein vollständiger Fotoexport.</p></details>
+        <details class="faq-extra desktop-version"><summary data-i18n="faq.routineQ">Was kann ich mit meiner Routine machen?<span aria-hidden="true">+</span></summary><p data-i18n="faq.routineA">Du kannst deine Produkte und Pflegeschritte für morgens und abends organisieren und erledigte Schritte abhaken.</p></details>
+        <details class="faq-extra"><summary data-i18n="faq.medicalQ">Ist das eine medizinische Diagnose?<span aria-hidden="true">+</span></summary><p data-i18n="faq.medicalA">Nein. Skinmetrics hilft dir, deine Haut zu beobachten, und ersetzt keine ärztliche Beratung, Diagnose oder Behandlung.</p></details>
         </div>
-        <button class="faq-more desktop-version" type="button" data-faq-more aria-expanded="false" aria-controls="faq-rest"><span data-faq-label>Weitere Fragen</span><span class="faq-more-mark" aria-hidden="true"></span></button>
+        <button class="faq-more desktop-version" type="button" data-faq-more aria-expanded="false" aria-controls="faq-rest"><span data-i18n="faq.more" data-faq-label>Weitere Fragen</span><span class="faq-more-mark" aria-hidden="true"></span></button>
       </div>
     </div>
   </section>
   <section class="closing" id="laden" aria-labelledby="download-title">
     <div class="closing-content"><img src="assets/img/app-icon.png" width="60" height="60" class="closing-icon" alt="" loading="lazy" />
-      <h2 id="download-title">Lerne deine Haut kennen.</h2>
-      <a class="store-badge" href="https://apps.apple.com/app/id0000000000" data-magnetic><img src="assets/img/app-store-badge-de.svg" width="150" height="50" alt="Laden im App Store" /></a>
+      <h2 data-i18n="footer.download" id="download-title">Lerne deine Haut kennen.</h2>
+      <div class="closing-store-invite">
+        <span class="closing-try-note" data-i18n="footer.tryFree">Jetzt kostenlos testen!</span>
+        <a class="store-badge" href="https://apps.apple.com/app/id0000000000" data-magnetic><img data-i18n-alt="hero.appStore" src="assets/img/app-store-badge-de.svg" width="150" height="50" alt="Laden im App Store" /></a>
+      </div>
     </div>
   </section>
 </main>
 <footer class="closing-footer">
   <div class="closing-footer-inner">
     <div class="closing-footer-top"><a class="closing-brand" href="#top"><img src="assets/img/app-icon.png" alt="" width="30" height="30" />Skinmetrics</a>
-      <div class="closing-links"><nav aria-label="Produkt"><h3>Die App</h3><a href="#funktionen">Funktionen</a><a href="#laden">Für iPhone</a></nav><nav aria-label="Kontakt"><h3>Kontakt</h3><a href="mailto:hello@q-systems.app">Schreib uns</a></nav><nav aria-label="Rechtliches"><h3>Rechtliches</h3><a href="legal/datenschutz.html">Datenschutz</a><a href="legal/agb.html">Nutzungsbedingungen</a><a href="legal/impressum.html">Impressum</a></nav></div>
+      <div class="closing-links"><nav data-i18n-aria-label="footer.product" aria-label="Produkt"><h3 data-i18n="nav.app">Die App</h3><a data-i18n="nav.features" href="#funktionen">Funktionen</a><a data-i18n="nav.iphone" href="#laden">Für iPhone</a></nav><nav data-i18n-aria-label="nav.contact" aria-label="Kontakt"><h3 data-i18n="nav.contact">Kontakt</h3><a data-i18n="footer.writeUs" href="mailto:hello@q-systems.app">Schreib uns</a></nav><nav data-i18n-aria-label="footer.legal" aria-label="Rechtliches"><h3 data-i18n="footer.legal">Rechtliches</h3><a data-i18n="nav.privacy" href="legal/datenschutz.html">Datenschutz</a><a data-i18n="nav.terms" href="legal/agb.html">Nutzungsbedingungen</a><a data-i18n="nav.imprint" href="legal/impressum.html">Impressum</a></nav></div>
     </div>
     <div class="closing-wordmark" aria-hidden="true">Skinmetrics</div>
-    <div class="closing-footer-bottom"><span>© 2026 Q Systems</span><a href="#top">Zurück nach oben ↑</a></div>
+    <div class="closing-footer-bottom"><span>© 2026 Q Systems</span><button class="language-trigger footer-language-trigger" type="button" data-language-open aria-haspopup="dialog" aria-controls="language-dialog" data-i18n-aria-label="language.label" aria-label="Sprache"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c5 5 5 13 0 18-5-5-5-13 0-18"/></svg><span data-language-current>Deutsch</span></button><a data-i18n="footer.backTop" href="#top">Zurück nach oben ↑</a></div>
   </div>
 </footer>
-<script src="assets/js/desktop-nav.js?v=55"></script>
-<script src="assets/js/landing.js?v=55"></script>
-<script src="assets/js/mobile-story.js?v=55"></script>
+<dialog id="language-dialog" class="language-dialog" aria-labelledby="language-title">
+  <div class="language-panel">
+    <div class="language-panel-header"><h2 id="language-title" data-i18n="language.label">Sprache</h2><button class="language-close" type="button" data-language-close data-i18n-aria-label="language.close" aria-label="Sprachauswahl schließen"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+    <div class="language-options" data-language-options role="listbox" aria-labelledby="language-title"></div>
+  </div>
+</dialog>
+<script src="assets/js/locales.js?v=66"></script>
+<script src="assets/js/i18n.js?v=62"></script>
+<script src="assets/js/language-menu.js?v=62"></script>
+<script src="assets/js/desktop-nav.js?v=61"></script>
+<script src="assets/js/landing.js?v=61"></script>
+<script src="assets/js/mobile-story.js?v=61"></script>
+<script src="assets/js/hero6.js?v=11" defer></script>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "854a4d1ae3cc4b05836044b8bea45467"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>

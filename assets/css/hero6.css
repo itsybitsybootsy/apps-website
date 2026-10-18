@@ -1,0 +1,104 @@
+/* Desktop hero: one glow-up, shown as a before and after on a single face. */
+.hero6 { --pad:clamp(28px,4.5vw,72px); position:relative; height:100vh; height:100svh; min-height:640px; background:#070908; color:#f2f6f2; overflow:clip; isolation:isolate; }
+.hero6-h1 { position:absolute; z-index:1; left:0; right:0; top:clamp(88px,12svh,112px); margin:0; text-align:center; font-family:Outfit,-apple-system,BlinkMacSystemFont,sans-serif; font-weight:600; font-size:min(7vw,13svh); line-height:1; letter-spacing:-.055em; white-space:nowrap; }
+
+.hero6-photo { --p:100%; position:absolute; z-index:2; left:50%; bottom:0; height:72%; aspect-ratio:1122/1402; transform:translateX(calc(-50% + var(--subject-shift,0%))) scale(calc(var(--sc,1) * var(--subject-scale,1))); transform-origin:50% 8%; -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%); }
+.hero6-photo img { position:absolute; inset:0; width:100%; height:100%; user-select:none; -webkit-user-drag:none; }
+
+.hero6-foot { position:absolute; z-index:4; left:var(--pad); right:var(--pad); bottom:clamp(24px,5svh,52px); display:flex; align-items:flex-end; justify-content:flex-end; gap:32px; }
+.hero6-cta { display:flex; align-items:center; flex-wrap:wrap; gap:12px; justify-content:flex-end; --store-width:164px; --store-height:54px; }
+.hero6-cta .hero-store-badge, .hero6-cta .play-store-badge { width:var(--store-width); height:var(--store-height); border:1px solid #777; border-radius:12px; background:#000; overflow:hidden; display:inline-flex; align-items:center; justify-content:center; padding:0; margin:0; }
+.hero6-cta .hero-store-badge img { width:calc(100% - 2px); height:auto; clip-path:inset(3px 5px); }
+.hero6-cta .play-store-badge img { width:calc(100% - 2px); max-width:none; height:auto; clip-path:inset(12px 5px); }
+/* These official badges include a transparent margin around their own frame.
+   Fit the artwork inside our shared button, cropping only that extra frame. */
+.hero6-cta .play-store-badge img:is([src$="google-play-en.png"],[src$="google-play-ar.png"],[src$="google-play-he.png"]) { width:calc((100% - 12px) * 646 / 554); flex:none; clip-path:inset(18.4% 7.12% round 8px); }
+.hero6-cta .hero-play-store[hidden] { display:none!important; }
+.hero6-credit { position:absolute; z-index:4; left:50%; bottom:8px; transform:translateX(-50%); margin:0; font-size:10px; color:rgba(255,255,255,.55); text-shadow:0 0 8px #070908,0 0 3px #070908; white-space:nowrap; }
+body.h6-on .desktop-nav-haze { opacity:0; transition:opacity .3s; }
+
+/* the wipe: the new version replaces the old one from right to left, then the line leaves */
+.hero6-photo .before { clip-path:inset(0 calc(100% - var(--p)) 0 0); }
+/* Moderate the closer female framing; share the male edge treatment. */
+html[data-g="f"] .hero6-photo { --subject-scale:.86; --subject-shift:-2.1%; }
+.hero6-photo .after { clip-path:inset(0 0 0 var(--p)); }
+.hero6-photo.live .line { opacity:1; }
+.hero6-photo.done .line { opacity:0; }
+/* the switcher: two round portraits, no words. The ringed one is the version you are looking at. */
+.hero6-switch { position:absolute; z-index:5; left:50%; bottom:46px; transform:translateX(-50%); display:inline-flex; gap:6px; padding:4px; border-radius:99px; border:1px solid rgba(255,255,255,.24); background:rgba(10,12,11,.6); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); }
+.hero6-switch button { position:relative; width:38px; height:38px; padding:0; border:0; border-radius:50%; background:#1a1d1b; cursor:pointer; overflow:hidden; opacity:.55; transition:opacity .25s, box-shadow .25s; }
+.hero6-switch button i { position:absolute; inset:0; border-radius:50%; background-repeat:no-repeat; background-color:#1a1d1b; }
+.hero6-switch button:hover { opacity:1; }
+.hero6-switch button[aria-pressed="true"] { opacity:1; cursor:default; box-shadow:0 0 0 2px #0b0d0c, 0 0 0 3.5px #f2f6f2; }
+.hero6-switch button:focus-visible { outline:2px solid #fff; outline-offset:2px; }
+
+/* time passing, told by light: a cool backlight warms as the new version arrives, a quiet caption names the day */
+.hero6 { --k:0; }
+.hero6-glow { position:absolute; z-index:0; left:50%; top:58%; width:130vw; height:150svh; translate:-50% -50%; border-radius:0; pointer-events:none; will-change:opacity,transform; }
+.hero6-glow.cool { background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(120,150,160,.08),rgba(120,150,160,.025) 55%,transparent 100%); opacity:calc((1 - var(--k)) * .8); }
+.hero6-glow.warm { background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(255,190,130,.10),rgba(255,170,110,.03) 55%,transparent 100%); opacity:calc(var(--k) * .9); transform:none; }
+
+/* the reveal: a flat, dim before comes up out of the dark, a hot light edge sweeps across, the new version lands behind it */
+.hero6-photo .before { opacity:var(--in,1); filter:saturate(.7) brightness(.82) contrast(.95); }
+.hero6-photo .after { filter:brightness(calc(1 + .2 * (1 - var(--k,0)))) saturate(calc(1 + .14 * (1 - var(--k,0)))); }
+.hero6-photo .bloom { position:absolute; inset:0; pointer-events:none; mix-blend-mode:screen; opacity:0; transition:opacity .9s;
+  background:linear-gradient(90deg, rgba(255,222,185,0) var(--p), rgba(255,226,190,.42) var(--p), rgba(255,226,190,.12) calc(var(--p) + 14%), rgba(255,226,190,0) calc(var(--p) + 34%));
+  -webkit-mask-image:var(--mask); mask-image:var(--mask); -webkit-mask-size:100% 100%; mask-size:100% 100%; }
+.hero6-photo.live .bloom { opacity:1; }
+.hero6-photo.done .bloom { opacity:0; transition:none; }
+.hero6-photo .line { position:absolute; top:6%; height:78%; left:var(--p); width:2px; background:rgba(255,244,228,.95); transform:translateX(-1px); opacity:0; transition:opacity .5s; box-shadow:0 0 14px 3px rgba(255,226,190,.7), 0 0 60px 14px rgba(255,214,170,.28); border-radius:2px; }
+.hero6-photo.live .line { opacity:1; }
+.hero6-photo.done .line { opacity:0; transition:none; }
+.hero6-flash { position:absolute; inset:0; z-index:6; pointer-events:none; opacity:0; background:radial-gradient(ellipse 60% 55% at 50% 58%, rgba(255,240,222,.30), rgba(255,240,222,.08) 55%, transparent 80%); }
+.hero6-flash.pop { animation:h6flash 1.1s ease-out 1; }
+@keyframes h6flash { 0% { opacity:0; } 18% { opacity:1; } 100% { opacity:0; } }
+.hero6-h1 .gl { display:inline-block; }
+.hero6.glow .hero6-h1 .gl { animation:h6gl 1.8s ease-out 1; }
+@keyframes h6gl { 0% { text-shadow:0 0 0 rgba(255,214,170,0); } 30% { text-shadow:0 0 34px rgba(255,214,170,.6), 0 0 6px rgba(255,238,214,.55); } 100% { text-shadow:0 0 0 rgba(255,214,170,0); } }
+@media (prefers-reduced-motion:reduce) { .hero6-flash.pop, .hero6.glow .hero6-h1 .gl { animation:none; } }
+
+/* the figure sinks into the dark at the bottom so the switcher, credit and badges always sit on a clean field */
+.hero6::after { content:""; position:absolute; left:0; right:0; bottom:0; height:34%; z-index:3; pointer-events:none; background:linear-gradient(180deg,rgba(7,9,8,0) 0,rgba(7,9,8,.7) 45%,rgba(7,9,8,.96) 80%,#070908 100%); }
+
+/* Phone: a two-line headline leads straight into a full-width portrait. */
+@media (max-width:640px) {
+  .hero6 { --pad:20px; min-height:700px; overflow:clip; }
+  .hero6-h1 { z-index:4; top:max(116px,calc(14svh + env(safe-area-inset-top,0px))); padding:0 20px; white-space:normal; font-size:clamp(52px,15.5vw,82px); line-height:1.02; letter-spacing:-.048em; text-wrap:balance; }
+  .hero6-h1 > [data-i18n="hero.headlinePrefix"] { display:block; margin-bottom:4px; font-size:.72em; letter-spacing:-.04em; }
+  .hero6-h1 .gl { display:block; }
+  .hero6-photo { bottom:0; height:min(78%,calc(100% - 260px)); transform:translateX(calc(-50% + var(--subject-shift,0%))) scale(calc(var(--sc,1) * var(--subject-scale,1))) translateZ(0); -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%); }
+  .hero6-photo .line { box-shadow:0 0 8px 1px rgba(255,226,190,.45); }
+  .hero6::after { height:29%; }
+  .hero6-foot { left:var(--pad); right:var(--pad); bottom:calc(34px + env(safe-area-inset-bottom,0px)); justify-content:center; }
+  .hero6-cta { justify-content:center; flex-wrap:nowrap; gap:10px; --store-width:clamp(126px,36vw,154px); --store-height:calc(var(--store-width) / 3); }
+  .hero6-credit { bottom:8px; font-size:9px; }
+  .hero6-switch { left:auto; right:16px; bottom:calc(116px + env(safe-area-inset-bottom,0px)); transform:none; flex-direction:column; -webkit-backdrop-filter:none; backdrop-filter:none; background:rgba(10,12,11,.82); }
+  .hero6-switch button { width:44px; height:44px; }
+  .hero6-glow { display:none; }
+  .hero6-flash { background:radial-gradient(ellipse 48% 40% at 50% 62%,rgba(255,240,222,.30),rgba(255,240,222,.08) 55%,transparent 85%); }
+  .hero6.hero6-lite .hero6-photo .before { filter:saturate(.7) brightness(.82) contrast(.95); }
+  .hero6.hero6-lite .hero6-photo .after { filter:brightness(calc(1 + .2 * (1 - var(--k,0)))) saturate(calc(1 + .14 * (1 - var(--k,0)))); }
+  /* the white phone bar becomes a quiet dark one while the hero is on screen */
+  body.h6-on .site-nav { background:transparent; -webkit-backdrop-filter:none; backdrop-filter:none; }
+  body.h6-on .site-nav .brand { color:#f2f6f2; }
+  body.h6-on .site-nav .mobile-language-trigger { color:rgba(242,246,242,.78); }
+  body.h6-on .site-nav .button-small { display:none; }
+}
+
+/* A bright mobile light pulse with a gradual rise and a smooth release. */
+@media (max-width:640px) and (prefers-reduced-motion:no-preference) {
+  .hero6-flash.pop { animation:h6flash-mobile 1.4s var(--ease-in-out,cubic-bezier(.77,0,.175,1)) 1; }
+  .hero6.glow .hero6-h1 .gl { animation:h6gl-mobile 1.6s var(--ease-in-out,cubic-bezier(.77,0,.175,1)) 1; }
+}
+@keyframes h6flash-mobile { 0%,100% { opacity:0; } 40% { opacity:1; } }
+@keyframes h6gl-mobile {
+  0%,100% { text-shadow:0 0 0 rgba(255,214,170,0); }
+  40% { text-shadow:0 0 34px rgba(255,214,170,.6),0 0 6px rgba(255,238,214,.4); }
+}
+
+/* phone: the browser bars and the overscroll area above and below the page are black while the hero is on screen */
+@media (max-width:640px) {
+  html.h6-on { background:#070908; }
+  html.h6-on body { background:#fff; }
+  .hero6 { height:100vh; height:100svh; contain:layout style paint; }
+}
