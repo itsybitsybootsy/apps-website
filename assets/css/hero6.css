@@ -1,8 +1,10 @@
 /* Desktop hero: one glow-up, shown as a before and after on a single face. */
-.hero6 { --pad:clamp(28px,4.5vw,72px); position:relative; height:100vh; height:100svh; min-height:640px; background:#070908; color:#f2f6f2; overflow:clip; isolation:isolate; }
+.hero6 { --pad:clamp(28px,4.5vw,72px); position:relative; height:100vh; height:100svh; height:100dvh; min-height:640px; background:#070908; color:#f2f6f2; overflow:clip; isolation:isolate; }
 .hero6-h1 { position:absolute; z-index:1; left:0; right:0; top:clamp(88px,12svh,112px); margin:0; text-align:center; font-family:Outfit,-apple-system,BlinkMacSystemFont,sans-serif; font-weight:600; font-size:min(7vw,13svh); line-height:1; letter-spacing:-.055em; white-space:nowrap; }
 
 .hero6-photo { --p:100%; position:absolute; z-index:2; left:50%; bottom:0; height:72%; aspect-ratio:1122/1402; transform:translateX(calc(-50% + var(--subject-shift,0%))) scale(calc(var(--sc,1) * var(--subject-scale,1))); transform-origin:50% 8%; -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0,#000 16%,#000 84%,transparent 100%); }
+/* Hide the HTML fallback until the selected portrait is decoded, including direct ?g=m visits. */
+.hero6-js .hero6-photo:not([data-ready]) { opacity:0; }
 .hero6-photo img { position:absolute; inset:0; width:100%; height:100%; user-select:none; -webkit-user-drag:none; }
 
 .hero6-foot { position:absolute; z-index:4; left:var(--pad); right:var(--pad); bottom:clamp(24px,5svh,52px); display:flex; align-items:flex-end; justify-content:flex-end; gap:32px; }
@@ -62,7 +64,7 @@ html[data-g="f"] .hero6-photo { --subject-scale:.86; --subject-shift:-2.1%; }
 
 /* Phone: a two-line headline leads straight into a full-width portrait. */
 @media (max-width:640px) {
-  .hero6 { --pad:20px; min-height:700px; overflow:clip; }
+  .hero6 { --pad:20px; min-height:700px; min-height:min(700px,100dvh); overflow:clip; }
   .hero6-h1 { z-index:4; top:max(116px,calc(14svh + env(safe-area-inset-top,0px))); padding:0 20px; white-space:normal; font-size:clamp(52px,15.5vw,82px); line-height:1.02; letter-spacing:-.048em; text-wrap:balance; }
   .hero6-h1 > [data-i18n="hero.headlinePrefix"] { display:block; margin-bottom:4px; font-size:.72em; letter-spacing:-.04em; }
   .hero6-h1 .gl { display:block; }
@@ -103,9 +105,11 @@ html[data-g="f"] .hero6-photo { --subject-scale:.86; --subject-shift:-2.1%; }
   40% { text-shadow:0 0 34px rgba(255,214,170,.6),0 0 6px rgba(255,238,214,.4); }
 }
 
-/* phone: the browser bars and the overscroll area above and below the page are black while the hero is on screen */
+/* Follow the visible viewport as mobile browser bars collapse or expand.
+   vh/svh remain fallbacks; dvh prevents the next light section from showing below the hero.
+   The browser bars and overscroll area stay black while the hero is on screen. */
 @media (max-width:640px) {
   html.h6-on { background:#070908; }
   html.h6-on body { background:#fff; }
-  .hero6 { height:100vh; height:100svh; contain:layout style paint; }
+  .hero6 { height:100vh; height:100svh; height:100dvh; contain:layout style paint; }
 }

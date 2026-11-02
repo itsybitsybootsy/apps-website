@@ -68,7 +68,14 @@
     "Veränderungen erkennen.",
     "Hautscore, Kennzahlen und Radar-Chart zeigen dir, wie sich deine Haut entwickelt. Vergleiche deine Check-ins und erkenne Trends.",
     "Vergleiche deine Scans über Wochen.",
-    "Skinmetrics: Fortschritt mit Hautscore und Kennzahlen"
+    "Skinmetrics: Fortschritt mit Hautscore und Kennzahlen",
+    "Heute",
+    "Heute",
+    "Dein Haut-Tag. Auf einen Blick.",
+    "Dein Haut-Tag. Auf einen Blick.",
+    "Hautscore, nächste Routine und deine Serie. Alles Wichtige für heute direkt auf der Startseite.",
+    "Hautscore, nächste Routine und deine Serie. Alles Wichtige für heute direkt auf der Startseite.",
+    "Skinmetrics: Startseite mit Hautscore, Pflegeroutine und Serie"
   ],
   "privacy": [
     "Deine Haut. Deine Daten.",
@@ -132,14 +139,16 @@
     "Jetzt kostenlos testen!"
   ],
   "story": [
-    "Skinmetrics: Analyse, Routine und Fortschritt",
+    "Skinmetrics: Heute, Routine, Verlauf",
     "App-Ansicht wählen",
     "Analyse anzeigen",
     "Routine anzeigen",
     "Verlauf anzeigen",
     "Analyse: Hautscore, Kennzahlen und Hautzonen",
     "Routine: Hautpflege für morgens und abends",
-    "Fortschritt: Hautscore und Entwicklung im Verlauf"
+    "Fortschritt: Hautscore und Entwicklung im Verlauf",
+    "Heute anzeigen",
+    "Skinmetrics: Startseite mit Hautscore, Pflegeroutine und Serie"
   ],
   "language": [
     "Sprache",

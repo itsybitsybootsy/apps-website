@@ -68,7 +68,14 @@
     "Se vad som förändras.",
     "Hudpoäng, värden och radardiagram hjälper dig följa hudens utveckling. Jämför incheckningar och upptäck trender.",
     "Jämför dina skanningar vecka för vecka.",
-    "Skinmetrics: utveckling med hudpoäng och värden"
+    "Skinmetrics: utveckling med hudpoäng och värden",
+    "Idag",
+    "Idag",
+    "Din huddag, i en överblick.",
+    "Din huddag, i en överblick.",
+    "Hudpoäng, nästa rutin och svit. Allt för idag på din startskärm.",
+    "Hudpoäng, nästa rutin och svit. Allt för idag på din startskärm.",
+    "Skinmetrics: startskärm med hudpoäng, hudvårdsrutin och svit"
   ],
   "privacy": [
     "Din hud. Dina uppgifter.",
@@ -132,14 +139,16 @@
     "Prova gratis!"
   ],
   "story": [
-    "Skinmetrics: analys, rutin och utveckling",
+    "Skinmetrics: Idag, Rutin, Utveckling",
     "Välj appvy",
     "Visa analys",
     "Visa rutin",
     "Visa utveckling",
     "Analys: hudpoäng, värden och hudzoner",
     "Rutin: hudvård morgon och kväll",
-    "Utveckling: hudpoäng och förändringar över tid"
+    "Utveckling: hudpoäng och förändringar över tid",
+    "Visa idag",
+    "Skinmetrics: startskärm med hudpoäng, hudvårdsrutin och svit"
   ],
   "language": [
     "Språk",

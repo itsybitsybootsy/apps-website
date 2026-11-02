@@ -68,7 +68,14 @@
     "Vedd észre a változást.",
     "A pontszám, a mutatók és a sugárdiagram segítenek követni a bőröd változásait. Hasonlítsd össze az ellenőrzéseket, és fedezd fel a trendeket.",
     "Hasonlítsd össze a vizsgálatokat hétről hétre.",
-    "Skinmetrics: a bőrpontszám és a mutatók alakulása"
+    "Skinmetrics: a bőrpontszám és a mutatók alakulása",
+    "Ma",
+    "Ma",
+    "A bőröd napja, egy pillantásra.",
+    "A bőröd napja, egy pillantásra.",
+    "Bőrpontszám, következő rutin és sorozat. Minden a mai naphoz a kezdőképernyőn.",
+    "Bőrpontszám, következő rutin és sorozat. Minden a mai naphoz a kezdőképernyőn.",
+    "Skinmetrics: kezdőképernyő bőrpontszámmal, bőrápolási rutinnal és sorozattal"
   ],
   "privacy": [
     "A te bőröd. A te adataid.",
@@ -132,14 +139,16 @@
     "Próbáld ki ingyen!"
   ],
   "story": [
-    "Skinmetrics: elemzés, rutin és változások",
+    "Skinmetrics: Ma, Rutin, Változások",
     "Appnézet kiválasztása",
     "Elemzés megjelenítése",
     "Rutin megjelenítése",
     "Változások megjelenítése",
     "Elemzés: bőrpontszám, mutatók és bőrterületek",
     "Rutin: reggeli és esti bőrápolás",
-    "Változások: bőrpontszám és alakulása az idő során"
+    "Változások: bőrpontszám és alakulása az idő során",
+    "Mai nézet megjelenítése",
+    "Skinmetrics: kezdőképernyő bőrpontszámmal, bőrápolási rutinnal és sorozattal"
   ],
   "language": [
     "Nyelv",

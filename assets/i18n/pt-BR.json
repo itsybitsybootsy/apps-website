@@ -68,7 +68,14 @@
     "Perceba o que está mudando.",
     "A pontuação, os indicadores e o gráfico de radar ajudam a acompanhar a evolução da sua pele. Compare seus registros e identifique tendências.",
     "Compare suas análises ao longo das semanas.",
-    "Skinmetrics: evolução da pontuação e dos indicadores da pele"
+    "Skinmetrics: evolução da pontuação e dos indicadores da pele",
+    "Hoje",
+    "Hoje",
+    "Seu dia de cuidados, em um olhar.",
+    "Seu dia de cuidados, em um olhar.",
+    "Pontuação da pele, próxima rotina e sequência. Tudo para hoje na tela inicial.",
+    "Pontuação da pele, próxima rotina e sequência. Tudo para hoje na tela inicial.",
+    "Skinmetrics: tela inicial com pontuação da pele, rotina de cuidados e sequência"
   ],
   "privacy": [
     "Sua pele. Seus dados.",
@@ -132,14 +139,16 @@
     "Experimente grátis!"
   ],
   "story": [
-    "Skinmetrics: análise, rotina e evolução",
+    "Skinmetrics: Hoje, Rotina, Evolução",
     "Escolher uma tela do app",
     "Mostrar análise",
     "Mostrar rotina",
     "Mostrar evolução",
     "Análise: pontuação, indicadores e regiões da pele",
     "Rotina: cuidados da manhã e da noite",
-    "Evolução: pontuação e mudanças da pele ao longo do tempo"
+    "Evolução: pontuação e mudanças da pele ao longo do tempo",
+    "Mostrar hoje",
+    "Skinmetrics: tela inicial com pontuação da pele, rotina de cuidados e sequência"
   ],
   "language": [
     "Idioma",

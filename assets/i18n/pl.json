@@ -68,7 +68,14 @@
     "Zobacz, co się zmienia.",
     "Ocena skóry, wskaźniki i wykres radarowy pokazują jej zmiany. Porównuj zapisane wyniki i dostrzegaj trendy.",
     "Porównuj skany z kolejnych tygodni.",
-    "Skinmetrics: postępy z oceną skóry i wskaźnikami"
+    "Skinmetrics: postępy z oceną skóry i wskaźnikami",
+    "Dzisiaj",
+    "Dzisiaj",
+    "Twój dzień pielęgnacji w skrócie.",
+    "Twój dzień pielęgnacji w skrócie.",
+    "Wynik skóry, kolejna rutyna i seria. Wszystko na dziś na ekranie głównym.",
+    "Wynik skóry, kolejna rutyna i seria. Wszystko na dziś na ekranie głównym.",
+    "Skinmetrics: ekran główny z wynikiem skóry, rutyną pielęgnacji i serią"
   ],
   "privacy": [
     "Twoja skóra. Twoje dane.",
@@ -132,14 +139,16 @@
     "Wypróbuj za darmo!"
   ],
   "story": [
-    "Skinmetrics: analiza, pielęgnacja i postępy",
+    "Skinmetrics: Dzisiaj, Pielęgnacja, Postępy",
     "Wybierz widok aplikacji",
     "Pokaż analizę",
     "Pokaż pielęgnację",
     "Pokaż postępy",
     "Analiza: ocena skóry, wskaźniki i obszary skóry",
     "Pielęgnacja: poranne i wieczorne kroki",
-    "Postępy: ocena skóry i jej zmiany w czasie"
+    "Postępy: ocena skóry i jej zmiany w czasie",
+    "Pokaż dzisiaj",
+    "Skinmetrics: ekran główny z wynikiem skóry, rutyną pielęgnacji i serią"
   ],
   "language": [
     "Język",

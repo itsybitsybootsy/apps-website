@@ -68,7 +68,14 @@
     "Sleduj, co se mění.",
     "Skóre, ukazatele a radarový graf pomáhají sledovat vývoj pleti. Porovnávej kontroly a objevuj trendy.",
     "Porovnávej skeny týden po týdnu.",
-    "Skinmetrics: vývoj skóre pleti a jednotlivých ukazatelů"
+    "Skinmetrics: vývoj skóre pleti a jednotlivých ukazatelů",
+    "Dnes",
+    "Dnes",
+    "Tvůj den péče, na první pohled.",
+    "Tvůj den péče, na první pohled.",
+    "Skóre pleti, další rutina a série. Vše důležité na dnešek na úvodní obrazovce.",
+    "Skóre pleti, další rutina a série. Vše důležité na dnešek na úvodní obrazovce.",
+    "Skinmetrics: úvodní obrazovka se skóre pleti, pečující rutinou a sérií"
   ],
   "privacy": [
     "Tvoje pleť. Tvoje data.",
@@ -132,14 +139,16 @@
     "Vyzkoušej zdarma!"
   ],
   "story": [
-    "Skinmetrics: analýza, péče a vývoj",
+    "Skinmetrics: Dnes, Péče, Vývoj",
     "Vybrat zobrazení aplikace",
     "Zobrazit analýzu",
     "Zobrazit péči",
     "Zobrazit vývoj",
     "Analýza: skóre pleti, ukazatele a oblasti obličeje",
     "Péče: ranní a večerní rutina",
-    "Vývoj: skóre pleti a změny v čase"
+    "Vývoj: skóre pleti a změny v čase",
+    "Zobrazit dnešek",
+    "Skinmetrics: úvodní obrazovka se skóre pleti, pečující rutinou a sérií"
   ],
   "language": [
     "Jazyk",

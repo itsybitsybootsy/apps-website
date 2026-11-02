@@ -68,7 +68,14 @@
     "Observă ce se schimbă.",
     "Scorul, indicatorii și diagrama radar te ajută să urmărești evoluția pielii. Compară verificările și descoperă tendințe.",
     "Compară scanările de la o săptămână la alta.",
-    "Skinmetrics: evoluția scorului și a indicatorilor pielii"
+    "Skinmetrics: evoluția scorului și a indicatorilor pielii",
+    "Astăzi",
+    "Astăzi",
+    "Ziua pielii tale, dintr-o privire.",
+    "Ziua pielii tale, dintr-o privire.",
+    "Scorul pielii, următoarea rutină și seria. Tot ce contează astăzi, pe ecranul principal.",
+    "Scorul pielii, următoarea rutină și seria. Tot ce contează astăzi, pe ecranul principal.",
+    "Skinmetrics: ecran principal cu scorul pielii, rutina de îngrijire și seria"
   ],
   "privacy": [
     "Pielea ta. Datele tale.",
@@ -132,14 +139,16 @@
     "Încearcă gratuit!"
   ],
   "story": [
-    "Skinmetrics: analiză, rutină și evoluție",
+    "Skinmetrics: Astăzi, Rutină, Evoluție",
     "Alege un ecran al aplicației",
     "Afișează analiza",
     "Afișează rutina",
     "Afișează evoluția",
     "Analiză: scor, indicatori și zone ale pielii",
     "Rutină: îngrijire dimineața și seara",
-    "Evoluție: scorul pielii și schimbările în timp"
+    "Evoluție: scorul pielii și schimbările în timp",
+    "Arată ziua de astăzi",
+    "Skinmetrics: ecran principal cu scorul pielii, rutina de îngrijire și seria"
   ],
   "language": [
     "Limbă",

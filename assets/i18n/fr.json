@@ -68,7 +68,14 @@
     "Repère les changements.",
     "Le score, les indicateurs et le graphique radar t’aident à suivre l’évolution de ta peau. Compare tes bilans et repère les tendances.",
     "Compare tes scans au fil des semaines.",
-    "Skinmetrics : suivi du score et des indicateurs de la peau"
+    "Skinmetrics : suivi du score et des indicateurs de la peau",
+    "Aujourd’hui",
+    "Aujourd’hui",
+    "Votre journée peau, en un regard.",
+    "Votre journée peau, en un regard.",
+    "Score cutané, prochaine routine et série. L’essentiel de votre journée sur l’écran d’accueil.",
+    "Score cutané, prochaine routine et série. L’essentiel de votre journée sur l’écran d’accueil.",
+    "Skinmetrics : accueil avec score cutané, routine de soins et série"
   ],
   "privacy": [
     "Ta peau. Tes données.",
@@ -132,14 +139,16 @@
     "Essayez gratuitement !"
   ],
   "story": [
-    "Skinmetrics : analyse, routine et évolution",
+    "Skinmetrics: Aujourd’hui, Routine, Évolution",
     "Choisir une vue de l’app",
     "Afficher l’analyse",
     "Afficher la routine",
     "Afficher l’évolution",
     "Analyse : score, indicateurs et zones de la peau",
     "Routine : soins du matin et du soir",
-    "Évolution : score et changements de la peau au fil du temps"
+    "Évolution : score et changements de la peau au fil du temps",
+    "Afficher aujourd’hui",
+    "Skinmetrics : accueil avec score cutané, routine de soins et série"
   ],
   "language": [
     "Langue",

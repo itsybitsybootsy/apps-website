@@ -68,7 +68,14 @@
     "progressMobileTitle",
     "progressBody",
     "progressMobileBody",
-    "progressAlt"
+    "progressAlt",
+    "today",
+    "todayEyebrow",
+    "todayTitle",
+    "todayMobileTitle",
+    "todayBody",
+    "todayMobileBody",
+    "todayAlt"
   ],
   "privacy": [
     "mobileTitle",
@@ -139,7 +146,9 @@
     "showProgress",
     "analysisAlt",
     "routineAlt",
-    "progressAlt"
+    "progressAlt",
+    "showToday",
+    "todayAlt"
   ],
   "language": [
     "label",
