@@ -68,7 +68,14 @@
     "Nelerin değiştiğini fark et.",
     "Cilt puanı, göstergeler ve radar grafiği cildindeki değişimi görmeni sağlar. Kontrolleri karşılaştır ve zaman içindeki eğilimleri keşfet.",
     "Taramalarını haftalar boyunca karşılaştır.",
-    "Skinmetrics: cilt puanı ve göstergelerle gelişim takibi"
+    "Skinmetrics: cilt puanı ve göstergelerle gelişim takibi",
+    "Bugün",
+    "Bugün",
+    "Cilt günün, bir bakışta.",
+    "Cilt günün, bir bakışta.",
+    "Cilt puanın, sıradaki rutinin ve serin. Bugün için her şey ana ekranında.",
+    "Cilt puanın, sıradaki rutinin ve serin. Bugün için her şey ana ekranında.",
+    "Skinmetrics: cilt puanı, bakım rutini ve seri içeren ana ekran"
   ],
   "privacy": [
     "Senin cildin. Senin verilerin.",
@@ -132,14 +139,16 @@
     "Ücretsiz dene!"
   ],
   "story": [
-    "Skinmetrics: analiz, rutin ve gelişim",
+    "Skinmetrics: Bugün, Rutin, Gelişim",
     "Uygulama görünümü seç",
     "Analizi göster",
     "Rutini göster",
     "Gelişimi göster",
     "Analiz: cilt puanı, göstergeler ve cilt bölgeleri",
     "Rutin: sabah ve akşam cilt bakımı",
-    "Gelişim: cilt puanı ve zaman içindeki değişimler"
+    "Gelişim: cilt puanı ve zaman içindeki değişimler",
+    "Bugünü göster",
+    "Skinmetrics: cilt puanı, bakım rutini ve seri içeren ana ekran"
   ],
   "language": [
     "Dil",

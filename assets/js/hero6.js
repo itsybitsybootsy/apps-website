@@ -21,7 +21,8 @@
     try { var s = sessionStorage.getItem('sm-g'); if (s === 'm' || s === 'f') return s; } catch (e) {}
     return 'f';
   }
-  var g = pick(), run = 0;
+  var g = pick(), displayed = null, run = 0, raf = null, fade = null;
+  var assets = Object.create(null);
 
   /* The switcher shows each version's own portrait. meta.json holds the face position (share of the image). */
   var DEFAULT_META = { cx: .5, cy: .38, s: .5 };
@@ -53,28 +54,62 @@
     photo.style.setProperty('--sc', o.sc.toFixed(4));
     hero.style.setProperty('--k', o.k.toFixed(4));
   };
-  var load = function (img, src, fb) {
-    return new Promise(function (res) {
-      img.onerror = function () { img.onerror = null; img.src = fb; img.decode ? img.decode().then(res, res) : res(); };
-      img.src = src; img.decode ? img.decode().then(res, function () {}) : res();
+  /* Decode detached nodes. Never mutate a visible image while a request is pending. */
+  function loadImage(src, kind) {
+    return new Promise(function (resolve, reject) {
+      var img = new Image();
+      img.alt = '';
+      img.decoding = 'async';
+      if (kind) { img.className = kind; img.width = 1122; img.height = 1402; img.setAttribute('data-img', kind); }
+      img.onload = function () {
+        var decoded = img.decode ? img.decode() : Promise.resolve();
+        decoded.then(function () { resolve(img); }, reject);
+      };
+      img.onerror = function () { reject(new Error('Could not load hero image: ' + src)); };
+      img.src = src;
     });
-  };
-
-  function show(next, replay) {
-    g = next; var id = ++run;
-    try { sessionStorage.setItem('sm-g', g); } catch (e) {}
-    document.documentElement.setAttribute('data-g', g);
-    btns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.g === g)); });
-    photo.classList.remove('live', 'done'); hero.classList.remove('glow'); flash.classList.remove('pop');
-    frame({ p: 100, k: 0, inn: replay ? 1 : 0, sc: replay ? 1.035 : 1.06 });
-    var base = 'assets/img/hero/' + g + '/', fb = 'assets/img/hero/f/';
-    var beforeName = g === 'f' ? 'before-body.webp' : 'before.webp';
-    Promise.all([load(imgs.before, base + beforeName, fb + 'before-body.webp'), load(imgs.after, base + 'after.webp', fb + 'after.webp')]).then(function () {
+  }
+  function prepare(next) {
+    if (assets[next]) return assets[next];
+    var base = 'assets/img/hero/' + next + '/';
+    var before = loadImage(base + (next === 'f' ? 'before-body.webp' : 'before.webp'), 'before');
+    var after = loadImage(base + 'after.webp', 'after');
+    var mask = loadImage(base + 'mask.webp').catch(function () { return null; });
+    assets[next] = Promise.all([before, after, mask]).catch(function (error) {
+      delete assets[next]; // A later click can retry a failed request.
+      throw error;
+    });
+    return assets[next];
+  }
+  function markSelection(next) {
+    btns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.g === next)); });
+  }
+  function remember(next) {
+    try { sessionStorage.setItem('sm-g', next); } catch (e) {}
+  }
+  function show(next, replay, keyboard) {
+    g = next;
+    var id = ++run;
+    if (raf !== null) { cancelAnimationFrame(raf); raf = null; }
+    if (fade) { fade.cancel(); fade = null; }
+    markSelection(next);
+    hero.setAttribute('aria-busy', 'true');
+    /* Keep the current portrait and framing unchanged until the entire new pair is ready. */
+    prepare(next).then(function (pair) {
       if (id !== run) return;
-      var mk = new Image();                         // a tightened silhouette keeps the light inside the figure
-      mk.onload = function () { photo.style.setProperty('--mask', 'url("' + mk.src + '")'); };
-      mk.onerror = function () { photo.style.setProperty('--mask', 'url("' + imgs.after.currentSrc + '")'); };
-      mk.src = (imgs.after.currentSrc || imgs.after.src).replace('after.webp', 'mask.webp');
+      imgs.before.replaceWith(pair[0]); imgs.after.replaceWith(pair[1]);
+      imgs.before = pair[0]; imgs.after = pair[1];
+      displayed = next;
+      remember(next);
+      document.documentElement.setAttribute('data-g', next);
+      photo.style.setProperty('--mask', 'url("' + (pair[2] || pair[1]).src + '")');
+      photo.classList.remove('live', 'done'); hero.classList.remove('glow'); flash.classList.remove('pop');
+      frame({ p: 100, k: 0, inn: replay ? 1 : 0, sc: replay ? 1.035 : 1.06 });
+      photo.setAttribute('data-ready', '');
+      hero.setAttribute('aria-busy', 'false');
+      if (replay && !reduce && !keyboard && photo.animate) {
+        fade = photo.animate([{ opacity: .6 }, { opacity: 1 }], { duration: 180, easing: 'cubic-bezier(.23,1,.32,1)' });
+      }
       if (reduce) { frame({ p: 0, k: 1, inn: 1, sc: 1 }); photo.classList.add('done'); return; }
       /* timeline in ms: hold, light sweeps across, camera settles — same pacing on first load and when switching */
       var T_SWEEP = 1700;
@@ -95,17 +130,32 @@
         if (s > 0 && !lightFinished) photo.classList.add('live');
         if (lightFinished) { photo.classList.remove('live'); photo.classList.add('done'); }
         if (s >= .965 && !fired) { fired = true; flash.classList.add('pop'); hero.classList.add('glow'); }
-        if (t < TOTAL) requestAnimationFrame(step);
-        else { photo.classList.add('done'); frame({ p: 0, k: 1, inn: 1, sc: 1 }); }
+        if (t < TOTAL) raf = requestAnimationFrame(step);
+        else { raf = null; photo.classList.add('done'); frame({ p: 0, k: 1, inn: 1, sc: 1 }); }
       })(t0);
+      // Warm the other portrait only after the selected version is visible.
+      prepare(next === 'f' ? 'm' : 'f').catch(function () {});
+    }).catch(function () {
+      if (id !== run) return;
+      hero.setAttribute('aria-busy', 'false');
+      // A network failure keeps the current person; it must never substitute the woman.
+      g = displayed;
+      markSelection(displayed);
+      if (displayed) {
+        remember(displayed);
+        photo.classList.remove('live'); photo.classList.add('done');
+        hero.classList.remove('glow'); flash.classList.remove('pop');
+        frame({ p: 0, k: 1, inn: 1, sc: 1 });
+        var u = new URL(location.href); u.searchParams.set('g', displayed); history.replaceState(null, '', u);
+      }
     });
   }
 
   btns.forEach(function (b) {
-    b.addEventListener('click', function () {
+    b.addEventListener('click', function (event) {
       var next = b.dataset.g; if (next === g) return;
       var u = new URL(location.href); u.searchParams.set('g', next); history.replaceState(null, '', u);
-      show(next, true);
+      show(next, true, event.detail === 0);
     });
   });
   show(g, false);

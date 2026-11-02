@@ -68,7 +68,14 @@
     "Zie wat er verandert.",
     "Je huidscore, de waarden en de radargrafiek laten zien hoe je huid verandert. Vergelijk check-ins en herken trends.",
     "Vergelijk je scans van week tot week.",
-    "Skinmetrics: voortgang met huidscore en meetwaarden"
+    "Skinmetrics: voortgang met huidscore en meetwaarden",
+    "Vandaag",
+    "Vandaag",
+    "Jouw huiddag, in één oogopslag.",
+    "Jouw huiddag, in één oogopslag.",
+    "Je huidscore, volgende routine en reeks. Alles voor vandaag op je startscherm.",
+    "Je huidscore, volgende routine en reeks. Alles voor vandaag op je startscherm.",
+    "Skinmetrics: startscherm met huidscore, verzorgingsroutine en reeks"
   ],
   "privacy": [
     "Jouw huid. Jouw gegevens.",
@@ -132,14 +139,16 @@
     "Probeer het gratis!"
   ],
   "story": [
-    "Skinmetrics: analyse, routine en voortgang",
+    "Skinmetrics: Vandaag, Routine, Voortgang",
     "Kies een appweergave",
     "Toon analyse",
     "Toon routine",
     "Toon voortgang",
     "Analyse: huidscore, waarden en huidzones",
     "Routine: verzorging voor ochtend en avond",
-    "Voortgang: huidscore en veranderingen door de tijd"
+    "Voortgang: huidscore en veranderingen door de tijd",
+    "Toon vandaag",
+    "Skinmetrics: startscherm met huidscore, verzorgingsroutine en reeks"
   ],
   "language": [
     "Taal",

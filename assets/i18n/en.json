@@ -68,7 +68,14 @@
     "See what's changing.",
     "Your skin score, metrics and radar chart help you see how your skin changes. Compare check-ins and spot trends over time.",
     "Compare your scans from week to week.",
-    "Skinmetrics: progress view with skin score and metrics"
+    "Skinmetrics: progress view with skin score and metrics",
+    "Today",
+    "Today",
+    "Your skin day. At a glance.",
+    "Your skin day. At a glance.",
+    "Your skin score, next routine and streak. Everything you need today, right on your home screen.",
+    "Your skin score, next routine and streak. Everything you need today, right on your home screen.",
+    "Skinmetrics: home screen with skin score, skincare routine and streak"
   ],
   "privacy": [
     "Your skin. Your data.",
@@ -132,14 +139,16 @@
     "Try it for free!"
   ],
   "story": [
-    "Skinmetrics: analysis, routine and progress",
+    "Skinmetrics: Today, Routine, Progress",
     "Choose an app view",
     "Show analysis",
     "Show routine",
     "Show progress",
     "Analysis: skin score, metrics and skin zones",
     "Routine: morning and evening skincare",
-    "Progress: skin score and changes over time"
+    "Progress: skin score and changes over time",
+    "Show today",
+    "Skinmetrics: home screen with skin score, skincare routine and streak"
   ],
   "language": [
     "Language",

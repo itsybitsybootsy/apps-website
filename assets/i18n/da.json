@@ -68,7 +68,14 @@
     "Se, hvad der ændrer sig.",
     "Hudscore, indikatorer og radardiagram hjælper dig med at følge din huds udvikling. Sammenlign dine tjek og find mønstre.",
     "Sammenlign dine scanninger uge for uge.",
-    "Skinmetrics: udvikling med hudscore og indikatorer"
+    "Skinmetrics: udvikling med hudscore og indikatorer",
+    "I dag",
+    "I dag",
+    "Din huddag, med ét blik.",
+    "Din huddag, med ét blik.",
+    "Hudscore, næste rutine og serie. Alt til i dag på din startskærm.",
+    "Hudscore, næste rutine og serie. Alt til i dag på din startskærm.",
+    "Skinmetrics: startskærm med hudscore, hudplejerutine og serie"
   ],
   "privacy": [
     "Din hud. Dine data.",
@@ -132,14 +139,16 @@
     "Prøv gratis!"
   ],
   "story": [
-    "Skinmetrics: analyse, rutine og udvikling",
+    "Skinmetrics: I dag, Rutine, Udvikling",
     "Vælg appvisning",
     "Vis analyse",
     "Vis rutine",
     "Vis udvikling",
     "Analyse: hudscore, indikatorer og hudzoner",
     "Rutine: hudpleje morgen og aften",
-    "Udvikling: hudscore og forandringer over tid"
+    "Udvikling: hudscore og forandringer over tid",
+    "Vis i dag",
+    "Skinmetrics: startskærm med hudscore, hudplejerutine og serie"
   ],
   "language": [
     "Sprog",

@@ -109,3 +109,20 @@ mit 35ms Versatz. Tastatur und reduzierte Bewegung öffnen ohne räumliche Anima
 Safari: Das Menü bleibt als manuelles natives Popover während der gesamten
 Schließbewegung geöffnet. Erst nach dem Opacity-Übergang wird hidePopover()
 aufgerufen. Keine Abhängigkeit von display-/overlay-Transitions oder @starting-style.
+
+
+## Aktualisierte Website-Screenshots (November 2026)
+
+Die App-Demo zeigt jetzt die ausgewählten Ansichten **Heute, Routine und Verlauf**
+mit einem einheitlichen schwarzen iPhone-17-Rahmen. Desktop und mobile Scroll-Sequenz
+verwenden dieselben transparenten WebP-Dateien (`*-iphone17.webp`, 1080 × 2229 px).
+Die UI-Texte auf den Aufnahmen sind deutsch, mit den unveränderten englischen
+Produktnamen und der aktuellen englischen Routine-Überschrift aus der App.
+Die umgebenden Website-Texte und Alternativtexte sind in allen 19 Sprachen vorhanden.
+Die Aufnahmen stammen aus einem separaten Simulator mit Testdaten.
+
+Die drei Screens wurden per Computer Use in shots.so eingesetzt. Da dessen
+normaler Download und Zwischenablagenexport im eingebauten Browser keine Datei
+lieferten, wurde der sichtbare originale iPhone-Rahmen über die dokumentierte
+Browser-Medienfunktion gespeichert und lokal mit den Originalaufnahmen anhand
+seiner Displayöffnung zusammengesetzt. Die UI-Inhalte wurden nicht retuschiert.
