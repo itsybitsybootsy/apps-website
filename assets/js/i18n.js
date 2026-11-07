@@ -6,6 +6,7 @@
   var storageKey = 'skinmetrics.language';
   var languages = catalog.languages;
   var locale = 'en', choice = 'auto';
+  var pinned = document.documentElement.getAttribute('data-static-locale');
   function resolve(value) {
     var tag = String(value || '').replace(/_/g, '-').toLowerCase();
     if (/^zh(?:-|$)/.test(tag)) {
@@ -54,6 +55,12 @@
   }
   function select(value, remember) {
     choice = value === 'auto' ? 'auto' : resolve(value) || 'auto';
+    if (pinned && remember && choice !== pinned) {
+      // Static per-language pages: switching language means going to that language's URL.
+      try { if (choice === 'auto') localStorage.removeItem(storageKey); else localStorage.setItem(storageKey, choice); } catch (_) {}
+      window.location.href = choice === 'auto' ? '/' : '/' + choice.toLowerCase() + '/';
+      return;
+    }
     locale = choice === 'auto' ? browserLocale() : choice;
     var language = languages.find(function (item) { return item.code === locale; });
     document.documentElement.lang = locale;
@@ -62,10 +69,10 @@
     document.querySelectorAll('[data-language-current]').forEach(function (label) { label.textContent = language.name; });
     document.querySelectorAll('[data-language-short]').forEach(function (label) { label.textContent = localeShort(choice); });
     document.querySelectorAll('.store-badge img').forEach(function (image) {
-      image.src = language.apple || 'assets/img/badges/app-store-en.svg';
+      image.src = language.apple || '/assets/img/badges/app-store-en.svg';
     });
     document.querySelectorAll('.play-store-badge img').forEach(function (image) {
-      image.src = language.play || 'assets/img/badges/google-play-en.png';
+      image.src = language.play || '/assets/img/badges/google-play-en.png';
     });
     if (remember) {
       try { if (choice === 'auto') localStorage.removeItem(storageKey); else localStorage.setItem(storageKey, choice); } catch (_) {}
@@ -86,7 +93,7 @@
   var requested = null, saved = null;
   try { requested = resolve(new URL(window.location.href).searchParams.get('lang')); } catch (_) {}
   try { saved = resolve(localStorage.getItem(storageKey)); } catch (_) {}
-  select(requested || saved || 'auto', false);
+  select(pinned && resolve(pinned) ? resolve(pinned) : (requested || saved || 'auto'), false);
   document.documentElement.classList.add('has-i18n');
   window.addEventListener('languagechange', function () { if (choice === 'auto') select('auto', false); });
 })();
