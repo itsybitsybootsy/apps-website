@@ -27,7 +27,7 @@
   /* The switcher shows each version's own portrait. meta.json holds the face position (share of the image). */
   var DEFAULT_META = { cx: .5, cy: .38, s: .5 };
   function avatar(gv) {
-    var i = hero.querySelector('[data-g="' + gv + '"] i'), base = 'assets/img/hero/' + gv + '/';
+    var i = hero.querySelector('[data-g="' + gv + '"] i'), base = '/assets/img/hero/' + gv + '/';
     var probe = new Image();
     var use = function (dir) {
       fetch(dir + 'meta.json').then(function (r) { return r.ok ? r.json() : DEFAULT_META; }).catch(function () { return DEFAULT_META; }).then(function (m) {
@@ -38,7 +38,7 @@
       });
     };
     probe.onload = function () { use(base); };
-    probe.onerror = function () { use('assets/img/hero/f/'); };
+    probe.onerror = function () { use('/assets/img/hero/f/'); };
     probe.src = base + 'after.webp';
   }
   avatar('f'); avatar('m');
@@ -71,7 +71,7 @@
   }
   function prepare(next) {
     if (assets[next]) return assets[next];
-    var base = 'assets/img/hero/' + next + '/';
+    var base = '/assets/img/hero/' + next + '/';
     var before = loadImage(base + (next === 'f' ? 'before-body.webp' : 'before.webp'), 'before');
     var after = loadImage(base + 'after.webp', 'after');
     var mask = loadImage(base + 'mask.webp').catch(function () { return null; });

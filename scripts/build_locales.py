@@ -34,9 +34,9 @@ for code,name,apple,play in registry:
    flattened[section+'.'+key]=value
  language={'code':code,'name':name,'dir':'rtl' if code in ('ar','he') else 'ltr'}
  badge=ROOT/'assets/img/badges'/('app-store-'+code+'.svg')
- if badge.exists():language['apple']='assets/img/badges/'+badge.name
+ if badge.exists():language['apple']='/assets/img/badges/'+badge.name
  badge=ROOT/'assets/img/badges'/('google-play-'+code+'.png')
- if badge.exists():language['play']='assets/img/badges/'+badge.name
+ if badge.exists():language['play']='/assets/img/badges/'+badge.name
  catalog['languages'].append(language)
  catalog['locales'][code]=flattened
 (ROOT/'assets/js/locales.js').write_text('/* Authored translations. Rebuild with python3 scripts/build_locales.py. */\nwindow.SkinmetricsCatalog = '+json.dumps(catalog,ensure_ascii=False,separators=(',',':'))+';\n')

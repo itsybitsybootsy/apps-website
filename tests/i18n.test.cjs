@@ -26,14 +26,14 @@ assert(page.includes('assets/js/hero6.js?v=12'));
 assert(page.indexOf('assets/js/i18n.js')<page.indexOf('assets/js/mobile-story.js'));
 console.log('PASS all '+catalog.languages.length+' catalogues are complete; labels, assets and all three controls are wired');
 
-function setup({languages=['en-US'],saved=null,url='https://skinmetrics.example/?ref=test#fragen',blocked=false}={}){
+function setup({languages=['en-US'],saved=null,url='https://skinmetrics.example/?ref=test#fragen',blocked=false,pinned=null}={}){
   const store=new Map(saved?[['skinmetrics.language',saved]]:[]),events=new Map();
   const currentLabels=[{textContent:''}];
   const icon={},text={nodeType:3,nodeValue:'Datenschutz '};
   const labelled={childNodes:[text],children:[icon],getAttribute(n){return n==='data-i18n'?'nav.privacy':null;},setAttribute(){}};
   const aria={attrs:{'data-i18n-aria-label':'nav.closeMenu'},childNodes:[],children:[],getAttribute(n){return this.attrs[n]||null;},setAttribute(n,v){this.attrs[n]=v;}};
   const images=[{},{}],play=[{}];
-  const document={documentElement:{classList:{add(){}},lang:'de',dir:'ltr'},createElement:()=>({}),
+  const document={documentElement:{classList:{add(){}},lang:'de',dir:'ltr',getAttribute(n){return n==='data-static-locale'?(pinned||null):null;}},createElement:()=>({}),
     querySelectorAll(s){return s==='[data-language-current]'?currentLabels:s==='.store-badge img'?images:s==='.play-store-badge img'?play:[labelled,aria];},dispatchEvent(e){this.lastEvent=e;}};
   const window={SkinmetricsCatalog:catalog,location:{href:url},history:{replaceState(a,b,u){window.location.href=u;}},addEventListener:(n,f)=>events.set(n,f)};
   const navigator={languages,language:languages[0]};
@@ -70,5 +70,12 @@ function setup({languages=['en-US'],saved=null,url='https://skinmetrics.example/
   assert.equal(t.api.resolve('../../bad-script'),null);
   assert.equal(t.api.resolve('constructor'),null);
   console.log('PASS RTL switching, native language aliases and blocked storage/file URL handling');
+}
+{
+  const t=setup({languages:['de-DE'],saved:'fr',pinned:'en',url:'https://skinmetrics.example/en/'});
+  assert.equal(t.api.getLocale(),'en');assert.equal(t.document.documentElement.lang,'en');
+  t.api.select('pt-BR',true);assert.equal(t.window.location.href,'/pt-br/');assert.equal(t.store.get('skinmetrics.language'),'pt-BR');
+  t.api.select('auto',true);assert.equal(t.window.location.href,'/');
+  console.log('PASS pinned per-language pages ignore saved language and navigate to the chosen language URL');
 }
 console.log('Internationalisation checks passed.');
